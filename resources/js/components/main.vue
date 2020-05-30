@@ -1,0 +1,21 @@
+<template>
+    <v-app>
+        <v-content>
+            <system-bar></system-bar>
+            <top-bar></top-bar>
+            <nav-bar></nav-bar>
+            <router-view></router-view>
+            <login></login>
+            <footer-bar></footer-bar>
+        </v-content>
+    </v-app>
+</template>
+<script>
+export default {
+    data(){
+        return{
+            //
+        }
+    }
+}
+</script>  
