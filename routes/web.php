@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('/menu/category', 'CategoryController@category');
 Route::get('/menu/subCategory', 'CategoryController@subCategory');
+Route::get('/front/all/product', 'ProductController@allProduct');
+Route::get('/front/category/product/{slug}', 'CategoryController@CategoryProduct');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

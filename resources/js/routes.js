@@ -1,6 +1,7 @@
 import HomeComponent from './components/home/homepage.vue';
 import CategoryComponent from './components/home/front/pages/category.vue';
 import SubCategoryComponent from './components/home/front/pages/subcategory.vue';
+import ProductComponent from './components/home/front/pages/product.vue';
 
 export const routes = [{
         path: '/',
@@ -17,6 +18,8 @@ export const routes = [{
         component: SubCategoryComponent
     },
 
-
-
+    {
+        path: '/ads',
+        component: ProductComponent
+    },
 ]

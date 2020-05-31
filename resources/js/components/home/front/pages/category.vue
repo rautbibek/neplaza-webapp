@@ -2,9 +2,8 @@
     <div>
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb ">
-                <li class="breadcrumb-item pull-right"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
+                <li class="breadcrumb-item active" aria-current="page">{{category.name}}</li>
             </ol>
         </nav>
       <div class="py-5">
@@ -12,11 +11,11 @@
         <v-container>
             <v-layout row wrap class="px-4">
             
-                <v-flex xs12 sm6 md4 lg3 xl2 v-for="(k,index) in 12" :key="index" >
+                <v-flex xs12 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
                 <v-hover v-slot:default="{ hover }"
                 open-delay="100">
                 
-                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
+                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" router :to='`/`'>
                     <v-btn @click="favorite"
                     class="mt-3"
                     absolute
@@ -42,7 +41,7 @@
                             small
                             label
                             >
-                            For Sale : Houses & Apartments
+                            {{ads.category.name}}
                             
                             </v-chip>
                         </div>
@@ -55,7 +54,7 @@
                                 label      
                                 color="#f2f2f2"
                             >
-                                Rs. 120,00,000
+                                Rs. {{ads.product_price}} {{ads.product_max_price}}
                             </v-chip>
                         </div>
                     </v-img>
@@ -74,7 +73,7 @@
                                 <v-avatar left>
                                     <v-icon small>mdi-alarm-check</v-icon>
                                 </v-avatar>
-                                1 day ago
+                                {{ads.created_date}}
                                 </v-chip>
                             </v-col>
                             <v-col>
@@ -86,7 +85,7 @@
                                 <v-avatar left >
                                     <v-icon small>mdi-account-circle</v-icon>
                                 </v-avatar>
-                                Bibek Raut
+                                {{ads.user.name}}
                                 </v-chip>
                             </v-col>
                         </v-row>
@@ -97,17 +96,17 @@
                     <v-card-text text-left>
                     <div style="color:black">
                         <h6>
-                        This Is Subheading class
+                        {{ads.ad_title}}
                         </h6>
                         
                         </div>
-                    <div class="grey--text">person role</div>
+                    
                     </v-card-text>
                     <div class="card-date text-left">
                     
                     <p class="pa-2">
                         <v-icon left small>location_on</v-icon>
-                        <small>Kathmandu Metro, Kathmandu</small>
+                        <small>{{ads.nhood.name}}, {{ads.city.name}}</small>
                         </p>
                     </div>
                 </v-card>
@@ -115,31 +114,68 @@
                 </v-flex>
             
             </v-layout>
-            <p class="text-center mt-3">
-            <v-btn outlined tile color="#2F3B59" class="">
+            <div class="text-center mt-5" v-if="nextUrl">
+
+            <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="fetch(nextUrl)">
                 
-                view all
-                <v-icon right>keyboard_arrow_right</v-icon>
+                Load More
+                <template v-slot:loader>
+                    <span>Loading...</span>
+                </template>
+                <v-icon right>cached</v-icon>
             </v-btn>
-            </p>
+            </div>
+            
         </v-container>
       </div>
     </div>
 </template>
 <script>
+
 export default {
     data(){
       return{
+        loading:false,
+        all_ads:[],
+        category:{},
         color:'white',
         background:'#270f0ea1',
         name:'bibek',
+        nextUrl : null,
       }
     },
     methods:{
       favorite(){
-        this.color= 'red';
-        this.background= 'white';
+        if(this.$loggedIn){
+            this.color= 'red';
+            
+            this.background= 'white';
+        }else{
+            EventBus.$emit('changeDialog', true);
+        }
+      },
+
+      fetch(url){
+          this.loading=true;
+          axios.get(url)
+               .then(({data}) =>{
+                     this.all_ads.push(...data[0].data);
+                     this.nextUrl = data.next_page_url
+                     this.category = data[1];
+                     this.loading = false;
+                 })
+      }
+    },
+    created(){
+        //alert(this.$route.params.slug)
+        this.fetch(`/front/category/product/${this.$route.params.slug}`);
+    },
+
+    watch:{
+      $route(to,from){
+        //return this.fetch(`/front/category/product/${this.$route.params.slug}`);
       }
     }
+
 }
 </script>

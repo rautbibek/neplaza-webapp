@@ -1,7 +1,14 @@
 <template>
-<div class="py-5">
-    <h4 class="text-center ">Recent Listing</h4>
-   <div class="text-center mb-5"><hr class="line"></div>
+<div>
+          <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb ">
+                <li class="breadcrumb-item pull-right"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Library</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li>
+            </ol>
+        </nav>
+  <div class="py-5">
+
   <v-container>
     <v-layout row wrap class="px-4">
       
@@ -111,12 +118,13 @@
     <p class="text-center mt-3">
       <v-btn outlined tile color="#2F3B59" class="">
         
-        view all
-        <v-icon right>keyboard_arrow_right</v-icon>
+        Load more
+        <v-icon right>cached</v-icon>
       </v-btn>
     </p>
   </v-container>
   </div>
+</div>
 </template>
 <script>
 export default {

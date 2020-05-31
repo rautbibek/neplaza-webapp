@@ -22,5 +22,10 @@
         dialog: false,
       }
     },
+    created(){
+      EventBus.$on('changeDialog',(data)=>{
+        this.dialog = data;
+      })
+    }
   }
 </script>

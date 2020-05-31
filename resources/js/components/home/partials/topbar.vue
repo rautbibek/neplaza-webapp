@@ -66,12 +66,12 @@
                   </v-btn>
                   </span>
                   <span v-else>
-                  <v-btn color="#2F3B59" tile  class="mr-2" dark href="/register" target="_blank">
+                  <v-btn color="#2F3B59" tile outlined  class="mr-2" dark href="/register" target="_blank">
                     <v-icon left>person_add</v-icon>
                     <span>Sign Up</span>
                   </v-btn>
       
-                  <v-btn color="#2F3B59"  tile dark href="/login" >
+                  <v-btn color="#2F3B59" @click="login"  tile dark outlined>
                     <v-icon left>mdi-account-circle</v-icon>
                     <span>Login</span>
                   </v-btn>
@@ -120,6 +120,9 @@
                console.log(response);
                location.reload();
              });
+      },
+      login(){
+        EventBus.$emit('changeDialog', true);
       }
     },
     mounted(){

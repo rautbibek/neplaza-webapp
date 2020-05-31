@@ -20,7 +20,7 @@ Vue.use(VueRouter)
 //vue carousel importing
 import VueCarousel from 'vue-carousel';
 
-
+window.EventBus = new Vue();
 //registering component
 
 Vue.component('system-bar', require('./components/home/partials/systembar.vue').default);

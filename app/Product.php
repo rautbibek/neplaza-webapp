@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $appends=['created_date','product_price','product_max_price','ad_title'];
 
     public function product_image(){
       return $this->hasMany('App\Product_image');
     }
 
     public function category(){
-      return $this->belongsTo('App\Category');
+      return $this->belongsTo('App\Category')->select('id','name','slug');
     }
 
     public function scategory(){
@@ -25,11 +26,11 @@ class Product extends Model
 
 
     public function city(){
-      return $this->belongsTo('App\City');
+      return $this->belongsTo('App\City')->select('id','name','slug');
     }
 
     public function nhood(){
-      return $this->belongsTo('App\Nhood');
+      return $this->belongsTo('App\Nhood')->select('id','name','slug');
     }
 
     public function type(){
@@ -37,7 +38,7 @@ class Product extends Model
     }
 
     public function user(){
-      return $this->belongsTo('App\User');
+      return $this->belongsTo('App\User')->select('id','name');
     }
 
     public function status(){
@@ -73,5 +74,25 @@ class Product extends Model
       return $this->hasMany('App\Comment')->latest();
     }
 
+    public function getCreatedDateAttribute(){
+      return $this->created_at->diffForHumans();
+    }
+
+    public function getProductPriceAttribute(){
+      return number_format($this->price);
+    }
+
+    public function getProductMaxPriceAttribute(){
+      $max_p = number_format($this->maxprice);
+      if($max_p == 0){
+        return "";
+      }else{
+        return ' - '.$max_p;
+      }
+    }
+
+    public function getAdTitleAttribute(){
+      return ucwords($this->title);
+    }
 
 }

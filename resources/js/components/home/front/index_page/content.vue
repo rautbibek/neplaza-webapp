@@ -6,11 +6,11 @@
   <v-container>
     <v-layout row wrap class="px-4">
       
-        <v-flex xs12 sm6 md4 lg3 xl2 v-for="(k,index) in 12" :key="index" >
+        <v-flex xs12 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
           <v-hover v-slot:default="{ hover }"
         open-delay="100">
         
-          <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
+          <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" router :to='`/`'>
             <v-btn @click="favorite"
               class="mt-3"
               absolute
@@ -36,7 +36,7 @@
                       small
                       label
                     >
-                      For Sale : Houses & Apartments
+                      {{ads.category.name}}
                       
                     </v-chip>
                 </div>
@@ -49,7 +49,7 @@
                         label      
                         color="#f2f2f2"
                       >
-                        Rs. 120,00,000
+                        Rs.{{ads.product_price}} {{ads.product_max_price}}
                       </v-chip>
                 </div>
               </v-img>
@@ -68,7 +68,7 @@
                           <v-avatar left>
                             <v-icon small>mdi-alarm-check</v-icon>
                           </v-avatar>
-                          1 day ago
+                          {{ads.created_date}}
                         </v-chip>
                     </v-col>
                     <v-col>
@@ -80,7 +80,7 @@
                           <v-avatar left >
                             <v-icon small>mdi-account-circle</v-icon>
                           </v-avatar>
-                          Bibek Raut
+                          {{ads.user.name}}
                         </v-chip>
                     </v-col>
                   </v-row>
@@ -91,17 +91,16 @@
             <v-card-text text-left>
               <div style="color:black">
                 <h6>
-                  This Is Subheading class
+                  {{ads.ad_title}}
                 </h6>
                 
                 </div>
-              <div class="grey--text">person role</div>
             </v-card-text>
             <div class="card-date text-left">
               
               <p class="pa-2">
                 <v-icon left small>location_on</v-icon>
-                <small>Kathmandu Metro, Kathmandu</small>
+                <small>{{ads.nhood.name}}, {{ads.city.name}}</small>
                 </p>
             </div>
           </v-card>
@@ -110,7 +109,7 @@
       
     </v-layout>
     <p class="text-center mt-3">
-      <v-btn outlined tile color="#2F3B59" class="">
+      <v-btn router :to="`/ads`" outlined tile color="#2F3B59" class="">
         
         view all
         <v-icon right>keyboard_arrow_right</v-icon>
@@ -124,6 +123,7 @@
 export default {
     data(){
       return{
+        all_ads:[],
         color:'white',
         background:'#270f0ea1',
         name:'bibek',
@@ -133,7 +133,19 @@ export default {
       favorite(){
         this.color= 'red';
         this.background= 'white';
+      },
+      getAds(){
+        axios.get(`/front/all/product`)
+             .then(({data}) =>{
+                this.all_ads = data.data;
+                console.log(this.all_ads);
+              })
       }
+
+    },
+
+    created(){
+        this.getAds();
     }
 }
 </script>
