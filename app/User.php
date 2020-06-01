@@ -19,6 +19,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    protected $appends =['cover'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -60,4 +62,18 @@ class User extends Authenticatable
       return $this->belongsToMany('App\Product')
             ->withTimestamps()->where('sold',false)->where('deleted',false);
     }
+
+    public function getCoverAttribute(){
+      if($this->image != null && $this->image != ''){
+         if (@is_array(getimagesize($this->image))) {
+               return $this->image;
+            }elseif(file_exists(public_path().'/storage/profile/'.$this->image)){
+               return asset('storage/profile/'.$this->image);
+            }else{
+               return asset('storage/user.png');
+            }
+    }else{
+      return asset('storage/user.png');
+   }
+ }
 }

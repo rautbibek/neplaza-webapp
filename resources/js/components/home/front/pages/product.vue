@@ -30,7 +30,7 @@
                     <v-img style="position:relative"
                         class="white--text align-end"
                         height="200px"
-                        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/allbikes-1539286251.jpg?crop=0.985xw:1.00xh;0.00812xw,0&resize=1200:*"
+                        :src="ads.product_cover"
                         >
                         <!-- price part -->
                         <div class="text-center mb-3">

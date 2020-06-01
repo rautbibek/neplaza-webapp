@@ -1,15 +1,15 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $appends=['created_date','product_price','product_max_price','ad_title'];
+    protected $appends=['created_date','product_price','product_max_price','ad_title','is_favorite','product_cover'];
 
     public function product_image(){
-      return $this->hasMany('App\Product_image');
+      return $this->hasMany('App\Product_image')->select('id','image','product_id');
     }
 
     public function category(){
@@ -17,13 +17,16 @@ class Product extends Model
     }
 
     public function scategory(){
-      return $this->belongsTo('App\Scategory');
+      return $this->belongsTo('App\Scategory')->select('id','name','slug');
     }
 
-    public function favourit_to_users(){
+    public function favorite_to_users(){
       return $this->belongsToMany('App\User')->withTimestamps();
     }
 
+    public function getIsFavoriteAttribute(){
+      return $this->favorite_to_users()->where('user_id',Auth::id())->count() >0;
+    }
 
     public function city(){
       return $this->belongsTo('App\City')->select('id','name','slug');
@@ -93,6 +96,14 @@ class Product extends Model
 
     public function getAdTitleAttribute(){
       return ucwords($this->title);
+    }
+
+    public function getProductCoverAttribute(){
+      if($this->product_image->count()>0){
+        return asset('storage/thumb/'.$this->product_image[0]->image);
+      }else{
+        return asset('storage/noimage.png');
+      }
     }
 
 }

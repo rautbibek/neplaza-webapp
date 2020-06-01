@@ -14,14 +14,14 @@
                 <search></search>
               </div>
               <div class="col-md-3 mt-3 col-sm-6 text-center cleaner">
-                <span v-if="$loggedIn" >
+                <span v-if="loggedIn" >
                  <v-menu offset-y nudge-bottom="15" open-on-click close-on-content-click transition="scale-transition">
                    <template v-slot:activator="{ on }">
                     
                         <v-avatar size="40" v-on="on">
                           <img
-                            src="https://cdn.vuetifyjs.com/images/john.jpg"
-                            alt="John"
+                            :src="loginUser.cover"
+                            :alt="loginUser.name"
                           >
                         </v-avatar>
                         <v-icon large v-on="on"  class="mr-4 pointer">keyboard_arrow_down</v-icon>
@@ -33,12 +33,12 @@
                               <v-col class="text-center">
                                 <v-avatar size="70">
                                     <img
-                                      src="https://cdn.vuetifyjs.com/images/john.jpg"
-                                      alt="John"
+                                      :src="loginUser.cover"
+                                      :alt="loginUser.name"
                                     >
                                   </v-avatar>
-                                <div class="subheading">Jonathan Lee</div>
-                                <div class="body-1">heyfromjonathan@gmail.com</div>
+                                <div class="subheading">{{loginUser.name}}</div>
+                                <div class="body-1">{{loginUser.email}}</div>
                               </v-col>
                             </v-row>
                           </div>
@@ -88,7 +88,7 @@
   export default {
     data () {
       return {
-        loggedin:true,
+        
           items: [
             {
               icon: 'mdi-inbox',
@@ -117,7 +117,6 @@
       logout(){
         axios.post(`/logout`)
              .then(response=>{
-               console.log(response);
                location.reload();
              });
       },

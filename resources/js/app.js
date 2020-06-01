@@ -20,7 +20,13 @@ Vue.use(VueRouter)
 //vue carousel importing
 import VueCarousel from 'vue-carousel';
 
+//vue event bus
 window.EventBus = new Vue();
+
+//laravel vue authorization part
+import Authorization from './authorization/authorize';
+Vue.use(Authorization);
+
 //registering component
 
 Vue.component('system-bar', require('./components/home/partials/systembar.vue').default);
@@ -33,6 +39,9 @@ Vue.component('carousel', require('./components/home/front/index_page/carousel.v
 Vue.component('premium', require('./components/home/front/index_page/premium.vue').default);
 Vue.component('search', require('./components/home/partials/search.vue').default);
 Vue.component('login', require('./components/login.vue').default);
+Vue.component('empty', require('./components/empty.vue').default);
+Vue.component('favorite', require('./components/home/favorite.vue').default);
+Vue.component('page-not-found', require('./components/empty.vue').default);
 
 import { routes } from './routes.js';
 const router = new VueRouter({
@@ -46,7 +55,7 @@ const router = new VueRouter({
     }
 });
 
-Vue.prototype.$loggedIn = window.Auth.loggedIn;
+//Vue.prototype.$loggedIn = window.Auth.loggedIn;
 const app = new Vue({
     vuetify: Vuetify,
     el: '#app',

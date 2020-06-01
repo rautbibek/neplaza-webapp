@@ -23,9 +23,9 @@ class CategoryController extends Controller
     public function categoryProduct($slug){
         $category = Category::where('slug',$slug)->select('id','name','slug')->firstOrFail();
         
-        $product = Product::select('id','price','maxprice','title','category_id','user_id','city_id','nhood_id','created_at')
+        $product = Product::select('id','price','maxprice','title','category_id','user_id','city_id','nhood_id','scategory_id','created_at')
                  ->where('category_id',$category->id)
-                 ->with('category','user','city','nhood')->simplePaginate(20);
+                 ->with('category','user','city','nhood','scategory')->simplePaginate(20);
         return response()->json([
                 $product,
                 $category

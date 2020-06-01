@@ -1,5 +1,5 @@
 <template>
-<div class="py-5" style=" background-color:#e0e0e057;">
+<div class="py-5" style=" background-color:#e0e0e057;" v-if="count>0">
     <h4 class="text-center ">Featured Products</h4>
    <div class="text-center mb-5"><hr class="line"></div>
    <div class="container">
@@ -16,28 +16,30 @@
               :perPageCustom="[[300, 1], [500, 2],[600, 4]]"
               class="row"
     >
-        <slide v-for="(k,index) in 12" :key="index" class="col-md-3 col-sm-6">
+        <slide v-for="(feature,index) in featured" :key="index" class="col-md-3 col-sm-6">
           <v-hover v-slot:default="{ hover }"
         open-delay="100">
           <v-card tile :elevation="hover ? 16 : 3" class=" text-center">
-            <v-btn
-              class="mt-3"
-              absolute
-              x-small
-              dark
-              fab
-              left
-              color="#270f0ea1"
-            >
-              <v-icon color="white" >favorite</v-icon>
-            </v-btn>
+            <favorite align="left" :is_favorite='feature.is_favorite' :product_id="feature.id"></favorite>
             <!-- image part -->
             <v-img
                   class="white--text align-end"
                   height="200px"
-                  src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/allbikes-1539286251.jpg?crop=0.985xw:1.00xh;0.00812xw,0&resize=1200:*"
+                  :src="feature.product_cover"
                 >
                 <div class="ribbon ribbon-top-right"><span>FEATURED</span></div>
+                <!-- category name part -->
+                <div class="text-center mb-3">
+                                <v-chip class="category"
+                                dark
+                                color="#000000b3"
+                                small
+                                label
+                                >
+                                {{feature.category.name}}
+                                
+                                </v-chip>
+                            </div>
                 <!-- price part -->
                 <div class="text-center">
                       <v-chip class="chip"
@@ -46,7 +48,7 @@
                         label      
                         color="#f2f2f2"
                       >
-                        Rs. 120,00,000
+                        Rs. {{feature.product_price}}
                       </v-chip>
                 </div>
               </v-img>
@@ -64,7 +66,7 @@
                           <v-avatar left>
                             <v-icon small>mdi-alarm-check</v-icon>
                           </v-avatar>
-                          1 day ago
+                          {{feature.created_date}}
                         </v-chip>
                     </v-col>
                     <v-col>
@@ -76,7 +78,7 @@
                           <v-avatar left >
                             <v-icon small>mdi-account-circle</v-icon>
                           </v-avatar>
-                          Bibek Raut
+                          {{feature.user.name}}
                         </v-chip>
                     </v-col>
                   </v-row>
@@ -87,17 +89,17 @@
             <v-card-text text-left>
               <div style="color:black">
                 <h6>
-                  This Is Subheading class
+                  {{feature.ad_title}}
                 </h6>
                 
                 </div>
-              <div class="grey--text">person role</div>
+              
             </v-card-text>
             <div class="card-date text-left">
               
               <p class="pa-2">
                 <v-icon left small>location_on</v-icon>
-                <small>Kathmandu Metro, Kathmandu</small>
+                <small>{{feature.nhood.name}}, {{feature.city.name}}</small>
                 </p>
             </div>
           </v-card>
@@ -118,6 +120,24 @@ export default {
   components: {
     'sliders':Carousel,
     Slide
+  },
+  data(){
+    return{
+      featured:[],
+      count:0,
+    }
+  },
+  methods:{
+    getFeatured(){
+      axios.get(`/front/featured/product`)
+            .then(({data})=>{
+              this.featured = data.data;
+              this.count = this.featured.length;
+            })
+    }
+  },
+  created(){
+    return this.getFeatured();
   }
 };
 </script>
