@@ -17,7 +17,7 @@
                     open-delay="100">
                     
                     <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
-                        <favorite :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
+                        <favorite position="right" :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
                         <!-- image part -->
                         <v-img style="position:relative"
                             class="white--text align-end"

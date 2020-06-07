@@ -5,31 +5,25 @@
    <div class="text-center mb-5"><hr class="line"></div>
   <v-container>
     <v-layout row wrap class="px-4">
-      
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+          </v-overlay>
         <v-flex xs12 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
           <v-hover v-slot:default="{ hover }"
         open-delay="100">
         
-          <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" router :to='`/`'>
-            <v-btn @click="favorite"
-              class="mt-3"
-              absolute
-              x-small
-              dark
-              fab
-              right
-              :color="background"
-            >
-              <v-icon :color="color"  >mdi-heart</v-icon>
-            </v-btn>
+          <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
+          <!-- favorite component -->
+            <favorite  :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
             <!-- image part -->
-            <v-img style="position:relative"
+            <router-link to="/user/create/ads">
+            <v-img router :to="`/user/create/ads`" style="position:relative"
                   class="white--text align-end"
                   height="200px"
                   :src="ads.product_cover"
                 >
                 <!-- price part -->
-                <div class="text-center mb-3">
+                <router-link :to="`/category/${ads.category.slug}`" class="text-center mb-3">
                     <v-chip class="category"
                       dark
                       color="#000000b3"
@@ -39,10 +33,10 @@
                       {{ads.category.name}}
                       
                     </v-chip>
-                </div>
+                </router-link>
                 
                 <!-- price part -->
-                <div class="text-center">
+                <div class="text-center mt-3">
                       <v-chip class="chip"
                         height="17"
                         small
@@ -86,6 +80,7 @@
                   </v-row>
                 
             </div>
+            </router-link>
 
             <!-- title and subtitle part -->
             <v-card-text text-left>
@@ -124,9 +119,7 @@ export default {
     data(){
       return{
         all_ads:[],
-        color:'white',
-        background:'#270f0ea1',
-        name:'bibek',
+        overlay:false,
       }
     },
     methods:{
@@ -135,9 +128,11 @@ export default {
         this.background= 'white';
       },
       getAds(){
+        this.overlay = true;
         axios.get(`/front/all/product`)
              .then(({data}) =>{
                 this.all_ads = data.data;
+                this.overlay = false;
               })
       }
 

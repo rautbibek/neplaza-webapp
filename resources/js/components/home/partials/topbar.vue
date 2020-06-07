@@ -44,9 +44,10 @@
                           </div>
                           <v-list>
                             <v-list-item-group >
-                              <v-list-item @click="logout"
+                              <v-list-item
                                 v-for="(item, i) in items"
                                 :key="i"
+                                router :to="item.url"
                               >
                                 <v-list-item-icon>
                                   <v-icon v-text="item.icon"></v-icon>
@@ -56,11 +57,19 @@
                                 </v-list-item-content>
                                 <hr>
                               </v-list-item>
+                              <v-list-item @click="logout">
+                                <v-list-item-icon>
+                                  <v-icon>mdi-logout</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                  <v-list-item-title >Logout</v-list-item-title>
+                                </v-list-item-content>
+                              </v-list-item>
                             </v-list-item-group>
                           </v-list>
                         </v-card>
                   </v-menu>
-                  <v-btn color="#2F3B59"  tile dark>
+                  <v-btn color="#2F3B59" tile dark router :to='`/user/create/ads`'>
                     <v-icon left>library_add</v-icon>
                     <span>Sell</span>
                   </v-btn>
@@ -91,24 +100,30 @@
         
           items: [
             {
+              icon: 'library_add',
+              text: 'Create New Ads',
+              url : '/user/create/ads'
+            },
+
+            {
               icon: 'mdi-inbox',
               text: 'My Ads',
+              url : '/user/myads'
             },
             {
               icon: 'mdi-heart',
               text: 'Favorite Ads',
+              url : '/user/favorite'
             },
             {
               icon: 'mdi-account-circle',
               text: 'Profile',
+              url : '/user/profile'
             },
             {
               icon: 'mdi-cog',
               text: 'Setting',
-            },
-            {      
-              icon: 'mdi-logout',
-              text: 'Logout',
+              url : '/user/setting'
             }
           ],
       }

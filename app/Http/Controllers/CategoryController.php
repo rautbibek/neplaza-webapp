@@ -25,7 +25,9 @@ class CategoryController extends Controller
         
         $product = Product::select('id','price','maxprice','title','category_id','user_id','city_id','nhood_id','scategory_id','created_at')
                  ->where('category_id',$category->id)
-                 ->with('category','user','city','nhood','scategory')->simplePaginate(20);
+                 ->where('deleted',false)
+                 ->where('sold',false)
+                 ->with('category','user','city','nhood','scategory','product_image')->simplePaginate(20);
         return response()->json([
                 $product,
                 $category

@@ -1,7 +1,7 @@
 <template>
     <div>
       <v-btn @click="toggle"
-         class="mt-3"
+         class="mt-3 ml-3"
          absolute
          x-small
          dark
@@ -14,37 +14,45 @@
     </div>
 </template>
 <script>
+
     export default {
         props:['is_favorite','product_id'],
         data(){
             return{
                 fav : this.is_favorite,
                 id:this.product_id,
+                
             }
         },
         methods:{
             toggle(){
              if(!this.loggedIn){
-                EventBus.$emit('changeDialog', true);
+                this.$toast.error('Please Login First','Login',{
+                         timeout:3000,
+                         position: 'topRight',
+                    });
+                //EventBus.$emit('changeDialog', true);
                 return;
              }
             this.fav? this.destroy() : this.create();
             },
 
             create(){
+                this.fav = true;
                axios.post(this.url)
                     .then(response => {
                         this.fav = true;
-                        console.log(response.data);
                     })
                     .catch();
             },
 
             destroy(){
+                this.fav = false;
                 axios.post(this.url)
                     .then(response => {
+
                         this.fav = false;
-                        console.log(response.data);
+
                     })
                     .catch();
             }

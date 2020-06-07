@@ -99,7 +99,8 @@ class Product extends Model
     }
 
     public function getProductCoverAttribute(){
-      if($this->product_image->count()>0){
+      $count = $this->product_image->count();
+      if($count>0){
         return asset('storage/thumb/'.$this->product_image[0]->image);
       }else{
         return asset('storage/noimage.png');

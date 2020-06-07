@@ -13,28 +13,25 @@
                 <v-flex xs12 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
                 <v-hover v-slot:default="{ hover }"
                 open-delay="100">
-                
-                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" router :to='`/`'>
-                    <v-btn @click="favorite"
-                    class="mt-3"
-                    absolute
-                    x-small
-                    dark
-                    fab
-                    right
-                    :color="background"
-                    >
-                    <v-icon :color="color"  >mdi-heart</v-icon>
-                    </v-btn>
+                <v-lazy
+                    v-model="isActive"
+                    :options="{
+                    threshold: .5
+                    }"
+                    min-height="200"
+                    transition="fade-transition"
+                >
+                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
+                    <favorite :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
                     <!-- image part -->
-                    <v-img style="position:relative"
+                    <v-img style="position:relative" 
                         class="white--text align-end"
                         height="200px"
                         :src="ads.product_cover"
                         >
                         <!-- price part -->
-                        <div class="text-center mb-3">
-                            <v-chip class="category"
+                        <router-link :to="`/category/${ads.category.slug}`" class="text-center mb-5" >
+                            <v-chip class="category" router :to='`/`'
                             dark
                             color="#000000b3"
                             small
@@ -43,10 +40,10 @@
                             {{ads.category.name}}
                             
                             </v-chip>
-                        </div>
+                        </router-link>
                         
                         <!-- price part -->
-                        <div class="text-center">
+                        <div class="text-center mt-3">
                             <v-chip class="chip"
                                 height="17"
                                 small
@@ -109,6 +106,7 @@
                         </p>
                     </div>
                 </v-card>
+                </v-lazy>
                 </v-hover>
                 </v-flex>
             
@@ -134,6 +132,7 @@
 export default {
     data(){
       return{
+        isActive: false,
         loading:false,
         all_ads:[],
         color:'white',

@@ -8,6 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//easy toast
+import VueIziToast from 'vue-izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+Vue.use(VueIziToast);
+
 //vuetify
 import Vuetify from './plugins/vuetify';
 
@@ -42,6 +47,10 @@ Vue.component('login', require('./components/login.vue').default);
 Vue.component('empty', require('./components/empty.vue').default);
 Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
+Vue.component('profile-form', require('./components/home/back/profile/form.vue').default);
+
+// create ads component
+Vue.component('property', require('./components/home/back/form/create/property.vue').default);
 
 import { routes } from './routes.js';
 const router = new VueRouter({

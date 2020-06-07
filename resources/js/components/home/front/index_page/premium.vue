@@ -16,13 +16,20 @@
               :perPageCustom="[[300, 1], [500, 2],[600, 4]]"
               class="row"
     >
-        <slide v-for="(feature,index) in featured" :key="index" class="col-md-3 col-sm-6">
+        <slide v-for="(feature,index) in featured" :key="index" class="col-md-3 col-sm-6" router :to="`/`">
           <v-hover v-slot:default="{ hover }"
         open-delay="100">
           <v-card tile :elevation="hover ? 16 : 3" class=" text-center">
-            <favorite align="left" :is_favorite='feature.is_favorite' :product_id="feature.id"></favorite>
+            <v-btn style="margin-top:-10px; margin-left:5px"
+              absolute
+              small
+              text
+              left
+            >
+              <favorite :is_favorite='feature.is_favorite' :product_id="feature.id"></favorite>
+            </v-btn>
             <!-- image part -->
-            <v-img
+            <v-img 
                   class="white--text align-end"
                   height="200px"
                   :src="feature.product_cover"
