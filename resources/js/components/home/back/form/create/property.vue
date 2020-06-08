@@ -1,9 +1,13 @@
 <template>
     <div>
-           <v-row justify="center" no-gutters>
-               <div class="text-center p-3 ">
+            <div class="text-center p-2 ">
                     <h4 class="font-weight-bold text-uppercase">{{scat.name}}</h4>
-                </div>
+            </div>
+            <v-overlay :value="overlay">
+                <v-progress-circular indeterminate size="64"></v-progress-circular>
+            </v-overlay>
+           <v-row justify="center" no-gutters>
+               
                <v-col cols="12" lg="10" md="10" sm="12" xs="12" class="custom-border">
                     <v-card tile>
                         <v-form ref="form" v-model="valid" lazy-validation>
@@ -20,70 +24,24 @@
                                         :items='scat.type'
                                         :item-text="'name'"
                                         :item-value="'id'"
-                                        label="Property type *"
-                                        placeholder="Property type"
-                                        :rules="[v => !!v || 'Property Type is required']"
+                                        label="Type *"
+                                        placeholder="Type"
+                                        :rules="[select('type')]"
                                         outlined
                                         clearable
                                     ></v-select>
-
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="bedroom"
-                                        label="Bedroom *"
-                                        placeholder="Bedroom"
-                                        :rules="[v => !!v || 'Bedroom is required']"
-                                        outlined
-                                        clearable
-                                    ></v-select>
-
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="bathroom"
-                                        label="Bathroom *"
-                                        placeholder="Bathroom"
-                                        :rules="[v => !!v || 'Bathroom is required']"
-                                        outlined
-                                        clearable
-                                    ></v-select>
-
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="furnishing"
-                                        label="Furnishing *"
-                                        placeholder="Furnishing"
-                                        :rules="[v => !!v || 'Furnishing is required']"
-                                        outlined
-                                        clearable
-                                    ></v-select>
-
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                    
+                                     <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.url !=='land'"
                                         v-model="status"
                                         :items='scat.status'
                                         :item-text="'title'"
                                         :item-value="'id'"
                                         label="Construction Status *"
                                         placeholder="Construction Status"
-                                        :rules="[v => !!v || 'Construction Status is required']"
+                                        :rules="[select('status')]"
                                         outlined
                                         clearable
-                                    ></v-select>
-
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="parking"
-                                        label="Car Parking *"
-                                        placeholder="Car parking"
-                                        :rules="[v => !!v || 'Car Parking is required']"
-                                        outlined
-                                        clearable
-                                    ></v-select>
-                                </v-col>  
-
-                          </div>
-                          <div style="border-top:0.5px solid black"></div>
-                          <div class="m-2">
-                                <v-card-title class="font-weight-bold">
-                                    MORE DETAILS
-                                </v-card-title>
-                                
-                                <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
+                                    ></v-select>   
                                     <v-select style="border-radius:0px; margin-bottom:20px"
                                         v-model="listed_by"
                                         :items='scat.filter_1'
@@ -91,11 +49,10 @@
                                         :item-value="'id'"
                                         label="Listed By *"
                                         placeholder="Listed By"
-                                        :rules="[v => !!v || 'Listed By is required']"
+                                        :rules="[select('listed by')]"
                                         outlined
                                         clearable
                                     ></v-select>
-
                                     <v-row>
                                         <v-col cols="8">
                                             <v-text-field style="border-radius:0px; margin-bottom:20px"
@@ -111,15 +68,80 @@
                                         <v-col cols="4">
                                             <v-select style="border-radius:0px; margin-bottom:20px"
                                                 v-model="unit"
+                                                :items='scat.filter_3'
+                                                :item-text="'name'"
+                                                :item-value="'id'"
                                                 label="Builtup Area unit*"
                                                 placeholder="Builtup Area unit"
-                                                :rules="[v => !!v || 'unit is required']"
+                                                :rules="[select('unit')]"
                                                 outlined
                                                 clearable
                                             ></v-select>
                                         </v-col>
                                     </v-row>
+                                </v-col>  
+                          </div>
+                          <div style="border-top:0.5px solid black"></div>
+                          <div class="m-2" v-if="scat.url !== 'land'">
+                                <v-card-title class="font-weight-bold">
+                                    MORE DETAILS
+                                </v-card-title>
 
+                                <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
+                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                        v-model="parking"
+                                        :items='scat.filter_2'
+                                        :item-text="'name'"
+                                        :item-value="'id'"
+                                        label="Car Parking *"
+                                        placeholder="Car parking"
+                                        :rules="[select('car parking')]"
+                                        outlined
+                                        clearable
+                                    ></v-select>
+                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.url !=='shop'"
+                                        v-model="bedroom"
+                                        :items="bedroom_items"
+                                        label="Bedroom *"
+                                        placeholder="Bedroom"
+                                        :rules="[select('bedroom')]"
+                                        outlined
+                                        clearable
+                                    ></v-select>
+
+                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                        v-model="bathroom"
+                                        :items="bathroom_items"
+                                        label="Bathroom *"
+                                        placeholder="Bathroom"
+                                        :rules="[select('bathroom')]"
+                                        outlined
+                                        clearable
+                                    ></v-select>
+
+                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                        v-model="furnishing"
+                                        :items='scat.filter'
+                                        :item-text="'name'"
+                                        :item-value="'id'"
+                                        label="Furnishing *"
+                                        placeholder="Furnishing"
+                                        :rules="[select('furnishing')]"
+                                        outlined
+                                        clearable
+                                    ></v-select>
+
+                                    
+                                </v-col>
+                          </div>
+                          <div style="border-top:0.5px solid black"></div>
+                          <div class="m-2">
+                                <v-card-title class="font-weight-bold">
+                                    AD TITLE & DESCRIPTION
+                                </v-card-title>
+                                
+                                <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
+                                    
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         v-model="title"
                                         label="Ad Title *"
@@ -154,20 +176,28 @@
                                         :item-value="'id'"
                                         label="District *"
                                         placeholder="District "
-                                        :rules="[v => !!v || 'District is required']"
+                                        :rules="[select('district')]"
                                         outlined
                                         clearable
+                                        
+                                        :loading="loading"
                                         @change="getNhood"
                                     ></v-select>
 
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                     <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
+                                        <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+
+                                    <v-select style="border-radius:0px; margin-bottom:20px" v-show="nhood_display && district"
                                         v-model="nhood"
                                         :items='localArea'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Metro/Municipility/VDC *"
                                         placeholder="Metro/Municipility/VDC "
-                                        :rules="[v => !!v || 'Metro/Municipility/VDC is required']"
+                                        :rules="[select('Local Area')]"
                                         outlined
                                         clearable
                                     ></v-select>
@@ -246,11 +276,14 @@
                                         </div>
                                     </div>
                                 </v-col>
+                                
                           </div>
                           
                           <div style="border-top:0.5px solid black">
-                                    <v-col cols="8 py-4">
-                                    <v-btn tile large color="primary"  @click="submit">Post ad</v-btn>
+                                <v-col cols="8 py-4 ml-4">
+                                    <v-btn tile large color="primary" :disabled="!valid"  @click="submit">
+                                        <v-icon left>save</v-icon>
+                                        Post ad</v-btn>
                                 </v-col>
                             </div>
                         </v-form>
@@ -266,28 +299,26 @@ export default {
     mixins:[imageMixins],
     data(){
         return{
-            
-
-            loading : false,
-            valid:true,
-            overlay:false,
-
+            bedroom_items:['1','2','3','4','5','6+'],
+            bathroom_items:['1','2','3','4+'],
             bedroom:null,
             bathroom:null,
             furnishing:null,
             status:null,
             parking:null,
             listed_by:null,
-            title:'',
             unit:null,
-            type:'',
+            type:null,
             area:'',
-            
         }
     },
     methods:{
         submit(){
-            //
+            this.overlay= true;
+            if(this.$refs.form.validate()){
+                alert('hello');
+                this.overlay= false;
+            }
         }
     },
     

@@ -15,16 +15,16 @@
                     <property :scat="scat"></property>
                 </div>
                 <div v-else-if="scat.url === 'car' || scat.url === 'bike'">
-                    create vehicles {{scat.url}}
+                    <vehicle :scat="scat"></vehicle>
                 </div>
                 <div v-else-if="category_url === 'mobile'">
-                    create mobile
+                    <mobile :scat="scat"></mobile>
                 </div>
                 <div v-else-if="category_url === 'job'">
-                    create jobs
+                    <jobs :scat="scat"></jobs>
                 </div>
                 <div v-else>
-                    all other items
+                    <other :scat="scat"></other>
                 </div>
             </div>
         </v-container>

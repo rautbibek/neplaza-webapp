@@ -49,8 +49,15 @@ Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
 Vue.component('profile-form', require('./components/home/back/profile/form.vue').default);
 
+//common form
+Vue.component('common-form', require('./components/home/back/form/commonForm.vue').default);
+
 // create ads component
 Vue.component('property', require('./components/home/back/form/create/property.vue').default);
+Vue.component('vehicle', require('./components/home/back/form/create/vehicle.vue').default);
+Vue.component('mobile', require('./components/home/back/form/create/mobile.vue').default);
+Vue.component('jobs', require('./components/home/back/form/create/jobs.vue').default);
+Vue.component('other', require('./components/home/back/form/create/other.vue').default);
 
 import { routes } from './routes.js';
 const router = new VueRouter({

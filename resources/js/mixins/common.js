@@ -1,10 +1,13 @@
 export default {
     data() {
         return {
+            loading: false,
+            valid: true,
+            overlay: false,
+            nhood_display: false,
             city: [],
             localArea: [],
             district: null,
-            slug: '',
             isDragging: false,
             dragCount: 0,
             files: [],
@@ -13,7 +16,12 @@ export default {
             price: '',
             street: '',
             nhood: null,
+            title: '',
             description: '',
+
+            select(propertyType) {
+                return v => !!v || `you must select a ${propertyType}`
+            },
             required(propertyType) {
                 return v => v && v.length > 0 || `you must input a ${propertyType}`
             },
@@ -30,7 +38,6 @@ export default {
             axios.get(`/all/city`)
                 .then(response => {
                     this.city = response.data;
-                    console.log(response.data);
                     this.getNhood();
                 })
                 .catch();
@@ -38,10 +45,12 @@ export default {
 
         getNhood() {
             this.loading = true;
+            this.nhood_display = false;
             axios.get(`/get/nhood/${this.district}`)
                 .then(response => {
                     this.localArea = response.data;
                     this.loading = false;
+                    this.nhood_display = true;
 
                 })
                 .catch()
