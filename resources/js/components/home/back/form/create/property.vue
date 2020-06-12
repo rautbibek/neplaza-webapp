@@ -1,5 +1,6 @@
 <template>
     <div>
+        
             <div class="text-center p-2 ">
                     <h4 class="font-weight-bold text-uppercase">{{scat.name}}</h4>
             </div>
@@ -43,7 +44,7 @@
                                         clearable
                                     ></v-select>   
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="listed_by"
+                                        v-model="filter_1_id"
                                         :items='scat.filter_1'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -57,7 +58,7 @@
                                         <v-col cols="8">
                                             <v-text-field style="border-radius:0px; margin-bottom:20px"
                                                 type="number"
-                                                v-model="area"
+                                                v-model="property_3"
                                                 label="Builtup Area *"
                                                 placeholder="Builtup Area"
                                                 :rules="[required('Builtup Area')]"
@@ -67,7 +68,7 @@
                                         </v-col>
                                         <v-col cols="4">
                                             <v-select style="border-radius:0px; margin-bottom:20px"
-                                                v-model="unit"
+                                                v-model="filter_3_id"
                                                 :items='scat.filter_3'
                                                 :item-text="'name'"
                                                 :item-value="'id'"
@@ -89,7 +90,7 @@
 
                                 <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="parking"
+                                        v-model="filter_2_id"
                                         :items='scat.filter_2'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -100,7 +101,7 @@
                                         clearable
                                     ></v-select>
                                     <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.url !=='shop'"
-                                        v-model="bedroom"
+                                        v-model="property_1"
                                         :items="bedroom_items"
                                         label="Bedroom *"
                                         placeholder="Bedroom"
@@ -110,7 +111,7 @@
                                     ></v-select>
 
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="bathroom"
+                                        v-model="property_2"
                                         :items="bathroom_items"
                                         label="Bathroom *"
                                         placeholder="Bathroom"
@@ -120,7 +121,7 @@
                                     ></v-select>
 
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="furnishing"
+                                        v-model="filter_id"
                                         :items='scat.filter'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -295,30 +296,12 @@
 <script>
 import imageMixins from "../../../../../mixins/common";
 export default {
-    props:['scat'],
+    
     mixins:[imageMixins],
     data(){
         return{
             bedroom_items:['1','2','3','4','5','6+'],
             bathroom_items:['1','2','3','4+'],
-            bedroom:null,
-            bathroom:null,
-            furnishing:null,
-            status:null,
-            parking:null,
-            listed_by:null,
-            unit:null,
-            type:null,
-            area:'',
-        }
-    },
-    methods:{
-        submit(){
-            this.overlay= true;
-            if(this.$refs.form.validate()){
-                alert('hello');
-                this.overlay= false;
-            }
         }
     },
     

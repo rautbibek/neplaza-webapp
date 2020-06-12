@@ -8,8 +8,9 @@
             </ol>
         </nav>
       <div >
-        <v-container>
+        <div class="container">
             <div style="min-height:300px">
+                              
                 <!-- create controller for property -->
                 <div v-if="category_url === 'property'">
                     <property :scat="scat"></property>
@@ -27,7 +28,7 @@
                     <other :scat="scat"></other>
                 </div>
             </div>
-        </v-container>
+        </div>
       </div>
     </div>
 </template>
@@ -36,7 +37,7 @@
 export default {
     data(){
       return{
-         scat:[],
+         scat:{},
          category_url:'',
       }
     },
@@ -56,7 +57,8 @@ export default {
     },
 
     created(){
-       return  this.getSubcategory();
+        
+       this.getSubcategory();
     }
 }
 </script>

@@ -55,7 +55,9 @@ class UserController extends Controller
 
     
     public function myProfile(){
-        $user = User::where('id',Auth::id())->with('city','nhood')->firstOrFail();
+        $user = User::where('id',Auth::id())
+              ->with('city','nhood')
+              ->firstOrFail();
         return response()->json($user,200);
     }
 }

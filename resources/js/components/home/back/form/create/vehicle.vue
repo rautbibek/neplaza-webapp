@@ -20,13 +20,26 @@
                             </v-card-subtitle>
                                 <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="brand"
+                                        v-model="brand_id"
                                         :items='scat.brand'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Brand *"
                                         placeholder="Brand"
                                         :rules="[select('brand')]"
+                                        outlined
+                                        clearable
+                                    ></v-select>
+
+
+                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                        v-model="status"
+                                        :items='scat.status'
+                                        :item-text="'title'"
+                                        :item-value="'id'"
+                                        label="Status *"
+                                        placeholder="Status"
+                                        :rules="[select('Status')]"
                                         outlined
                                         clearable
                                     ></v-select>
@@ -45,7 +58,7 @@
                                     ></v-select>
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         type="number"
-                                        v-model="lot"
+                                        v-model="property_2"
                                         label="Lot Number *"
                                         placeholder="Lot Number"
                                         :rules="[required('Lot Number')]"
@@ -54,7 +67,7 @@
                                     ></v-text-field>
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         type="number"
-                                        v-model="driven"
+                                        v-model="property_1"
                                         label="KM Driven *"
                                         placeholder="KM Driven"
                                         :rules="[required('KM Driven')]"
@@ -223,28 +236,8 @@
 <script>
 import imageMixins from "../../../../../mixins/common";
 export default {
-    props:['scat'],
     mixins:[imageMixins],
-    data(){
-        return{
-            
-            status:null,
-            driven:'',
-            lot:'',
-            type:'',
-            area:'',
-        }
-    },
-    methods:{
-
-        submit(){
-            this.overlay= true;
-            if(this.$refs.form.validate()){
-                this.overlay= false;
-            }
-            this.overlay= false;
-        }
-    },
+    
     computed:{
         label(){
             return this.scat.url === 'bike'?'Type *':'Fuel Type *';

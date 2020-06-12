@@ -14,60 +14,47 @@
                          <div class="m-2">
                              <v-card-title class="font-weight-bold">
                                 INCLUDE SOME DETAILS
+                                
                              </v-card-title>
                              <v-card-subtitle>
                                 * Fileld are mendatory
                             </v-card-subtitle>
-                                <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
-                                    <v-select v-if="scat.brand.length>0" style="border-radius:0px; margin-bottom:20px"
-                                        v-model="brand"
-                                        :items='scat.brand'
+                                <v-col cols="12" sm="12" md="8" xs="12" class="p-4"> 
+                                <div v-for="(subcategory,index) in sub" :key="index">
+                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.brand.length"
+                                        v-model="brand_id"
+                                        :items='subcategory.brand'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Brand *"
                                         placeholder="Brand"
-                                        :rules="[select('brand')]"
                                         outlined
                                         clearable
                                     ></v-select>
 
-                                    
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.type.length>0"
-                                        v-model="Type"
-                                        :items='scat.type'
+                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.type.length"
+                                        v-model="type"
+                                        :items='subcategory.type'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Type *"
                                         placeholder="Type"
-                                        :rules="[select('Type')]"
                                         outlined
                                         clearable
                                     ></v-select>
 
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.filter.length>0"
-                                        v-model="ad_for"
-                                        :items='scat.filter'
+                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.filter.length"
+                                        v-model="filter_id"
+                                        :items='subcategory.filter'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="For *"
                                         placeholder="For"
-                                        :rules="[select('ad_for')]"
                                         outlined
                                         clearable
                                     ></v-select>
-
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.status.length>0"
-                                        v-model="status"
-                                        :items='scat.status'
-                                        :item-text="'title'"
-                                        :item-value="'id'"
-                                        label="Status *"
-                                        placeholder="Status"
-                                        :rules="[select('status')]"
-                                        outlined
-                                        clearable
-                                    ></v-select>  
-                                </v-col>  
+                                </div>
+                            </v-col>  
                           </div>
                           
                           <div style="border-top:0.5px solid black"></div>
@@ -229,25 +216,29 @@
 <script>
 import imageMixins from "../../../../../mixins/common";
 export default {
-    props:['scat'],
+    
     mixins:[imageMixins],
     data(){
         return{
-            status:null,
-            type:null,
-            for:null,
+            sub:[],
         }
     },
+    
     methods:{
-
-        submit(){
-            this.overlay= true;
-            if(this.$refs.form.validate()){
-                this.overlay= false;
+       
+        getSub(){
+                axios.get(`/other/sub/${this.$route.params.slug}`)
+                     .then(response =>{
+                         this.sub = response.data;
+                         
+                     })
+                     .catch();
             }
-            this.overlay= false;
-        }
+
     },
+    mounted(){
+        this.getSub();
+    }
     
 }
 </script>

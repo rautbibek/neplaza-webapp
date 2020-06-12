@@ -6,7 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $appends=['created_date','product_price','product_max_price','ad_title','is_favorite','product_cover'];
+    protected $fillable = [
+      'title',
+      'description',
+      'price',
+      'status_id',
+      'city_id',
+      'nhood_id',
+      'user_id',
+      'address',
+      'category_id',
+      'scategory_id',
+      'type_id',
+      'brand_id',
+      'brand_model',
+      'filter_id',
+      'maxprice',
+      'filter_1_id',
+      'filter_2_id',
+      'filter_3_id',
+      'property_1',
+      'property_2',
+      'property_3',
+      'property_4'
+    ];
+
+
+    protected $appends=['created_date','product_price','product_max_price','ad_title',
+    'is_favorite','product_cover'];
 
     public function product_image(){
       return $this->hasMany('App\Product_image')->select('id','image','product_id');

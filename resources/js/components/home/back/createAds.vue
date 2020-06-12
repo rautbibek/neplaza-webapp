@@ -33,8 +33,9 @@ export default {
     methods:{
         getCategory(){
             if(!this.loggedIn){
-                this.$router.push("/");
                 EventBus.$emit('changeDialog', true);
+                this.$router.push("/");
+                
                 return;
             }
             axios.get(`/menu/subCategory`)

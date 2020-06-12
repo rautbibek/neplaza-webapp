@@ -135,11 +135,8 @@ export default {
                  })
       },
 
-      remove(index){
-         
-            this.fav_ads.splice(index,1)
-          
-           
+      remove(index){ 
+        this.fav_ads.splice(index,1)
       }
 
     },

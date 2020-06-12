@@ -20,7 +20,7 @@
                             </v-card-subtitle>
                                 <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="brand"
+                                        v-model="brand_id"
                                         :items='scat.brand'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -33,7 +33,7 @@
 
                                     
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="ram"
+                                        v-model="filter_1_id"
                                         :items='scat.filter_1'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -45,7 +45,7 @@
                                     ></v-select>
 
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="storage"
+                                        v-model="filter_2_id"
                                         :items='scat.filter_2'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -230,28 +230,6 @@
 <script>
 import imageMixins from "../../../../../mixins/common";
 export default {
-    props:['scat'],
     mixins:[imageMixins],
-    data(){
-        return{
-            brand:null,
-            ram:null,
-            status:null,
-            storage:null,
-            type:null,
-            
-        }
-    },
-    methods:{
-
-        submit(){
-            this.overlay= true;
-            if(this.$refs.form.validate()){
-                this.overlay= false;
-            }
-            this.overlay= false;
-        }
-    },
-    
 }
 </script>

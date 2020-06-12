@@ -31,7 +31,7 @@
                                         clearable
                                     ></v-select>
                                     <v-select style="border-radius:0px; margin-bottom:20px"
-                                        v-model="salary_period"
+                                        v-model="filter_id"
                                         :items='scat.filter'
                                         :item-text="'name'"
                                         :item-value="'id'"
@@ -128,7 +128,7 @@
                                   <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         type="number"
-                                        v-model="min_salary"
+                                        v-model="price"
                                         label="Minimum salary *"
                                         placeholder="Minimum Salary"
                                         :rules="[required('Minimum salary')]"
@@ -137,7 +137,7 @@
                                     ></v-text-field>
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         type="number"
-                                        v-model="max_salary"
+                                        v-model="maxprice"
                                         label="Maximum salary *"
                                         placeholder="Maximum Salary"
                                         :rules="[required('Maximum salary')]"
@@ -211,31 +211,7 @@
 <script>
 import imageMixins from "../../../../../mixins/common";
 export default {
-    props:['scat'],
-    mixins:[imageMixins],
-    data(){
-        return{
-            min_salary:'',
-            max_salary:'',
-            type:null,
-            salary_period:null,
-        }
-    },
-    methods:{
 
-        submit(){
-            this.overlay= true;
-            if(this.$refs.form.validate()){
-                this.overlay= false;
-            }
-            this.overlay= false;
-        }
-    },
-    computed:{
-        label(){
-            return this.scat.url === 'bike'?'Type *':'Fuel Type *';
-        }
-    }
-    
+    mixins:[imageMixins],    
 }
 </script>

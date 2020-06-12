@@ -15,7 +15,59 @@
                 open-delay="100">
                 
                 <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
-                    <favorite :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
+                   <v-menu bottom left>
+                        <template v-slot:activator="{ on: menu, attrs }">
+                            <v-tooltip bottom>
+                            <template v-slot:activator="{ on: tooltip }">
+                                <v-btn 
+                                class="mt-3 ml-3"
+                                absolute
+                                x-small
+                                dark
+                                fab
+                                v-bind="attrs"
+                                v-on="{ ...tooltip, ...menu }"
+                                right
+                                :color="background"
+                                
+                                >
+                                <v-icon :color="color">settings</v-icon>
+                            </v-btn>
+                            </template>
+                            <span>Settings</span>
+                            </v-tooltip>
+                        </template>
+                        <v-list dense>
+                            <v-subheader>SETTING</v-subheader>
+                            <v-list-item-group v-model="item" color="primary">
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon small>edit</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Edit Detail</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon small>image</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Edit Image</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon small>delete</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>Delete Ad</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-list-item-group>
+                            </v-list>
+                    </v-menu>
                     <!-- image part -->
                     <v-img style="position:relative" 
                         class="white--text align-end"

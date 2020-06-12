@@ -42,6 +42,10 @@ Route::group(['middleware'=>['auth']], function(){
 
     //get subcategory for create ads controller
     Route::get('/create/ads/subcategory/{slug}', 'HomeController@subcategory');
+    Route::get('/other/sub/{slug}', 'HomeController@otherSub');
+
+    //product resource controller
+    Route::resource('/user/add/product', 'User\ProductController');
 
 });
 Route::get('/home', 'HomeController@index')->name('home');

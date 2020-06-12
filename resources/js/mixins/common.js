@@ -1,23 +1,54 @@
 export default {
+    props: ['scat'],
     data() {
         return {
+
+            //loading and display
             loading: false,
             valid: true,
             overlay: false,
             nhood_display: false,
-            city: [],
-            localArea: [],
-            district: null,
+
+            errors: {},
+            //image propeerty
             isDragging: false,
             dragCount: 0,
             files: [],
             image: [],
-            errors: {},
+
+            //fetching city and loacal area
+            city: [],
+            localArea: [],
+
+            //brand and model
+            brand_id: '',
+            model_id: '',
+
+            //filter property
+            filter_1_id: '',
+            filter_2_id: '',
+            filter_3_id: '',
+            status: '',
+            type: '',
+            filter_id: '',
+
+            //common property
             price: '',
-            street: '',
-            nhood: null,
+            maxprice: '',
             title: '',
             description: '',
+            category_id: '',
+            scategory_id: '',
+            url: '',
+            district: '',
+            street: '',
+            nhood: '',
+
+            //non filter static data
+            property_1: '',
+            property_2: '',
+            property_3: '',
+
 
             select(propertyType) {
                 return v => !!v || `you must select a ${propertyType}`
@@ -34,11 +65,11 @@ export default {
         }
     },
     methods: {
+
         getCity() {
             axios.get(`/all/city`)
                 .then(response => {
                     this.city = response.data;
-                    this.getNhood();
                 })
                 .catch();
         },
@@ -103,8 +134,96 @@ export default {
             this.image.splice(index, 1);
             this.files.splice(index, 1);
         },
+
+
+        submit() {
+            this.category_id = this.scat.category.id;
+            this.scategory_id = this.scat.id;
+            this.url = this.scat.url;
+            this.overlay = true;
+            if (this.$refs.form.validate()) {
+                const formData = new FormData();
+                let config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                };
+
+                //category subcategory data
+                formData.append('category_id', this.category_id);
+                formData.append('scategory_id', this.scategory_id);
+                formData.append('url', this.url);
+
+                //static data
+                formData.append('property_1', this.property_1);
+                formData.append('property_2', this.property_2);
+                formData.append('property_3', this.property_3);
+                formData.append('maxprice', this.maxprice);
+
+                //dynamic filter data
+                formData.append('type_id', this.type);
+                formData.append('status_id', this.status);
+                formData.append('brand_id', this.brand_id);
+                formData.append('model_id', this.model_id);
+                formData.append('filter_id', this.filter_id);
+                formData.append('filter_1_id', this.filter_1_id);
+                formData.append('filter_2_id', this.filter_2_id);
+                formData.append('filter_3_id', this.filter_3_id);
+
+                //common form data
+                formData.append('title', this.title);
+                formData.append('description', this.description);
+                formData.append('city_id', this.district);
+                formData.append('nhood_id', this.nhood);
+                formData.append('price', this.price);
+                formData.append('address', this.street);
+
+                this.files.forEach(file => {
+                    formData.append('image[]', file, file.name);
+                });
+                axios.post(`/user/add/product`, formData, config)
+                    .then(response => {
+                        this.overlay = false;
+                        this.$router.push('/user/myads');
+                        this.$toast.success(response.data, 'success', {
+                            timeout: 3000,
+                            position: 'topRight',
+                        });
+
+                    })
+                    .catch(error => {
+                        this.errors = error.response.data.errors;
+                        if (error.response.status === 422) {
+
+                            console.log(this.errors);
+                            this.$toast.error('Invalid data please check your form again', 'error', {
+                                timeout: 3000,
+                                position: 'topRight',
+                            });
+
+                            if (this.errors.image) {
+                                this.$toast.error('Image size can`t be grater than 12MB', 'error', {
+                                    timeout: 3000,
+                                    position: 'topRight',
+                                });
+
+                            }
+                            this.overlay = false;
+                        }
+
+                        this.overlay = false;
+                    });
+                return;
+            }
+            this.$toast.error('Invalid data please check your form again', 'error', {
+                timeout: 3000,
+                position: 'topRight',
+            });
+            this.overlay = false;
+        }
     },
-    mounted() {
-        return this.getCity();
+    created() {
+
+        this.getCity();
     }
 }
