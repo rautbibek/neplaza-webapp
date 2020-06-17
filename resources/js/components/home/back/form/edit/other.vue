@@ -14,16 +14,16 @@
                          <div class="m-2">
                              <v-card-title class="font-weight-bold">
                                 INCLUDE SOME DETAILS
-                                
                              </v-card-title>
+                             
                              <v-card-subtitle>
                                 * Fileld are mendatory
                             </v-card-subtitle>
                                 <v-col cols="12" sm="12" md="8" xs="12" class="p-4"> 
-                                <div v-for="(subcategory,index) in sub" :key="index">
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.brand.length"
+                                    <v-select style="border-radius:0px; margin-bottom:20px" 
+                                        v-if="brand_count >0"
                                         v-model="brand_id"
-                                        :items='subcategory.brand'
+                                        :items='scat.brand'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Brand *"
@@ -32,9 +32,10 @@
                                         clearable
                                     ></v-select>
 
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.type.length"
+                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                        v-if="type_count>0"
                                         v-model="type"
-                                        :items='subcategory.type'
+                                        :items='scat.type'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Type *"
@@ -43,9 +44,10 @@
                                         clearable
                                     ></v-select>
 
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.filter.length"
+                                    <v-select style="border-radius:0px; margin-bottom:20px" 
+                                        v-if="filter_count>0"
                                         v-model="filter_id"
-                                        :items='subcategory.filter'
+                                        :items='scat.filter'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="For *"
@@ -53,7 +55,19 @@
                                         outlined
                                         clearable
                                     ></v-select>
-                                </div>
+                                    
+                                    <v-select style="border-radius:0px; margin-bottom:20px" 
+                                        v-if="status_count>0"
+                                        v-model="status"
+                                        :items='scat.status'
+                                        :item-text="'title'"
+                                        :item-value="'id'"
+                                        label="Status *"
+                                        placeholder="Status"
+                                        outlined
+                                        clearable
+                                    ></v-select>
+                                
                             </v-col>  
                           </div>
                           
@@ -151,57 +165,11 @@
                                     ></v-text-field>
                                 </v-col>
                           </div>
-                          <div style="border-top:0.5px solid black"></div>
-                          <div class="m-2">
-                              <v-card-title class="font-weight-bold">
-                                    SELECT OR DRAG AD IMAGE
-                                </v-card-title>
-                                  <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
-                                    <div class="form-group">
-                                        <div class="uploader"
-                                            @dragenter="OnDragEnter"
-                                            @dragleave="OnDragLeave"
-                                            @dragover.prevent
-                                            @drop="onDrop"
-                                            :class="{ dragging: isDragging }">
-
-                                            <div class="upload-control" v-show="image.length">
-                                                <label for="file">Select a file</label>
-                                            </div>
-
-
-                                            <div v-show="!image.length">
-                                                <i class="fa fa-cloud-upload"></i>
-                                                <p>Drag your image here</p>
-                                                <div>OR</div>
-                                                <div class="file-input">
-                                                    <label for="file">Select a file</label>
-                                                    <input type="file" id="file" @change="onInputChange" multiple>
-                                                </div>
-                                            </div>
-
-                                            <div class="image-preview" v-show="image.length">
-                                                <div class="img-wrapper" v-for="(image, index) in image" :key="index">
-                                                    <img :src="image" :alt="`Image Uplaoder ${index}`">
-                                                    <div class="details">
-                                                        <span class="name" v-text="files[index].name"></span>
-                                                        <span class="size" v-text="getFileSize(files[index].size)"></span>
-                                                        <a class="hover" href="javascript:void(0)" @click="removeimage(index)" style="color:red" >remove</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div v-if="errors.image" class="invalid-feedback">
-                                        {{errors.image}}
-                                        </div>
-                                    </div>
-                                </v-col>
-                                
-                          </div>
+                          
                           
                           <div style="border-top:0.5px solid black">
                                     <v-col cols="8 py-4 ml-4">
-                                    <v-btn tile large color="primary" :disabled="!valid"  @click="submit">
+                                    <v-btn tile large color="primary" :disabled="!valid" @click="submit">
                                         <v-icon left>save</v-icon>
                                         Post ad
                                         </v-btn>
@@ -214,31 +182,41 @@
     </div>
 </template>
 <script>
-import imageMixins from "../../../../../mixins/common";
+import imageMixins from "../../../../../mixins/editMixin";
 export default {
-    
+    props: ['brand_count', 'filter_count', 'status_count', 'type_count'],
     mixins:[imageMixins],
-    data(){
-        return{
-            sub:[],
+    methods:{
+        getProduct(){
+        if (!this.loggedIn) {
+                this.$router.push("/");
+                EventBus.$emit('changeDialog', true);
+                return;
+            }
+        axios.get(`/user/add/product/${this.$route.params.id}/edit`)
+             .then(response =>{
+                 
+                 this.product = response.data;
+
+                 this.url = this.product.join;
+                 this.title = this.product.title;
+                 this.district = this.product.city_id;
+                 this.nhood = this.product.nhood_id;
+                 this.price = this.product.price;
+                 this.description = this.product.description;
+                 this.brand_id = this.product.brand_id
+                 this.type= this.product.type_id;
+                 this.filter_id = this.product.filter_id;
+                 this.status = this.product.status_id;
+                 this.street = this.product.address;
+                 this.getNhood();
+                 
+             })
         }
     },
-    
-    methods:{
-       
-        getSub(){
-                axios.get(`/other/sub/${this.$route.params.slug}`)
-                     .then(response =>{
-                         this.sub = response.data;
-                         
-                     })
-                     .catch();
-            }
-
-    },
     mounted(){
-        this.getSub();
+        this.getProduct();
     }
-    
+        
 }
 </script>

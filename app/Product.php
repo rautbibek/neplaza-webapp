@@ -28,7 +28,8 @@ class Product extends Model
       'property_1',
       'property_2',
       'property_3',
-      'property_4'
+      'property_4',
+      'join'
     ];
 
 
@@ -40,11 +41,11 @@ class Product extends Model
     }
 
     public function category(){
-      return $this->belongsTo('App\Category')->select('id','name','slug');
+      return $this->belongsTo('App\Category')->select('id','name','slug','url');
     }
 
     public function scategory(){
-      return $this->belongsTo('App\Scategory')->select('id','name','slug');
+      return $this->belongsTo('App\Scategory')->select('id','name','slug','url');
     }
 
     public function favorite_to_users(){

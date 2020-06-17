@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function allProduct(){
-        $product = Product::select('id','price','maxprice','title','category_id','user_id','city_id','nhood_id','created_at')
-                 ->with('category','user','city','nhood','product_image')
+        $product = Product::select('id','price','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
+                 ->with('category','scategory','user','city','nhood','product_image')
                  ->simplePaginate(20);
                  
         return response()->json($product,200);

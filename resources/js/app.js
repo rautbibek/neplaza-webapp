@@ -48,6 +48,14 @@ Vue.component('empty', require('./components/empty.vue').default);
 Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
 Vue.component('profile-form', require('./components/home/back/profile/form.vue').default);
+Vue.component('mymenu', require('./components/home/back/myAds/myMenu.vue').default);
+
+Vue.component('cover', require('./components/home/coverImage.vue').default);
+Vue.component('card-date', require('./components/home/cardDate.vue').default);
+Vue.component('card-title', require('./components/home/cardTitle.vue').default);
+Vue.component('card-lazy', require('./components/home/card-lazy.vue').default);
+Vue.component('user-menu', require('./components/home/partials/userMenu.vue').default);
+Vue.component('card-menu', require('./components/home/cardMenu.vue').default);
 
 //common form
 Vue.component('common-form', require('./components/home/back/form/commonForm.vue').default);
@@ -58,6 +66,17 @@ Vue.component('vehicle', require('./components/home/back/form/create/vehicle.vue
 Vue.component('mobile', require('./components/home/back/form/create/mobile.vue').default);
 Vue.component('jobs', require('./components/home/back/form/create/jobs.vue').default);
 Vue.component('other', require('./components/home/back/form/create/other.vue').default);
+
+// edit ads component
+Vue.component('editproperty', require('./components/home/back/form/edit/property.vue').default);
+Vue.component('editvehicle', require('./components/home/back/form/edit/vehicle.vue').default);
+Vue.component('editmobile', require('./components/home/back/form/edit/mobile.vue').default);
+Vue.component('editjobs', require('./components/home/back/form/edit/jobs.vue').default);
+Vue.component('edit-other', require('./components/home/back/form/edit/other.vue').default);
+
+
+//confirm vue
+Vue.component('nav-filter', require('./components/filter.vue').default);
 
 import { routes } from './routes.js';
 const router = new VueRouter({

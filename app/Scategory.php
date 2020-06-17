@@ -15,7 +15,10 @@ class Scategory extends Model
     }
 
     public function product(){
-      return $this->hasMany('App\Product')->latest()->where('sold',false)->where('deleted',false);
+      return $this->hasMany('App\Product')
+                  ->latest()
+                  ->where('sold',false)
+                  ->where('deleted',false);
     }
 
     public function type(){

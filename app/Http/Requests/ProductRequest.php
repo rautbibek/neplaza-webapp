@@ -66,6 +66,7 @@ class ProductRequest extends FormRequest
             $rule['property_1'] = 'required';
             $rule['property_2'] = 'required';
             $rule['type_id'] = 'required';
+            $rule['brand_id'] = 'required';
         }
 
         if($this->url === 'job'){
@@ -80,7 +81,7 @@ class ProductRequest extends FormRequest
         $rule['nhood_id'] = 'required';
         $rule['city_id'] = 'required';
         $rule['address'] = 'required';
-        $rule['image.*'] = 'mimes:jpeg,png,jpg,gif,svg|max:12648';
+        $rule['image.*'] = 'mimes:jpeg,png,jpg,gif,svg|max:20648';
         
         return $rule;
     }

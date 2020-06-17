@@ -7,102 +7,17 @@
             </ol>
         </nav>
         <div>
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
         <div class="py-5" v-if="count>0">
 
             <v-container>
                 <v-layout row wrap class="px-4">
                 
                 <v-flex xs12 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
-                    <v-hover v-slot:default="{ hover }"
-                    open-delay="100">
-                    
-                    <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
-                        <favorite position="right" :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
-                        <!-- image part -->
-                        <v-img style="position:relative"
-                            class="white--text align-end"
-                            height="200px"
-                            :src="ads.product_cover"
-                            >
-                            <!-- category name -->
-                            <div class="text-center mb-3">
-                                <v-chip class="category"
-                                dark
-                                color="#000000b3"
-                                small
-                                label
-                                >
-                                {{ads.scategory.name}}
-                                
-                                </v-chip>
-                            </div>
-                            
-                            <!-- price part -->
-                            <div class="text-center">
-                                <v-chip class="chip"
-                                    height="17"
-                                    small
-                                    label      
-                                    color="#f2f2f2"
-                                >
-                                    Rs. {{ads.product_price}} {{ads.product_max_price}}
-                                </v-chip>
-                            </div>
-                        </v-img>
-
-                        <!-- date and user name part -->
-                        <div class="card-date">
-                        
-                            <v-row >
-                                <v-col class="text-left">
-                                    <v-chip style="border-radius:none"
-                                    draggable
-                                    small
-                                    color="#f2f2f2"
-                                    text-color="dark"
-                                    >
-                                    <v-avatar left>
-                                        <v-icon small>mdi-alarm-check</v-icon>
-                                    </v-avatar>
-                                    {{ads.created_date}}
-                                    </v-chip>
-                                </v-col>
-                                <v-col>
-                                    <v-chip
-                                    small
-                                    color="#f2f2f2"
-                                    text-color="dark"
-                                    >
-                                    <v-avatar left >
-                                        <v-icon small>mdi-account-circle</v-icon>
-                                    </v-avatar>
-                                    {{ads.user.name}}
-                                    </v-chip>
-                                </v-col>
-                            </v-row>
-                            
-                        </div>
-
-                        <!-- title and subtitle part -->
-                        <v-card-text text-left>
-                        <div style="color:black">
-                            <h6>
-                            {{ads.ad_title}}
-                            </h6>
-                            
-                            </div>
-                        
-                        </v-card-text>
-                        <div class="card-date text-left">
-                        
-                        <p class="pa-2">
-                            <v-icon left small>location_on</v-icon>
-                            <small>{{ads.nhood.name}}, {{ads.city.name}}</small>
-                            </p>
-                        </div>
-                    </v-card>
-                    </v-hover>
-                    </v-flex>
+                    <card-lazy :ads="ads"></card-lazy>
+                </v-flex>
                 
                 </v-layout>
                 <div class="text-center mt-5" v-if="nextUrl">
@@ -130,6 +45,7 @@
 export default {
     data(){
       return{
+        overlay:true,
         loading:false,
         count:1,
         all_ads:[],
@@ -149,14 +65,15 @@ export default {
       },
 
       fetch(url){
-          
+          this.overlay=true;
           axios.get(url)
                .then(({data}) =>{
                      this.all_ads = data[0].data;
                      this.nextUrl = data[0].next_page_url
                      this.category = data[1];
                      this.count = this.all_ads.length;
-                 })
+                     this.overlay= false;
+            })
       },
       more(nextUrl){
         this.loading=true;

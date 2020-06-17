@@ -27,11 +27,12 @@ class CategoryController extends Controller
                  ->where('category_id',$category->id)
                  ->where('deleted',false)
                  ->where('sold',false)
-                 ->with('category','user','city','nhood','scategory','product_image')->simplePaginate(20);
-        return response()->json([
-                $product,
-                $category
-             ],
+                 ->with('category','user','city','nhood','scategory','product_image')
+                 ->simplePaginate(20);
+                 return response()->json([
+                  $product,
+                  $category
+               ],
             200
         );
     }

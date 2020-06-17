@@ -18,6 +18,7 @@
                              </v-card-title>
                              <v-card-subtitle>
                                 * Fileld are mendatory
+                                
                             </v-card-subtitle>
                                 <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
                                     <v-select style="border-radius:0px; margin-bottom:20px"
@@ -232,53 +233,8 @@
                                     ></v-text-field>
                                 </v-col>
                           </div>
-                          <div style="border-top:0.5px solid black"></div>
-                          <div class="m-2">
-                              <v-card-title class="font-weight-bold">
-                                    SELECT OR DRAG AD IMAGE
-                                </v-card-title>
-                                  <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
-                                    <div class="form-group">
-                                        <div class="uploader"
-                                            @dragenter="OnDragEnter"
-                                            @dragleave="OnDragLeave"
-                                            @dragover.prevent
-                                            @drop="onDrop"
-                                            :class="{ dragging: isDragging }">
-
-                                            <div class="upload-control" v-show="image.length">
-                                                <label for="file">Select a file</label>
-                                            </div>
-
-
-                                            <div v-show="!image.length">
-                                                <i class="fa fa-cloud-upload"></i>
-                                                <p>Drag your image here</p>
-                                                <div>OR</div>
-                                                <div class="file-input">
-                                                    <label for="file">Select a file</label>
-                                                    <input type="file" id="file" @change="onInputChange" multiple>
-                                                </div>
-                                            </div>
-
-                                            <div class="image-preview" v-show="image.length">
-                                                <div class="img-wrapper" v-for="(image, index) in image" :key="index">
-                                                    <img :src="image" :alt="`Image Uplaoder ${index}`">
-                                                    <div class="details">
-                                                        <span class="name" v-text="files[index].name"></span>
-                                                        <span class="size" v-text="getFileSize(files[index].size)"></span>
-                                                        <a class="hover" href="javascript:void(0)" @click="removeimage(index)" style="color:red" >remove</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div v-if="errors.image" class="invalid-feedback">
-                                        {{errors.image}}
-                                        </div>
-                                    </div>
-                                </v-col>
-                                
-                          </div>
+                          
+          
                           
                           <div style="border-top:0.5px solid black">
                                 <v-col cols="8 py-4 ml-4">
@@ -294,7 +250,7 @@
     </div>
 </template>
 <script>
-import imageMixins from "../../../../../mixins/common";
+import imageMixins from "../../../../../mixins/editMixin";
 export default {
     
     mixins:[imageMixins],
@@ -304,6 +260,42 @@ export default {
             bathroom_items:['1','2','3','4+'],
         }
     },
+    methods:{
+        getProduct(){
+        if (!this.loggedIn) {
+                this.$router.push("/");
+                EventBus.$emit('changeDialog', true);
+                return;
+            }
+        axios.get(`/user/add/product/${this.$route.params.id}/edit`)
+             .then(response =>{
+                 
+                 this.product = response.data;
+
+                 this.url         = this.product.join;
+                 this.title       = this.product.title;
+                 this.district    = this.product.city_id;
+                 this.nhood       = this.product.nhood_id;
+                 this.price       = this.product.price;
+                 this.description = this.product.description;
+                 this.street      = this.product.address;  
+                 this.filter_id = this.product.filter_id;               
+                 this.filter_1_id = this.product.filter_1_id;
+                 this.filter_2_id = this.product.filter_2_id;
+                 this.filter_3_id = this.product.filter_3_id;
+                 this.property_1  = this.product.property_1;
+                 this.property_2  = this.product.property_2;
+                 this.property_3  = this.product.property_3 
+                 this.status      = this.product.status_id;
+                 this.type        = this.product.type_id;
+                 this.getNhood();
+                 
+             })
+        }
+    },
+    mounted(){
+        this.getProduct();
+    }
     
 }
 </script>

@@ -53,6 +53,17 @@
                                         outlined
                                         clearable
                                     ></v-select>
+
+                                    <v-select style="border-radius:0px; margin-bottom:20px" v-if="subcategory.status.length"
+                                        v-model="status"
+                                        :items='subcategory.status'
+                                        :item-text="'title'"
+                                        :item-value="'id'"
+                                        label="Status *"
+                                        placeholder="Status"
+                                        outlined
+                                        clearable
+                                    ></v-select>
                                 </div>
                             </v-col>  
                           </div>

@@ -61,54 +61,12 @@
               </v-img>
 
               <!-- date and user name part -->
-            <div class="card-date">
-              
-                  <v-row >
-                    <v-col class="text-left">
-                        <v-chip
-                          small
-                          color="#f2f2f2"
-                          text-color="dark"
-                        >
-                          <v-avatar left>
-                            <v-icon small>mdi-alarm-check</v-icon>
-                          </v-avatar>
-                          {{feature.created_date}}
-                        </v-chip>
-                    </v-col>
-                    <v-col>
-                        <v-chip
-                          small
-                          color="#f2f2f2"
-                          text-color="dark"
-                        >
-                          <v-avatar left >
-                            <v-icon small>mdi-account-circle</v-icon>
-                          </v-avatar>
-                          {{feature.user.name}}
-                        </v-chip>
-                    </v-col>
-                  </v-row>
-                
-            </div>
+                    <div class="card-date">
+                        <card-date :ads="feature"></card-date>
+                    </div>
 
-            <!-- title and subtitle part -->
-            <v-card-text text-left>
-              <div style="color:black">
-                <h6>
-                  {{feature.ad_title}}
-                </h6>
-                
-                </div>
-              
-            </v-card-text>
-            <div class="card-date text-left">
-              
-              <p class="pa-2">
-                <v-icon left small>location_on</v-icon>
-                <small>{{feature.nhood.name}}, {{feature.city.name}}</small>
-                </p>
-            </div>
+                    <!-- title and subtitle part -->
+                    <card-title :ads="feature"></card-title>
           </v-card>
           </v-hover>
         

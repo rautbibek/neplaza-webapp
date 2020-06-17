@@ -177,6 +177,7 @@ export default {
                 formData.append('nhood_id', this.nhood);
                 formData.append('price', this.price);
                 formData.append('address', this.street);
+                formData.append('join', this.url);
 
                 this.files.forEach(file => {
                     formData.append('image[]', file, file.name);

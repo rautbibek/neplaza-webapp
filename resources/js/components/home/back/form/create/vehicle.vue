@@ -242,7 +242,6 @@ export default {
         label(){
             return this.scat.url === 'bike'?'Type *':'Fuel Type *';
         }
-    }
-    
+    }, 
 }
 </script>

@@ -5,5 +5,9 @@ export default {
 
     accept(user, answer) {
         return user.id === answer.question.user_id;
+    },
+
+    can(user, product) {
+        return loginUser === product.user_id;
     }
 }

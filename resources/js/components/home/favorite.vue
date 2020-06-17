@@ -50,9 +50,7 @@
                 this.fav = false;
                 axios.post(this.url)
                     .then(response => {
-
                         this.fav = false;
-
                     })
                     .catch();
             }
