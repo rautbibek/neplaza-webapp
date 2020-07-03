@@ -23,6 +23,7 @@
                                     <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
                                         <card-menu :ads="ads"></card-menu>
                                         <!-- image part -->
+                                        <router-link :to="`/ad/detail/${ads.id}`">
                                         <cover :ads="ads"></cover>
 
                                         <!-- date and user name part -->
@@ -34,6 +35,7 @@
 
                                         <!-- title and subtitle part -->
                                         <card-title :ads="ads"></card-title>
+                                        </router-link>
                                     </v-card>
                                 </v-hover>
                             </v-flex>

@@ -66,12 +66,17 @@ export default {
                  .catch();
         },
         deactivate(){
+            
+            if(confirm('are you sure to want do deactivate your account')){
             this.overlay= true;
             axios.put(`/user/deactivate/account`)
                  .then(response =>{
                      this.overlay= false;
                      return this.logout();
                  }).catch();
+                  this.overlay= false;
+            }
+           
         },
         logout(){
             axios.post(`/logout`)

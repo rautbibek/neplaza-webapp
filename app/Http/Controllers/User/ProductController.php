@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 
 use App\product;
@@ -129,8 +129,8 @@ class ProductController extends Controller
            $product->brand_id     = $request->brand_id;
            $product->status_id    = $request->status_id;
            $product->type_id      = $request->type_id;
+           $product->property_1   = $request->property_1;
            $product->property_2   = $request->property_2;
-           $product->property_1   = $request->property_2;
         }
 
         if($request->url === 'job'){

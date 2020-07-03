@@ -4,11 +4,14 @@
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                 <li class="breadcrumb-item pull-right"><router-link :to="`/user/myads`">My Ads</router-link></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Ad {{status_count}}</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Ad</li>
                 <li class="breadcrumb-item active" aria-current="page">{{name}}</li>
             </ol>
         </nav>
-      <div >
+      <div>
+          <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
         <div class="container">
             <div style="min-height:300px" v-if="product">
                               
@@ -45,6 +48,7 @@
 export default {
     data(){
       return{
+         overlay:false,
          scat_url:'',
          product:[],
          scat:[],
@@ -58,7 +62,7 @@ export default {
     },
     methods:{
         getSubcategory(url) {
-            
+            this.overlay = true;
             axios.get(url)
                 .then(response => {
                     this.scat = response.data;
@@ -66,14 +70,18 @@ export default {
                     this.filter_count = this.scat.filter.length;
                     this.type_count   = this.scat.type.length;
                     this.status_count = this.scat.status.length;
+                    this.overlay = false;
                 })
         },
 
         getProduct(){
+        this.overlay = true;
         if (!this.loggedIn) {
                 this.$router.push("/");
                 EventBus.$emit('changeDialog', true);
+                this.overlay = false;
                 return;
+
             }
         axios.get(`/user/add/product/${this.$route.params.id}/edit`)
              .then(response =>{
@@ -83,6 +91,7 @@ export default {
                  this.name = this.product.scategory.name;
                  let slug = this.product.scategory.slug;
                  this.getSubcategory(`/create/ads/subcategory/${slug}`);
+                 this.overlay = false;
              })
         }
     },

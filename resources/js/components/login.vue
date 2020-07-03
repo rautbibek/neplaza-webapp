@@ -1,15 +1,48 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="290">
-      
+    <v-dialog v-model="dialog" persistent  max-width="380">
       <v-card>
-        <v-card-title class="headline">Use Google's location service?</v-card-title>
-        <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
-        <v-card-actions>
+        <v-card-title class="text-right">
+          Neplaza Login
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
-        </v-card-actions>
+          <v-btn x-small fab @click="dialog = false"><v-icon>close</v-icon></v-btn>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <v-carousel  hide-delimiter-background hide-delimiters
+          height="150" cycle>
+              <v-carousel-item
+                v-for="(item,i) in items"
+                :key="i"
+                :src="item.src"
+              >
+              </v-carousel-item>
+              <v-overlay absolute opacity=".6"><h3> Login </h3></v-overlay>
+          </v-carousel>
+        </v-card-text>
+        <v-card-text>
+           <v-btn href="/login/facebook" large color="primary" class="my-1" style="width:100%">
+            <v-icon>mdi-facebook</v-icon>
+             &nbsp; Facebook
+           </v-btn>
+           <v-btn href="/login/google" large color="primary" class="my-1" style="width:100%">
+            <v-icon>mdi-google-plus</v-icon>
+             &nbsp; Gmail
+           </v-btn>
+
+           <v-btn large color="primary" class="my-1" style="width:100%">
+            <v-icon>mdi-email</v-icon>
+             &nbsp; Email
+           </v-btn>
+           <v-btn large color="primary" class="my-1" style="width:100%">
+            <v-icon>mdi-github</v-icon>
+             &nbsp; Github
+           </v-btn>
+           <v-btn large href="/login/twitter" color="primary" class="my-1" style="width:100%">
+            <v-icon>mdi-twitter</v-icon>
+             &nbsp; twitter
+           </v-btn>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </v-row>
@@ -21,6 +54,11 @@
     data () {
       return {
         dialog: false,
+        items: [
+          {
+            src: '/image/back.jpg',
+          },
+        ],
       }
     },
     created(){

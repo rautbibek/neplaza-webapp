@@ -26,9 +26,10 @@
               text
               left
             >
-              <favorite :is_favorite='feature.is_favorite' :product_id="feature.id"></favorite>
+              <favorite :is_favorite='feature.favorite_to_users.length?true:false' :product_id="feature.id"></favorite>
             </v-btn>
             <!-- image part -->
+            <router-link :to="`/ad/detail/${feature.id}`">
             <v-img 
                   class="white--text align-end"
                   height="200px"
@@ -67,6 +68,7 @@
 
                     <!-- title and subtitle part -->
                     <card-title :ads="feature"></card-title>
+            </router-link>
           </v-card>
           </v-hover>
         

@@ -10,6 +10,10 @@ class WelcomeController extends Controller
     public function index(){
         return view('welcome');
     }
+    
+    public function check(){
+        return view('check');
+    }
 
     public function city(){
         $city= City::select('id','name')->orderBy('name','ASC')->get();

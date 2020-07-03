@@ -3,34 +3,69 @@
 namespace App\Http\Controllers;
 use App\Scategory;
 use App\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
 {
     //category and category Product
     public function scategoryProduct($slug){
+        
         $scategory = Scategory::with('category')->where('slug',$slug)->firstOrFail();
-        $product = Product::select('id','price','maxprice','title','category_id','user_id','city_id','nhood_id','scategory_id','created_at')
-                 ->where('scategory_id',$scategory->id)
-                 ->where('deleted',false)
-                 ->where('sold',false)
-                 ->latest()
-                 ->with('category','user','city','nhood','scategory','product_image')
-                 ->simplePaginate(20);
-                 return response()->json([
-                  $product,
-                  $scategory
-               ],
-            200
-        );
+        
+        $product = app(Pipeline::class)
+                  ->send(Product::query())
+                  ->through([
+                      \App\Filter\Type::class,
+                      \App\Filter\Status::class,
+                      \App\Filter\Filters::class,
+                      \App\Filter\Sort::class,
+                      \App\Filter\Filter_1::class,
+                      \App\Filter\Filter_2::class,
+                      \App\Filter\Filter_3::class,
+                      \App\Filter\Brand::class,
+                      \App\Filter\Price::class,
+                      \App\Filter\Sort::class,
+                      
+                  ])
+                  ->thenReturn();
+                  
+        if(request()->has('city_id') && request('city_id') != null){
+            $product->where('city_id',request('city_id'));
+        }
+
+        if(request()->has('nhood_id') && request('nhood_id') != null){
+            $product->where('nhood_id',request('nhood_id'));
+        }
+
+        $p = $product->where('scategory_id',$scategory->id)
+                  ->where('deleted',false)
+                  ->where('sold',false)
+                  ->with(['user','category','scategory','product_image','city','nhood','favorite_to_users'=>function($query){
+                     $query->select('user_id')->where('user_id',Auth::id());
+                    }])
+                  ->simplePaginate(15)->appends([
+                      'price' => request('price'),
+                      'filter' => request('filter'),
+                      'filter_1_id' => request('filter_1_id'),
+                      'filter_2_id' => request('filter_2_id'),
+                      'filter_3_id' => request('filter_3_id'),
+                      'brand' => request('brand'),
+                  ]);
+        
+        return response()->json($p,200);
     }
 
     //category and category Product
     public function subcategoryFilter($slug){
         $subcategoryFilter = Scategory::
-                   with('type','status','filter','filter_1','filter_2','filter_3','brand')
+                   with(['type','category','status','filter','filter_1','filter_2','filter_3','brand','product'=>function($query){
+                        $query->select('id','scategory_id','created_at','price')->orderBy('price','desc')->first();
+                    }])
                    ->where('slug',$slug)
                    ->get();
-        return $subcategoryFilter;
+        return response()->json($subcategoryFilter,200);
     }
 }

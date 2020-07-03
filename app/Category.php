@@ -10,6 +10,6 @@ class Category extends Model
       return $this->hasMany('App\Scategory')->select('id','name','slug','category_id');
     }
     public function product(){
-      return $this->hasMany('App\Product')->latest()->where('sold',false)->where('deleted',false);
+      return $this->hasMany('App\Product');
     }
 }

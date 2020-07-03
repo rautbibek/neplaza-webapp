@@ -19,6 +19,14 @@ import CreateController from './components/home/back/createController.vue';
 import EditController from './components/home/back/editController.vue';
 import EditImage from './components/home/back/form/edit/editImages.vue';
 
+import AdDetail from './components/home/adDetail.vue';
+
+
+
+//admin part
+import Dashboard from './components/admin/pages/dashboard.vue';
+import Category from './components/admin/category/index.vue';
+
 export const routes = [{
         path: '/',
         component: HomeComponent
@@ -109,6 +117,26 @@ export const routes = [{
     {
         path: '/edit/ad/:id/image',
         component: EditImage,
+    },
+    //ad detail
+
+    {
+        path: '/ad/detail/:id',
+        component: AdDetail,
+    },
+
+
+
+    ////////////// dashboard part
+
+    {
+        path: '/admin/dashboard',
+        component: Dashboard,
+    },
+    {
+        path: '/admin/category',
+        name: 'category',
+        component: Category,
     }
 
 ]

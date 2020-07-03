@@ -8,7 +8,7 @@
       :src="item.src"
     >
     </v-carousel-item>
-    <v-overlay absolute><h2> Buy And Sell Anything </h2></v-overlay>
+    <v-overlay absolute opacity=".6"><h2> Buy And Sell Anything </h2></v-overlay>
   </v-carousel>
 
 </template>

@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scategory extends Model
 {
+    
     public function category(){
       return $this->belongsTo('App\Category');
     }
 
     public function brand(){
-      return $this->hasMany('App\Brand');
+      return $this->hasMany('App\Brand')->orderBy('name','asc');
     }
 
     public function product(){
       return $this->hasMany('App\Product')
-                  ->latest()
                   ->where('sold',false)
                   ->where('deleted',false);
     }
@@ -30,18 +30,18 @@ class Scategory extends Model
     }
 
     public function filter(){
-      return $this->hasMany('App\Filter');
+      return $this->hasMany('App\Filter')->orderBy('name','asc');
     }
 
     public function filter_1(){
-      return $this->hasMany('App\Filter_1');
+      return $this->hasMany('App\Filter_1')->orderBy('name','asc');
     }
 
     public function filter_2(){
-      return $this->hasMany('App\Filter_2');
+      return $this->hasMany('App\Filter_2')->orderBy('name','asc');
     }
 
     public function filter_3(){
-      return $this->hasMany('App\Filter_3');
+      return $this->hasMany('App\Filter_3')->orderBy('name','asc');
     }
 }

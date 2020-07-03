@@ -11,7 +11,7 @@
          </v-card-text>
          <div class="card-date text-left">
          
-         <p class="pa-2">
+         <p class="pa-2" style="color:black">
              <v-icon left small>location_on</v-icon>
              <small>{{ads.nhood.name}}, {{ads.city.name}}</small>
              </p>

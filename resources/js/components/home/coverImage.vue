@@ -16,8 +16,8 @@
                                 </v-row>
                             </template>
                         <!-- price part -->
-                        <router-link :to="`/category/${ads.category.slug}`" class="text-center mb-5" >
-                            <v-chip class="category" router :to='`/`'
+                        <router-link :to="`/ad/detail/${ads.id}`" class="text-center mb-5" >
+                            <v-chip class="category" router :to='`/ad/detail/${ads.id}`'
                             dark
                             color="#000000b3"
                             small

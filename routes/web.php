@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::prefix('admin')->group(function(){
+    Route::get('/login', 'Auth\AdminLoginController@adminLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
+});
+
+Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>'auth:admin', 'namespace'=>'Admin'],function(){
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('/category', 'CategoryController');
+
+});
+//testing
+Route::get('/check', 'WelcomeController@check')->name('check');
+
 Route::get('/menu/category', 'CategoryController@category');
 Route::get('/menu/subCategory', 'CategoryController@subCategory');
 Route::get('/front/all/product', 'ProductController@allProduct');
@@ -21,8 +35,13 @@ Route::get('/front/category/product/{slug}', 'CategoryController@categoryProduct
 Route::get('/front/scategory/product/{slug}', 'SubcategoryController@scategoryProduct');
 Route::get('/front/scategory/filter/{slug}', 'SubcategoryController@subcategoryFilter');
 Route::get('/front/featured/product', 'ProductController@premium');
+Route::get('/ad/comment/{id}','CommentController@getComment');
+Route::get('/product/detail/{id}', 'ProductController@productDetail');
 
 
+//login controller
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 
 
 //get city
@@ -41,12 +60,22 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/user/product/featured','User\UserProductController@featured');
     Route::get('/user/product/urgent','User\UserProductController@urgent');
     Route::get('/user/product/sold','User\UserProductController@sold');
-    
 
+    //notification 
+    Route::get('/get/notification','User\UserController@notification');
+    Route::get('/markAsRead/{id}','User\UserController@read');
+    Route::get('/read/notification','User\UserController@readNotification');
+
+    //comment controller
+    Route::post('/user/comment','User\CommentController@post');
+    Route::post('/reply/ad/comment','User\CommentController@reply');
+    Route::delete('/delete/comment/{id}','User\CommentController@commentDelete');
 
 
     Route::put('/user/contact/status','User\UserController@contact_status');
     Route::put('/user/deactivate/account','User\UserController@deactivateAccount');
+    Route::put('/update/contact','User\UserController@updateContact');
+    
 
     //profile update
     Route::put('/update/profile', 'User\UserController@updateProfile');

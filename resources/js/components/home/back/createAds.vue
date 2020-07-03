@@ -6,6 +6,9 @@
                 <li class="breadcrumb-item active" aria-current="page">Create Ads</li>
             </ol>
         </nav>
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
         <div class="container py-5">
         <div class="card-columns">
             <div v-for="(category,index) in categories" :key="index" class="card mt-3" >
@@ -26,21 +29,25 @@
 export default {
     data(){
         return{
+            overlay:false,
             categories:[],
             url:''
         }
     },
     methods:{
         getCategory(){
+            this.overlay=true;
             if(!this.loggedIn){
                 EventBus.$emit('changeDialog', true);
                 this.$router.push("/");
-                
+                this.overlay= false;
                 return;
             }
             axios.get(`/menu/subCategory`)
                  .then(response =>{
+                     
                      this.categories = response.data;
+                     this.overlay= false;
                  })
                  .catch();
         }

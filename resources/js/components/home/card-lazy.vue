@@ -11,8 +11,10 @@
         >
             <v-hover v-slot:default="{ hover }"
             open-delay="100">
-                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
-                    <favorite :is_favorite='ads.is_favorite' :product_id="ads.id"></favorite>
+                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
+                   
+                    <favorite :is_favorite='ads.favorite_to_users.length?true:false' :product_id="ads.id"></favorite>
+                    <router-link :to="`/ad/detail/${ads.id}`">
                     <!-- image part -->
                     <cover :ads="ads"></cover>
 
@@ -23,6 +25,7 @@
 
                     <!-- title and subtitle part -->
                     <card-title :ads="ads"></card-title>
+                    </router-link>
                 </v-card>
             </v-hover>
         </v-lazy>

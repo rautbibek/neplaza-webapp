@@ -9,6 +9,7 @@ export default {
             overlay: false,
             nhood_display: false,
 
+            hasContact: '',
             errors: {},
             //image propeerty
             isDragging: false,
@@ -137,11 +138,18 @@ export default {
 
 
         submit() {
+
             this.category_id = this.scat.category.id;
             this.scategory_id = this.scat.id;
             this.url = this.scat.url;
             this.overlay = true;
             if (this.$refs.form.validate()) {
+                if (!this.hasContact) {
+
+                    EventBus.$emit('profileForm', true);
+                    this.overlay = false;
+                    return;
+                }
                 const formData = new FormData();
                 let config = {
                     headers: {
@@ -178,7 +186,6 @@ export default {
                 formData.append('price', this.price);
                 formData.append('address', this.street);
                 formData.append('join', this.url);
-
                 this.files.forEach(file => {
                     formData.append('image[]', file, file.name);
                 });
@@ -193,10 +200,8 @@ export default {
 
                     })
                     .catch(error => {
-                        this.errors = error.response.data.errors;
-                        if (error.response.status === 422) {
 
-                            console.log(this.errors);
+                        if (error.response.status === 422) {
                             this.$toast.error('Invalid data please check your form again', 'error', {
                                 timeout: 3000,
                                 position: 'topRight',
@@ -224,7 +229,11 @@ export default {
         }
     },
     created() {
-
+        EventBus.$on('contactUpdated', (data) => {
+            this.hasContact = data;
+            this.submit();
+        })
         this.getCity();
+        this.hasContact = this.loginUser.phone;
     }
 }

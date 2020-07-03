@@ -6,7 +6,10 @@
                 <li class="breadcrumb-item active" aria-current="page">All Ads</li>
             </ol>
         </nav>
-      <div class="py-5">
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
+      <div class="">
         <v-container>
             <v-layout row wrap class="px-4">
             
@@ -38,10 +41,10 @@ export default {
       return{
         isActive: false,
         loading:false,
+        overlay:false,
         all_ads:[],
         color:'white',
         background:'#270f0ea1',
-        name:'bibek',
         nextUrl : null,
       }
     },
@@ -56,12 +59,14 @@ export default {
       },
 
       fetch(url){
+          this.overlay= true
           this.loading=true;
           axios.get(url)
                .then(({data}) =>{
                      this.all_ads.push(...data.data);
                      this.nextUrl = data.next_page_url
                      this.loading = false;
+                     this.overlay = false;
                  })
       }
     },

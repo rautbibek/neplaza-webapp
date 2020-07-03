@@ -7,6 +7,9 @@
                 <li class="breadcrumb-item active" aria-current="page">{{scat.name}}</li>
             </ol>
         </nav>
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
       <div >
         <div class="container">
             <div style="min-height:300px">
@@ -37,21 +40,25 @@
 export default {
     data(){
       return{
+          overlay:false,
          scat:{},
          category_url:'',
       }
     },
     methods:{
         getSubcategory(){
+            this.overlay=true;
             if(!this.loggedIn){
                 this.$router.push("/");
                 EventBus.$emit('changeDialog', true);
+                this.overlay = false;
                 return;
             }
             axios.get(`/create/ads/subcategory/${this.$route.params.slug}`)
                  .then(response => {
                      this.scat = response.data;
                      this.category_url= response.data.category.url;
+                     this.overlay = false;
                  })
         }
     },

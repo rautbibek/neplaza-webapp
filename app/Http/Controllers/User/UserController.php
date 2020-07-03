@@ -33,6 +33,8 @@ class UserController extends Controller
                 $product->deleted = true ;
                 $product->update();
             }
+            Auth::user()->comment()->delete();
+            Auth::user()->notifications()->delete();
             $message= "your account has been deactivated";
             
         } 
@@ -53,11 +55,36 @@ class UserController extends Controller
         return response()->json($message,200);
     }
 
-    
+    public function updateContact(Request $request){
+        $this->validate($request ,[
+            'contact' => 'required|min:9 | max:11',
+        ]);
+        $user = User::where('id',Auth::id())->firstOrFail();
+        $user->phone = $request->contact;
+        $user->update();
+        $message="contact number saved succefully";
+        return response()->json($message,200);
+    }
+
     public function myProfile(){
         $user = User::where('id',Auth::id())
               ->with('city','nhood')
               ->firstOrFail();
         return response()->json($user,200);
+    }
+
+    public function notification(){
+        $notification = Auth::user()->unreadNotifications()->get();
+        return response()->json($notification,200);
+    }
+
+    public function readNotification(){
+        $notification = Auth::user()->readNotifications()->take(5)->get();
+        return response()->json($notification,200);
+    }
+
+    public function read($id){
+        Auth::user()->notifications->where('id', $id)->markAsRead();
+        return response()->json('readed',200);
     }
 }

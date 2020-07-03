@@ -15,7 +15,9 @@
               </div>
               <div class="col-md-3 mt-3 col-sm-6 text-center cleaner">
                 <span v-if="loggedIn" >
+                  
                  <user-menu></user-menu>
+                 
                   
                  </span>
                   <span v-else>

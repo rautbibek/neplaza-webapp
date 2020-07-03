@@ -19,6 +19,10 @@ class User extends Authenticatable
         'name', 'email', 'password','role_id','username',
     ];
 
+    protected $guard = ['role_id'];
+
+   
+
     protected $appends =['cover','register_date','contact_status','contact_number','located_city','located_metro'];
 
     /**
@@ -63,7 +67,7 @@ class User extends Authenticatable
        return $this->hasMany('App\Comment');
     }
     public function favourit_products(){
-      return $this->belongsToMany('App\Product')
+      return $this->belongsToMany('App\Product','product_user')
             ->withTimestamps()->where('sold',false)->where('deleted',false);
     }
 
@@ -76,23 +80,28 @@ class User extends Authenticatable
 
     public function getContactNumberAttribute(){
       if($this->phone != '' || $this->phone != NULL){
-         return $this->phone;
+         if(!$this->hide_contact){
+            return $this->phone;
+         }
+         return '+977- xx-xxxx-xxxx';
+         
       }
        return "N/A";
     }
 
     public function getLocatedCityAttribute(){
-       if($this->city){
-          return $this->city->name;
-       }
-       return "N/A";
+       
+      //  if($this->city){
+      //     return $this->city->name;
+      //  }
+      //  return "N/A";
     }
 
     public function getLocatedMetroAttribute(){
-       if($this->nhood){
-          return $this->nhood->name;
-       }
-       return "N/A";
+      //  if($this->nhood){
+      //     return $this->nhood->name;
+      //  }
+      //  return "N/A";
     }
 
     public function getCoverAttribute(){

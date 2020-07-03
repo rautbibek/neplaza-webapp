@@ -35,6 +35,7 @@ Vue.use(Authorization);
 //registering component
 
 Vue.component('system-bar', require('./components/home/partials/systembar.vue').default);
+Vue.component('notification', require('./components/home/partials/notification.vue').default);
 Vue.component('main-component', require('./components/main.vue').default);
 Vue.component('top-bar', require('./components/home/partials/topbar.vue').default);
 Vue.component('nav-bar', require('./components/home/partials/navbar.vue').default);
@@ -49,6 +50,7 @@ Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
 Vue.component('profile-form', require('./components/home/back/profile/form.vue').default);
 Vue.component('mymenu', require('./components/home/back/myAds/myMenu.vue').default);
+Vue.component('update-profile', require('./components/home/back/profileForm.vue').default);
 
 Vue.component('cover', require('./components/home/coverImage.vue').default);
 Vue.component('card-date', require('./components/home/cardDate.vue').default);
@@ -76,7 +78,31 @@ Vue.component('edit-other', require('./components/home/back/form/edit/other.vue'
 
 
 //confirm vue
-Vue.component('nav-filter', require('./components/filter.vue').default);
+Vue.component('filter-ad', require('./components/filter.vue').default);
+Vue.component('scroll', require('./components/scroll.vue').default);
+
+//product detail part 
+Vue.component('ad-image', require('./components/home/detail/displayImage.vue').default);
+Vue.component('ad-user', require('./components/home/detail/displayUserDetail.vue').default);
+Vue.component('ad-description', require('./components/home/detail/displayDescription.vue').default);
+Vue.component('ad-comment', require('./components/home/detail/displayComment.vue').default);
+Vue.component('comment-reply', require('./components/home/detail/reply.vue').default);
+
+
+
+// ------                 admin layouts    --------
+
+Vue.component('dashboard-component', require('./components/admin/pages/dashboard.vue').default);
+Vue.component('admin-sidebar', require('./components/admin/layout/sidebar.vue').default);
+Vue.component('dialog-component', require('./components/admin/layout/dialog.vue').default);
+Vue.component('admin-category', require('./components/admin/category/index.vue').default);
+
+
+
+
+
+
+
 
 import { routes } from './routes.js';
 const router = new VueRouter({

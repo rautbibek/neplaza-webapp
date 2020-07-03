@@ -31,9 +31,11 @@ class Product extends Model
       'property_4',
       'join'
     ];
+    protected $with=['product_image','city','nhood','user','category','nhood','scategory'];
 
 
-    protected $appends=['created_date','product_price','product_max_price','ad_title',
+    protected $appends=[
+      'created_date','product_price','product_max_price','ad_title','located_city',
     'is_favorite','product_cover'];
 
     public function product_image(){
@@ -49,11 +51,19 @@ class Product extends Model
     }
 
     public function favorite_to_users(){
-      return $this->belongsToMany('App\User')->withTimestamps();
+      return $this->belongsToMany('App\User','product_user')->withTimestamps();
     }
 
     public function getIsFavoriteAttribute(){
-      return $this->favorite_to_users()->where('user_id',Auth::id())->count() >0;
+      return true; 
+    }
+
+    public function getLocatedCityAttribute(){
+       
+        if($this->city){
+           return $this->city->name;
+        }
+        return "N/A";
     }
 
     public function city(){
@@ -69,7 +79,7 @@ class Product extends Model
     }
 
     public function user(){
-      return $this->belongsTo('App\User')->select('id','name');
+      return $this->belongsTo('App\User');
     }
 
     public function status(){
@@ -115,7 +125,7 @@ class Product extends Model
 
     public function getProductMaxPriceAttribute(){
       $max_p = number_format($this->maxprice);
-      if($max_p == 0){
+      if($max_p == 0 || $max_p == null){
         return "";
       }else{
         return ' - '.$max_p;
