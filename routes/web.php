@@ -14,16 +14,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::get('/seller/detail/{id}/{username}', 'WelcomeController@seller')->name('seller');
+Route::get('/seller/{id}/ad', 'WelcomeController@sellerAd')->name('seller.ad');
+//search products
+Route::get('/ad/search', 'SearchController@search')->name('search');
+Route::get('/searchResult', 'SearchController@searchResult')->name('/search/result');
+
+
+
+///admin part
+
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@adminLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 });
-
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>'auth:admin', 'namespace'=>'Admin'],function(){
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('/category', 'CategoryController');
-
+    Route::resource('/category', 'CategoryController')->except('show','edit');
+    Route::resource('/subcategory', 'SubcategoryController')->except('show','edit');
+    Route::resource('/city', 'CityController')->except('show','edit');
+    Route::resource('/neighbourhood', 'NeighbourhoodController')->except('create','edit','show');
+    Route::resource('/brand', 'BrandController')->except('create','edit');
+    Route::resource('/type', 'TypeController')->except('create','edit');
+    Route::resource('/status', 'StatusController')->except('create','edit');
+    Route::resource('/user', 'UserController')->except('edit');
+    Route::resource('/product', 'ProductController')->except('edit');
 });
 //testing
 Route::get('/check', 'WelcomeController@check')->name('check');

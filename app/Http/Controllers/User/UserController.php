@@ -79,7 +79,7 @@ class UserController extends Controller
     }
 
     public function readNotification(){
-        $notification = Auth::user()->readNotifications()->take(5)->get();
+        $notification = Auth::user()->readNotifications()->take(3)->get();
         return response()->json($notification,200);
     }
 

@@ -13,7 +13,10 @@ class ProductController extends Controller
                  ->with(['category','scategory','user','city','nhood','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
+                 ->where('deleted',false)
+                 ->where('sold',false) 
                  ->latest()
+
                  ->simplePaginate(20);
                  
         return response()->json($product,200);
@@ -21,7 +24,9 @@ class ProductController extends Controller
 
     public function premium(){
         $product = Product::select('id','price','premium','maxprice','title','category_id','user_id','city_id','nhood_id','created_at')
-                ->where('premium',1) 
+                ->where('premium',1)
+                ->where('deleted',false)
+                ->where('sold',false) 
                 ->with(['category','scategory','user','city','nhood','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                 }])->simplePaginate(16);

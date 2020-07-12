@@ -22,10 +22,11 @@ import EditImage from './components/home/back/form/edit/editImages.vue';
 import AdDetail from './components/home/adDetail.vue';
 
 
+// search
+import SearchData from './components/home/front/pages/searchData.vue';
+import SellerComponent from './components/home/front/pages/seller.vue';
 
-//admin part
-import Dashboard from './components/admin/pages/dashboard.vue';
-import Category from './components/admin/category/index.vue';
+
 
 export const routes = [{
         path: '/',
@@ -125,18 +126,16 @@ export const routes = [{
         component: AdDetail,
     },
 
-
-
-    ////////////// dashboard part
-
+    //search
     {
-        path: '/admin/dashboard',
-        component: Dashboard,
+        path: '/search/*',
+        component: SearchData,
     },
+
+    //seller
     {
-        path: '/admin/category',
-        name: 'category',
-        component: Category,
-    }
+        path: '/seller/:id/:username',
+        component: SellerComponent,
+    },
 
 ]

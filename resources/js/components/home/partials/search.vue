@@ -1,34 +1,130 @@
 <template>
-                <div class="form-row">
-                      <div class="col-10">
-                        <input type="text" class="form-control" placeholder="Type your search keyword">
-                      </div>
-                      <div class="col-2">
-                        <button class="btn" style="background-color:#2F3B59; color:white; margin-left:-10px">
-                          <v-icon style="color:white">search</v-icon>
-                        </button>
-                      </div>
-                </div>
-</template>
+<div class="col-md-11  search">
+        <div class="input-group" >
+            <input class="form-control searchinput" value="`${this.$route.query.q}`" @select="show==true" @keyup="search()" v-model="keyword" type="text"  placeholder="Enter your search keyword..." aria-label="Search">
+            <div class="input-group-append ">
+                    <a href="javascript:void(0)" class="input-group-text searchbtn" @click="submit()">
+                        <i class="fa fa-search text-white" aria-hidden="true"></i>
+                    </a>
+            </div>
+        </div>
 
+        <div class="autocomplete " style="margin-top:-22px" v-show="show" v-if="searchResult.length" >
+          <div class="container">
+           <ul class="list-group" @click="select()">
+            <router-link :to='`/search/?q=${search.title}`'  class="list-group-item" v-for="search in searchResult" :key="search.id">
+              <b>{{search.category.name}}</b><br>
+              {{search.title}}
+
+            </router-link>
+          </ul>
+        </div>
+      </div>
+    </div>
+</template>
+<script>
+
+$("body").click
+(
+  function(e)
+  {
+    if(e.target.className !== "search")
+    {
+      $(".autocomplete").hide();
+    }
+  }
+);
+export default {
+  data(){
+    return{
+      
+      keyword:'',
+      show:false,
+      searchResult:[],
+    }
+  },
+  methods:{
+    submit(){
+        this.show=false;
+        if(this.keyword){
+          this.$router.replace({path: '/search/', query: { q: this.keyword} }).catch(err => {});
+        }
+      },
+    select(){
+        this.keyword = this.$route.query.q;
+        this.show=false;
+      },
+    search:_.debounce(function(){
+      
+       axios.get('/ad/search',
+          {params:{
+            search : this.keyword,
+          }}
+        )
+          .then((response) =>{
+            this.show = true;
+            this.searchResult = response.data;
+            
+          })
+        .catch();
+    },2000)
+  },
+  mounted(){
+      this.keyword = this.$route.query.q;
+  },
+  watch:{
+      $route(to,from){
+        //return this.search();
+        //console.log(this.cat_posts);
+        this.keyword = this.$route.query.q;
+
+
+      }
+    }, 
+
+}
+
+</script>
 <style scoped>
   .form-control{
-    height: 40px;
     border-radius:0px;
-    margin:0px;
-    padding:0px;
-    border:2px solid #2F3B59;    
+  }
+  .input-group{
+    border-radius:0px;
+    border:2px solid #2F3B59;
+  }
+ .autocomplete {
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    display: inline-block;
+    top: 100%;
+    overflow:hidden;
+    max-height: 410px;
+    left:0;
   }
   .form-control:focus{
+      border-color:white;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #2f3b59;
+  }
+  
+   .searchbtn:focus{
       box-shadow:none;
   }
-  .btn{
-    height: 40px;
-    border-radius:0px;
-    border-radius:2px solid #2F3B59;
+
+
+  .searchbtn{
+    background-color:#2f3b59;
   }
-   .btn:focus{
-      box-shadow:none;
+
+  a{
+    color: black !important;
+  }
+  ul{
+    padding:0px !important;
+  }
+  input[type="text"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
   }
 
 

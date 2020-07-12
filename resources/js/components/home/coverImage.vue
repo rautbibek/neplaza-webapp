@@ -1,5 +1,6 @@
 <template>
     <div>
+        <v-responsive>
         <v-img style="position:relative" 
                         class="white--text align-end"
                         height="200px"
@@ -40,6 +41,7 @@
                             </v-chip>
                         </div>
                     </v-img>
+            </v-responsive>
     </div>
 </template>
 <script>

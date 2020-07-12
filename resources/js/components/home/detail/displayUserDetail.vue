@@ -14,19 +14,21 @@
         <!-- user information -->
         <v-card tile class="mt-3 text-center" >
             
-            <v-col class="col-md-6 offset-md-3">
-                <v-avatar size="120">
-                <img
-                    :src="owner.cover"
-                    :alt="owner.name"
-                >
-                </v-avatar>
+            <v-col class="">
+                <v-responsive>
+                    <v-avatar size="120">
+                    <img
+                        :src="owner.cover"
+                        :alt="owner.name"
+                    >
+                    </v-avatar>
+                </v-responsive>
             </v-col>
             <v-list-item-content class="text-center">
              <v-list-item-title>{{owner.name}}</v-list-item-title>
              <small style="color:grey" class="my-1" >user since : {{owner.register_date}}</small>
             </v-list-item-content>
-            <v-chip
+            <v-chip router :to="`/seller/${owner.id}/${owner.username}`"
                 class="ma-2"
                 color="indigo"
                 text-color="white"

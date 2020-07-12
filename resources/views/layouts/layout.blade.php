@@ -14,16 +14,9 @@
     </head>
 <body>
     <div id="app">
-        <v-app id="inspire">
-
-                <admin-sidebar></admin-sidebar>
-
-                <div class="container">
-                    @yield('content')
-                </div>
-
-                <dialog-component></dialog-component>
-        </v-app>
+         <div class="mt-5">
+            @yield('content')
+        </div>
     </div>
 </body>
 {{-- script part --}}

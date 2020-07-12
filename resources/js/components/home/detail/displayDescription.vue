@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3">
+    <div >
         <v-card tile>
             <v-card-title>Ad Detail</v-card-title> 
                 <v-card-text >
@@ -129,6 +129,7 @@
               <v-card-title>Ad Description</v-card-title> 
               <v-card-text class="ml-3">
                   <p class="pre-formatted" v-html="ad.description"></p>
+                  {{ad.description}}
               </v-card-text>
         </v-card>    
     </div>
@@ -141,7 +142,7 @@ export default {
 <style scoped>
 
   .pre-formatted {
-    white-space: pre;
+    white-space: pre-wrap;
   }
  
 </style>

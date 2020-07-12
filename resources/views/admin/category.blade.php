@@ -1,8 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.layout')
 
 @section('content')
         
-        <div>
+        <div class="mt-5">
             
             <admin-category></admin-category> 
             

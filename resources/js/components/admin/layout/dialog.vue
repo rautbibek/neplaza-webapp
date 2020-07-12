@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn
+    <v-btn
       bottom
       color="pink"
       dark

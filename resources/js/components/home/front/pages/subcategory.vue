@@ -21,9 +21,231 @@
                 <v-content class="py-3">
                     <v-toolbar flat>
                       <v-spacer></v-spacer>
-                      <v-btn tile color="primary" class="mr-4 d-flex d-sm-none">
-                          filter
-                      </v-btn>
+                      
+                       <v-row justify="center">
+                        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                          <template v-slot:activator="{ on }">
+                            <v-btn tile color="primary" v-on="on" class="mr-4 d-flex d-sm-none">
+                               filter
+                            </v-btn>
+                          </template>
+                          <v-card>
+                            <v-toolbar dark color="primary">
+                              <v-btn icon dark @click="dialog = false">
+                                <v-icon>mdi-close</v-icon>
+                              </v-btn>
+                              <v-toolbar-title>Filter</v-toolbar-title>
+                              <v-spacer></v-spacer>
+                              <v-toolbar-items>
+                                <v-btn dark text @click="dialog = false">Close</v-btn>
+                              </v-toolbar-items>
+                            </v-toolbar>
+                            <v-list three-line subheader>
+                              <v-subheader>Ad filter</v-subheader>
+                              
+                            </v-list>
+                            <v-divider></v-divider>
+                            <v-card outlined tile v-for="(scat,index) in subcategory" :key="index">
+                        <v-card-title> <v-icon>mdi-filter</v-icon> FILTER</v-card-title>
+                        <v-card-subtitle>{{scat.name}}</v-card-subtitle>
+                        <!-- PART ONE -->
+                          <v-divider></v-divider>
+                            <v-card-text>
+                              <h5 class="title mb-2">Location</h5>
+                              <v-select class="py-2" style="border-radius:0px"
+                                v-model="city_id"
+                                :items='city'
+                                :item-text="'name'"
+                                :item-value="'id'"
+                                outlined
+                                clearable
+                                label="District"
+                                append-icon="mdi-map-marker"
+                                @change="getNhood"
+                              ></v-select>
+                              <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
+                                  <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                  </div>
+                              </div>
+
+                              <v-select class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
+                                v-model="nhood_id"
+                                :items='localArea'
+                                :item-text="'name'"
+                                :item-value="'id'"
+                                outlined
+                                clearable
+                                label="Metro/Municipility/VDC"
+                                append-icon="mdi-map-marker"
+                                
+                              ></v-select>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <!-- price part  -->
+                            <v-card-text v-if="max_price">
+                              <h5 class="title mb-2">Price Range</h5>
+                              <v-card-text>
+                                
+                                <v-range-slider @change="slide"
+                                  v-model="price"
+                                  thumb-label
+                                  
+                                  min="0"
+                                  :max="max_price"
+                                ></v-range-slider>
+                                <div class="row">
+                                  <div class="col">
+                                    <v-text-field
+                                    
+                                      type="number"
+                                      v-model="min_p"
+                                      label="Minimum Price"
+                                      single-line
+                                    ></v-text-field>
+                                  </div>
+                                  
+                                  <div class="col text-right">
+                                    <v-text-field @keyup="changing"
+                                      type="number"
+                                      v-model="max_p"
+                                      label="Maximum price"
+                                      single-line
+                                    ></v-text-field>
+                                  </div>
+                                </div>
+                              </v-card-text>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <!-- PART 2 -->
+                            <div v-if="scat.type.length>0"> 
+                              <v-card-text>
+                              <h5 class="title mb-2">{{type_title}}</h5>
+                                <v-chip-group
+                                  v-model="type_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="type.id" outlined v-for="(type,index) in scat.type" :key="index">{{type.name}}</v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                          </div>
+
+                            <!-- PART 3 -->
+                            <div v-if="scat.status.length>0">
+                              <v-card-text>
+                              <h5 class="title mb-2">Status</h5>
+                                <v-chip-group
+                                  v-model="status_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="status.id" outlined v-for="(status,index) in scat.status" :key="index">
+                                    {{status.title}}
+                                  </v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+
+                            <!-- PART 4 -->
+                            <div v-if="scat.brand.length > 0">
+                              <v-card-text>
+                              <h5 class="title mb-2">Brand</h5>
+                                <v-chip-group
+                                  v-model="brand_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="brand.id" outlined v-for="(brand,index) in scat.brand" :key="index">
+                                    {{brand.name}}
+                                    </v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+
+                            <!-- PART 5 -->
+                            <div v-if="scat.filter.length>0">
+                              <v-card-text>
+                              <h5 class="title mb-2">{{filter_title}}</h5>
+                                <v-chip-group
+                                  v-model="filter_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="filter.id" outlined v-for="(filter,index) in scat.filter" :key="index">
+                                    {{filter.name}}
+                                    </v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+
+                            <!-- PART 5 -->
+                            <div v-if="scat.filter_1.length>0">
+                              <v-card-text>
+                              <h5 class="title mb-2">{{filter_1_title}}</h5>
+                                <v-chip-group
+                                  v-model="filter_1_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="filter_1.id" outlined v-for="(filter_1,index) in scat.filter_1" :key="index">
+                                    {{filter_1.name}}
+                                    </v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+
+                            <!-- PART 5 -->
+                            <div v-if="scat.filter_2.length>0">
+                              <v-card-text>
+                              <h5 class="title mb-2">{{filter_2_title}}</h5>
+                                <v-chip-group
+                                  v-model="filter_2_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="filter_2.id" outlined v-for="(filter_2,index) in scat.filter_2" :key="index">
+                                    {{filter_2.name}}
+                                    </v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+
+                            <!-- PART 5 -->
+                            <div v-if="scat.filter_3.length>0">
+                              <v-card-text>
+                              <h5 class="title mb-2">{{filter_3_title}}</h5>
+                                <v-chip-group
+                                  v-model="filter_3_id"
+                                  column
+                                  multiple
+                                >
+                                  <v-chip filter :value="filter_3.id" outlined v-for="(filter_3,index) in scat.filter_3" :key="index">
+                                    {{filter_3.name}}
+                                    </v-chip>
+                                </v-chip-group>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+
+                            <div class="p-3" v-if="max_price">
+                              <v-btn @click="filter" color="indigo" dark large tile>
+                                <v-icon left>mdi-filter</v-icon>
+                                Apply Filter 
+                                </v-btn>
+                            </div>
+
+                            
+                      </v-card>
+                          </v-card>
+                        </v-dialog>
+                      </v-row>
                         <v-col cols="8" lg="3" md="3" sm="6" xs="8">
                           
                           <v-select class="mt-4"
@@ -266,6 +488,7 @@
 export default {
     data(){
       return{
+        dialog:false,
         nhood_display: false,
         city:[],
         localArea:[],
@@ -336,6 +559,7 @@ export default {
         }
       },
       filter(){
+        this.dialog= false;
         this.fetch(`/front/scategory/product/${this.$route.params.slug}`);
         window.scrollTo(0,100);
 

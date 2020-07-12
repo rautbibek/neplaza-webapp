@@ -1,14 +1,11 @@
 <template>
     <div class="row no-gutters">
         <div class="col-3 text-center">
-          
-            
+
               <notification></notification>
-            
-          
         </div>
         <div class="col-4 text-right">
-          <v-menu offset-y nudge-bottom="20" open-on-click close-on-content-click transition="scale-transition">
+          <v-menu offset-y nudge-bottom="15" open-on-click close-on-content-click transition="scale-transition">
            <template v-slot:activator="{ on }">
               <v-avatar size="38" color="grey" class="profile" v-on="on">
                 <img 

@@ -11133,3 +11133,38 @@ v-text-field {
   margin-right: 10px;
 }
 
+.searchdiv {
+  padding-top: 5px;
+}
+
+.search {
+  margin: auto;
+}
+
+.searchinput {
+  height: 38px;
+  display: inline-block;
+  width: 66%;
+  border: none;
+  background: #fff;
+  box-shadow: none;
+  font-size: 12px;
+  padding-left: 12px;
+}
+
+.input-group {
+  border: 5px solid #e4e4e4;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  background: #fff;
+}
+
+.searchbtn {
+  background: #2F3B59;
+}
+
+a:hover {
+  text-decoration: none;
+}
+

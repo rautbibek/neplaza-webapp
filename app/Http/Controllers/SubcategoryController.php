@@ -53,6 +53,8 @@ class SubcategoryController extends Controller
                       'filter_2_id' => request('filter_2_id'),
                       'filter_3_id' => request('filter_3_id'),
                       'brand' => request('brand'),
+                      'city_id' => request('city_id'),
+                      'nhood_id'=>request('nhood_id')
                   ]);
         
         return response()->json($p,200);

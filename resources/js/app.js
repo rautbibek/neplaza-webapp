@@ -95,13 +95,15 @@ Vue.component('comment-reply', require('./components/home/detail/reply.vue').def
 Vue.component('dashboard-component', require('./components/admin/pages/dashboard.vue').default);
 Vue.component('admin-sidebar', require('./components/admin/layout/sidebar.vue').default);
 Vue.component('dialog-component', require('./components/admin/layout/dialog.vue').default);
-Vue.component('admin-category', require('./components/admin/category/index.vue').default);
-
-
-
-
-
-
+Vue.component('admin-category', require('./components/admin/pages/category.vue').default);
+Vue.component('admin-scat', require('./components/admin/pages/subcategory.vue').default);
+Vue.component('admin-city', require('./components/admin/pages/city.vue').default);
+Vue.component('admin-nhood', require('./components/admin/pages/neighbourhood.vue').default);
+Vue.component('admin-brand', require('./components/admin/pages/brand.vue').default);
+Vue.component('admin-type', require('./components/admin/pages/type.vue').default);
+Vue.component('admin-status', require('./components/admin/pages/status.vue').default);
+Vue.component('admin-user', require('./components/admin/pages/user.vue').default);
+Vue.component('admin-product', require('./components/admin/pages/product.vue').default);
 
 
 import { routes } from './routes.js';

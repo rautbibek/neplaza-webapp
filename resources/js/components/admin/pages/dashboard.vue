@@ -1,26 +1,20 @@
 <template>
+  <v-app id="inspire">
     
-    <v-container
+
+    <admin-sidebar></admin-sidebar>
+    
+      <v-container
         class="fill-height"
-        fluid
-      >
+        fluid>
         <v-row
           align="center"
           justify="center"
         >
-          <v-tooltip right>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                icon
-                large
-                target="_blank"
-                v-on="on"
-              >
-                WELCOME TO DASHBOARD
-              </v-btn>
-            </template>
-            <span>Source</span>
-          </v-tooltip>
+          DASHBOARD
         </v-row>
       </v-container>
+    <dialog-component></dialog-component>
+  </v-app>
 </template>
+
