@@ -114,6 +114,7 @@
           <tr>
             <th class="text-left">#ID</th>
             <th class="text-left">District Name</th>
+            <th class="text-left">Product Count</th>
             <th class="text-left">Slug</th>
             <th class="text-left">Display</th>
             <th class="text-left">Actions</th>
@@ -123,6 +124,14 @@
           <tr v-for="(item,index) in desserts" :key="index">
             <td>{{ index+1 }}</td>
             <td>{{ item.name }}</td>
+            <td><v-chip small
+                    class="ma-2"
+                    color="indigo"
+                    text-color="white"
+                    >
+                    {{item.product_count}}
+                </v-chip>
+            </td>
             <td>{{ item.slug }}</td>
             <td>
 

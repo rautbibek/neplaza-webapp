@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\User;
 use App\User;
 use App\Product;
+use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
+//use Intervention\Image\Image;
+
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -63,6 +68,35 @@ class UserController extends Controller
         $user->phone = $request->contact;
         $user->update();
         $message="contact number saved succefully";
+        return response()->json($message,200);
+    }
+
+    public function updateCover(Request $request){
+        $this->validate($request ,[
+            'image' => 'required|file|image|mimes:jpeg,jpg,png',
+        ]);
+        $image = $request->file('image');
+        $slug = str_slug(Auth::user()->name);
+        if(isset($image)){
+                $currentDate = Carbon::now()->toDateString();
+                $imagename = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+                if(!Storage::disk('public')->exists('profile')){
+                    Storage::disk('public')->makeDirectory('profile');
+                }
+                if(Storage::disk('public')->exists('profile/'.Auth::user()->image)){
+                    Storage::disk('public')->delete('profile/'.Auth::user()->image);
+                }
+                //resize the image
+                $profile = Image::make($image)->resize(300,200)->stream();
+                Storage::disk('public')->put('profile/'.$imagename,$profile);
+            }
+            else{
+                $imagename= '';
+        }
+        $user = User::findOrFail(Auth::id());
+        $user->image = $imagename;
+        $user->update();
+        $message="profile picture updated succefully";
         return response()->json($message,200);
     }
 

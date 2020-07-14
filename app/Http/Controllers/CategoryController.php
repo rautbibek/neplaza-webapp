@@ -28,7 +28,7 @@ class CategoryController extends Controller
                  ->where('category_id',$category->id)
                  ->where('deleted',false)
                  ->where('sold',false)
-                 ->with(['favorite_to_users'=>function($query){
+                 ->with(['product_image','city','nhood','user','nhood','scategory','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                  }])
                  ->simplePaginate(20);

@@ -27,8 +27,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $category = Category::with('scategory')
-                             ->latest()
+        $category = Category::with(['scategory'=>function($q){
+          $q->orderBy('product_count','desc');
+          $q->withCount('product');
+        }])
+                             ->orderBy('product_count','desc')
+                             ->withCount('product')
                              ->get();
         return response()->json($category,200);
     }
@@ -166,13 +170,16 @@ class CategoryController extends Controller
     public function destroy($id)
     {
       $category = Category::find($id);
-      if(Storage::disk('public')->exists('category/'.'/'.$category->image)){
-        Storage::disk('public')->delete('category/'.$category->image);
+        if($category->product->count()< 1){
+          if(Storage::disk('public')->exists('category/'.'/'.$category->image)){
+            Storage::disk('public')->delete('category/'.$category->image);
+          }
+          if(Storage::disk('public')->exists('thumb/'.'/'.$category->image)){
+            Storage::disk('public')->delete('thumb/'.'/'.$category->image);
+          }
+          $category->delete();
+          return response()->json('Category item deleted succefully ',200);
       }
-      if(Storage::disk('public')->exists('thumb/'.'/'.$category->image)){
-        Storage::disk('public')->delete('thumb/'.'/'.$category->image);
-      }
-      $category->delete();
-      return response()->json('Category item deleted succefully ',200);
+      return response()->json('Cannot deleted this category it contains '.$category->product->count().' ads',200);
     }
 }

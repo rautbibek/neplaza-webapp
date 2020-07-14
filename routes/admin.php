@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::resource('/neighbourhood', 'NeighbourhoodController')->except('create','edit');
+   // Route::resource('/product', 'ProductController')->except('edit');
+
+

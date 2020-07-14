@@ -7,11 +7,11 @@
     <sliders style="margin:0px; padding:0px"
               :autoplay="true"
               :autoplayHoverPause="true"
-              :scrollPerPage="true"
+              :scrollPerPage="false"
               :loop="true"
               :spacePadding="2"
               :navigationEnabled="true"
-              :paginationEnabled="false"
+              :paginationEnabled="true"
               :responsive="true"
               :perPageCustom="[[300, 1], [500, 2],[600, 4]]"
               class="row"
@@ -44,7 +44,7 @@
                                 small
                                 label
                                 >
-                                {{feature.category.name}}
+                                {{feature.scategory.name}}
                                 
                                 </v-chip>
                             </div>

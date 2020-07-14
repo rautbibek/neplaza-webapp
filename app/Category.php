@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     public function scategory(){
-      return $this->hasMany('App\Scategory')->select('id','name','slug','url','category_id','view_count');
+      return $this->hasMany('App\Scategory');
     }
     public function product(){
-      return $this->hasMany('App\Product');
+      return $this->hasMany('App\Product')->where('sold',false)
+                  ->where('deleted',false);;
     }
 }

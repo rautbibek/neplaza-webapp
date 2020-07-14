@@ -20,7 +20,7 @@
             </v-layout>
             <div class="text-center mt-5" v-if="nextUrl">
 
-            <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="fetch(nextUrl)">
+            <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
                 
                 Load More
                 <template v-slot:loader>
@@ -68,6 +68,15 @@ export default {
                      this.loading = false;
                      this.overlay = false;
                  })
+      },
+      more(nextUrl){
+        this.loading=true;
+        axios.get(nextUrl)
+             .then(({data}) =>{
+                this.all_ads.push(...data.data);
+                this.nextUrl = data.next_page_url
+                this.loading = false;
+            })
       }
     },
     created(){

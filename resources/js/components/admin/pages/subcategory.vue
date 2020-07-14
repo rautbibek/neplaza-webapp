@@ -141,13 +141,23 @@
     </v-dialog>
     <!-- table componsent -->
     <div class="p-5" v-for="(category,index) in desserts" :key="index">
-      <h5 class="border-bottom" :class="category.visible?'':'text-danger'" ><i :class="category.icons"></i> {{category.name}}</h5>
+      <h5 class="border-bottom" :class="category.visible?'':'text-danger'" >
+        <i :class="category.icons"></i> {{category.name}} 
+        <v-chip small
+                    class="ma-2"
+                    color="indigo"
+                    text-color="white"
+                    >
+                    Total product : {{category.product_count}}
+                </v-chip>
+        </h5>
       <v-simple-table >
         <template v-slot:default>
           <thead>
             <tr>
               <th class="text-left">#ID</th>
               <th class="text-left">Subcategory Name</th>
+              <th class="text-left">Product Count</th>
               <th class="text-left">Slug</th>
               <th class="text-left">Url</th>
               <th class="text-left">view Count</th>
@@ -158,6 +168,15 @@
             <tr v-for="(item,index) in category.scategory" :key="index">
               <td>{{ index+1 }}</td>
               <td>{{ item.name }}</td>
+              <td>
+                <v-chip small
+                    class="ma-2"
+                    color="indigo"
+                    text-color="white"
+                    >
+                    {{item.product_count}}
+                </v-chip>
+              </td>
               <td>{{ item.slug }}</td>
               <td>{{ item.url }}</td>
               <td>
@@ -221,6 +240,7 @@
         axios.get(`/admin/category/create`)
              .then(response =>{
                this.desserts = response.data;
+               
                this.overlay = false;
              })
              .catch(error =>{

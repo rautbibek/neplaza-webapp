@@ -39,9 +39,10 @@ export default {
       },
       getAds(){
         this.overlay = true;
-        axios.get(`/front/all/product`)
-             .then(({data}) =>{
-                this.all_ads = data.data;
+        axios.get(`/front/home/product`)
+             .then(response =>{
+                this.all_ads = response.data;
+                console.log(this.all_ads);
                 this.overlay = false;
               })
       }

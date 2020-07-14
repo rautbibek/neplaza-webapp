@@ -23,6 +23,7 @@
                 <v-col cols="12" lg="4">
                     <ad-user :ad="ad" :owner="ad.user"></ad-user>
                 </v-col>
+                
             </v-row>
             <v-row>
                 <v-col cols="12" lg="8" md="8" sm="12" xs="12">

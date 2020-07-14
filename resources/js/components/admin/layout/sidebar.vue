@@ -70,6 +70,7 @@ export default {
         { icon: 'class', text: 'Type',url:'/admin/type' },
         { icon: 'assignment', text: 'Status',url:'/admin/status' },
         { icon: 'mdi-account-circle', text: 'Users',url:'/admin/user' },
+        { icon: 'shop', text: 'Ads',url:'/admin/product' },
       ],
     }),
     methods:{

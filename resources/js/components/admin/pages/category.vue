@@ -183,6 +183,7 @@
           <tr>
             <th class="text-left">#ID</th>
             <th class="text-left">Category Name</th>
+            <th class="text-left">Total Product</th>
             <th class="text-left">Slug</th>
             <th class="text-left">Url</th>
             <th class="text-left">visibility main menu</th>
@@ -195,6 +196,14 @@
           <tr v-for="(item,index) in desserts" :key="index">
             <td>{{ index+1 }}</td>
             <td>{{ item.name }}</td>
+            <td><v-chip small
+                    class="ma-2"
+                    color="indigo"
+                    text-color="white"
+                    >
+                    {{item.product_count}}
+                </v-chip>
+            </td>
             <td>{{ item.slug }}</td>
             <td>{{ item.url }}</td>
             <td>
@@ -404,7 +413,7 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 };
-                console.log(this.icon);
+                
                 //category subcategory data
                 formData.append("_method", "put");
                 formData.append('name', this.name);

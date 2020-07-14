@@ -28,7 +28,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@adminLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 });
-Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>'auth:admin', 'namespace'=>'Admin'],function(){
+Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'namespace'=>'Admin'],function(){
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/category', 'CategoryController')->except('show','edit');
     Route::resource('/subcategory', 'SubcategoryController')->except('show','edit');
@@ -46,6 +46,7 @@ Route::get('/check', 'WelcomeController@check')->name('check');
 Route::get('/menu/category', 'CategoryController@category');
 Route::get('/menu/subCategory', 'CategoryController@subCategory');
 Route::get('/front/all/product', 'ProductController@allProduct');
+Route::get('/front/home/product', 'ProductController@homeProduct');
 Route::get('/front/category/product/{slug}', 'CategoryController@categoryProduct');
 Route::get('/front/scategory/product/{slug}', 'SubcategoryController@scategoryProduct');
 Route::get('/front/scategory/filter/{slug}', 'SubcategoryController@subcategoryFilter');
@@ -94,6 +95,7 @@ Route::group(['middleware'=>['auth']], function(){
 
     //profile update
     Route::put('/update/profile', 'User\UserController@updateProfile');
+    Route::put('/update/cover', 'User\UserController@updateCover');
     Route::get('/get/login/user', 'User\UserController@myProfile');
 
     //get subcategory for create ads controller

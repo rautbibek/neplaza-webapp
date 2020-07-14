@@ -6,31 +6,47 @@
     <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
-    <v-col class="text-right px-5">
-      <v-btn @click="dialog = true" small color="primary">
-        <v-icon small left>mdi-plus-circle</v-icon>
-        Add new 
-        </v-btn>
-    </v-col>
     <!-- dialog component -->
     <v-dialog v-model="dialog" persistent  max-width="450">
       <v-card>
         <v-card-title class="text-right">
-          Add new category
+          Change User Role
           <v-spacer></v-spacer>
           <v-btn x-small fab @click="dialog = false"><v-icon>close</v-icon></v-btn>
         </v-card-title>
 
         <v-divider></v-divider>
         
-        
+            <v-form class="px-3" ref="form" v-model="valid" lazy-validation>
+                  <v-col cols="12" >
+                    <v-select
+                      v-model="role_id" 
+                      :items='roles'
+                      :item-text="'name'"
+                      :item-value="'id'"
+                      label="Role"
+                      
+                      clearable
+                      >
+                      </v-select>
+                  </v-col>
+              </v-form>
         <v-card-actions>
           <v-spacer></v-spacer>
           
-           
+          <v-btn
+            color="green darken-1"
+            dark
+            tile
+            @click="changeRole"
+          >
+            update user
+          </v-btn>
+          
         </v-card-actions>
       </v-card>
     </v-dialog>
+   
     <!-- table componsent -->
     <v-simple-table class="p-5">
       <template v-slot:default>
@@ -40,9 +56,10 @@
             <th class="text-left">Name</th>
             <th class="text-left">Email</th>
             <th class="text-left">Username</th>
+            <th class="text-left">Total Ads</th>
             <th class="text-left">Account Status</th>
             <th class="text-left">Block By Admin</th>
-            <th class="text-left">Image</th>
+            <th class="text-left">Role</th>
             <th class="text-left">Actions</th>
           </tr>
         </thead>
@@ -52,6 +69,16 @@
             <td>{{ item.name }}</td>
             <td>{{ item.email }}</td>
             <td>{{ item.username }}</td>
+            <td>
+              <v-chip
+                class="ma-2"
+                color="blue"
+                text-color="white"
+                >
+                {{ item.product_count }}
+               
+            </v-chip>
+              </td>
             <td>
               
               <v-chip v-if="!item.account_status" small
@@ -72,34 +99,33 @@
             </v-chip>
             </td>
             <td>
-              <v-chip v-if="!item.block_by_admin" small
-                    class="ma-2"
-                    color="green"
-                    text-color="white"
-                    >
-                    no
-                    
-                </v-chip>
-                <v-chip v-else small
-                    class="ma-2"
-                    color="green"
-                    text-color="white"
-                    >
-                    yes
-                    
-                </v-chip>
+              <v-btn x-small v-if="item.block_by_admin" color="red" @click="block_user(item.id,false,'ublock')" dark>unblock</v-btn>
+              <v-btn x-small v-else color="success" @click="block_user(item.id,true,'block')" dark>block</v-btn>
             </td>
             <td>
-                <v-avatar>
-                    <v-img :src="item.cover"></v-img>
-                </v-avatar>
+              <v-chip small v-if="item.role.id==1"
+                class="ma-2"
+                color="purple darken-2"
+                text-color="white"
+                >
+                {{item.role.name}}
+                
+              </v-chip>
+              <v-chip small v-else
+                class="ma-2"
+                :color="item.role.id==2?'indigo':'teal'"
+                text-color="white"
+                >
+                {{item.role.name}}
+                
+              </v-chip>
               
             </td>
             <td>
-              <v-btn x-small text @click="edit(item.id)">
+              <v-btn x-small text @click="edit(item)">
                 <v-icon small>mdi-pencil</v-icon>
               </v-btn>
-              <v-btn x-small text @click="del(item.id)">
+              <v-btn x-small text @click="del(item.id,item)">
                 <v-icon small>mdi-delete</v-icon>
               </v-btn>
             </td>
@@ -107,7 +133,15 @@
         </tbody>
       </template>
     </v-simple-table>
-    
+    <div class="text-center mb-5" v-if="nextUrl">
+        <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
+            Load More
+            <template v-slot:loader>
+                <span>Loading...</span>
+            </template>
+            <v-icon right>cached</v-icon>
+        </v-btn>
+    </div>
   </v-container>
   <dialog-component></dialog-component>
   </v-app>
@@ -117,126 +151,127 @@
   export default {
     
     data: () => ({
-      overlay:false,
+
+      role_id:'',
+      user_id:'',
+      block_by_admin:'',
       dialog:false,
-      dialog: false,
-      desserts: [],      
+      loading:false,
+      blocked: true,
+      nextUrl : null,
+      overlay:false,
+      valid: true,
+      desserts: [], 
+      roles:[
+        {'id':1,'name':'Admin'},
+        {'id':2,'name':'Seller'},
+        {'id':3,'name':'User'}
+      ]     
     }),
     
 
     created () {
-      this.initialize()
+      //this.initialize()
+      this.fetch(`/admin/user/create`);
     },
 
     methods: {
-      initialize () {
-        this.overlay = true;
-        axios.get(`/admin/user/create`)
-             .then(response =>{
-               this.desserts = response.data;
-               this.overlay = false;
-             })
-             .catch(error =>{
-               this.$toast.success('server not responding refresh the page ', 'error', {
+      fetch(url){
+          this.overlay=true;
+          axios.get(url)
+               .then(({data}) =>{
+                     this.desserts = data.data;
+                     this.nextUrl = data.next_page_url
+                     this.overlay= false;
+            })
+      },
+      more(nextUrl){
+        this.loading=true;
+        axios.get(nextUrl)
+             .then(({data}) =>{
+                this.desserts.push(...data.data);
+                this.nextUrl = data.next_page_url
+                this.loading = false;
+            })
+      },
+      
+      edit(item){
+        this.role_id = item.role.id;
+        this.block_by_admin = item.block_by_admin;
+        this.user_id =  item.id;
+        this.dialog = true;
+      },
+      
+      block_user(user_id,value,val){
+        if(confirm('are your sure to wnat to '+ val +' this user')){
+          this.overlay = true;
+          axios.put(`/admin/user/`+user_id,{
+            block:value
+          })
+               .then(response=>{
+                 this.$toast.success(response.data, 'success', {
+                      timeout: 3000,
+                      position: 'topRight',
+                  });
+                  this.fetch(`/admin/user/create`);
+                  this.overlay= false;
+               })
+               .catch(error=>{
+                 this.$toast.success(error.response.data.message, 'success', {
+                      timeout: 3000,
+                      position: 'topRight',
+                  });
+                });
+        }
+
+      },
+      changeRole(){
+        if(confirm('are your sure to wnat to change this user role')){
+          this.overlay = true;
+          axios.put(`/admin/user/`+this.user_id,{
+            block:this.block_by_admin,
+            role_id: this.role_id,
+          })
+               .then(response=>{
+                 this.$toast.success(response.data, 'success', {
+                      timeout: 3000,
+                      position: 'topRight',
+                  });
+                  this.fetch(`/admin/user/create`);
+                  this.overlay= false;
+                  this.dialog = false;
+               })
+               .catch(error=>{
+                 this.$toast.success(error.response.data.message, 'error', {
+                      timeout: 3000,
+                      position: 'topRight',
+                  });
+                });
+        }
+      },
+       del(id,item){
+        if(confirm('are you sure to wnat to delete this user')){
+          this.overlay = true;
+          axios.delete(`/admin/user/`+id)
+             
+             .then(response=>{
+               
+               this.$toast.success(response.data, 'success', {
                       timeout: 3000,
                       position: 'topRight',
                 });
                 this.overlay = false;
-             });
-      },
-      del(id){
-        
-        if(confirm('are you sure to want to delete this category item')){
-          this.overlay = true;
-          axios.delete(`/admin/category/`+id)
-                .then(response=> {
-                  this.$toast.success(response.data, 'success', {
-                        timeout: 3000,
-                        position: 'topRight',
-                  });
-                  this.initialize();
-                  this.overlay = false;
-                })
-                .catch(error =>{
-                  this.$toast.success(error.response.data.errors.message, 'error', {
-                        timeout: 3000,
-                        position: 'topRight',
-                  });
-                  this.overlay = false;
-                });
-          }
-      },
+                if(item.product_count == 0){
+                  this.desserts.splice(this.desserts.indexOf(item), 1);
+                }
+                
+             })
+             .catch();
+        }
+      }
 
-      edit(id){
-        alert(id);
-      },
-      close(){
-        this.dialog= false;
-      },
-
-      save () {
-            if (this.$refs.form.validate()) {
-                const formData = new FormData();
-                let config = {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                };
-
-                //category subcategory data
-                formData.append('name', this.name);
-                formData.append('icon', this.icon);
-                formData.append('image', this.image);
-                formData.append('url', this.url);
-                axios.post(`/admin/category`, formData, config)
-                    .then(response => {
-                        this.overlay = false;
-                        
-                        this.$toast.success(response.data, 'success', {
-                            timeout: 3000,
-                            position: 'topRight',
-                        });
-                        this.initialize();
-                        this.$refs.form.reset();
-                        this.close();
-
-                    })
-                    .catch(error => {
-                        
-                        if (error.response.status === 422) {
-                          if (error.response.data.errors.name.length>0) {
-                              console.log('hello world')
-                                this.$toast.error(error.response.data.errors.name[0],'error', {
-                                    timeout: 3000,
-                                    position: 'topRight',
-                                });
-                                
-                            }
-                          if (error.response.data.errors.image.length>0) {
-                                this.$toast.error(error.response.data.errors.image[0],'error', {
-                                    timeout: 3000,
-                                    position: 'topRight',
-                                });
-                                return
-
-                            }
-                            
-                            this.$toast.error('Invalid data please check your form again','error' , {
-                                timeout: 3000,
-                                position: 'topRight',
-                            });
-
-                        }
-                    });
-                return;
-            }
-            this.$toast.error('Invalid data please check your form again', 'error', {
-                timeout: 3000,
-                position: 'topRight',
-            });
-            
-        
-      },
+      
     },
+   
   }
 </script>

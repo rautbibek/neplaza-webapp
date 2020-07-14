@@ -24,7 +24,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        $city = City::orderBy('name','asc')->get();
+        $city = City::orderBy('name','asc')->withCount('product')->get();
         return response()->json($city,200);
     }
 
@@ -100,7 +100,12 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-      City::findOrFail($id)->delete();
-      return response()->json('district deleted succefully');
+      $city=City::findOrFail($id);
+      if($city->product->count()<1){
+        $city->delete();
+        return response()->json('district deleted succefully');
+      }
+      
+      return response()->json('this district has '. $city->product->count() .' ads cannot delete the city');
     }
 }

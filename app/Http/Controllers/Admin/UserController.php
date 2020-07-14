@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 use App\User;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = User::get(['id','name','phone','email','account_status','block_by_admin','username','image'])->toArray();
+        $user = User::orderBy('product_count','desc')->with('role')->withCount('product')->simplePaginate(30);
         return response()->json($user,200);
     }
 
@@ -70,7 +72,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        if($request->role_id){
+           $user->role_id = $request->role_id; 
+        }
+        $user->block_by_admin = $request->block;
+        $user->update();
+        return response()->json('action performed succefully ',200);
     }
 
     /**
@@ -81,6 +89,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user= User::findOrFail($id);
+        if($user->product->count()<1){
+            if(Storage::disk('public')->exists('profle/'.'/'.$user->image)){
+                Storage::disk('public')->delete('profile/'.'/'.$user->image);
+            }
+            $user->comment()->delete();
+            $user->notifications()->delete();
+            $user->delete();
+            
+            return response()->json('user deleted succefully',200);
+        }
+        
+        return response()->json('user cannot be deleted user has '.$user->product->count().' Ads',200);
     }
 }

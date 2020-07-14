@@ -31,11 +31,11 @@ class Product extends Model
       'property_4',
       'join'
     ];
-    protected $with=['product_image','city','nhood','user','category','nhood','scategory'];
+  
 
-
+    protected $with=['product_image'];
     protected $appends=[
-      'created_date','product_price','product_max_price','ad_title','located_city',
+      'created_date','product_price','product_max_price','ad_title',
     'is_favorite','product_cover'];
 
     public function product_image(){
@@ -58,13 +58,7 @@ class Product extends Model
       return true; 
     }
 
-    public function getLocatedCityAttribute(){
-       
-        if($this->city){
-           return $this->city->name;
-        }
-        return "N/A";
-    }
+   
 
     public function city(){
       return $this->belongsTo('App\City')->select('id','name','slug');

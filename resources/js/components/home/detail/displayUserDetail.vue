@@ -57,6 +57,15 @@
                  <small class="my-1 text-white">Seller Set the Contact {{owner.contact_status}}</small>
             </v-card-text>
         </v-card>
+        <!-- product id -->
+        <v-card class="mt-3" tile>
+            <v-list-item-content class="text-center">
+             <v-list-item-title class="mt-2">
+                 <strong style="color:green">Product Id : &nbsp;</strong>
+                 <strong>#{{ad.productid}}</strong>
+             </v-list-item-title>
+            </v-list-item-content>
+        </v-card>
     </div>
 </template>
 <script>

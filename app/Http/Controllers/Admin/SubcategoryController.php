@@ -25,7 +25,7 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        $subcategory = Scategory::orderBy('category_id','asc')->get();
+        $subcategory = Scategory::orderBy('category_id','asc')->withCount('product')->get();
         return response()->json($subcategory,200);
     }
 
@@ -105,7 +105,10 @@ class SubcategoryController extends Controller
     public function destroy($id)
     {
       $scategory = Scategory::find($id);
-      $scategory->delete();
-      return response()->json('Subcategory Deleted succefully',200);
+      if($scategory->product->count() < 1){
+        $scategory->delete();
+        return response()->json('Subcategory Deleted succefully',200);
+      }
+      return response()->json('Subcategory cannot delete it contains '.$scategory->product->count().' ads',200);
     }
 }

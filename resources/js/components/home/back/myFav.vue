@@ -18,7 +18,7 @@
                     <v-hover v-slot:default="{ hover }"
                     open-delay="100">
                         <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
-                            <div @click='remove(index)'>
+                            <div @click='remove(ads)'>
                             <favorite :is_favorite='ads.is_favorite' :product_id="ads.id" ></favorite>
                             </div>
                             
@@ -87,9 +87,9 @@ export default {
                  })
       },
 
-      remove(index){ 
-          this.fetch();
-        this.fav_ads.splice(index,1);
+      remove(item){ 
+        this.fav_ads.splice(this.fav_ads.indexOf(item), 1);
+        //this.fav_ads.splice(index,1);
         //
       }
 

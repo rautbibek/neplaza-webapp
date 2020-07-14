@@ -4,11 +4,11 @@
           <v-container>
             <div class="row">
               <div class="col-md-3 cleaner d-none d-md-flex">
-                <a href="/" >
+                <router-link to="/" >
                 <v-toolbar-title class="text--grey">
-                  <img src="https://neplaza.shivakshaenterprises.com/images/image/logo.png" height="50" alt="">
+                  <img src="/storage/logo.png" height="50" alt="">
                 </v-toolbar-title>
-                </a>
+                </router-link>
               </div>
               <div class="col-md-6 col-sm-6 cleaner">
                 <search></search>

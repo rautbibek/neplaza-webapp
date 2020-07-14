@@ -27,7 +27,7 @@ class UserProductController extends Controller
     public function myFav(){
         $user_id = Auth::user()->id;
       //$fav_product = Product::;
-      $fav = Auth::user()->with('favourit_products','favourit_products.category',
+      $fav = Auth::user()->with('favourit_products','favourit_products.scategory',
       'favourit_products.product_image','favourit_products.user','favourit_products.city','favourit_products.nhood')->where('id',$user_id)->get();
       return response()->json($fav,200);
     }

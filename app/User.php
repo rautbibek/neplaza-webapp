@@ -21,6 +21,7 @@ class User extends Authenticatable
 
     protected $guard = ['role_id'];
 
+
    
 
     protected $appends =['cover','register_date','contact_status','contact_number','located_city','located_metro'];
