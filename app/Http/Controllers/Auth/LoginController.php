@@ -54,19 +54,32 @@ class LoginController extends Controller
     public function handleProviderCallback($provider)
     {
         $userSocial = Socialite::driver($provider)->user();
-        $user = User::where('email',$userSocial->email)->first();
+        $isUser = User::where('email',$userSocial->email)->first();
+        if($isUser){
+            Auth::login($isUser);
+            return redirect()->route('welcome');
+        }
+        $user = User::where('provider_id',$userSocial->id)->first();
         if($user){
             Auth::login($user);
         }else{
-            //dd($userSocial);
+            
             $newuser = new User;
             $newuser->role_id  = 3;
             $newuser->name = $userSocial->name;
-            $newuser->username = str_slug($userSocial->name);
-            $newuser->email = $userSocial->email;
+            $newuser->username = str_slug($userSocial->name).'-'.uniqid();
+            if($userSocial->email == null || $userSocial->email==""){
+                $newuser->email = uniqid();
+            }else{
+                $newuser->email = $userSocial->email;
+            }
+
             $newuser->image = $userSocial->avatar;
+            $newuser->login_provider = $provider;
+            $newuser->provider_id = $userSocial->id;
             $newuser->password = bcrypt('neplaza2311');
             //$newuser->remember_token = rememberToken();
+            
             $newuser->save();
             Auth::login($newuser);
         }

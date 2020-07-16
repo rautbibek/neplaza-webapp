@@ -15,7 +15,7 @@ class UserProductController extends Controller
 
     public function myAds(){
         $user_id = Auth::id();
-        $product = Product::select('id','price','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
+        $product = Product::select('id','price','slug','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
                 ->where('user_id',$user_id) 
                 ->where('deleted',false)
                 ->where('sold',false)
@@ -34,8 +34,10 @@ class UserProductController extends Controller
 
     public function featured(){
         $user_id = Auth::id();
-        $product = Product::select('id','price','maxprice','title','category_id','scategory_id','premium','user_id','city_id','nhood_id','created_at')
+        $product = Product::select('id','price','slug','maxprice','title','category_id','scategory_id','premium','user_id','city_id','nhood_id','created_at')
                 ->where('user_id',$user_id) 
+                ->where('deleted',false)
+                ->where('sold',false)
                 ->where('premium',true)
                 ->latest()
                 ->with('category','scategory','user','city','nhood','product_image')->simplePaginate(16);
@@ -44,7 +46,7 @@ class UserProductController extends Controller
 
     public function sold(){
         $user_id = Auth::id();
-        $product = Product::select('id','price','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
+        $product = Product::select('id','price','slug','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
                 ->where('user_id',$user_id) 
                 ->where('sold',true)
                 ->latest()
@@ -64,7 +66,7 @@ class UserProductController extends Controller
 
     public function urgent(){
         $user_id = Auth::id();
-        $product = Product::select('id','price','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
+        $product = Product::select('id','price','slug','maxprice','title','scategory_id','category_id','user_id','city_id','nhood_id','created_at')
                 ->where('user_id',$user_id) 
                 ->where('emergency_sell',true)
                 ->latest()

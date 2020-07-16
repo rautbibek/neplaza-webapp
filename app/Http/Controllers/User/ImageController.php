@@ -16,9 +16,11 @@ class ImageController extends Controller
     }
 
     public function delete($id){
-        $image = Product_image::findOrFail($id);
+        
+        $image = Product_image::find($id);
+        
         //return $image;
-        $this->authorize('delete', $image);
+        //$this->authorize('delete', $image);
         //return $image_id;
         //$image = Product_image::findOrFail($id);
         if(Storage::disk('public')->exists('product/'.'/'.$image->image)){

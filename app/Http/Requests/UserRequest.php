@@ -25,6 +25,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name'  => 'required | max:20',
+            'email' => 'required|email| unique:users,email,'.Auth::id(),
             'contact'=>'required | numeric | min:8',
             'district' => 'required',
             'nhood' => 'required',

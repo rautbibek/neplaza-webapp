@@ -7,7 +7,9 @@
             </ol>
         </nav>
         <div class="py-3">
-          
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
         <v-container>
             <div class="container">
                 <v-layout row wrap class="px-4">
@@ -79,7 +81,7 @@
                                     </v-card-actions>
                                 </v-card>
                                 </v-dialog>
-                        <v-card tile class="pa-2 mt-3">
+                        <v-card tile class="pa-3 mt-3">
                             <h5 class="m-2 text-center"><i class="fa fa-phone"> </i> Contact Detail</h5>
                             <hr>
                             <div class="row">
@@ -92,16 +94,20 @@
                             </div>
                         </v-card>
 
-                        <v-card tile class="pa-2 mt-3">
+                        <v-card tile class="pa-3 mt-3">
                             <h5 class="m-2 text-center"><i class="fa fa-map-marker"> </i> Address Location </h5>
                             <hr>
                             <div class="row">
                                 <div class="col-md-6"> Located District :</div>
-                                <div class="col-md-6">{{profile.city.name}}</div>
+                                <div class="col-md-6">
+                                    <span v-if="profile.city">{{profile.city.name}}</span>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">Metro/Municipility/VDC :</div>
-                                <div class="col-md-6">{{profile.nhood.name}}</div>
+                                <div class="col-md-6">
+                                    <span v-if="profile.nhood">{{profile.nhood.name}}</span>
+                                </div>
                             </div>
                         </v-card>
                         <v-card tile class="pa-2 mt-3">
@@ -182,9 +188,11 @@ export default {
         },
         
         userProfile(){
+            this.overlay =true;
             axios.get(`/get/login/user/`)
                   .then(response =>{
                       this.profile = response.data;
+                      this.overlay = false;
                   })
                   .catch();
         }

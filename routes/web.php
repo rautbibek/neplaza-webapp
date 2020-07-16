@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('/seller/detail/{id}/{username}', 'WelcomeController@seller')->name('seller');
 Route::get('/seller/{id}/ad', 'WelcomeController@sellerAd')->name('seller.ad');
+Route::get('/urgent/ad', 'ProductController@urgentProduct')->name('urgent.ad');
 //search products
 Route::get('/ad/search', 'SearchController@search')->name('search');
 Route::get('/searchResult', 'SearchController@searchResult')->name('/search/result');

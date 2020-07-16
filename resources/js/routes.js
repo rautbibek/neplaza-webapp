@@ -27,8 +27,16 @@ import SearchData from './components/home/front/pages/searchData.vue';
 import SellerComponent from './components/home/front/pages/seller.vue';
 
 
+//404 console.error();
+import PageNotFound from './components/404.vue';
+
+
 
 export const routes = [{
+        path: '*',
+        component: PageNotFound
+    },
+    {
         path: '/',
         component: HomeComponent
     },
@@ -122,7 +130,7 @@ export const routes = [{
     //ad detail
 
     {
-        path: '/ad/detail/:id',
+        path: '/ad/detail/:id/:slug',
         component: AdDetail,
     },
 

@@ -14,8 +14,8 @@
                 <v-progress-circular indeterminate size="64"></v-progress-circular>
             </v-overlay>
             <v-row wrap class="px-4">
-                <v-col cols="3" class="mt-3"><mymenu></mymenu></v-col>
-                <v-col cols="9">
+                <v-col cols="12" xs="12" sm="6" lg="3" md="3" class="mt-3"><mymenu></mymenu></v-col>
+                <v-col cols="12" xs="12" sm="6" lg="9" md="9">
                     <div v-if="count>0">
                         <v-layout row wrap>
                             <v-flex xs12 sm6 md4 lg4 xl2 v-for="(ads,index) in my_ads" :key="index" >

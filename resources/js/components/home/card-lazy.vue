@@ -14,7 +14,7 @@
                 <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
                    
                     <favorite :is_favorite='ads.favorite_to_users.length?true:false' :product_id="ads.id"></favorite>
-                    <router-link :to="`/ad/detail/${ads.id}`">
+                    <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                     <!-- image part -->
                     <cover :ads="ads"></cover>
 

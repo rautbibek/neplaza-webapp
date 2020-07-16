@@ -16,14 +16,18 @@ class ImageResizer{
            }
 
            //resize the image
-           $productImage = Image::make($image)->resize(1600,790)->stream();
+           $productImage = Image::make($image)->resize(1600,790,function($constrain){
+             $constrain->aspectRatio();
+           })->stream();
            Storage::disk('public')->put('product/'.$imagename,$productImage);
 
            //thumbnail the image
            if(!Storage::disk('public')->exists('thumb')){
              Storage::disk('public')->makeDirectory('thumb');
            }
-           $thumb = Image::make($image)->resize(350,300)->stream();
+           $thumb = Image::make($image)->resize(350,300,function($constrain){
+             $constrain->aspectRatio();
+           })->stream();
            Storage::disk('public')->put('thumb/'.$imagename,$thumb);
 
            $product_image = new Product_image();

@@ -7,8 +7,8 @@
             </ol>
         </nav>
         <v-overlay :value="overlay">
-                <v-progress-circular indeterminate size="64"></v-progress-circular>
-            </v-overlay>
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
       <div class="py-5">
         <v-container>
             <div v-if="count>0">
@@ -22,7 +22,7 @@
                             <favorite :is_favorite='ads.is_favorite' :product_id="ads.id" ></favorite>
                             </div>
                             
-                            <router-link :to="`/ad/detail/${ads.id}`">
+                            <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                             <!-- image part -->
                                 <cover :ads="ads"></cover>
 

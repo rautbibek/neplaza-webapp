@@ -51,6 +51,7 @@ class UserController extends Controller
     public function updateProfile(UserRequest $request){
         $user = User::where('id',Auth::id())->firstOrFail();
         $user->name = $request->name;
+        $user->email = $request->email;
         $user->phone = $request->contact;
         $user->about = $request->about;
         $user->nhood_id = $request->nhood;
@@ -87,7 +88,10 @@ class UserController extends Controller
                     Storage::disk('public')->delete('profile/'.Auth::user()->image);
                 }
                 //resize the image
-                $profile = Image::make($image)->resize(300,200)->stream();
+                $profile = Image::make($image)->resize(200,150,function($constrain){
+                    $constrain->aspectRatio();
+
+                })->stream();
                 Storage::disk('public')->put('profile/'.$imagename,$profile);
             }
             else{

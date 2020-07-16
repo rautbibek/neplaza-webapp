@@ -54,4 +54,10 @@ return [
         'redirect'      => env('GOOGLE_URL'),
     ],
 
+    'yahoo' => [
+        'client_id'     => env('YAHOO_ID'),
+        'client_secret' => env('YAHOO_SECRET'),
+        'redirect'      => env('YAHOO_URL'),
+    ],
+
 ];

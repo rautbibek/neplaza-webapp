@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function categoryProduct($slug){
         $category = Category::where('slug',$slug)->firstOrFail(['id','name','slug']);
         
-        $product = Product::select('id','price','maxprice','title','category_id','user_id','city_id','nhood_id','scategory_id','created_at')
+        $product = Product::select('id','price','maxprice','title','slug','category_id','user_id','city_id','nhood_id','scategory_id','created_at')
                  ->where('category_id',$category->id)
                  ->where('deleted',false)
                  ->where('sold',false)

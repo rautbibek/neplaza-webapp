@@ -26,7 +26,7 @@
                             >
                           </v-avatar>
                         <div class="subheading">{{loginUser.name}}</div>
-                        <div class="body-1">{{loginUser.email}}</div>
+                        <div class="body-1">{{loginUser.valid_email}}</div>
                       </v-col>
                     </v-row>
                   </div>

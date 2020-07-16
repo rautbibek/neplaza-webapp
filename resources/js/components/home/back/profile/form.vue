@@ -6,6 +6,7 @@
           </v-overlay>
           <v-card-title>USER PROFILE </v-card-title>
           <hr>
+          
           <v-form ref="form" v-model="valid" lazy-validation>
               <v-col cols="12">
                 <v-text-field
@@ -13,6 +14,17 @@
                     label="Name"
                     counter="20"
                     :rules="[required('name'),minLength('name',5),maxLength('name',20)]"
+                    outlined
+                    clearable
+                ></v-text-field>
+              </v-col>
+
+              <v-col cols="12" >
+                <v-text-field
+                    v-model="email"
+                    label="Email"
+                    counter="40"
+                    :rules="[required('email'),minLength('name',5),maxLength('name',40)]"
                     outlined
                     clearable
                 ></v-text-field>
@@ -83,7 +95,7 @@ export default {
             overlay:false,
             district:this.loginUser.city_id,
             name : this.loginUser.name,
-            email : this.loginUser.email,
+            email : this.loginUser.valid_email,
             contact: this.loginUser.phone,
             about:this.loginUser.about,
             nhood:this.loginUser.nhood_id,
@@ -97,7 +109,9 @@ export default {
             },
             maxLength(propertyType,length){
                return v => v && v.length <= length || `${propertyType} must be less than ${length} characters`
-            }
+            },
+            
+
         }
     },
     methods:{
@@ -106,21 +120,32 @@ export default {
                 this.overlay = true;
                 axios.put(`/update/profile`,{
                     name : this.name,
+                    email:this.email,
                     contact: this.contact,
                     about:this.about,
                     nhood:this.nhood,
                     district: this.district,
                 })
                      .then(response =>{
+                         this.overlay = false;
                          this.$toast.success(response.data,'success',{
                          timeout:3000,
                          position: 'topRight',
                          });
                          EventBus.$emit('updateUser',true);
-                         this.overlay = false;
+                         
                          EventBus.$emit('loadUser');
                      })
-                     .catch();
+                     .catch(error=>{
+                         if(error.response.status == 422){
+                             this.overlay= false;
+                             this.$toast.error(error.response.data.errors.email[0],'error',{
+                                timeout:3000,
+                                position: 'topRight',
+                            });
+                         }
+                         
+                     });
             }
         },
 

@@ -1,4 +1,12 @@
 <template>
+    <div>
+    <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb ">
+                <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
+                <li class="breadcrumb-item pull-right"><router-link :to="`/user/myAds`">My Ads</router-link></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit & Delete Ad Image</li>
+            </ol>
+        </nav>
     <div class="pb-3">
             <div class="text-center p-4 ">
                 <h4 class="font-weight-bold text-uppercase">{{existing_images.ad_title}}</h4>
@@ -154,6 +162,8 @@
             </v-dialog>
         </v-row>
     </div>
+
+    </div>
 </template>
 <script>
     export default {
@@ -175,7 +185,7 @@
     methods: {
         
         confirm(id){
-            this.dialog= true;
+            this.dialog = true;
             this.image_id = id; 
         },
         remove(){

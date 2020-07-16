@@ -24,7 +24,7 @@ class User extends Authenticatable
 
    
 
-    protected $appends =['cover','register_date','contact_status','contact_number','located_city','located_metro'];
+    protected $appends =['cover','register_date','contact_status','contact_number','valid_email'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -90,20 +90,7 @@ class User extends Authenticatable
        return "N/A";
     }
 
-    public function getLocatedCityAttribute(){
-       
-      //  if($this->city){
-      //     return $this->city->name;
-      //  }
-      //  return "N/A";
-    }
-
-    public function getLocatedMetroAttribute(){
-      //  if($this->nhood){
-      //     return $this->nhood->name;
-      //  }
-      //  return "N/A";
-    }
+    
 
     public function getCoverAttribute(){
       if($this->image != null && $this->image != ''){
@@ -118,4 +105,12 @@ class User extends Authenticatable
       return asset('storage/user.png');
    }
  }
+
+ public function getValidEmailAttribute() {
+     if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+         return $this->email;
+      } else {
+         return "";
+      }
+   }
 }

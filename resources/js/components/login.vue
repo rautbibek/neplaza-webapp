@@ -21,23 +21,24 @@
           </v-carousel>
         </v-card-text>
         <v-card-text>
+          <v-btn dark href="/login" large color="indigo" class="my-1" style="width:100%">
+            <v-icon>mdi-account-circle</v-icon>
+             &nbsp; Custom Login
+           </v-btn>
            <v-btn href="/login/facebook" large color="primary" class="my-1" style="width:100%">
             <v-icon>mdi-facebook</v-icon>
              &nbsp; Facebook
            </v-btn>
-           <v-btn href="/login/google" large color="primary" class="my-1" style="width:100%">
+           <v-btn href="/login/google" dark large color="#d93025" class="my-1" style="width:100%">
             <v-icon>mdi-google-plus</v-icon>
              &nbsp; Gmail
            </v-btn>
 
-           <v-btn large color="primary" class="my-1" style="width:100%">
+           <v-btn href="/login/yahoo"  large dark color="#6001d2" class="my-1" style="width:100%">
             <v-icon>mdi-email</v-icon>
              &nbsp; Email
            </v-btn>
-           <v-btn large color="primary" class="my-1" style="width:100%">
-            <v-icon>mdi-github</v-icon>
-             &nbsp; Github
-           </v-btn>
+          
            <v-btn large href="/login/twitter" color="primary" class="my-1" style="width:100%">
             <v-icon>mdi-twitter</v-icon>
              &nbsp; twitter

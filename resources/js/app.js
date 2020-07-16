@@ -40,9 +40,14 @@ Vue.component('main-component', require('./components/main.vue').default);
 Vue.component('top-bar', require('./components/home/partials/topbar.vue').default);
 Vue.component('nav-bar', require('./components/home/partials/navbar.vue').default);
 Vue.component('footer-bar', require('./components/home/partials/footer.vue').default);
+
+// homepage data
 Vue.component('data-content', require('./components/home/front/index_page/content.vue').default);
+Vue.component('urgent-sell', require('./components/home/front/index_page/urgentSell.vue').default);
 Vue.component('carousel', require('./components/home/front/index_page/carousel.vue').default);
 Vue.component('premium', require('./components/home/front/index_page/premium.vue').default);
+
+
 Vue.component('search', require('./components/home/partials/search.vue').default);
 Vue.component('login', require('./components/login.vue').default);
 Vue.component('empty', require('./components/empty.vue').default);
