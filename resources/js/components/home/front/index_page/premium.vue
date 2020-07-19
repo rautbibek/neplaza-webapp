@@ -29,7 +29,7 @@
               <favorite :is_favorite='feature.favorite_to_users.length?true:false' :product_id="feature.id"></favorite>
             </v-btn>
             <!-- image part -->
-            <router-link :to="`/ad/detail/${feature.id}`">
+            <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
             <v-img 
                   class="white--text align-end"
                   height="200px"
@@ -75,7 +75,14 @@
       
         </slide>
    </sliders>
+   <p class="text-right mt-3 mr-3" v-if="count > 7">
+      <v-btn router small :to="`/feature/ads`" dark  tile color="#2F3B59" class="">
+        view all
+        <v-icon right>keyboard_arrow_right</v-icon>
+      </v-btn>
+    </p>
    </v-container>
+
    </div>
 </div>
 </template>
@@ -97,8 +104,8 @@ export default {
   methods:{
     getFeatured(){
       axios.get(`/front/featured/product`)
-            .then(({data})=>{
-              this.featured = data.data;
+            .then(response=>{
+              this.featured = response.data;
               this.count = this.featured.length;
             })
     }

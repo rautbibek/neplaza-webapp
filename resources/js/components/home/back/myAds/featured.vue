@@ -4,16 +4,18 @@
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                  <li class="breadcrumb-item pull-right"><router-link :to="`/user/myads`">My Ads</router-link></li>
-                <li class="breadcrumb-item active" aria-current="page">Urgent Ads</li>
+                <li class="breadcrumb-item active" aria-current="page">Feature Ads</li>
             </ol>
         </nav>
       <div class="py-3">
-          
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
         <v-container>
             
             <v-row wrap class="px-4">
-                <v-col cols="3" class="mt-3"><mymenu></mymenu></v-col>
-                <v-col cols="9">
+                <v-col cols="12" xs="12" sm="6" lg="3" md="3" class="mt-3"><mymenu></mymenu></v-col>
+                <v-col cols="12" xs="12" sm="6" lg="9" md="9">
                     <div v-if="count>0">
                         <v-layout row wrap>
                             <v-flex xs12 sm6 md4 lg4 xl2 v-for="(ads,index) in my_ads" :key="index" >
@@ -43,7 +45,7 @@
                     </div>
                     <div v-else class="mt-3">
                         <div class="border text-center py-4">
-                            <h1 class="display-4">Sorry <span style="color:#2398d2;">!</span></h1>
+                            <h1 class="display-1">Sorry <span style="color:#2398d2;">!</span></h1>
                             <h3 ><strong style="color:#2398d2;">No Ads</strong> Found.</h3>
                             <img height="150px" src="/storage/empty_product.png" alt="">
                             <br>
@@ -76,13 +78,16 @@ export default {
       return{
         loading:false,
         my_ads:[],
+        overlay:false,
         nextUrl : null,
         count:1,
       }
     },
     methods:{
       fetch(url){
+          this.overlay= true;
           if(!this.loggedIn){
+                
                 this.$router.push("/");
                 EventBus.$emit('changeDialog', true);
                 return;
@@ -94,6 +99,7 @@ export default {
                      this.count = this.my_ads.length;
                      this.nextUrl = data.next_page_url
                      this.loading = false;
+                     this.overlay = false;
                  })
       }
     },

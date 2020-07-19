@@ -23,7 +23,7 @@
         <v-card-text>
           <v-btn dark href="/login" large color="indigo" class="my-1" style="width:100%">
             <v-icon>mdi-account-circle</v-icon>
-             &nbsp; Custom Login
+             &nbsp; Useername / Password
            </v-btn>
            <v-btn href="/login/facebook" large color="primary" class="my-1" style="width:100%">
             <v-icon>mdi-facebook</v-icon>
@@ -34,10 +34,10 @@
              &nbsp; Gmail
            </v-btn>
 
-           <v-btn href="/login/yahoo"  large dark color="#6001d2" class="my-1" style="width:100%">
+           <!-- <v-btn href="/login/yahoo"  large dark color="#6001d2" class="my-1" style="width:100%">
             <v-icon>mdi-email</v-icon>
              &nbsp; Email
-           </v-btn>
+           </v-btn> -->
           
            <v-btn large href="/login/twitter" color="primary" class="my-1" style="width:100%">
             <v-icon>mdi-twitter</v-icon>

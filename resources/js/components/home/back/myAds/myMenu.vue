@@ -4,7 +4,7 @@
     
     tile
   >
-    <v-list rounded>
+    <v-list dense>
       <v-subheader class="d-none d-sm-flex">MYADS MENU</v-subheader>
       <v-list-item-group v-model="item" color="primary">
         
@@ -38,7 +38,7 @@
       item: 1,
       items: [
         { 
-            text: 'All My Ads', 
+            text: 'Active Ads', 
             icon: 'mdi-clock',
             url : '/user/myads' 
         },

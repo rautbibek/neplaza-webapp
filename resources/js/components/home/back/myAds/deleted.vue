@@ -4,7 +4,7 @@
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                  <li class="breadcrumb-item pull-right"><router-link :to="`/user/myads`">My Ads</router-link></li>
-                <li class="breadcrumb-item active" aria-current="page">Urgent Ads</li>
+                <li class="breadcrumb-item active" aria-current="page">Deleted Ads</li>
             </ol>
         </nav>
       <div class="py-3">
@@ -47,7 +47,7 @@
                                                 <v-list dense>
                                                     <v-subheader>SETTING</v-subheader>
                                                     <v-list-item-group  color="primary">
-                                                        <v-list-item @click="recovered(ads.id)">
+                                                        <v-list-item @click="permanentDelete(ads)">
                                                             <v-list-item-icon>
                                                                 <v-icon small>delete_forever</v-icon>
                                                             </v-list-item-icon>
@@ -88,7 +88,7 @@
                     </div>
                     <div v-else class="mt-3">
                         <div class="border text-center py-4">
-                            <h1 class="display-4">Sorry <span style="color:#2398d2;">!</span></h1>
+                            <h1 class="display-1">Sorry <span style="color:#2398d2;">!</span></h1>
                             <h3 ><strong style="color:#2398d2;">No Ads</strong> Found.</h3>
                             <img height="150px" src="/storage/empty_product.png" alt="">
                             <br>
@@ -155,10 +155,35 @@ export default {
                             position: 'topRight',
                         }); 
                     this.my_ads.splice(index,1);
+                    this.count--;
                     this.overlay= false;
                 })
                 .catch();
         },
+
+        permanentDelete(ads){
+            
+            if(confirm('are you sure to want to delete this ad')){
+            this.overlay = true;
+            axios.delete(`/product/permanent/delete/${ads.id}`)
+                 .then(response=>{
+                     this.$toast.success(response.data, 'success', {
+                            timeout: 3000,
+                            position: 'topRight',
+                    }); 
+                    this.my_ads.splice(this.my_ads.indexOf(ads), 1);
+                    this.count--;
+                     this.overlay = false;
+                 })
+                 .catch(error =>{
+                     this.$toast.error(error.response.data.message, 'unauthorized', {
+                            timeout: 3000,
+                            position: 'topRight',
+                    }); 
+                    this.overlay = false;
+                 })
+            }
+        }
     },
     created(){
         this.fetch(`/user/product/deleted`);

@@ -52,7 +52,8 @@ Route::get('/front/category/product/{slug}', 'CategoryController@categoryProduct
 Route::get('/front/scategory/product/{slug}', 'SubcategoryController@scategoryProduct');
 Route::get('/front/scategory/filter/{slug}', 'SubcategoryController@subcategoryFilter');
 Route::get('/front/featured/product', 'ProductController@premium');
-Route::get('/ad/comment/{id}','CommentController@getComment');
+Route::get('/all/featured/product', 'ProductController@featured');
+Route::get('/front/urgent/product', 'ProductController@urgent');
 Route::get('/product/detail/{id}', 'ProductController@productDetail');
 
 
@@ -74,6 +75,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/user/favorite/product','User\UserProductController@myfav');
 
     Route::get('/user/product/deleted','User\UserProductController@deleted');
+    Route::delete('product/permanent/delete/{id}','User\ProductController@perDelete');
     Route::get('/user/product/featured','User\UserProductController@featured');
     Route::get('/user/product/urgent','User\UserProductController@urgent');
     Route::get('/user/product/sold','User\UserProductController@sold');
@@ -84,6 +86,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/read/notification','User\UserController@readNotification');
 
     //comment controller
+    Route::get('/ad/comment/{id}','CommentController@getComment');
     Route::post('/user/comment','User\CommentController@post');
     Route::post('/reply/ad/comment','User\CommentController@reply');
     Route::delete('/delete/comment/{id}','User\CommentController@commentDelete');
@@ -108,7 +111,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::put('/restore/ad/{id}', 'User\ProductController@restore');
     Route::put('/sold/ad/{id}', 'User\ProductController@sold');
     Route::put('/trash/ad/{id}', 'User\ProductController@softDelete');
-    Route::resource('/user/add/product', 'User\ProductController');
+    Route::resource('/user/add/product', 'User\ProductController')->except('index','create','destroy');
     Route::delete('/delete/image/{image_id}', 'User\ImageController@delete');
     Route::post('/save/image/{image_id}', 'User\ImageController@store');
 

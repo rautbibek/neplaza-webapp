@@ -1,5 +1,8 @@
 <template>
     <div>
+        <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
         <v-menu bottom left>
             <template v-slot:activator="{ on: menu, attrs }">
                 <v-tooltip bottom>
@@ -15,7 +18,8 @@
                     right
 
                     >
-                    <v-icon >edit</v-icon>
+                    
+                    <v-icon >mdi-cog</v-icon>
                 </v-btn>
                 </template>
                 <span>Settings</span>
@@ -41,7 +45,7 @@
                             <v-list-item-title>Edit Image</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item @click="softDelete(ads.id)">
+                    <v-list-item @click="softDelete(ads)">
                         <v-list-item-icon>
                             <v-icon small>delete</v-icon>
                         </v-list-item-icon>
@@ -49,7 +53,7 @@
                             <v-list-item-title>Delete Ad</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                    <v-list-item @click="soldOut(ads.id)">
+                    <v-list-item @click="soldOut(ads)">
                         <v-list-item-icon>
                                 <v-icon small>money</v-icon>
                             </v-list-item-icon>
@@ -66,25 +70,38 @@
 //import action from "../../mixins/actions";
 export default {
     props:['ads'],
+    data(){
+        return{
+            overlay : false,
+        }
+    },
     methods:{
-        softDelete(id){
-            axios.put(`/trash/ad/${id}`)
-                .then(response =>{
-                    this.$toast.success(response.data, 'success', {
-                            timeout: 3000,
-                            position: 'topRight',
+        softDelete(ads){
+            if(confirm("Are you sure you want to delete this? You can still recover the item later.")){ 
+                this.overlay = true;
+                axios.put(`/trash/ad/${ads.id}`)
+                    .then(response =>{
+                        this.$toast.success(response.data, 'success', {
+                                timeout: 3000,
+                                position: 'topRight',
                         });
-                })
-                .catch();
+                        EventBus.$emit('deleteAd',ads);
+                        this.overlay = false;
+                    })
+                    .catch();
+            }
         },
-        soldOut(id) {
-            axios.put(`/sold/ad/${id}`)
+        soldOut(ads) {
+            this.overlay= true;
+            axios.put(`/sold/ad/${ads.id}`)
                 .then(response =>{
                     this.$toast.success(response.data, 'success', {
                             timeout: 3000,
                             position: 'topRight',
                         });
-                        EventBus.$emit('loadAd', true);
+                        EventBus.$emit('soldAd', ads);
+                        this.overlay = false;
+
                 })
                 .catch();
         },

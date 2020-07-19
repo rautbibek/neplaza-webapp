@@ -2,6 +2,8 @@ import HomeComponent from './components/home/homepage.vue';
 import CategoryComponent from './components/home/front/pages/category.vue';
 import SubCategoryComponent from './components/home/front/pages/subcategory.vue';
 import ProductComponent from './components/home/front/pages/product.vue';
+import UrgentSellComponent from './components/home/front/pages/allUrgent.vue';
+import AllFeaturedAdsComponent from './components/home/front/pages/allFeatureAds.vue';
 import CreateAdsComponent from './components/home/back/createAds.vue';
 //myads related posts
 import MyAdsComponent from './components/home/back/myads.vue';
@@ -54,6 +56,16 @@ export const routes = [{
     {
         path: '/ads',
         component: ProductComponent
+    },
+
+    {
+        path: '/urgent/sell',
+        component: UrgentSellComponent
+    },
+
+    {
+        path: '/feature/ads',
+        component: AllFeaturedAdsComponent
     },
 
     {

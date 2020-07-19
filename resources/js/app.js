@@ -43,7 +43,7 @@ Vue.component('footer-bar', require('./components/home/partials/footer.vue').def
 
 // homepage data
 Vue.component('data-content', require('./components/home/front/index_page/content.vue').default);
-Vue.component('urgent-sell', require('./components/home/front/index_page/urgentSell.vue').default);
+Vue.component('urgent-sell', require('./components/home/front/index_page/urgent.vue').default);
 Vue.component('carousel', require('./components/home/front/index_page/carousel.vue').default);
 Vue.component('premium', require('./components/home/front/index_page/premium.vue').default);
 

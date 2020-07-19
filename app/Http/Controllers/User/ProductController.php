@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
-
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use App\product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\imageExtractor\ImageResizer;
@@ -209,5 +210,21 @@ class ProductController extends Controller
         $product->update();
         $message="your ad had been readvertised !!";
         return response()->json($message,200);
+    }
+
+    public function perDelete($id){
+        $products = Product::findOrFail($id);
+        $this->authorize('delete',$products);
+        
+        foreach ($products->product_image as $product) {
+            if(Storage::disk('public')->exists('product/'.'/'.$product->image)){
+            Storage::disk('public')->delete('product/'.$product->image);
+            }
+            if(Storage::disk('public')->exists('thumb/'.'/'.$product->image)){
+            Storage::disk('public')->delete('thumb/'.'/'.$product->image);
+            }
+        }
+        $products->delete();
+        return response()->json('ad deleted succefully ',200);
     }
 }

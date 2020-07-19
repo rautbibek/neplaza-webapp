@@ -107,6 +107,12 @@ export default {
       }
     },
     created(){
+        EventBus.$on('deleteAd',(data)=>{
+            this.my_ads.splice(this.my_ads.indexOf(data), 1);
+        })
+        EventBus.$on('soldAd',(data)=>{
+            this.my_ads.splice(this.my_ads.indexOf(data), 1);
+        })
         this.fetch(`/user/product/myads`);
     }
 

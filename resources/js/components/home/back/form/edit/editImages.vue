@@ -202,7 +202,6 @@
                  })
                  .catch(error=>{
                      this.overlay= false;
-                     console.log(error.response);
                      this.$toast.error(error.response.data.message, 'unauthorized action', {
                             timeout: 3000,
                             position: 'topRight',
@@ -285,7 +284,7 @@
                 axios.post(`/save/image/${this.product_id}`, formData, config)
                     .then(response => {
                         this.getImage();
-                        console.log(response.data);
+                        
                         this.$router.push('/user/myads');
                         this.$toast.success(response.data, 'success', {
                             timeout: 3000,
@@ -295,11 +294,7 @@
                     })
                     .catch(error => {
                         this.overlay = false;
-                        
-                         console.log(error.response.status)
-                         
                         if (error.response.status === 422) {
-
                             this.$toast.error(error.response.data.message, 'error', {
                                 timeout: 6000,
                                 position: 'topRight',

@@ -30,7 +30,7 @@ class ProductImagePolicy
      */
     public function view(User $user, Product_image $productImage)
     {
-        //return $user->id = $productImage->product->user_id;
+        return $user->id = $productImage->product->user_id;
         
     }
 
