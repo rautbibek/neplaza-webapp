@@ -24,7 +24,7 @@
                     <v-list-item href="comment"
                         v-for="(item,index) in notification"
                         :key="index"
-                        router :to="`/ad/detail/${item.data['ad']['productid']}`"
+                        router :to="`/ad/detail/${item.data['ad']['productid']}/${item.data['ad']['slug']}`"
                         @click="markAsRead(item.id)"
                         
                     >
@@ -53,7 +53,7 @@
                     <v-list-item
                         v-for="(item,index) in read"
                         :key="index"
-                        router :to="`/ad/detail/${item.data['ad']['productid']}`"
+                        router :to="`/ad/detail/${item.data['ad']['productid']}/${item.data['ad']['slug']}`"
                         
                     >
                         <v-list-item-avatar>

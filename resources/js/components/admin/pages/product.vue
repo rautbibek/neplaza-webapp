@@ -76,6 +76,23 @@
       </v-card>
     </v-dialog>
      <!-- toolbar -->
+     
+     <v-row no-gutters class="mt-3">
+       <v-spacer></v-spacer>
+       <v-col cols="12" xs="9" md="5" sm="8">
+       <v-text-field
+            label="search by product id"
+            v-model="search"
+            dense
+            clerable
+        ></v-text-field>
+     </v-col>
+     <v-col cols="12" xs="3" md="3" sm="4">
+       <v-btn text color="green" @click="search_product">
+         <v-icon>search</v-icon>
+       </v-btn>
+      </v-col>
+     </v-row>
         <v-toolbar dense flat class="mt-5">
             <v-spacer></v-spacer>
             <v-chip small
@@ -272,7 +289,7 @@
       sold:'',
       dialog:false,
       loading:false,
-
+      search:'',
       state_premium:'',
       state_urgent:'',
       state_deleted:'',
@@ -294,6 +311,10 @@
     },
 
     methods: {
+      search_product(){
+        this.overlay=true;
+        this.fetch(`/admin/product/create`);
+      },
       filter(){
           this.overlay=true;
           this.fetch(`/admin/product/create`);
@@ -302,6 +323,7 @@
           this.overlay=true;
           axios.get(url,{
               params:{
+                  search:this.search,
                   premium:this.premium,
                   deleted:this.deleted,
                   sold:this.sold,

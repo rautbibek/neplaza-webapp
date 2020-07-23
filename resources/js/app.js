@@ -82,8 +82,9 @@ Vue.component('editjobs', require('./components/home/back/form/edit/jobs.vue').d
 Vue.component('edit-other', require('./components/home/back/form/edit/other.vue').default);
 
 
-//confirm vue
+//external vue
 Vue.component('filter-ad', require('./components/filter.vue').default);
+Vue.component('report-ad', require('./components/home/detail/report.vue').default);
 Vue.component('scroll', require('./components/scroll.vue').default);
 
 //product detail part 
@@ -109,6 +110,9 @@ Vue.component('admin-type', require('./components/admin/pages/type.vue').default
 Vue.component('admin-status', require('./components/admin/pages/status.vue').default);
 Vue.component('admin-user', require('./components/admin/pages/user.vue').default);
 Vue.component('admin-product', require('./components/admin/pages/product.vue').default);
+Vue.component('admin-report', require('./components/admin/pages/adReport.vue').default);
+Vue.component('admin-ad-detail', require('./components/admin/detail/productDetail.vue').default);
+Vue.component('admin-user-detail', require('./components/admin/detail/userDetail.vue').default);
 
 
 import { routes } from './routes.js';

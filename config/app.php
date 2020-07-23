@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
-        RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
+    
 
         /*
          * Package Service Providers...
@@ -177,6 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 

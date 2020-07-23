@@ -24,7 +24,7 @@
                     v-model="email"
                     label="Email"
                     counter="40"
-                    :rules="[required('email'),minLength('name',5),maxLength('name',40)]"
+                    :rules="[required('email'),minLength('email',5),maxLength('email',40)]"
                     outlined
                     clearable
                 ></v-text-field>

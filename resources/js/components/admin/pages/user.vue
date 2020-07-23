@@ -46,7 +46,23 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-   
+   <v-row no-gutters class="mt-3">
+       <v-spacer></v-spacer>
+       <v-col cols="12" xs="9" md="5" sm="8">
+       <v-text-field
+            label="search by username or email"
+            v-model="search"
+            dense
+            clearable
+            clerable
+        ></v-text-field>
+     </v-col>
+     <v-col cols="12" xs="3" md="3" sm="4">
+       <v-btn text color="green" @click="search_user">
+         <v-icon>search</v-icon>
+       </v-btn>
+      </v-col>
+     </v-row>
     <!-- table componsent -->
     <v-simple-table class="p-5">
       <template v-slot:default>
@@ -66,11 +82,11 @@
         <tbody>
           <tr v-for="(item,index) in desserts" :key="index">
             <td>{{ index+1 }}</td>
-            <td>{{ item.name }}</td>
+            <td> <a :href="'/admin/user/'+item.id">{{ item.name }}</a></td>
             <td>{{ item.email }}</td>
             <td>{{ item.username }}</td>
             <td>
-              <v-chip
+              <v-chip small
                 class="ma-2"
                 color="blue"
                 text-color="white"
@@ -151,7 +167,7 @@
   export default {
     
     data: () => ({
-
+      search:'',
       role_id:'',
       user_id:'',
       block_by_admin:'',
@@ -176,9 +192,16 @@
     },
 
     methods: {
+      search_user(){
+        this.fetch(`/admin/user/create`);
+      },
       fetch(url){
           this.overlay=true;
-          axios.get(url)
+          axios.get(url,{
+              params:{
+                search: this.search,
+              }
+            })
                .then(({data}) =>{
                      this.desserts = data.data;
                      this.nextUrl = data.next_page_url

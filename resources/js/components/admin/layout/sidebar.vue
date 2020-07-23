@@ -71,6 +71,7 @@ export default {
         { icon: 'assignment', text: 'Status',url:'/admin/status' },
         { icon: 'mdi-account-circle', text: 'Users',url:'/admin/user' },
         { icon: 'shop', text: 'Ads',url:'/admin/product' },
+        { icon: 'report', text: 'Reported Ad',url:'/admin/report' },
       ],
     }),
     methods:{

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\User;
+use App\Product;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
@@ -26,8 +27,14 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user = User::orderBy('product_count','desc')->with('role')->withCount('product')->simplePaginate(30);
-        return response()->json($user,200);
+        $user = User::orderBy('product_count','desc');
+              
+        if(request()->has('search') && request('search') !== null){
+            $user->where('name','LIKE', "%".request('search')."%")->orWhere('email','LIKE', "%".request('search')."%");
+        }
+        $result = $user->with('role')->withCount('product')
+                       ->simplePaginate(30);
+        return response()->json($result,200);
     }
 
     /**
@@ -49,7 +56,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user= User::where('id',$id)->withCount('product')->first();
+        $urgent= Product::where('user_id',$id)->where('emergency_sell',true)->count();
+        $feature= Product::where('user_id',$id)->where('premium',true)->count();
+        $sold= Product::where('user_id',$id)->where('sold',true)->count();
+        $deleted= Product::where('user_id',$id)->where('deleted',true)->count();
+        
+        
+        return view('admin.detail.userDetail',compact('user','urgent','feature','deleted'));
     }
 
     /**

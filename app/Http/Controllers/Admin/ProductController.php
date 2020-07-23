@@ -40,6 +40,10 @@ class ProductController extends Controller
             $product->where('premium',request('premium'));
         }
 
+        if(request()->has('search') && request('search') !== null){
+            $product->where('productid','LIKE', "%".request('search')."%")->orWhere('title','LIKE', "%".request('search')."%");
+        }
+
         if(request()->has('deleted') && request('deleted') !== null){
             $product->where('deleted',request('deleted'));
         }
@@ -81,7 +85,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $ad = Product::findOrFail($id);
+        return view('admin.product');
     }
 
     /**

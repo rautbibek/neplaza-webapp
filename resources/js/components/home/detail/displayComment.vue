@@ -46,7 +46,17 @@
                     <comment-reply transition="fab-transition" :cmt_id="comments.id" :product_id="comments.product_id" v-if="show == comments.id" :replies="comments.replies"></comment-reply>
                </v-row>
             </v-card-text>
+            <div class="text-center p-3" v-if="nextUrl">
+                      <v-btn :loading="loading" dark tile small color="#2F3B59" class="" @click.prevent="moreComment(nextUrl)">
+                          Load More Comments
+                          <template v-slot:loader>
+                              <span>Loading...</span>
+                          </template>
+                          
+                      </v-btn>
+                  </div>
         </v-card>
+        
     </div>
 </template>
 <script>
@@ -54,7 +64,9 @@ export default {
     props:['product_id'],
     data(){
         return{
+            loading:false,
             overlay:false,
+            nextUrl:'',
             show:"",
             comment:'',
             all_comments:[],
@@ -74,17 +86,27 @@ export default {
                             timeout: 3000,
                             position: 'topRight',
                         });
-                    this.getComment();
+                    this.fetch(`/ad/comment/${this.$route.params.id}`);
                     this.overlay= false;
                  })
                  .catch();
             }
         },
-        getComment(){
-            axios.get(`/ad/comment/${this.$route.params.id}`)
-                 .then(response =>{
-                     this.all_comments = response.data;
+        fetch(url){
+            axios.get(url)
+                 .then(({data}) =>{
+                     this.all_comments = data.data;
+                     this.nextUrl = data.next_page_url
                  })
+        },
+        moreComment(nextUrl){
+            this.loading=true;
+            axios.get(nextUrl)
+             .then(({data}) =>{
+                this.all_comments.push(...data.data);
+                this.nextUrl = data.next_page_url
+                this.loading = false;
+            })
         },
         postComment(){
             if(!this.loggedIn){
@@ -101,7 +123,7 @@ export default {
                             timeout: 3000,
                             position: 'topRight',
                         });
-                    this.getComment();
+                    this.fetch(`/ad/comment/${this.$route.params.id}`);
                     this.comment="";
                     this.overlay= false;
                  })
@@ -117,9 +139,9 @@ export default {
     },
     created(){
         EventBus.$on('loadComment',(data)=>{
-            this.getComment();
+            this.fetch(`/ad/comment/${this.$route.params.id}`);
         })
-        this.getComment();
+        this.fetch(`/ad/comment/${this.$route.params.id}`);
     }
 }
 </script>

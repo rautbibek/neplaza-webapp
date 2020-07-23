@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->boolean('account_status')->default(true)->comment('1 for active and 0 for deactive');
             $table->boolean('block_by_admin')->default(false)->comment('0 for active 1 for blocked');
             $table->string('login_privider')->nullable()->comment('socialite login provider');
+            $table->string('provider_id')->nullable()->comment('socialite login provider id');
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

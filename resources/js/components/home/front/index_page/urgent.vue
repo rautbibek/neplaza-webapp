@@ -1,5 +1,5 @@
 <template>
-<div style=" background-color:#e0e0e0;" v-if="count>3">
+<div style=" background-color:#e0e0e0;" v-if="count>0">
   <div class="py-5">
     <h4 class="text-center ">Urgent Sell</h4>
    <div class="text-center mb-5"><hr class="line"></div>

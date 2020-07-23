@@ -5,21 +5,21 @@
         </v-overlay>
         <v-card-text class="ml-5">
             <v-row no-gutters v-for="(reply,index) in replies" :key="index">
-                <v-col cols="3" sm="3" xs="3" lg="2" md="2">
-                    <v-avatar color="indigo" size="36">
+                <v-col cols="3" sm="3" xs="3" lg="3" md="3">
+                    <v-avatar color="indigo" size="25">
                         <img
                             :src="reply.user.cover"
                             :alt="reply.user.name"
                         >
                     </v-avatar>
                 </v-col>
-                <v-col cols="9" lg="9" md="9" sm="9" xs="9">
+                <v-col cols="9" lg="9" md="9" sm="9" xs="9" class="px-2">
                     <h6 style="color:black">{{reply.user.name}}</h6>
                         {{reply.body}}
                     <p class="pt-2" v-if="loggedIn">
                         <v-btn x-small text color="red" v-if="loginUser.id == reply.user_id" @click="deleteComment(reply.id)">delete</v-btn>
                     </p>
-                    <p class="text-right"><small>{{reply.created}}</small></p>
+                    <p class="text-left border"><small>{{reply.created}}</small></p>
                     
                 </v-col>
                 

@@ -276,7 +276,7 @@
                   this.overlay = false;
                 })
                 .catch(error =>{
-                  this.$toast.success(error.response.data.errors.message, 'error', {
+                  this.$toast.success(error.response.data.message, 'error', {
                         timeout: 3000,
                         position: 'topRight',
                   });

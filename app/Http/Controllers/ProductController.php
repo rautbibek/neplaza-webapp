@@ -90,6 +90,7 @@ class ProductController extends Controller
     }
 
     public function productDetail($id){
+        
         $product = Product:: where('id',$id)->with(
                 [
                     'category',

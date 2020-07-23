@@ -469,14 +469,14 @@
                   </v-col>
                 </v-row>
                 <div class="text-center mt-5 mb-5" v-if="nextUrl">
-                      <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
-                          Load More
-                          <template v-slot:loader>
-                              <span>Loading...</span>
-                          </template>
-                          <v-icon right>cached</v-icon>
-                      </v-btn>
-                  </div>
+                    <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
+                        Load More
+                        <template v-slot:loader>
+                            <span>Loading...</span>
+                        </template>
+                        <v-icon right>cached</v-icon>
+                    </v-btn>
+                </div>
             </v-content>
         </div>
         

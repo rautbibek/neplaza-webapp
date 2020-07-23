@@ -20,6 +20,9 @@ Route::get('/urgent/ad', 'ProductController@urgentProduct')->name('urgent.ad');
 //search products
 Route::get('/ad/search', 'SearchController@search')->name('search');
 Route::get('/searchResult', 'SearchController@searchResult')->name('/search/result');
+Route::get('/ad/comment/{id}','CommentController@getComment');
+Route::post('/post/ad/report','ReportController@report');
+
 
 
 
@@ -40,6 +43,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::resource('/status', 'StatusController')->except('create','edit');
     Route::resource('/user', 'UserController')->except('edit');
     Route::resource('/product', 'ProductController')->except('edit');
+    Route::get('/report', 'ReportController@index')->name('report');
+    Route::delete('/report/delete/{id}', 'ReportController@delete')->name('report.delete');
+    Route::get('/report/record', 'ReportController@reportApi')->name('report.api');
 });
 //testing
 Route::get('/check', 'WelcomeController@check')->name('check');
@@ -86,7 +92,7 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/read/notification','User\UserController@readNotification');
 
     //comment controller
-    Route::get('/ad/comment/{id}','CommentController@getComment');
+    
     Route::post('/user/comment','User\CommentController@post');
     Route::post('/reply/ad/comment','User\CommentController@reply');
     Route::delete('/delete/comment/{id}','User\CommentController@commentDelete');

@@ -202,7 +202,7 @@ export default {
                     .catch(error => {
 
                         if (error.response.status === 422) {
-                            this.$toast.error('Invalid data please check your form again', 'error', {
+                            this.$toast.error(error.response.data.message, 'error', {
                                 timeout: 3000,
                                 position: 'topRight',
                             });
@@ -221,7 +221,7 @@ export default {
                     });
                 return;
             }
-            this.$toast.error('Invalid data please check your form again', 'error', {
+            this.$toast.error(error.response.data.message, 'error', {
                 timeout: 3000,
                 position: 'topRight',
             });
