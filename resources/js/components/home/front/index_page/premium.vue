@@ -1,5 +1,5 @@
 <template>
-<div class="py-5" style=" background-color:#e0e0e057;" v-if="count>0">
+<div class="py-5" style=" background-color:white;" v-if="count>0">
     <h4 class="text-center ">Featured Products</h4>
    <div class="text-center mb-5"><hr class="line"></div>
    <div class="container">

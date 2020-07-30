@@ -18,7 +18,7 @@
                     v-model="contact"
                     label="Contact Number"
                     counter="10"
-                    
+                    :rules="[required('Contact Number'),minLength('Contact Number',9),maxLength('Contact Number',10)]"
                     outlined
                     clearable
                 ></v-text-field>

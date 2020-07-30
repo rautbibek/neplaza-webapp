@@ -11168,3 +11168,7 @@ a:hover {
   text-decoration: none;
 }
 
+.scroll {
+  overflow-y: scroll;
+}
+

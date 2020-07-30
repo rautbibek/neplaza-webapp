@@ -33,6 +33,14 @@ Route::prefix('admin')->group(function(){
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 });
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'namespace'=>'Admin'],function(){
+    //featured ad controller
+    Route::post('/add/featured', 'FeaturedController@save');
+    Route::post('/add/urgent', 'UrgentController@save');
+    //urgent add controller
+    Route::delete('/delete/featured/{id}', 'FeaturedController@delete');
+    Route::delete('/delete/urgent/{id}', 'UrgentController@delete');
+
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/category', 'CategoryController')->except('show','edit');
     Route::resource('/subcategory', 'SubcategoryController')->except('show','edit');
@@ -46,6 +54,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::get('/report', 'ReportController@index')->name('report');
     Route::delete('/report/delete/{id}', 'ReportController@delete')->name('report.delete');
     Route::get('/report/record', 'ReportController@reportApi')->name('report.api');
+    
 });
 //testing
 Route::get('/check', 'WelcomeController@check')->name('check');

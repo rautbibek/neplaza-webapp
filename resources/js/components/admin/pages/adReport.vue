@@ -17,8 +17,8 @@
             <th class="text-left">#ID</th>
             <th class="text-left">To Product Id</th>
             <th class="text-left">Reported By Email</th>
-            <th class="text-left">Product User id</th>
-            <th class="text-left">Reported Ads Id</th>
+            <th class="text-left">Product User</th>
+            
             <th class="text-left">Report Reason</th>
             <th class="text-left">Report Description</th>
             <th class="text-left">Reportd At</th>
@@ -29,10 +29,9 @@
         <tbody>
           <tr v-for="(item,index) in desserts" :key="index">
             <td>{{ index+1 }}</td>
-            <td>{{ item.product }}</td>
+            <td><a :href="'/admin/product/'+item.product_id">{{ item.product.title }}</a></td>
             <td>{{ item.reported_by }}</td>
-            <td>{{ item.user_id }}</td>
-            <td>{{ item.product_id }}</td>
+            <td><a :href="'/admin/user/'+item.user_id">{{ item.user.name }}</a></td>
             <td>{{ item.reason_for_report }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.created }}</td>

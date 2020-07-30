@@ -129,7 +129,7 @@
               <v-card-title>Ad Description</v-card-title> 
               <v-card-text class="ml-3">
                   <p class="pre-formatted" v-html="ad.description"></p>
-                  {{ad.description}}
+                  
               </v-card-text>
         </v-card>    
     </div>

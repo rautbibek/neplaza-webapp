@@ -40,20 +40,23 @@ export default {
     data(){
       return{
         user_id:'',
-        contact_status:false,
+        contact_status:this.loginUser.hide_contact,
         overlay:false
       }
     },
     methods:{
-        user(){
+        user_data(){
+            this.overlay =true;
             if(!this.loggedIn){
                 this.$router.push("/");
                 EventBus.$emit('changeDialog', true);
+                this.overlay = false;
                 return;
             }
-            //this.user = loginUser;
+            
             this.user_id = this.loginUser.id;
             this.contact_status = this.loginUser.hide_contact;
+            this.overlay = false;
         },
         change_contact_status(){
             this.overlay= true;
@@ -67,7 +70,7 @@ export default {
         },
         deactivate(){
             
-            if(confirm('are you sure to want do deactivate your account')){
+            if(confirm('are you sure to want do deactivate your account ? once you deactivate your account you won`t be able to recover yor data.')){
             this.overlay= true;
             axios.put(`/user/deactivate/account`)
                  .then(response =>{
@@ -94,8 +97,9 @@ export default {
         
     },
     created(){
-        return this.user();
-    }
+        this.user_data();
+    },
+    
 
 
 }

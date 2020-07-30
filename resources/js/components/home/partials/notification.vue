@@ -1,8 +1,9 @@
 <template>
     <div>
         <v-badge 
-              color="grey"
               :content="count"
+              :value="count"
+              color="indigo"
               overlap
             >
         <v-menu offset-y nudge-bottom="10" open-on-click close-on-content-click transition="scale-transition">
@@ -16,10 +17,10 @@
                 <v-card max-width="340" style="max-height: 550px"
                       class="overflow-y-auto">
                     <v-list subheader >
-                    <v-subheader>
-                        <span v-if="count == 0">No &nbsp; </span>
-                         New Notifications
-                        </v-subheader>
+                    <v-subheader  style="width:300px">
+                        <span  v-if="count == 0">No &nbsp; </span>
+                         New Notifications 
+                    </v-subheader>
                     
                     <v-list-item href="comment"
                         v-for="(item,index) in notification"
@@ -44,7 +45,7 @@
                     </v-list-item>
                     </v-list>
 
-                    <v-list subheader v-if="readCount >0">
+                    <!-- <v-list subheader v-if="readCount >0">
                     <v-divider></v-divider>
                     <v-subheader>
                          Old Notifications
@@ -70,8 +71,12 @@
                         <v-icon>chat_bubble</v-icon>
                         </v-list-item-icon>
                     </v-list-item>
-                    </v-list>
+                    </v-list> -->
+                    <p class="text-center px-5" > 
+                        <v-btn @click="getNotification" x-small text> <v-icon left small>refresh</v-icon> Refresh notification </v-btn>
+                    </p>
                 </v-card>
+                
         </v-menu>
         </v-badge> 
     </div>

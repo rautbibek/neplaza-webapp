@@ -17,12 +17,12 @@
             <div v-for="(ad,index) in detail" :key="index">
             <v-container> 
                 <v-row>
-                    <v-col cols="12"  lg="8" >
+                    <v-col cols="12"  lg="8" md="8" sm="12" xs="12" >
                         <ad-image :images="ad.product_image"></ad-image>
                         <ad-description :ad="ad"></ad-description>
                     </v-col>
                     
-                    <v-col cols="12" lg="4">
+                    <v-col cols="12" lg="4" md="4">
                         <ad-user :ad="ad" :owner="ad.user"></ad-user>
                     </v-col>
                     

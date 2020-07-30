@@ -60,6 +60,10 @@ class User extends Authenticatable
        return $this->hasMany('App\Product')->latest()->where('sold',false)->where('deleted',false);
     }
 
+    public function report(){
+       return $this->hasMany('App\Report');
+    }
+
     public function getRegisterDateAttribute(){
       return date("d M Y", strtotime($this->created_at));
     }

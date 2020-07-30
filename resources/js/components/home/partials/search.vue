@@ -3,7 +3,7 @@
         <div class="input-group" >
             <input class="form-control searchinput" value="`${this.$route.query.q}`" @select="show==true" @keyup="search()" v-model="keyword" type="text"  placeholder="Enter your search keyword..." aria-label="Search">
             <div class="input-group-append ">
-                    <a href="javascript:void(0)" class="input-group-text searchbtn" @click="submit()">
+                    <a href="javascript:void(0)" class="input-group-text searchbtn" @click.enter="submit()">
                         <i class="fa fa-search text-white" aria-hidden="true"></i>
                     </a>
             </div>

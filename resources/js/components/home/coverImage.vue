@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-responsive>
-        <v-img style="position:relative" 
+        <v-img style="position:relative"
                         class="white--text align-end"
                         height="200px"
                         :src="ads.product_cover"
@@ -17,8 +17,8 @@
                                 </v-row>
                             </template>
                         <!-- price part -->
-                        <router-link :to="`/ad/detail/${ads.id}`" class="text-center mb-5" >
-                            <v-chip class="category" router :to='`/ad/detail/${ads.id}`'
+                        <div  class="text-center mb-5" >
+                            <v-chip class="category"
                             dark
                             color="#000000b3"
                             small
@@ -27,7 +27,7 @@
                             {{ads.scategory.name}}
                             
                             </v-chip>
-                        </router-link>
+                        </div>
                         
                         <!-- price part -->
                         <div class="text-center mt-3">
@@ -45,6 +45,7 @@
     </div>
 </template>
 <script>
+
 export default {
     props:['ads'],
     data(){

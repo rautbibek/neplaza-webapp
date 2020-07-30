@@ -5,7 +5,7 @@ export default {
 
             //loading and display
             loading: false,
-            valid: true,
+            valid: false,
             overlay: false,
             nhood_display: false,
 
@@ -221,7 +221,7 @@ export default {
                     });
                 return;
             }
-            this.$toast.error(error.response.data.message, 'error', {
+            this.$toast.error('Invalid data please check your form again', 'error', {
                 timeout: 3000,
                 position: 'topRight',
             });

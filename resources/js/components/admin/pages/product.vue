@@ -24,7 +24,7 @@
                     :items='state'
                     :item-text="'name'"
                     :item-value="'id'"
-                    label="featured"
+                    label="featured for lifetime"
                     >
                       </v-select>
                   </v-col>
@@ -44,7 +44,7 @@
                     :items='state'
                     :item-text="'name'"
                     :item-value="'id'"
-                    label="urgent sell"
+                    label="urgent sell for lifetime"
                     >
                     </v-select>
                   </v-col>
@@ -178,9 +178,9 @@
         <tbody>
           <tr v-for="(item,index) in desserts" :key="index">
             <td>{{ index+1 }}</td>
-            <td>{{ item.productid }}</td>
+            <td><a :href="'/admin/product/'+item.id">{{ item.productid }} </a></td>
             <td>{{ item.title }}</td>
-            <td>{{ item.user.name }}</td>
+            <td><a :href="'/admin/user/'+item.user.id">{{ item.user.name }} </a></td>
             <td>{{ item.category.name }}</td>
             <td>
               <v-chip small v-if="item.premium"

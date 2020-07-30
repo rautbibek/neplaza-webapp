@@ -19,7 +19,7 @@
                     <p class="pt-2" v-if="loggedIn">
                         <v-btn x-small text color="red" v-if="loginUser.id == reply.user_id" @click="deleteComment(reply.id)">delete</v-btn>
                     </p>
-                    <p class="text-left border"><small>{{reply.created}}</small></p>
+                    <p class="text-left"><small>{{reply.created}}</small></p>
                     
                 </v-col>
                 

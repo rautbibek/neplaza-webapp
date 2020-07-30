@@ -109,6 +109,20 @@ class Product extends Model
       return $this->hasMany('App\Comment')->latest();
     }
 
+    public function urgent(){
+      return $this->hasOne('App\Urgent');
+    }
+
+    public function featured(){
+        return $this->hasOne('App\Featured');
+    }
+
+    public function report(){
+        return $this->hasMany('App\Report');
+    }
+
+    
+
     public function getCreatedDateAttribute(){
       return $this->created_at->diffForHumans();
     }

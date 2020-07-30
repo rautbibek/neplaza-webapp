@@ -56,14 +56,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user= User::where('id',$id)->withCount('product')->first();
+        $user= User::where('id',$id)->with(['product','city','nhood'])->withCount('product')->first();
         $urgent= Product::where('user_id',$id)->where('emergency_sell',true)->count();
         $feature= Product::where('user_id',$id)->where('premium',true)->count();
         $sold= Product::where('user_id',$id)->where('sold',true)->count();
         $deleted= Product::where('user_id',$id)->where('deleted',true)->count();
         
         
-        return view('admin.detail.userDetail',compact('user','urgent','feature','deleted'));
+        return view('admin.detail.userDetail',compact('user','urgent','feature','deleted','sold'));
     }
 
     /**

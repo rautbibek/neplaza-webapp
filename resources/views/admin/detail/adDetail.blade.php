@@ -2,6 +2,7 @@
 
 @section('content')
         <div class="mt-5">
-            welcome ta ad detail page
+        <admin-ad-detail :ad="{{$ad}}"></admin-ad-detail>
+        
         </div>
 @endsection

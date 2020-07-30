@@ -18,7 +18,10 @@ class ImageResizer{
            //resize the image
            $productImage = Image::make($image)->resize(1600,790,function($constrain){
              $constrain->aspectRatio();
-           })->stream();
+           })
+           ->insert(public_path('storage/watermark.png'), 'center')
+           
+           ->stream();
            Storage::disk('public')->put('product/'.$imagename,$productImage);
 
            //thumbnail the image
@@ -27,7 +30,9 @@ class ImageResizer{
            }
            $thumb = Image::make($image)->resize(350,300,function($constrain){
              $constrain->aspectRatio();
-           })->stream();
+           })
+           ->resizeCanvas(350,null,'center', false, '#e0e0e0')
+           ->stream();
            Storage::disk('public')->put('thumb/'.$imagename,$thumb);
 
            $product_image = new Product_image();

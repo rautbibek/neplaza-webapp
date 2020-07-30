@@ -13,13 +13,12 @@ class ReportController extends Controller
     }
 
     public function reportApi(){
-        $report = Report::latest()->paginate(30);
+        $report = Report::with('product','user')->latest()->paginate(30);
         return response()->json($report,200);
     }
 
     public function delete($id){
         $report = Report::findOrFail($id);
-        
         $report->delete();
         return response()->json('report deleted succefully');
 
