@@ -1,17 +1,19 @@
 <template>
 <div class="col-md-11  search">
         <div class="input-group" >
-            <input class="form-control searchinput" value="`${this.$route.query.q}`" @select="show==true" @keyup="search()" v-model="keyword" type="text"  placeholder="Enter your search keyword..." aria-label="Search">
+            <input class="form-control searchinput" value="`${this.$route.query.q}`" @select="show==true" @keyup="search" v-model="keyword" type="text" @keydown.enter="submit"  placeholder="Enter your search keyword..." aria-label="Search">
             <div class="input-group-append ">
-                    <a href="javascript:void(0)" class="input-group-text searchbtn" @click.enter="submit()">
-                        <i class="fa fa-search text-white" aria-hidden="true"></i>
+                    <a href="javascript:void(0)" class="input-group-text searchbtn" @click="submit()">
+                      <span class="material-icons" style="color:white">
+                       search
+                     </span>
                     </a>
             </div>
         </div>
 
         <div class="autocomplete " style="margin-top:-22px" v-show="show" v-if="searchResult.length" >
           <div class="container">
-           <ul class="list-group" @click="select()">
+           <ul class="list-group" @click="select">
             <router-link :to='`/search/?q=${search.title}`'  class="list-group-item" v-for="search in searchResult" :key="search.id">
               <b>{{search.category.name}}</b><br>
               {{search.title}}
@@ -37,7 +39,7 @@ $("body").click
 export default {
   data(){
     return{
-      
+
       keyword:'',
       show:false,
       searchResult:[],
@@ -55,7 +57,7 @@ export default {
         this.show=false;
       },
     search:_.debounce(function(){
-      
+
        axios.get('/ad/search',
           {params:{
             search : this.keyword,
@@ -64,7 +66,7 @@ export default {
           .then((response) =>{
             this.show = true;
             this.searchResult = response.data;
-            
+
           })
         .catch();
     },2000)
@@ -80,7 +82,7 @@ export default {
 
 
       }
-    }, 
+    },
 
 }
 
@@ -89,9 +91,13 @@ export default {
   .form-control{
     border-radius:0px;
   }
+  .searchinput {
+    font-size: 14px;
+  }
   .input-group{
     border-radius:0px;
-    border:2px solid #2F3B59;
+    border:1px solid #D9D9D9;
+    border-right: 0px;
   }
  .autocomplete {
     position: absolute;
@@ -107,7 +113,7 @@ export default {
       border-color:white;
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #2f3b59;
   }
-  
+
    .searchbtn:focus{
       box-shadow:none;
   }

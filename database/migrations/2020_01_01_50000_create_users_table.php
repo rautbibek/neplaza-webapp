@@ -37,7 +37,7 @@ class CreateUsersTable extends Migration
             $table->string('provider_id')->nullable()->comment('socialite login provider id');
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->text('about')->nullable();
             $table->timestamps();

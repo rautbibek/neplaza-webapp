@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user= User::where('id',$id)->with(['product','city','nhood'])->withCount('product')->first();
+        $user= User::where('id',$id)->with(['product','city','nhood','report'])->withCount('product')->first();
         $urgent= Product::where('user_id',$id)->where('emergency_sell',true)->count();
         $feature= Product::where('user_id',$id)->where('premium',true)->count();
         $sold= Product::where('user_id',$id)->where('sold',true)->count();

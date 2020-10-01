@@ -105,22 +105,16 @@
                                         color="red"
                                         text-color="white"
                                         >
-                                        {{ad.featured.remaining_days}} day {{ad.featured.remaining_minute}} min
-                                </v-chip>
+                                        {{ad.featured.remaining_days}} day                               </v-chip>
                                 <v-chip small v-else
                                         class="ma-2"
                                         color="green"
                                         text-color="white"
                                         >
-                                        {{ad.featured.remaining_days}} day {{ad.featured.remaining_minute}} min
-                                </v-chip>
+                                        {{ad.featured.remaining_days}} day                               </v-chip>
                                 
                             </td>
                             <td>{{ad.featured.created_at}}</td>
-                            
-                            
-                            
-                            
                             <td>
                             <v-btn x-small text @click="delete_feature(ad.featured.id)">
                                 <v-icon small>mdi-delete</v-icon>
@@ -156,15 +150,13 @@
                                         color="red"
                                         text-color="white"
                                         >
-                                        {{ad.urgent.remaining_days}} day {{ad.urgent.remaining_minute}} min
-                                </v-chip>
+                                        {{ad.urgent.remaining_days}} day                                </v-chip>
                                 <v-chip small v-else
                                         class="ma-2"
                                         color="green"
                                         text-color="white"
                                         >
-                                        {{ad.urgent.remaining_days}} day {{ad.urgent.remaining_minute}} min
-                                </v-chip>
+                                        {{ad.urgent.remaining_days}} day                               </v-chip>
                             </td>
                             <td>{{ad.urgent.created_at}}</td>
                             <td>
@@ -185,13 +177,17 @@
         <v-col cols="12" md="6" lg="6" xs="12" class="border">
             <v-card-title class="text-center">Make this ad featured</v-card-title>
                 <v-row>
-                    <v-col cols="8">
+                    <v-col cols="6">
                         <v-date-picker v-model="feature_expire_date" :show-current="false"></v-date-picker>
                 
                     </v-col>
-                    <v-col cols="4">
+                    <v-col cols="6">
+                        <v-card-text v-if="ad.featured" >
+                            Remaining : {{ad.featured.remaining_days}} day                       </v-card-text>
+                        <v-card-text v-else>
                         <p>{{feature_expire_date}}</p>
-                        <v-btn color="green" @click="addFeatured" dark>save</v-btn>
+                        <v-btn color="indigo" @click="addFeatured" dark>save expiry date</v-btn>
+                        </v-card-text>
                     </v-col>
                 </v-row>
             
@@ -200,13 +196,20 @@
             <v-card-title>Make urgent sell ad</v-card-title>
                 
                 <v-row>
-                    <v-col cols="8">
+                    
+                    <v-col cols="6">
+                        <v-card-text v-if="ad.urgent" >
+                            Remaining : {{ad.urgent.remaining_days}} days
+                        </v-card-text>
+                        <v-card-text v-else>
+                        <p>{{urgent_expire_date}}</p>
+                        <v-btn color="indigo" dark @click="addUrgent">save expiry date</v-btn>
+                    </v-card-text>
+                    </v-col>
+
+                    <v-col cols="6">
                         <v-date-picker v-model="urgent_expire_date" :show-current="false"></v-date-picker>
                 
-                    </v-col>
-                    <v-col cols="4">
-                        <p>{{urgent_expire_date}}</p>
-                        <v-btn color="green" dark @click="addUrgent">save</v-btn>
                     </v-col>
                 </v-row>
         </v-col>
@@ -214,9 +217,10 @@
 
     <v-row v-if="ad.report" class="mb-5">
         <v-col cols="12" class="border mb-3">
-            <v-card-title>Report by customer</v-card-title>
-            <v-spacer></v-spacer>
+            <v-card-title>Report by customer
+                <v-spacer></v-spacer>
             <v-btn small dark color="indigo" href="/admin/report">All Reports</v-btn>
+            </v-card-title>
             <v-simple-table>
                 <template v-slot:default>
                     <thead>

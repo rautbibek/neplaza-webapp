@@ -39,7 +39,7 @@
                         <v-list-item-title class="mt-2">
                             Contact Number :
                             <v-icon small color="green"> phone</v-icon>
-                            {{ user.contact_number}} 
+                            {{ user.phone}} 
                         </v-list-item-title>
                         </v-list-item-content>
 
@@ -51,15 +51,73 @@
                 </v-col>
         <v-col cols="12" lg="9" md="9">
             <v-card class="mt-3" tile v-if="user.about">
-                        <v-card-title>
-                            About {{user.name}}
-                        </v-card-title>
-                        <v-card-text>
-                            <blockquote>{{user.about}}</blockquote>
-                        </v-card-text>
-             </v-card>
+                 <v-card-title>
+                     About {{user.name}}
+                 </v-card-title>
+                 <v-card-text>
+                     <blockquote>{{user.about}}</blockquote>
+                 </v-card-text>
+            </v-card>
             
+            <v-row v-if="user.report" class="mb-5">
+        <v-col cols="12" class="border mb-3">
+            <v-card-title>Report by customer
+                <v-spacer></v-spacer>
+            <v-btn small dark color="indigo" href="/admin/report">All Reports</v-btn>
+            </v-card-title>
+            
+            <v-simple-table>
+                <template v-slot:default>
+                    <thead>
+                    <tr>
+                        <th class="text-left">###</th>
+                        <th class="text-left">Reported By</th>
+                        <th class="text-left">Report Reason </th>
+                        <th class="text-left">Description </th>
+                        <th class="text-left">seen/unseen </th>
+                        <th class="text-left">sent date </th>
+                        <th class="text-left">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(report,index) in user.report" :key="index">
+                            <td>{{index+1}}</td>
+                            <td>
+                                {{report.reported_by}}
+                            </td>
+                            <td>{{report.reason_for_report}}</td>
+                            <td>{{report.description}}</td>
+                            <td>
+                                <v-chip small v-if="report.seen"
+                                        class="ma-2"
+                                        color="green"
+                                        text-color="white"
+                                        >
+                                        seen
+                                </v-chip>
+                                <v-chip small v-else
+                                        class="ma-2"
+                                        color="red"
+                                        text-color="white"
+                                        >
+                                        unseen
+                                </v-chip>
+                            </td>
+                            <td>{{report.created}}</td>
+                            <td>
+                            <v-btn x-small text @click="delete_report(report.id)">
+                                <v-icon small>mdi-delete</v-icon>
+                            </v-btn>
+                            </td>
+                        </tr>
+                    </tbody>
+                </template>
+            </v-simple-table>
         </v-col>
+    </v-row>
+        
+        </v-col>
+
     </v-row>
     <v-row>
         <v-col cols="12">

@@ -20,6 +20,7 @@ class CreateProductImagesTable extends Migration
                   ->references('id')->on('products')
                   ->onDelete('cascade');
             $table->string('image');
+            $table->boolean('cover')->default(0);
             $table->timestamps();
         });
     }

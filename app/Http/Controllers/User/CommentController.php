@@ -11,9 +11,9 @@ use App\Product;
 
 class CommentController extends Controller
 {
-    
+
     public function post(CommentRequest $request){
-        
+
         $product= Product::where('id',$request->product_id)->first();
         $comment = new Comment;
         $comment->product_id = $request->product_id;
@@ -25,13 +25,13 @@ class CommentController extends Controller
             $collect = collect(['id'=>$product->id,'cover'=>Auth::user()->cover,'user'=>Auth::user()->name,'slug'=>$product->slug,'productid'=>$product->id,'message'=>"Commentd on your ad"]);
             $product->user->notify(new CommentNotification($collect));
         }
-        return response()->json('Comment posted succefully !!',200);   
+        return response()->json('Comment posted succefully !!',200);
     }
 
     public function reply(CommentRequest $request){
         $product= Product::where('id',$request->product_id)->first();
         $cmt = Comment::where('id',$request->comment_id)->first();
-        
+
         $comment = new Comment;
         $comment->product_id = $request->product_id;
         $comment->user_id = Auth::id();
@@ -54,7 +54,7 @@ class CommentController extends Controller
             $cmt = Comment::where('reply_id',$request->comment_id)
                            ->where('user_id','!=',Auth::id())
                            ->get()->unique('user_id');
-            
+
             if($cmt->count() >0){
                 $collect = collect(
                 ['id'=>$product->id,
@@ -72,7 +72,7 @@ class CommentController extends Controller
     }
 
     public function commentDelete($id){
-        
+
         $comment = Comment::where('id',$id)->first();
         if(Auth::id() == $comment->user_id){
             $comment->replies()->delete();
@@ -82,5 +82,5 @@ class CommentController extends Controller
         }
         return response()->json('unauthorized access',200);
     }
-    
+
 }

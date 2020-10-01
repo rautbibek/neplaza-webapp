@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class FeaturedController extends Controller
 {
     public function save(Request $request){
-        
+
         $this->validate($request,[
             'expire_date' => 'required',
             'product_id'  => 'required|unique:featureds'
@@ -20,14 +20,15 @@ class FeaturedController extends Controller
         $featured->expire_date = $request->expire_date;
         $featured->product_id = $request->product_id;
         $featured->save();
-        
+        cache()->forget('featured-ad');
         return response()->json('Add succefully add to featured list',200);
     }
 
     public function delete($id){
         $feature = Featured::findOrFail($id);
         $feature->delete();
+        cache()->forget('featured-ad');
         return response()->json('Add succefully removed from featured list',200);
     }
-    
+
 }

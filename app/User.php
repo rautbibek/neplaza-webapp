@@ -22,9 +22,9 @@ class User extends Authenticatable
     protected $guard = ['role_id'];
 
 
-   
 
-    protected $appends =['cover','register_date','contact_status','contact_number','valid_email'];
+
+    protected $appends =['cover','register_date','contact_status','contact_number','valid_email','completion'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -32,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','role_id','phone','email','account_status','blck_by_admin','login_provider','provider_id'
     ];
 
     /**
@@ -48,6 +48,14 @@ class User extends Authenticatable
        return $this->belongsTo('App\Role');
     }
 
+    public function sent_message(){
+       return $this->hasOne(Message::class,'to_id','id')->where('from_id',auth()->id())->latest();
+    }
+
+    public function received_message(){
+      return $this->hasOne(Message::class,'from_id','id')->where('to_id',auth()->id())->latest();
+    }
+
     public function city(){
        return $this->belongsTo('App\City')->select('id','name');
     }
@@ -57,7 +65,7 @@ class User extends Authenticatable
     }
 
     public function product(){
-       return $this->hasMany('App\Product')->latest()->where('sold',false)->where('deleted',false);
+       return $this->hasMany('App\Product')->latest();
     }
 
     public function report(){
@@ -89,12 +97,12 @@ class User extends Authenticatable
             return $this->phone;
          }
          return '+977- xx-xxxx-xxxx';
-         
+
       }
        return "N/A";
     }
 
-    
+
 
     public function getCoverAttribute(){
       if($this->image != null && $this->image != ''){
@@ -115,6 +123,14 @@ class User extends Authenticatable
          return $this->email;
       } else {
          return "";
+      }
+   }
+
+   public function getCompletionAttribute(){
+      if($this->password){
+         return true;
+      }else{
+         return false;
       }
    }
 }

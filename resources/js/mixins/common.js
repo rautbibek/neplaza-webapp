@@ -8,8 +8,8 @@ export default {
             valid: false,
             overlay: false,
             nhood_display: false,
-
-            hasContact: '',
+            my_data:{},
+            hasContact: false,
             errors: {},
             //image propeerty
             isDragging: false,
@@ -52,11 +52,17 @@ export default {
 
 
             select(propertyType) {
-                return v => !!v || `you must select a ${propertyType}`
+                return v => !!v || `${propertyType} field is mendatory.`
             },
+
             required(propertyType) {
-                return v => v && v.length > 0 || `you must input a ${propertyType}`
+                return v => v && v.length > 0 || `${propertyType} field is mendatory. `
             },
+
+            priceVlidate(propertyType) {
+                return v => v && v > 99 || `${propertyType} must be grater than or equal to 100.`
+            },
+
             minLength(propertyType, length) {
                 return v => v && v.length >= length || `${propertyType} must be at least ${length} characters`
             },
@@ -134,6 +140,16 @@ export default {
         removeimage(index) {
             this.image.splice(index, 1);
             this.files.splice(index, 1);
+        },
+        userData(){
+
+            axios.get(`/get/login/user/`)
+                  .then(response =>{
+                      this.my_data = response.data;
+                      this.hasContact = this.my_data.phone_verified;
+
+                  })
+                  .catch();
         },
 
 
@@ -230,10 +246,11 @@ export default {
     },
     created() {
         EventBus.$on('contactUpdated', (data) => {
-            this.hasContact = data;
+            this.hasContact = true;
             this.submit();
         })
         this.getCity();
-        this.hasContact = this.loginUser.phone;
+        this.userData();
+        this.hasContact = this.my_data.phone_verified;
     }
 }

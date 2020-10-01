@@ -56,7 +56,7 @@
                                                             </v-list-item-content>
                                                         </v-list-item>
 
-                                                        <v-list-item route @click="restore(ads.id,ads.index)">
+                                                        <v-list-item route @click="restore(ads)">
                                                             <v-list-item-icon>
                                                                 <v-icon small>restore</v-icon>
                                                             </v-list-item-icon>
@@ -131,8 +131,8 @@ export default {
       fetch(url){
           this.overlay= true;
           if(!this.loggedIn){
-                this.$router.push("/");
                 EventBus.$emit('changeDialog', true);
+                this.$router.push("/");
                 return;
             }
           this.loading=true;
@@ -145,16 +145,16 @@ export default {
                      this.overlay = false;
                  })
       },
-      restore(id,index) {
+      restore(item) {
           this.overlay = true;
-            axios.put(`/restore/ad/${id}`)
+            axios.put(`/restore/ad/${item.id}`)
                 .then(response =>{
                     
                     this.$toast.success(response.data, 'success', {
                             timeout: 3000,
                             position: 'topRight',
                         }); 
-                    this.my_ads.splice(index,1);
+                    this.my_ads.splice(this.my_ads.indexOf(item), 1);
                     this.count--;
                     this.overlay= false;
                 })

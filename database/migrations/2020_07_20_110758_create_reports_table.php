@@ -26,9 +26,6 @@ class CreateReportsTable extends Migration
             $table->foreign('product_id')
                   ->references('id')->on('products')
                   ->onDelete('cascade');
-                  
-            $table->string('product');
-
             $table->string('reason_for_report');
             $table->text('description')->nullable();
             $table->boolean('seen')->default(0);

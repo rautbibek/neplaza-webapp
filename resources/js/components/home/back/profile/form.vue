@@ -1,98 +1,160 @@
-<template> 
-    <v-card  tile>
-      <div class="container p-3">
+<template>
+    <v-card  flat tile style="border:1px solid black">
+
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
           </v-overlay>
-          <v-card-title>USER PROFILE </v-card-title>
-          <hr>
-          
-          <v-form ref="form" v-model="valid" lazy-validation>
-              <v-col cols="12">
-                <v-text-field
-                    v-model="name"
-                    label="Name"
-                    counter="20"
-                    :rules="[required('name'),minLength('name',5),maxLength('name',20)]"
-                    outlined
-                    clearable
-                ></v-text-field>
-              </v-col>
+          <v-card-title class="font-weight-bold">
+             Edit Information
+          </v-card-title>
+          <div class="form-seperator"></div>
+          <div class="mt-4">
 
-              <v-col cols="12" >
-                <v-text-field
-                    v-model="email"
-                    label="Email"
-                    counter="40"
-                    :rules="[required('email'),minLength('email',5),maxLength('email',40)]"
-                    outlined
-                    clearable
-                ></v-text-field>
-              </v-col>
+            <v-form ref="form" v-model="valid" lazy-validation>
+                <v-card-subtitle class="font-weight-bold">
+                   Display Name
+                </v-card-subtitle>
+                <v-col cols="12" md="8" xs="10" class="mx-2">
+                  <v-text-field style="border-radius:0px; margin-bottom:20px"
+                      v-model="name"
+                      label="Name"
+                      counter="20"
+                      :rules="[required('name'),minLength('name',5),maxLength('name',20)]"
+                      outlined
+                      clearable
+                  ></v-text-field>
+                </v-col>
+                <div class="form-seperator"></div>
+                <v-card-subtitle class="font-weight-bold">
+                   Contact number
+                </v-card-subtitle>
+                <v-col>
+                  <v-row no-gutters>
+                    <v-col cols="12" md="8" xs="10" class="mx-2">
+                      <v-text-field style="border-radius:0px;" @click="addContact"
+                          type="number"
 
-              <v-col cols="12">
-                <v-text-field
-                    type="number"
-                    v-model="contact"
-                    label="Contact Number"
-                    counter="10"
-                    :rules="[required('contact Number'),minLength('Contact Number',8),maxLength('contact Number',10)]"
-                    outlined
-                    clearable
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-textarea
-                    v-model="about"
-                    label="About (optional) "
-                    outlined
-                    clearable
-                ></v-textarea>
-              </v-col>
-              <v-col cols="12">
-                <v-select 
-                v-model="district"
-                :items='city'
-                :item-text="'name'"
-                :item-value="'id'"
-                :rules="[v => !!v || 'District is required']"
-                label="District"
-                clearable
-                outlined
-                @change="getNhood"
-                ></v-select>
-              </v-col>
+                          label="Contact Number"
+                          counter="20"
+                          :value="userData.phone"
+                          readonly
+                          outlined
 
-              <v-col cols="12">
-                <v-select
-                v-model="nhood"
-                :items='localArea'
-                :item-text="'name'"
-                :item-value="'id'"
-                :rules="[v => !!v || 'Metro/Municipility/VDC is required']"
-                label="Metro/Municipility/VDC"
-                clearable
-                outlined
-                :loading ="loading"
-                >
-                </v-select>
-              </v-col>
-              
+                      ></v-text-field>
+                    </v-col>
+                    <v-col style="margin-bottom:10px">
 
-            <v-col cols="12">
-                <v-btn tile outlined large color="primary"  @click="submit">Update PROFILE</v-btn>
-            </v-col>
-          </v-form>
+                        <div v-if="userData.phone">
+                          <v-btn v-if="userData.phone_verified"  color="green" dark text>
+                              <v-icon left>done_all</v-icon>
+                              verified
+                          </v-btn>
+                          <v-btn small v-else color="red" dark text>
+
+                            <v-icon small left>error</v-icon>  contact number is not verified.
+                          </v-btn>
+                        </div>
+                    </v-col>
+                  </v-row>
+                </v-col>
+                <v-col cols="12" md="11" xs="12" class="text-right mb-2">
+                  <v-btn v-if="userData.phone" x-small color="red" text router to="/user/setting">
+                    <v-icon x-small left>edit</v-icon>
+                    edit contact number
+                  </v-btn>
+                  <v-btn v-else x-small color="green" text router to="/user/setting">
+                    <v-icon x-small left>add</v-icon>
+                    add contact number
+                  </v-btn>
+                </v-col>
+
+                <div class="form-seperator"></div>
+                <v-card-subtitle class="font-weight-bold">
+                   Email Address
+                </v-card-subtitle>
+                <v-col>
+                  <v-row no-gutters>
+                    <v-col cols="12" md="8" xs="10" class="mx-2">
+                      <v-text-field style="border-radius:0px;"
+
+
+                          label="Email"
+                          counter="30"
+                          :value="userData.email"
+                          readonly
+                          outlined
+
+                      ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-btn v-if="userData.email_verified_at"  color="green" dark text>
+                            <v-icon left>done_all</v-icon>
+                            verified
+                        </v-btn>
+                        <v-btn v-else color="red" dark text>
+                            <v-icon left>error</v-icon>
+                            Email is not verified.
+                        </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-col>
+                <v-col cols="12" md="11" xs="12" class="text-right mb-2">
+                  <v-btn x-small color="red" text router to="/user/email/setting">
+                    <v-icon x-small left>edit</v-icon>
+                    add or edit email address
+                  </v-btn>
+                </v-col>
+
+                <div class="form-seperator"></div>
+                <v-card-subtitle class="font-weight-bold">
+                   Address
+                </v-card-subtitle>
+                <v-col cols="12" md="8" xs="10" class="mx-2">
+                  <v-autocomplete style="border-radius:0px; margin-bottom:20px"
+                  v-model="district"
+                  :items='city'
+                  :item-text="'name'"
+                  :item-value="'id'"
+                  :rules="[v => !!v || 'District is required']"
+                  label="District"
+                  clearable
+                  outlined
+                  @change="getNhood"
+                  ></v-autocomplete>
+                </v-col>
+
+                <v-col cols="12" md="8" xs="10" class="mx-2">
+                  <v-autocomplete style="border-radius:0px; margin-bottom:10px"
+                  v-model="nhood"
+                  :items='localArea'
+                  :item-text="'name'"
+                  :item-value="'id'"
+                  :rules="[v => !!v || 'Metro/Municipility/VDC is required']"
+                  label="Metro/Municipility/VDC"
+                  clearable
+                  outlined
+                  :loading ="loading"
+                  >
+                  </v-autocomplete>
+                </v-col>
+
+              <div class="form-seperator"></div>
+              <v-col cols="12" md="9" xs="12">
+                  <v-btn small dark color="indigo"  @click="submit">Update PROFILE</v-btn>
+              </v-col>
+            </v-form>
       </div>
 </v-card>
 </template>
 <script>
 export default {
+    props:['userData'],
     data(){
         return{
             loading : false,
             valid:true,
             overlay:false,
+
             district:this.loginUser.city_id,
             name : this.loginUser.name,
             email : this.loginUser.valid_email,
@@ -110,19 +172,19 @@ export default {
             maxLength(propertyType,length){
                return v => v && v.length <= length || `${propertyType} must be less than ${length} characters`
             },
-            
+
 
         }
     },
     methods:{
+        addContact(){
+          EventBus.$emit('profileForm', true);
+        },
         submit(){
             if(this.$refs.form.validate()){
                 this.overlay = true;
                 axios.put(`/update/profile`,{
                     name : this.name,
-                    email:this.email,
-                    contact: this.contact,
-                    about:this.about,
                     nhood:this.nhood,
                     district: this.district,
                 })
@@ -133,7 +195,7 @@ export default {
                          position: 'topRight',
                          });
                          EventBus.$emit('updateUser',true);
-                         
+
                          EventBus.$emit('loadUser');
                      })
                      .catch(error=>{
@@ -144,7 +206,7 @@ export default {
                                 position: 'topRight',
                             });
                          }
-                         
+
                      });
             }
         },
@@ -153,7 +215,7 @@ export default {
             axios.get( `/all/city`)
                  .then(response =>{
                      this.city = response.data;
-                     
+
                      this.getNhood();
                  })
                  .catch();
@@ -165,11 +227,11 @@ export default {
                  .then(response => {
                      this.localArea = response.data;
                      this.loading= false;
-                     
+
                  })
                  .catch()
         },
-        
+
     },
     created(){
         return this.getCity();

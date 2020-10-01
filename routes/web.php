@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::post('/send/contact/message', 'ContactController@save')->name('send.contact.message');
 Route::get('/seller/detail/{id}/{username}', 'WelcomeController@seller')->name('seller');
 Route::get('/seller/{id}/ad', 'WelcomeController@sellerAd')->name('seller.ad');
 Route::get('/urgent/ad', 'ProductController@urgentProduct')->name('urgent.ad');
@@ -22,6 +23,7 @@ Route::get('/ad/search', 'SearchController@search')->name('search');
 Route::get('/searchResult', 'SearchController@searchResult')->name('/search/result');
 Route::get('/ad/comment/{id}','CommentController@getComment');
 Route::post('/post/ad/report','ReportController@report');
+
 
 
 
@@ -54,10 +56,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::get('/report', 'ReportController@index')->name('report');
     Route::delete('/report/delete/{id}', 'ReportController@delete')->name('report.delete');
     Route::get('/report/record', 'ReportController@reportApi')->name('report.api');
-    
+
 });
-//testing
-Route::get('/check', 'WelcomeController@check')->name('check');
+
 
 Route::get('/menu/category', 'CategoryController@category');
 Route::get('/menu/subCategory', 'CategoryController@subCategory');
@@ -69,7 +70,7 @@ Route::get('/front/scategory/filter/{slug}', 'SubcategoryController@subcategoryF
 Route::get('/front/featured/product', 'ProductController@premium');
 Route::get('/all/featured/product', 'ProductController@featured');
 Route::get('/front/urgent/product', 'ProductController@urgent');
-Route::get('/product/detail/{id}', 'ProductController@productDetail');
+Route::get('/product/detail/{id}/{slug}', 'ProductController@productDetail');
 
 
 //login controller
@@ -82,7 +83,7 @@ Route::get('/all/city', 'WelcomeController@city');
 Route::get('/get/nhood/{id}', 'WelcomeController@nhood');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::group(['middleware'=>['auth']], function(){
     //myads component
     Route::post('/favorite/{id}/add','FavoriteController@add');
@@ -95,22 +96,27 @@ Route::group(['middleware'=>['auth']], function(){
     Route::get('/user/product/urgent','User\UserProductController@urgent');
     Route::get('/user/product/sold','User\UserProductController@sold');
 
-    //notification 
+    //notification
     Route::get('/get/notification','User\UserController@notification');
     Route::get('/markAsRead/{id}','User\UserController@read');
     Route::get('/read/notification','User\UserController@readNotification');
 
     //comment controller
-    
+
     Route::post('/user/comment','User\CommentController@post');
     Route::post('/reply/ad/comment','User\CommentController@reply');
     Route::delete('/delete/comment/{id}','User\CommentController@commentDelete');
 
 
     Route::put('/user/contact/status','User\UserController@contact_status');
+    Route::post('/user/initial/update','User\UserController@account_completion');
     Route::put('/user/deactivate/account','User\UserController@deactivateAccount');
     Route::put('/update/contact','User\UserController@updateContact');
-    
+    Route::post('/send/otp','User\UserController@send_otp')->name('send.otp');
+    Route::post('/change/user/password','User\UserController@changePassword');
+    Route::post('/user/email/verification','User\UserController@verify_email');
+    Route::post('/user/email/veriried/at','User\UserController@email_verified_at');
+
 
     //profile update
     Route::put('/update/profile', 'User\UserController@updateProfile');
@@ -130,7 +136,13 @@ Route::group(['middleware'=>['auth']], function(){
     Route::delete('/delete/image/{image_id}', 'User\ImageController@delete');
     Route::post('/save/image/{image_id}', 'User\ImageController@store');
 
+    //chat
+    Route::get('/chat/contacts','Chat\ContactController@contacts');
+    Route::get('/chat/conversation/{id}','Chat\ContactController@getMessagesFor');
+    Route::post('/chat/send/message','Chat\ContactController@send');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/total/unread/message','Chat\ContactController@total_unread_messages');
 });
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('{path}', 'WelcomeController@index')->where('path','([A-z\d\-\/_.]+)?');

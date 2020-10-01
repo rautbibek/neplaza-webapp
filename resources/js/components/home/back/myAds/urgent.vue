@@ -12,7 +12,7 @@
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
         <v-container>
-            
+
             <v-row wrap class="px-4">
                 <v-col cols="12" xs="12" sm="6" lg="3" class="mt-3"><mymenu></mymenu></v-col>
                 <v-col cols="12" xs="12" sm="6" lg="9" md="9">
@@ -21,7 +21,7 @@
                             <v-flex xs12 sm6 md4 lg4 xl2 v-for="(ads,index) in my_ads" :key="index" >
                                 <v-hover v-slot:default="{ hover }"
                                 open-delay="100">
-                                
+
                                     <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center">
                                         <card-menu :ads="ads"></card-menu>
                                         <!-- image part -->
@@ -30,18 +30,22 @@
 
                                         <!-- date and user name part -->
                                         <div class="card-date">
-                                        
-                                            <card-date :ads="ads"></card-date>
-                                            
-                                        </div>
 
+                                            <card-date :ads="ads"></card-date>
+
+                                        </div>
+                                        <div v-if="ads.urgent">
+                                        <v-chip class="mt-1" small :color="ads.urgent.remaining_days < 3?'red':'indigo'" dark>
+                                          Expire After : {{ads.urgent.remaining_days}} Days
+                                        </v-chip>
+                                        </div>
                                         <!-- title and subtitle part -->
                                         <card-title :ads="ads"></card-title>
                                         </router-link>
                                     </v-card>
                                 </v-hover>
                             </v-flex>
-                
+
                         </v-layout>
                     </div>
                     <div v-else class="mt-3">
@@ -54,11 +58,11 @@
                     </div>
                 </v-col>
             </v-row>
-            
+
             <div class="text-center mt-5" v-if="nextUrl">
 
             <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="fetch(nextUrl)">
-                
+
                 Load More
                 <template v-slot:loader>
                     <span>Loading...</span>
@@ -66,10 +70,10 @@
                 <v-icon right>cached</v-icon>
             </v-btn>
             </div>
-            
+
         </v-container>
       </div>
-      
+
     </div>
 </template>
 <script>

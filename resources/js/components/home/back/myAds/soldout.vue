@@ -56,7 +56,7 @@
                                                             </v-list-item-content>
                                                         </v-list-item>
 
-                                                        <v-list-item @click="resell(ads.id,ads.index)">
+                                                        <v-list-item @click="resell(ads)">
                                                             <v-list-item-icon>
                                                                 <v-icon small>restore</v-icon>
                                                             </v-list-item-icon>
@@ -144,16 +144,16 @@ export default {
                      this.overlay= false;
                  })
       },
-      resell(id,index) {
+      resell(item) {
           this.overlay = true;
-            axios.put(`/resell/ad/${id}`)
+            axios.put(`/resell/ad/${item.id}`)
                 .then(response =>{
                     
                     this.$toast.success(response.data, 'success', {
                             timeout: 3000,
                             position: 'topRight',
                         }); 
-                    this.my_ads.splice(index,1);
+                    this.my_ads.splice(this.my_ads.indexOf(item), 1);
                     this.count--;
                     this.overlay= false;
                 })

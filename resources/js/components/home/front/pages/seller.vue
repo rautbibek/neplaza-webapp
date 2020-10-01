@@ -4,15 +4,16 @@
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                 <li class="breadcrumb-item active" aria-current="page">{{seller_detail.name}}</li>
-               
+
             </ol>
         </nav>
-        
+
         <v-overlay :value="overlay" absolute>
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
+
         <div >
-          <v-container class="px-5"> 
+          <v-container class="px-5">
             <v-row >
                 <v-col cols="12" lg="3" md="3">
                     <v-card tile class="mt-3 text-center" >
@@ -26,10 +27,11 @@
                                 </v-avatar>
                             </v-responsive>
                         </v-col>
+
                         <v-list-item-content class="text-center">
                         <v-list-item-title>{{seller_detail.name}}</v-list-item-title>
                         <small style="color:grey" class="my-1" >user since : {{seller_detail.register_date}}</small>
-                        </v-list-item-content>    
+                        </v-list-item-content>
                     </v-card>
                     <v-card tile class=" mt-3 pa-3" v-if="seller_detail.city">
                             <h5 class="m-2 text-center"><i class="fa fa-map-marker"> </i> Address Location </h5>
@@ -45,45 +47,49 @@
                     </v-card>
                     <!-- contact number -->
                     <v-card class="mt-3 pa-3">
+                      <Message :seller="seller_detail"/>
                         <v-list-item-content class="text-center">
                         <v-list-item-title class="mt-2">
                             Contact Number :
                             <v-icon small color="green"> phone</v-icon>
-                            {{ seller_detail.contact_number}} 
+                            
+                            <a :href="'tel:'+seller_detail.contact_number">{{ seller_detail.contact_number}} </a>
                         </v-list-item-title>
                         </v-list-item-content>
 
                         <v-card-text class="text-center" style="background-color:#3f51b5" v-if="seller_detail.hide_contact ==true">
+
                             <small class="my-1 text-white">Seller Set the Contact {{seller_detail.contact_status}}</small>
                         </v-card-text>
                     </v-card>
-                
+
                 </v-col>
 
-                
+
                 <v-col cols="12"  lg="9" >
-                    <v-card class="mt-3" tile v-if="seller_detail.about">
+
+                    <!-- <v-card class="mt-3" tile v-if="seller_detail.about">
                         <v-card-title>
                             About {{seller_detail.name}}
                         </v-card-title>
                         <v-card-text>
                             <blockquote>{{seller_detail.about}}</blockquote>
                         </v-card-text>
-                    </v-card>
+                    </v-card> -->
                     <v-layout row wrap>
                         <v-flex xs12 sm6 md4 lg4 xl3 v-for="(ads,index) in all_ads" :key="index" >
                             <card-lazy :ads="ads"></card-lazy>
                         </v-flex>
-                    
+
                     </v-layout>
                 </v-col>
-                
-                
+
+
             </v-row>
                 <div class="text-center mt-5" v-if="nextUrl">
 
                     <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
-                        
+
                         Load More
                         <template v-slot:loader>
                             <span>Loading...</span>
@@ -96,7 +102,11 @@
     </div>
 </template>
 <script>
+import Message from '../../detail/Message';
 export default {
+  components:{
+      Message,
+  },
  data(){
      return{
          overlay:false,
@@ -112,6 +122,7 @@ export default {
          this.overlay= true;
          axios.get(`/seller/detail/${this.$route.params.id}/${this.$route.params.username}`)
               .then(response =>{
+                console.log(response.data);
                   this.seller_detail = response.data;
                   this.overlay = false;
               })

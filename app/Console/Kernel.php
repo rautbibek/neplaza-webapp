@@ -13,7 +13,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        commands\RepordedAdDelete::class,
+        commands\CheckUrgentProduct::class,
+        commands\CheckFeaturedProduct::class,
+        commands\FeatureNotification::class,
+        commands\UrgentNotification::class,
     ];
 
     /**
@@ -26,6 +30,7 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('feature:update')->everyMinute();
          $schedule->command('urgent:update')->everyMinute();
+         $schedule->command('reported')->everyMinute();
     }
 
     /**

@@ -6,15 +6,19 @@ use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
 {
     //category and category Product
     public function scategoryProduct($slug){
-        
+
         $scategory = Scategory::with('category')->where('slug',$slug)->firstOrFail();
-        
+        if(!Session::has($slug)){
+            $scategory->increment('view_count');
+            Session::put($slug,1);
+        }
         $product = app(Pipeline::class)
                   ->send(Product::query())
                   ->through([
@@ -28,10 +32,10 @@ class SubcategoryController extends Controller
                       \App\Filter\Brand::class,
                       \App\Filter\Price::class,
                       \App\Filter\Sort::class,
-                      
+
                   ])
                   ->thenReturn();
-                  
+
         if(request()->has('city_id') && request('city_id') != null){
             $product->where('city_id',request('city_id'));
         }
@@ -43,7 +47,7 @@ class SubcategoryController extends Controller
         $p = $product->where('scategory_id',$scategory->id)
                   ->where('deleted',false)
                   ->where('sold',false)
-                  ->with(['user','category','scategory','product_image','city','nhood','favorite_to_users'=>function($query){
+                  ->with(['product_property','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
                   ->simplePaginate(15)->appends([
@@ -56,7 +60,7 @@ class SubcategoryController extends Controller
                       'city_id' => request('city_id'),
                       'nhood_id'=>request('nhood_id')
                   ]);
-        
+
         return response()->json($p,200);
     }
 

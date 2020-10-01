@@ -1,90 +1,99 @@
 <template>
-<div class="py-5" style=" background-color:white;" v-if="count>0">
-    <h4 class="text-center ">Featured Products</h4>
-   <div class="text-center mb-5"><hr class="line"></div>
-   <div class="container">
-    <v-container>
-    <sliders style="margin:0px; padding:0px"
-              :autoplay="true"
-              :autoplayHoverPause="true"
-              :scrollPerPage="false"
-              :loop="true"
-              :spacePadding="2"
-              :navigationEnabled="true"
-              :paginationEnabled="true"
-              :responsive="true"
-              :perPageCustom="[[300, 1], [500, 2],[600, 4]]"
-              class="row"
-    >
-        <slide v-for="(feature,index) in featured" :key="index" class="col-md-3 col-sm-6" router :to="`/`">
-          <v-hover v-slot:default="{ hover }"
-        open-delay="100">
-          <v-card tile :elevation="hover ? 16 : 3" class=" text-center">
-            <v-btn style="margin-top:-10px; margin-left:5px"
-              absolute
-              small
-              text
-              left
+<v-card v-if="count>0" outlined tile flat>
+    <v-container class="py-0">
+      <v-card-title style="padding-bottom:0px">
+        <!-- <v-btn icon >
+          <v-icon color="#0c1963">star</v-icon>
+        </v-btn> -->
+        Featured Ads
+        <v-spacer></v-spacer>
+        <v-btn color="#0c1963" small dark tile router :to="`/feature/ads`" v-if="count>6"  >
+          view all
+          <v-icon right>keyboard_arrow_right</v-icon>
+        </v-btn>
+      </v-card-title>
+
+    </v-container>
+    <v-divider style="padding:0px"></v-divider>
+  <div class="" style=" " >
+    <!-- <h4 class="text-center pt-2">Featured Products</h4>
+     <div class="text-center mb-5"><hr class="line"></div> -->
+     <div class="container">
+      <v-container>
+          <sliders style="margin:0px; padding:0px"
+                :autoplay="true"
+                :autoplayHoverPause="true"
+                :scrollPerPage="false"
+                :loop="true"
+                :spacePadding="2"
+                :navigationEnabled="true"
+                :paginationEnabled="true"
+                :responsive="true"
+                :perPageCustom="[[300, 1], [500, 2],[600, 4]]"
+                class="row"
             >
-              <favorite :is_favorite='feature.favorite_to_users.length?true:false' :product_id="feature.id"></favorite>
-            </v-btn>
-            <!-- image part -->
-            <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
-            <v-img 
-                  class="white--text align-end"
-                  height="200px"
-                  :src="feature.product_cover"
-                >
-                <div class="ribbon ribbon-top-right"><span>FEATURED</span></div>
-                <!-- category name part -->
-                <div class="text-center mb-3">
-                                <v-chip class="category"
-                                dark
-                                color="#000000b3"
-                                small
-                                label
-                                >
-                                {{feature.scategory.name}}
-                                
-                                </v-chip>
-                            </div>
-                <!-- price part -->
-                <div class="text-center">
-                      <v-chip class="chip"
-                        height="17"
-                        small
-                        label      
-                        color="#f2f2f2"
-                      >
-                        Rs. {{feature.product_price}}
-                      </v-chip>
-                </div>
-              </v-img>
+           <slide v-for="(feature,index) in featured" :key="index" class="col-md-3 col-sm-6" router :to="`/`">
+            <v-hover v-slot:default="{ hover }"
+             open-delay="100">
+            <v-card tile :elevation="hover ? 16 : 3" class=" text-center">
+              <v-btn style="margin-top:-10px; margin-left:5px"
+                absolute
+                small
+                text
+                left
+              >
+                <favorite :is_favorite='feature.favorite_to_users.length?true:false' :product_id="feature.id"></favorite>
+              </v-btn>
+              <!-- image part -->
+              <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
+              <v-img
+                    class="white--text align-end"
+                    height="200px"
+                    :src="feature.product_cover"
+                  >
+                  <div class="ribbon ribbon-top-right"><span>FEATURED</span></div>
+                  <!-- category name part -->
+                  <div class="text-center mb-3">
+                                  <v-chip class="category"
+                                  dark
+                                  color="#000000b3"
+                                  small
+                                  label
+                                  >
+                                  <span v-if="feature.product_property.status_name">Status : {{feature.product_property.status_name}}</span>
+                                  <span v-else>{{feature.product_property.scategory_name}}</span>
 
-              <!-- date and user name part -->
-                    <div class="card-date">
-                        <card-date :ads="feature"></card-date>
-                    </div>
+                                  </v-chip>
+                              </div>
+                  <!-- price part -->
+                  <div class="text-center">
+                    <v-alert style="opacity:0.9; padding-top:0px" height="25px" shaped color="red" elevation="20" dark prominent max-width="200px" dense>
+                      Rs. {{feature.product_price}} {{feature.product_max_price}}
+                    </v-alert>
+                 </div>
 
-                    <!-- title and subtitle part -->
-                    <card-title :ads="feature"></card-title>
-            </router-link>
-          </v-card>
-          </v-hover>
-        
-      
-        </slide>
-   </sliders>
-   <p class="text-right mt-3 mr-3" v-if="count > 7">
-      <v-btn router small :to="`/feature/ads`" dark  tile color="#2F3B59" class="">
-        view all
-        <v-icon right>keyboard_arrow_right</v-icon>
-      </v-btn>
-    </p>
-   </v-container>
+                </v-img>
 
-   </div>
-</div>
+                <!-- date and user name part -->
+                      <div class="card-date">
+                          <card-date :ads="feature"></card-date>
+                      </div>
+
+                      <!-- title and subtitle part -->
+                      <card-title :ads="feature"></card-title>
+              </router-link>
+            </v-card>
+            </v-hover>
+
+
+          </slide>
+     </sliders>
+
+     </v-container>
+
+     </div>
+  </div>
+</v-card>
 </template>
 
 <script>

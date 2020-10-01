@@ -17,9 +17,11 @@ class ReportMail extends Mailable
      * @return void
      */
     public $product;
-    public function __construct($product)
+    public $reason;
+    public function __construct($product,$reason)
     {
         $this->product = $product;
+        $this->reason = $reason;
     }
 
     /**
@@ -30,6 +32,7 @@ class ReportMail extends Mailable
     public function build()
     {
         $p = $this->product;
-        return $this->markdown('email.user',compact('p'));
+        $r = $this->reason;
+        return $this->markdown('email.user',compact('p','r'));
     }
 }

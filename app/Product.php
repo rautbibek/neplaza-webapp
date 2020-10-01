@@ -31,11 +31,11 @@ class Product extends Model
       'property_4',
       'join'
     ];
-  
 
+    protected $hidden =[];
     protected $with=['product_image'];
     protected $appends=[
-      'created_date','product_price','product_max_price','ad_title',
+      'created_date','product_price','product_max_price',
     'is_favorite','product_cover'];
 
     public function product_image(){
@@ -55,17 +55,17 @@ class Product extends Model
     }
 
     public function getIsFavoriteAttribute(){
-      return true; 
+      return true;
     }
 
-   
+
 
     public function city(){
-      return $this->belongsTo('App\City')->select('id','name','slug');
+      return $this->belongsTo('App\City')->select('id','name','slug','product_count');
     }
 
     public function nhood(){
-      return $this->belongsTo('App\Nhood')->select('id','name','slug');
+      return $this->belongsTo('App\Nhood')->select('id','name','slug','product_count');
     }
 
     public function type(){
@@ -73,7 +73,7 @@ class Product extends Model
     }
 
     public function user(){
-      return $this->belongsTo('App\User');
+      return $this->belongsTo('App\User')->select('id','name','phone','username','phone_verified','image');
     }
 
     public function status(){
@@ -117,11 +117,13 @@ class Product extends Model
         return $this->hasOne('App\Featured');
     }
 
+    public function product_property(){
+        return $this->hasOne('App\Product_property');
+    }
+
     public function report(){
         return $this->hasMany('App\Report');
     }
-
-    
 
     public function getCreatedDateAttribute(){
       return $this->created_at->diffForHumans();
@@ -140,9 +142,7 @@ class Product extends Model
       }
     }
 
-    public function getAdTitleAttribute(){
-      return ucwords($this->title);
-    }
+
 
     public function getProductCoverAttribute(){
       $count = $this->product_image->count();

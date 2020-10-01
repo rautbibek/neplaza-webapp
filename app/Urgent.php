@@ -7,20 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Urgent extends Model
 {
     protected $fillable =['product_id','expire_date'];
-    protected $appends=['remaining_days','remaining_minute'];
-    
+    protected $appends=['remaining_days'];
+
     public function product(){
-        return $this->belognsTo('App\Product');
+        return $this->belongsTo('App\Product');
     }
 
     public function getRemainingDaysAttribute(){
         return Carbon::now()->diffInDays($this->expire_date, false);
     }
 
-    public function getRemainingMinuteAttribute(){
-        return Carbon::now()->diffInMinutes($this->expire_date, false);
-        
-    }
+
 
     public static function boot(){
         parent::boot();

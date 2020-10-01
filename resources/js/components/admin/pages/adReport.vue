@@ -2,12 +2,12 @@
  <v-app >
   <admin-sidebar></admin-sidebar>
   <v-container class="mt-5">
-    
+
     <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
-    
-   
+
+
     <!-- table componsent -->
     <p>Total Report : {{total}}</p>
     <v-simple-table class="p-5">
@@ -18,15 +18,16 @@
             <th class="text-left">To Product Id</th>
             <th class="text-left">Reported By Email</th>
             <th class="text-left">Product User</th>
-            
+
             <th class="text-left">Report Reason</th>
             <th class="text-left">Report Description</th>
             <th class="text-left">Reportd At</th>
             <th class="text-left">Action</th>
-            
+
           </tr>
         </thead>
         <tbody>
+
           <tr v-for="(item,index) in desserts" :key="index">
             <td>{{ index+1 }}</td>
             <td><a :href="'/admin/product/'+item.product_id">{{ item.product.title }}</a></td>
@@ -65,10 +66,10 @@
   export default {
     props:['total'],
     data: () => ({
-      desserts: [], 
-      nextUrl:'',    
+      desserts: [],
+      nextUrl:'',
     }),
-    
+
 
     created () {
       //this.initialize()
@@ -94,10 +95,12 @@
           this.overlay=true;
           axios.get(url)
                .then(({data}) =>{
+
                      this.desserts = data.data;
+
                      this.nextUrl = data.next_page_url
                      this.overlay= false;
-            })
+            }).catch();
       },
       more(nextUrl){
         this.loading=true;
@@ -109,6 +112,6 @@
             })
       },
     },
-   
+
   }
 </script>

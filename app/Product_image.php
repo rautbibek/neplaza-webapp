@@ -1,7 +1,8 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 class Product_image extends Model
@@ -19,6 +20,19 @@ class Product_image extends Model
 
   public function getFullImageAttribute(){
     return asset('storage/product/'.$this->image);
+  }
+  public static function boot(){
+      parent::boot();
+
+     static::deleting(function($product_image){
+
+       if(Storage::disk('public')->exists('product/'.'/'.$product_image->image)){
+           Storage::disk('public')->delete('product/'.$product_image->image);
+       }
+       if(Storage::disk('public')->exists('thumb/'.'/'.$product_image->image)){
+           Storage::disk('public')->delete('thumb/'.'/'.$product_image->image);
+       }
+      });
   }
 
 }

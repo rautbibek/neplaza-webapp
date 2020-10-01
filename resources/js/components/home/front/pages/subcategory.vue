@@ -16,17 +16,17 @@
         </v-overlay>
         <div class="py-2" >
 
-            <v-content>
+            <v-content class="px-3">
               <!-- sorting -->
-                <v-content class="py-3">
+                <v-content class="pb-2">
                     <v-toolbar flat>
                       <v-spacer></v-spacer>
-                      
+
                        <v-row justify="center">
                         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                           <template v-slot:activator="{ on }">
-                            <v-btn tile color="primary" v-on="on" class="mr-4 d-flex d-sm-none">
-                               filter
+                            <v-btn color="primary" outlined v-on="on" class="mr-4 d-flex d-sm-none">
+                               <v-icon left>mdi-filter</v-icon> filter
                             </v-btn>
                           </template>
                           <v-card>
@@ -42,7 +42,7 @@
                             </v-toolbar>
                             <v-list three-line subheader>
                               <v-subheader>Ad filter</v-subheader>
-                              
+
                             </v-list>
                             <v-divider></v-divider>
                             <v-card outlined tile v-for="(scat,index) in subcategory" :key="index">
@@ -52,7 +52,7 @@
                           <v-divider></v-divider>
                             <v-card-text>
                               <h5 class="title mb-2">Location</h5>
-                              <v-select class="py-2" style="border-radius:0px"
+                              <v-autocomplete class="py-2" style="border-radius:0px"
                                 v-model="city_id"
                                 :items='city'
                                 :item-text="'name'"
@@ -62,14 +62,14 @@
                                 label="District"
                                 append-icon="mdi-map-marker"
                                 @change="getNhood"
-                              ></v-select>
+                              ></v-autocomplete>
                               <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
                                   <div class="spinner-border" role="status">
                                     <span class="sr-only">Loading...</span>
                                   </div>
                               </div>
 
-                              <v-select class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
+                              <v-autocomplete class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
                                 v-model="nhood_id"
                                 :items='localArea'
                                 :item-text="'name'"
@@ -78,33 +78,33 @@
                                 clearable
                                 label="Metro/Municipility/VDC"
                                 append-icon="mdi-map-marker"
-                                
-                              ></v-select>
+
+                              ></v-autocomplete>
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- price part  -->
                             <v-card-text v-if="max_price">
                               <h5 class="title mb-2">Price Range</h5>
                               <v-card-text>
-                                
+
                                 <v-range-slider @change="slide"
                                   v-model="price"
                                   thumb-label
-                                  
+
                                   min="0"
                                   :max="max_price"
                                 ></v-range-slider>
                                 <div class="row">
                                   <div class="col">
                                     <v-text-field
-                                    
+
                                       type="number"
                                       v-model="min_p"
                                       label="Minimum Price"
                                       single-line
                                     ></v-text-field>
                                   </div>
-                                  
+
                                   <div class="col text-right">
                                     <v-text-field @keyup="changing"
                                       type="number"
@@ -118,7 +118,7 @@
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- PART 2 -->
-                            <div v-if="scat.type.length>0"> 
+                            <div v-if="scat.type.length>0">
                               <v-card-text>
                               <h5 class="title mb-2">{{type_title}}</h5>
                                 <v-chip-group
@@ -235,43 +235,45 @@
                             </div>
 
                             <div class="p-3" v-if="max_price">
-                              <v-btn @click="filter" color="indigo" dark large tile>
+                              <v-btn @click="filter" color="indigo" dark  tile>
                                 <v-icon left>mdi-filter</v-icon>
-                                Apply Filter 
+                                Apply Filter
                                 </v-btn>
                             </div>
 
-                            
+
                       </v-card>
                           </v-card>
                         </v-dialog>
                       </v-row>
                         <v-col cols="8" lg="3" md="3" sm="6" xs="8">
-                          
+
                           <v-select class="mt-4"
-                          @change="filter"
+                            @change="filter"
                             v-model="sorting"
                             clearable
                             :items="sort"
                             :item-text="'title'"
                              label="SORT BY"
                              dense
+
+
                           ></v-select>
                         </v-col>
                       </v-toolbar>
                     </v-content>
                   <!-- end of sorting -->
                 <v-row wrap no-gutters class="px-2">
-                  <v-col cols="12" md="3" lg="3" sm="4" xs="12" class="d-none d-sm-flex"> 
+                  <v-col cols="12" md="3" lg="3" sm="4" xs="12" class="d-none d-sm-flex">
                     <div class="mt-3">
-                      <v-card outlined tile v-for="(scat,index) in subcategory" :key="index">
-                        <v-card-title> <v-icon>mdi-filter</v-icon> FILTER</v-card-title>
+                      <v-card outlined v-for="(scat,index) in subcategory" :key="index">
+                        <v-card-title> <v-icon>mdi-filter</v-icon> filter</v-card-title>
                         <v-card-subtitle>{{scat.name}}</v-card-subtitle>
                         <!-- PART ONE -->
                           <v-divider></v-divider>
                             <v-card-text>
                               <h5 class="title mb-2">Location</h5>
-                              <v-select class="py-2" style="border-radius:0px"
+                              <v-autocomplete class="py-2" style="border-radius:0px"
                                 v-model="city_id"
                                 :items='city'
                                 :item-text="'name'"
@@ -281,14 +283,14 @@
                                 label="District"
                                 append-icon="mdi-map-marker"
                                 @change="getNhood"
-                              ></v-select>
+                              ></v-autocomplete>
                               <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
                                   <div class="spinner-border" role="status">
                                     <span class="sr-only">Loading...</span>
                                   </div>
                               </div>
 
-                              <v-select class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
+                              <v-autocomplete class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
                                 v-model="nhood_id"
                                 :items='localArea'
                                 :item-text="'name'"
@@ -297,33 +299,33 @@
                                 clearable
                                 label="Metro/Municipility/VDC"
                                 append-icon="mdi-map-marker"
-                                
-                              ></v-select>
+
+                              ></v-autocomplete>
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- price part  -->
                             <v-card-text v-if="max_price">
                               <h5 class="title mb-2">Price Range</h5>
                               <v-card-text>
-                                
+
                                 <v-range-slider @change="slide"
                                   v-model="price"
                                   thumb-label
-                                  
+
                                   min="0"
                                   :max="max_price"
                                 ></v-range-slider>
                                 <div class="row">
                                   <div class="col">
                                     <v-text-field
-                                    
+
                                       type="number"
                                       v-model="min_p"
                                       label="Minimum Price"
                                       single-line
                                     ></v-text-field>
                                   </div>
-                                  
+
                                   <div class="col text-right">
                                     <v-text-field @keyup="changing"
                                       type="number"
@@ -337,7 +339,7 @@
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- PART 2 -->
-                            <div v-if="scat.type.length>0"> 
+                            <div v-if="scat.type.length>0">
                               <v-card-text>
                               <h5 class="title mb-2">{{type_title}}</h5>
                                 <v-chip-group
@@ -454,17 +456,17 @@
                             </div>
 
                             <div class="p-3" v-if="max_price">
-                              <v-btn @click="filter" color="indigo" dark large tile>
+                              <v-btn @click="filter" color="indigo" dark tile>
                                 <v-icon left>mdi-filter</v-icon>
-                                Apply Filter 
+                                Apply Filter
                                 </v-btn>
                             </div>
 
-                            
+
                       </v-card>
                     </div>
                   </v-col>
-                  <v-col cols="12" md="9" lg="9" sm="8" xs="12"> 
+                  <v-col cols="12" md="9" lg="9" sm="8" xs="12" class="mt-1">
                      <filter-ad :all_ads="all_ads" :count="count"></filter-ad>
                   </v-col>
                 </v-row>
@@ -479,7 +481,7 @@
                 </div>
             </v-content>
         </div>
-        
+
         </div>
     </div>
 </template>
@@ -552,7 +554,7 @@ export default {
       favorite(){
         if(this.$loggedIn){
             this.color= 'red';
-            
+
             this.background= 'white';
         }else{
             EventBus.$emit('changeDialog', true);

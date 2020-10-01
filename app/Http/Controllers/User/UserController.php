@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Mail\VerifyMail;
+use Illuminate\Support\Facades\Mail;
 use App\User;
 use App\Product;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Hash;
 //use Intervention\Image\Image;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
@@ -27,33 +30,44 @@ class UserController extends Controller
         return response()->json($message,200);
     }
 
+    public function account_completion(Request $request){
+        $this->validate($request ,[
+            'password' => 'required|min:6',
+            'confirm_password' => 'required_with:password|same:password|min:6'
+        ]);
+        $user = User::where('id',Auth::id())->firstOrFail();
+        $user->password = bcrypt($request->password);
+        $user->update();
+        return response()->json('Password updated succefully');
+    }
+
     public function deactivateAccount(Request $request){
-        
+
         $user= User::where('id',Auth::id())->firstOrFail();
-        
+
         $user->account_status = true;
         if($user->update()){
             $products = Product::where('user_id',Auth::id())->get();
             foreach($products as $product){
                 $product->deleted = true ;
+                event(new ProductDeletedEvent($product));
                 $product->update();
             }
             Auth::user()->comment()->delete();
             Auth::user()->notifications()->delete();
             $message= "your account has been deactivated";
-            
-        } 
+
+        }
         //$this->performLogout($request);
-        
+
         return response()->json($message,200);
     }
+
+
 
     public function updateProfile(UserRequest $request){
         $user = User::where('id',Auth::id())->firstOrFail();
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->contact;
-        $user->about = $request->about;
         $user->nhood_id = $request->nhood;
         $user->city_id = $request->district;
         $user->update();
@@ -61,15 +75,67 @@ class UserController extends Controller
         return response()->json($message,200);
     }
 
+
+    public function send_otp(Request $request){
+      $this->validate($request ,[
+          'contact_number' => 'required|numeric|digits:10|unique:users,phone,'.Auth::id(),
+      ]);
+
+      if($request->contact_number ==  Auth::user()->phone && Auth::user()->phone_verified == true){
+        return response()->json(['message','Provided contact number is already verified '],200);
+      }
+      $otp = rand(10000,99999);
+      Session::put('OTP',$otp);
+      Session::put('contact_number',$request->contact_number);
+      $authKey='ocLnN4JeWOyp7rc9VqbH';
+      $senderId='Demo';
+      $data = array(
+        'token' => $authKey,
+        'from'=>$senderId,
+        'to' =>$request->contact_number,
+        'text'=>'your otp code '.$otp,
+      );
+
+      $url = "http://api.sparrowsms.com/v2/sms/" ;
+      $ch = curl_init();
+
+      curl_setopt_array($ch, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST =>true,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => $data,
+      ));
+
+      $response = curl_exec($ch);
+      $err = curl_error($ch);
+
+      if ($err) {
+      echo "cURL Error #:" . $err;
+      }
+      curl_close($ch);
+      return response()->json(['success','Verification code succefully sent to your phone. '],200);
+    }
+
     public function updateContact(Request $request){
         $this->validate($request ,[
-            'contact' => 'required|min:9 | max:11',
+            'otp' => 'required',
         ]);
-        $user = User::where('id',Auth::id())->firstOrFail();
-        $user->phone = $request->contact;
-        $user->update();
-        $message="contact number saved succefully";
-        return response()->json($message,200);
+        if($request->otp == $request->session()->get('OTP')){
+          $user = User::where('id',Auth::id())->firstOrFail();
+          $user->phone = $request->session()->get('contact_number');
+          $user->phone_verified = true;
+          $user->update();
+          $request->session()->forget('contact_number');
+          $request->session()->forget('OTP');
+          $message="Contact number verified succefully";
+          return response()->json(['success',$message],200);
+        }else{
+          $message="OTP Code doesn`t match";
+          return response()->json(['error',$message],200);
+        }
+
+
     }
 
     public function updateCover(Request $request){
@@ -107,7 +173,7 @@ class UserController extends Controller
     public function myProfile(){
         $user = User::where('id',Auth::id())
               ->with('city','nhood')
-              ->firstOrFail();
+              ->firstOrFail()->makeVisible(['phone','email']);
         return response()->json($user,200);
     }
 
@@ -125,4 +191,67 @@ class UserController extends Controller
         Auth::user()->notifications->where('id', $id)->markAsRead();
         return response()->json('readed',200);
     }
+
+    public function changePassword(Request $request){
+        $this->validate($request, [
+          'old_password' => 'required|min:6',
+          'password'      => 'required|min:6',
+          'password_confirmation' =>'required_with:password|same:password|min:6',
+        ]);
+        $hashedPassword= Auth::user()->password;
+        if(Hash::check($request->old_password,$hashedPassword)){
+          if(!Hash::check($request->password,$hashedPassword)){
+            $user = User::find(Auth::id());
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $message =['success','Password Changed Succefully !'];
+            return response()->json($message);
+          }
+          else
+          {
+            $message =['error','New password cannot be same as old password'];
+            return response()->json($message,200);
+          }
+        }
+        else
+        {
+          $message =['error','Invalid Old Password'];
+          return response()->json($message);
+
+        }
+      }
+
+      public function verify_email(Request $request){
+        $this->validate($request ,[
+            'email' => 'required| email |unique:users,email,'.Auth::id(),
+        ]);
+        $user = User::where('id',Auth::id())->firstOrFail();
+
+        $user->email = $request->email;
+        if($user->email !== $request->email){
+            $user->email_verified_at = null;
+        }
+        $user->update();
+        $activation_code = rand(10000,99999);
+        Session::put('ACTIVE_CODE',$activation_code);
+        Mail::to($request->email)->queue(new VerifyMail($activation_code));
+        //$user->sendEmailVerificationNotification();
+        return response()->json('Verification code sent succefully. Please Check Your Email.');
+    }
+
+    public function email_verified_at(Request $request){
+      $this->validate($request ,[
+          'verification_code' => 'required',
+      ]);
+      $user = User::where('id',Auth::id())->firstOrFail();
+
+
+      if($request->verification_code == $request->session()->get('ACTIVE_CODE')){
+          $user->email_verified_at = date('Y-m-d H:i:s');
+          $user->update();
+          $request->session()->forget('ACTIVE_CODE');
+          return response()->json(['success','Email verified succefully.'],200);
+      }
+      return response()->json(['error','Verification code doesn`t match.'],200);
+  }
 }

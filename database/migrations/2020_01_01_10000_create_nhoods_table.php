@@ -21,6 +21,7 @@ class CreateNhoodsTable extends Migration
                   ->references('id')->on('cities')
                   ->onDelete('cascade');
             $table->string('slug');
+            $table->integer('product_count')->unsigned()->default(0);
             $table->bigInteger('longitude')->nullable();
             $table->bigInteger('latitude')->nullable();
             $table->timestamps();

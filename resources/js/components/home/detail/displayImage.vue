@@ -1,15 +1,15 @@
 <template>
-<div  class="mb-3">
-    <v-card tile v-if="total_image>0"> 
-      
-        <v-col> 
+<div class="mb-3">
+    <v-card tile v-if="total_image>0">
+
+        <v-col>
           <vue-easy-lightbox
             :visible="visible"
             :imgs="imgs"
             @hide="handleHide"
           ></vue-easy-lightbox>
             <v-row align="center" no-gutters justify="center" class="pa-1">
-              
+
               <v-col elevation="10" >
                 <v-img elevation="10" @click="() => showImg(img_id)"
                   :src="images[img_id].full_image"
@@ -20,7 +20,7 @@
                   max-width="100%"
                   max-height="390"
                   >
-                 
+
                   <template v-slot:placeholder>
                       <v-row
                       class="fill-height ma-0"
@@ -34,30 +34,30 @@
                        <v-chip
                        dark
                        color="#000000b3"
-                       
+
                        label
                        >
-                       {{img_id+1}} / {{total_image}} 
+                       {{img_id+1}} / {{total_image}}
                        <v-icon right small>image</v-icon>
                        </v-chip>
                     </div>
-                    
+
                 </v-img>
                 <a class="next" @click="nextSlides" v-if="last_slide">&#10095;</a>
                 <a class="prev" @click="prevSlides" v-if="first_slide">&#10094;</a>
-                
+
               </v-col>
-            </v-row> 
+            </v-row>
             <v-row no-gutters>
-            <v-col 
+            <v-col
               v-for="(image,index) in images"
               :key="index"
               class="d-flex child-flex px-1 pb-1"
               cols="2" md="1" sm="1" lg="1" xs="2"
             >
               <v-card :style="index == img_id ?'opacity:0.5':''" flat tile class="d-flex border" elevation="10" @click="selected_image(index)">
-                
-                <v-img 
+
+                <v-img
                   :src="image.thumb_image"
                   :lazy-src="image.thumb_image"
                   aspect-ratio="1"
@@ -76,15 +76,15 @@
               </v-card>
             </v-col>
           </v-row>
-        </v-col>  
-          
-    </v-card> 
-    <v-card tile v-else> 
-        <v-col> 
+        </v-col>
+
+    </v-card>
+    <v-card tile v-else>
+        <v-col>
             <v-row align="center" justify="center" class="pa-1">
               <v-col cols="12" elevation="10">
-                <v-img 
-                  :src="'/storage/noimage.png'"
+                <v-img
+                  :src="'/storage/emptyDetailImage.png'"
                   :lazy-src="'/storage/noimage.png'"
                   aspect-ratio="1"
                   class="grey lighten-2 border"
@@ -103,9 +103,9 @@
                   </template>
                 </v-img>
               </v-col>
-            </v-row> 
-        </v-col>    
-    </v-card>   
+            </v-row>
+        </v-col>
+    </v-card>
 </div>
 </template>
 <script>
@@ -115,7 +115,7 @@ import Lightbox from 'vue-easy-lightbox'
 
 Vue.use(Lightbox)
 export default {
-  
+
     props:['images'],
     data(){
         return{

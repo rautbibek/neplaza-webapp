@@ -4,32 +4,33 @@
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
-                <li class="breadcrumb-item active" aria-current="page">{{category}}</li>
-                <li class="breadcrumb-item active" aria-current="page">{{scategory}}</li>
+                <li class="breadcrumb-item active" aria-current="page"><router-link :to="`/category/${category.slug}`">{{category.name}}</router-link></li>
+                <li class="breadcrumb-item active" aria-current="page"><router-link :to="`/category/${category.id}/${scategory.slug}`">{{scategory.name}}</router-link></li>
                 <li class="breadcrumb-item active" aria-current="page">{{productId}}</li>
             </ol>
         </nav>
-        
+
         <v-overlay :value="overlay" absolute>
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
         <div>
             <div v-for="(ad,index) in detail" :key="index">
-            <v-container> 
+            <v-container>
                 <v-row>
                     <v-col cols="12"  lg="8" md="8" sm="12" xs="12" >
                         <ad-image :images="ad.product_image"></ad-image>
                         <ad-description :ad="ad"></ad-description>
                     </v-col>
-                    
+
                     <v-col cols="12" lg="4" md="4">
                         <ad-user :ad="ad" :owner="ad.user"></ad-user>
                     </v-col>
-                    
+
                 </v-row>
                 <v-row>
                     <v-col cols="12" lg="8" md="8" sm="12" xs="12">
-                        <ad-comment :product_id="ad.id"></ad-comment>
+
+                        <ad-comment></ad-comment>
                     </v-col>
                 </v-row>
             </v-container>
@@ -46,11 +47,11 @@
         </nav>
         <v-container>
             <div class="container">
-                
-                    <v-card dense tile flat 
+
+                    <v-card dense tile flat
                         max-width="344"
                         class="mx-auto"
-                        
+
                     >
                         <h4  class="text-center" style="font-size:50px; color:indigo">Oops !</h4>
                         <p class="text-center mt-3" style=" font-size:20px">
@@ -71,7 +72,7 @@
                             </v-btn>
                         </div>
                     </v-card>
-                
+
             </div>
         </v-container>
     </div>
@@ -87,8 +88,8 @@ export default {
             detail:[],
             images:{},
             owner:{},
-            category:'',
-            scategory:'',
+            category:{},
+            scategory:{},
             productId:'',
             fav_count:null,
         }
@@ -96,18 +97,20 @@ export default {
     methods:{
         getAd(){
             this.overlay= true;
-            axios.get(`/product/detail/${this.$route.params.id}`)
+            axios.get(`/product/detail/${this.$route.params.id}/${this.$route.params.slug}`)
                  .then(response =>{
                      this.detail = response.data;
                      this.count = this.detail.length;
-                     this.category= response.data[0].category.name;
-                     this.scategory= response.data[0].scategory.name;
+                     this.category= response.data[0].category;
+                     this.scategory= response.data[0].scategory;
                      this.productId = response.data[0].productid;
                      this.overlay = false;
                  })
         }
     },
     created(){
+        //console.log(window.location.pathname);
+        //localStorage.url = window.location.pathname;
         this.getAd();
     },
     watch:{

@@ -55,14 +55,14 @@ class ProductController extends Controller
         if(request()->has('emergency_sell') && request('emergency_sell') !== null){
             $product->where('emergency_sell',request('emergency_sell'));
         }
-        
+
         $p = $product->latest()->simplePaginate(30)->appends([
                       'premium' => request('premium'),
                       'deleted' => request('deleted'),
                       'sold'    =>  request('sole'),
                       'emergency_sell'  =>  request('emergency_sell')
                   ]);
-        
+
         return response()->json($p,200);
     }
 
@@ -115,9 +115,10 @@ class ProductController extends Controller
         $product->sold = $request->sold;
         $product->emergency_sell = $request->urgent;
         $product->deleted = $request->deleted;
+
         $product->update();
 
-        return response()->json('ad state changed succefully',200); 
+        return response()->json('ad state changed succefully',200);
     }
 
     /**
@@ -128,17 +129,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-      $products = Product::findOrFail($id);
-      
+        $products = Product::findOrFail($id);
+        $products->deleted = true;
         foreach ($products->product_image as $product) {
-            if(Storage::disk('public')->exists('product/'.'/'.$product->image)){
-            Storage::disk('public')->delete('product/'.$product->image);
-            }
-            if(Storage::disk('public')->exists('thumb/'.'/'.$product->image)){
-            Storage::disk('public')->delete('thumb/'.'/'.$product->image);
-            }
+            $product->delete();
         }
+        $products->category->decrement('product_count');
+        $products->scategory->decrement('product_count');
         $products->delete();
+        //$products->update(['deleted' => 1]);
         return response()->json('ad deleted succefully ',200);
     }
 }

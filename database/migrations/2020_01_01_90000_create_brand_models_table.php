@@ -15,11 +15,12 @@ class CreateBrandModelsTable extends Migration
     {
         Schema::create('brand_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->unsignedBigInteger('brand_id');
+            $table->string('name');
             $table->foreign('brand_id')
                   ->references('id')->on('brands')
                   ->onDelete('cascade');
+            $table->integer('product_count')->unsigned()->default(0);
             $table->string('slug');
             $table->timestamps();
         });

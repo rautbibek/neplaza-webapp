@@ -3,7 +3,7 @@
         <v-badge 
               :content="count"
               :value="count"
-              color="indigo"
+              color="red"
               overlap
             >
         <v-menu offset-y nudge-bottom="10" open-on-click close-on-content-click transition="scale-transition">
@@ -14,19 +14,19 @@
                   </v-btn>
                   </template>
                   
-                <v-card max-width="340" style="max-height: 550px"
+                <v-card max-width="340" max-height="400"
                       class="overflow-y-auto">
-                    <v-list subheader >
+                    <v-list subheader dense nav>
                     <v-subheader  style="width:300px">
                         <span  v-if="count == 0">No &nbsp; </span>
                          New Notifications 
                     </v-subheader>
                     
-                    <v-list-item href="comment"
+                    <v-list-item href="comment" @click="markAsRead(item.id)"
                         v-for="(item,index) in notification"
                         :key="index"
                         router :to="`/ad/detail/${item.data['ad']['productid']}/${item.data['ad']['slug']}`"
-                        @click="markAsRead(item.id)"
+                        
                         
                     >
                         <v-list-item-avatar color="grey">
@@ -36,7 +36,7 @@
                         <v-list-item-content >
                         <v-list-item-title>{{item.data['ad']['user']}}</v-list-item-title>
                         <v-list-item-subtitle>{{item.data['ad']['message']}}</v-list-item-subtitle>
-                        <v-list-item-subtitle class="mt-1">5 min ago</v-list-item-subtitle>
+                        
                         </v-list-item-content>
 
                         <v-list-item-icon>
@@ -110,18 +110,11 @@
                  .catch();
         },
 
-        raadNotification(){
-            axios.get(`/read/notification`)
-                 .then(response =>{
-                     this.read = response.data;
-                     this.readCount = this.read.length;
-                 })
-                 .catch();
-        }
+        
     },
     created(){
         this.getNotification();
-        this.raadNotification();
+
     },
   }
 </script>

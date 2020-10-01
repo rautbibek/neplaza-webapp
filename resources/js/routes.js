@@ -15,7 +15,12 @@ import FavAdsComponent from './components/home/back/myFav.vue';
 //end of myads
 
 
-import SettingComponent from './components/home/back/setting.vue';
+import SettingComponent from './components/home/back/setting/setting.vue';
+import ChangePasswordComponent from './components/home/back/setting/changePassword.vue';
+import ConfirmEmailComponent from './components/home/back/setting/emailSetting.vue';
+import AccountSettingComponent from './components/home/back/setting/accountSetting.vue';
+
+
 import ProfileComponent from './components/home/back/profile.vue';
 import CreateController from './components/home/back/createController.vue';
 import EditController from './components/home/back/editController.vue';
@@ -28,10 +33,20 @@ import AdDetail from './components/home/adDetail.vue';
 import SearchData from './components/home/front/pages/searchData.vue';
 import SellerComponent from './components/home/front/pages/seller.vue';
 
+//chat
+import ChatComponent from './components/chat/chatApp.vue';
+
 
 //404 console.error();
 import PageNotFound from './components/404.vue';
 
+//help and support
+import ContactUsComponent from './components/support/contactUs.vue';
+import AboutUsComponent from './components/support/aboutUs.vue';
+import FaqComponent from './components/support/faq.vue';
+import HelpCenterComponent from './components/support/helpCenter.vue';
+import PrivacyPolicyComponent from './components/support/privacyPolicy.vue';
+import TermsAndConditionComponent from './components/support/termsAndCondition.vue';
 
 
 export const routes = [{
@@ -121,6 +136,21 @@ export const routes = [{
     },
 
     {
+        path: '/user/email/setting',
+        component: ConfirmEmailComponent
+    },
+
+    {
+        path: '/user/account/setting',
+        component: AccountSettingComponent
+    },
+
+    {
+        path: '/user/change/password',
+        component: ChangePasswordComponent
+    },
+
+    {
         path: '/user/profile',
         component: ProfileComponent
     },
@@ -158,4 +188,45 @@ export const routes = [{
         component: SellerComponent,
     },
 
+    //chat
+    {
+        path: '/message',
+        component: ChatComponent,
+    },
+
+    //help and support routing
+    {
+        path: '/helpCenter',
+        name: 'helpCenter',
+        component: HelpCenterComponent,
+    },
+
+    {
+        path: '/terms/condition',
+        name: 'termsAndCondition',
+        component: TermsAndConditionComponent,
+    },
+
+    {
+        path: '/privacyPolicy',
+        name: 'privacyPolicy',
+        component: PrivacyPolicyComponent,
+    },
+    {
+        path: '/FAQ',
+        name: 'faq',
+        component: FaqComponent,
+    },
+
+    {
+        path: '/about/us',
+        name: 'aboutUs',
+        component: AboutUsComponent,
+    },
+
+    {
+        path: '/contact/us',
+        name: 'contactUs',
+        component:ContactUsComponent,
+    },
 ]

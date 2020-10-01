@@ -22,8 +22,8 @@ class CreateScategoriesTable extends Migration
             $table->foreign('category_id')
                   ->references('id')->on('categories')
                   ->onDelete('cascade');
-            
             $table->integer('view_count')->unsigned()->default(0);
+            $table->integer('product_count')->unsigned()->default(0);
             $table->timestamps();
         });
     }

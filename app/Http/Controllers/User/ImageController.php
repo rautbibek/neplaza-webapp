@@ -16,27 +16,27 @@ class ImageController extends Controller
     }
 
     public function delete($id){
-        
+
         $image = Product_image::find($id);
-        
+
         //return $image;
         //$this->authorize('delete', $image);
         //return $image_id;
         //$image = Product_image::findOrFail($id);
-        if(Storage::disk('public')->exists('product/'.'/'.$image->image)){
-            Storage::disk('public')->delete('product/'.$image->image);
-        }
-        if(Storage::disk('public')->exists('thumb/'.'/'.$image->image)){
-            Storage::disk('public')->delete('thumb/'.'/'.$image->image);
-        }
+        // if(Storage::disk('public')->exists('product/'.'/'.$image->image)){
+        //     Storage::disk('public')->delete('product/'.$image->image);
+        // }
+        // if(Storage::disk('public')->exists('thumb/'.'/'.$image->image)){
+        //     Storage::disk('public')->delete('thumb/'.'/'.$image->image);
+        // }
         $image->delete();
         $message= "image deleted succefully";
         return response()->json($message,200);
-        
+
     }
 
     public function store(Request $request){
-        
+
         $this->validate($request,[
         'product_id'    => 'required',
         'image'     => 'required',

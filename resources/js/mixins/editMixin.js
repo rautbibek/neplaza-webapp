@@ -46,14 +46,21 @@ export default {
 
 
             select(propertyType) {
-                return v => !!v || `you must select a ${propertyType}`
+                return v => !!v || `${propertyType} field is mendatory.`
             },
+
             required(propertyType) {
-                return v => v && v.length > 0 || `you must input a ${propertyType}`
+                return v => v && v.length > 0 || `${propertyType} field is mendatory. `
             },
+
+            priceVlidate(propertyType) {
+                return v => v && v > 99 || `${propertyType} must be grater than or equal to 100.`
+            },
+
             minLength(propertyType, length) {
                 return v => v && v.length >= length || `${propertyType} must be at least ${length} characters`
             },
+
             maxLength(propertyType, length) {
                 return v => v && v.length <= length || `${propertyType} must be less than ${length} characters`
             }
@@ -124,7 +131,7 @@ export default {
                         this.errors = error.response.data.errors;
                         if (error.response.status === 422) {
 
-                            console.log(this.errors);
+
                             this.$toast.error('Invalid data please check your form again', 'error', {
                                 timeout: 3000,
                                 position: 'topRight',
@@ -138,6 +145,15 @@ export default {
 
                             }
                             this.overlay = false;
+                        }
+                        if(error.response.status === 403){
+                          this.$toast.error(error.response.data.message +' This ad does`t belongs to you', 'error', {
+                              timeout: 3000,
+                              position: 'topRight',
+                          });
+                          
+                          this.overlay = false;
+                          this.$router.push({ name: 'myads' });
                         }
 
                         this.overlay = false;

@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div class="border text-center py-4">
+    <div class="container-fluid">
+        <div class="border text-center ">
         <h1 class="display-4">Sorry <span style="color:#2398d2;">!</span></h1>
         <h3 ><strong style="color:#2398d2;">No Ads</strong> Found.</h3>
         <img height="150px" src="/storage/empty_product.png" alt="">
@@ -19,6 +19,6 @@
 <script>
 
 export default {
-  
+
 }
 </script>

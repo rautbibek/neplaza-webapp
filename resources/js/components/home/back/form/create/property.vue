@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+
             <div class="text-center p-2 ">
                     <h4 class="font-weight-bold text-uppercase">{{scat.name}}</h4>
             </div>
@@ -8,7 +8,7 @@
                 <v-progress-circular indeterminate size="64"></v-progress-circular>
             </v-overlay>
            <v-row justify="center" no-gutters>
-               
+
                <v-col cols="12" lg="10" md="10" sm="12" xs="12" class="custom-border">
                     <v-card tile>
                         <v-form ref="form" v-model="valid" lazy-validation>
@@ -27,11 +27,11 @@
                                         :item-value="'id'"
                                         label="Type *"
                                         placeholder="Type"
-                                        :rules="[select('type')]"
+                                        :rules="[select('Type')]"
                                         outlined
                                         clearable
                                     ></v-select>
-                                    
+
                                      <v-select style="border-radius:0px; margin-bottom:20px" v-if="scat.url !=='land'"
                                         v-model="status"
                                         :items='scat.status'
@@ -39,10 +39,10 @@
                                         :item-value="'id'"
                                         label="Construction Status *"
                                         placeholder="Construction Status"
-                                        :rules="[select('status')]"
+                                        :rules="[select('Status')]"
                                         outlined
                                         clearable
-                                    ></v-select>   
+                                    ></v-select>
                                     <v-select style="border-radius:0px; margin-bottom:20px"
                                         v-model="filter_1_id"
                                         :items='scat.filter_1'
@@ -50,12 +50,12 @@
                                         :item-value="'id'"
                                         label="Listed By *"
                                         placeholder="Listed By"
-                                        :rules="[select('listed by')]"
+                                        :rules="[select('Listed by')]"
                                         outlined
                                         clearable
                                     ></v-select>
                                     <v-row>
-                                        <v-col cols="8">
+                                        <v-col cols="12" md="7" xs="12">
                                             <v-text-field style="border-radius:0px; margin-bottom:20px"
                                                 type="number"
                                                 v-model="property_3"
@@ -66,7 +66,7 @@
                                                 clearable
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="4">
+                                        <v-col cols="12" md="5" xs="12">
                                             <v-select style="border-radius:0px; margin-bottom:20px"
                                                 v-model="filter_3_id"
                                                 :items='scat.filter_3'
@@ -74,15 +74,15 @@
                                                 :item-value="'id'"
                                                 label="Builtup Area unit*"
                                                 placeholder="Builtup Area unit"
-                                                :rules="[select('unit')]"
+                                                :rules="[select('Builtup area unit')]"
                                                 outlined
                                                 clearable
                                             ></v-select>
                                         </v-col>
                                     </v-row>
-                                </v-col>  
+                                </v-col>
                           </div>
-                          <div style="border-top:0.5px solid black"></div>
+                          <div class="form-seperator"></div>
                           <div class="m-2" v-if="scat.url !== 'land'">
                                 <v-card-title class="font-weight-bold">
                                     MORE DETAILS
@@ -96,7 +96,7 @@
                                         :item-value="'id'"
                                         label="Car Parking *"
                                         placeholder="Car parking"
-                                        :rules="[select('car parking')]"
+                                        :rules="[select('Car parking')]"
                                         outlined
                                         clearable
                                     ></v-select>
@@ -105,7 +105,7 @@
                                         :items="bedroom_items"
                                         label="Bedroom *"
                                         placeholder="Bedroom"
-                                        :rules="[select('bedroom')]"
+                                        :rules="[select('Bedroom')]"
                                         outlined
                                         clearable
                                     ></v-select>
@@ -115,7 +115,7 @@
                                         :items="bathroom_items"
                                         label="Bathroom *"
                                         placeholder="Bathroom"
-                                        :rules="[select('bathroom')]"
+                                        :rules="[select('Bathroom')]"
                                         outlined
                                         clearable
                                     ></v-select>
@@ -127,28 +127,28 @@
                                         :item-value="'id'"
                                         label="Furnishing *"
                                         placeholder="Furnishing"
-                                        :rules="[select('furnishing')]"
+                                        :rules="[select('Furnishing')]"
                                         outlined
                                         clearable
                                     ></v-select>
 
-                                    
+
                                 </v-col>
                           </div>
-                          <div style="border-top:0.5px solid black"></div>
+                          <div class="form-seperator"></div>
                           <div class="m-2">
                                 <v-card-title class="font-weight-bold">
                                     AD TITLE & DESCRIPTION
                                 </v-card-title>
-                                
+
                                 <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
-                                    
+
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         v-model="title"
                                         label="Ad Title *"
                                         placeholder="Ad Title"
                                         counter="100"
-                                        :rules="[required('title'),minLength('title',10),maxLength('name',100)]"
+                                        :rules="[required('Title'),minLength('Title',10),maxLength('Title',100)]"
                                         outlined
                                         clearable
                                     ></v-text-field>
@@ -157,33 +157,33 @@
                                         v-model="description"
                                         label="Ad description *"
                                         placeholder="Ad Description "
-                                        :rules="[required('Ad Description'),minLength('description',20),maxLength('description',4000)]"
+                                        :rules="[required('Description'),minLength('Description',20),maxLength('Description',4000)]"
                                         counter="4000"
                                         outlined
                                         clearable
                                     ></v-textarea>
                                 </v-col>
                             </div>
-                          <div style="border-top:0.5px solid black"></div>
+                          <div class="form-seperator"></div>
                           <div class="m-2">
                               <v-card-title class="font-weight-bold">
                                     LOCATION & ADDRESS
                                 </v-card-title>
                                   <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
-                                    <v-select style="border-radius:0px; margin-bottom:20px"
+                                    <v-autocomplete style="border-radius:0px; margin-bottom:20px"
                                         v-model="district"
                                         :items='city'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="District *"
                                         placeholder="District "
-                                        :rules="[select('district')]"
+                                        :rules="[select('District')]"
                                         outlined
                                         clearable
-                                        
+
                                         :loading="loading"
                                         @change="getNhood"
-                                    ></v-select>
+                                    ></v-autocomplete>
 
                                      <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
                                         <div class="spinner-border" role="status">
@@ -191,34 +191,42 @@
                                         </div>
                                     </div>
 
-                                    <v-select style="border-radius:0px; margin-bottom:20px" v-show="nhood_display && district"
+                                    <v-autocomplete style="border-radius:0px; margin-bottom:20px" v-show="nhood_display && district"
                                         v-model="nhood"
                                         :items='localArea'
                                         :item-text="'name'"
                                         :item-value="'id'"
                                         label="Metro/Municipility/VDC *"
                                         placeholder="Metro/Municipility/VDC "
-                                        :rules="[select('Local Area')]"
+                                        :rules="[select('Metro/Municipility/VDC')]"
                                         outlined
                                         clearable
-                                    ></v-select>
+                                    ></v-autocomplete>
 
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
                                         v-model="street"
-                                        label="Street *"
+                                        label="Location/Area *"
                                         placeholder="Address where customer can find you or your office"
                                         counter="100"
-                                        :rules="[required('street'),minLength('street',10),maxLength('street',100)]"
+                                        :rules="[required('Location/Area'),minLength('SLocation/Area',10),maxLength('Location/Area',100)]"
                                         outlined
                                         clearable
                                     ></v-text-field>
                                 </v-col>
                           </div>
 
-                          <div style="border-top:0.5px solid black"></div>
+                          <div class="form-seperator"></div>
                           <div class="m-2">
                               <v-card-title class="font-weight-bold">
                                     SET A PRICE
+                                    <v-chip v-if="price>99"
+                                      class="ma-2"
+                                      small
+                                      color="indigo"
+                                      text-color="white"
+                                    >
+                                      Rs. {{ Number(price).toLocaleString() }}
+                                    </v-chip>
                                 </v-card-title>
                                   <v-col cols="12" sm="12" md="8" xs="12" class="p-4">
                                     <v-text-field style="border-radius:0px; margin-bottom:20px"
@@ -226,13 +234,13 @@
                                         v-model="price"
                                         label="Price *"
                                         placeholder="Price"
-                                        :rules="[required('price')]"
+                                        :rules="[required('Price'),priceVlidate('Price')]"
                                         outlined
                                         clearable
                                     ></v-text-field>
                                 </v-col>
                           </div>
-                          <div style="border-top:0.5px solid black"></div>
+                          <div class="form-seperator"></div>
                           <div class="m-2">
                               <v-card-title class="font-weight-bold">
                                     SELECT OR DRAG AD IMAGE
@@ -277,10 +285,10 @@
                                         </div>
                                     </div>
                                 </v-col>
-                                
+
                           </div>
-                          
-                          <div style="border-top:0.5px solid black">
+
+                          <div class="form-seperator">
                                 <v-col cols="8 py-4 ml-4">
                                     <v-btn tile large color="primary" :disabled="!valid"  @click="submit">
                                         <v-icon left>save</v-icon>
@@ -296,7 +304,7 @@
 <script>
 import imageMixins from "../../../../../mixins/common";
 export default {
-    
+
     mixins:[imageMixins],
     data(){
         return{
@@ -304,6 +312,6 @@ export default {
             bathroom_items:['1','2','3','4+'],
         }
     },
-    
+
 }
 </script>

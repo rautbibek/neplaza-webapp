@@ -3,29 +3,26 @@
         <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
-        <v-card-text class="ml-5">
-            <v-row no-gutters v-for="(reply,index) in replies" :key="index">
-                <v-col cols="3" sm="3" xs="3" lg="3" md="3">
-                    <v-avatar color="indigo" size="25">
-                        <img
-                            :src="reply.user.cover"
-                            :alt="reply.user.name"
-                        >
-                    </v-avatar>
-                </v-col>
-                <v-col cols="9" lg="9" md="9" sm="9" xs="9" class="px-2">
-                    <h6 style="color:black">{{reply.user.name}}</h6>
-                        {{reply.body}}
-                    <p class="pt-2" v-if="loggedIn">
-                        <v-btn x-small text color="red" v-if="loginUser.id == reply.user_id" @click="deleteComment(reply.id)">delete</v-btn>
-                    </p>
-                    <p class="text-left"><small>{{reply.created}}</small></p>
+        <v-card-text>
+            <v-list three-line>
+                <v-list-item v-for="(reply,index) in replies" :key="index">
+                <v-list-item-avatar color="grey" size="25">
+                    <v-img :src="reply.user.cover"></v-img>
+                </v-list-item-avatar>
+                <v-list-item-content >
+                    <v-list-item-title class="text-capitalize">{{reply.user.name}}</v-list-item-title>
+                    <v-list-item-subtitle ><small>{{reply.created}}</small></v-list-item-subtitle>
+                    <v-card-subtitle style="padding:0px"><span>{{reply.body}}</span></v-card-subtitle>
                     
-                </v-col>
+                    <v-card-actions v-if="loggedIn">
+                        <v-btn x-small text color="red" v-if="loginUser.id == reply.user_id" @click="deleteComment(reply)">delete</v-btn>
+                    </v-card-actions>
+                </v-list-item-content>
                 
-            </v-row>
-            <v-col cols="12" lg="12" v-if="loggedIn">
-                <v-textarea 
+                </v-list-item>
+            </v-list>
+            <v-col cols="12" lg="12" >
+                <v-textarea @keydown.enter="replyComment"
                     v-model="comment"
                     clear-icon="mdi-close-circle"
                     prepend-icon="mdi-account-circle"
@@ -52,16 +49,16 @@ export default {
     },
 
     methods:{
-        deleteComment(id){
+        deleteComment(reply){
         if(confirm('are you sure ?')){
             this.overlay = true;
-            axios.delete(`/delete/comment/${id}`)
+            axios.delete(`/delete/comment/${reply.id}`)
                  .then(response =>{
                      this.$toast.info(response.data,'message', {
                             timeout: 3000,
                             position: 'topRight',
                         });
-                    EventBus.$emit('loadComment',true);
+                    this.replies.splice(this.replies.indexOf(reply), 1);
                     this.overlay = false;
                  })
                  .catch(error=>{
@@ -70,6 +67,10 @@ export default {
             }
         },
         replyComment(){
+            if(!this.loggedIn){
+                EventBus.$emit('changeDialog', true);
+                return;
+             }
             this.overlay = true;
             axios.post(`/reply/ad/comment`,{
                 product_id: this.product_id,
@@ -81,7 +82,7 @@ export default {
                             timeout: 3000,
                             position: 'topRight',
                         });
-                    EventBus.$emit('loadComment',true);
+                    EventBus.$emit('getComment',true);
                     this.comment="";
                     this.overlay = false;
                  })

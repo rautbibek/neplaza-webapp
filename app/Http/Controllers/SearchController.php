@@ -24,7 +24,7 @@ class SearchController extends Controller
 
     public function searchResult(Request $request){
       $keyword = \Request::get('q');
-      $searchResult = Product::with(['scategory','brand','product_image','city','user','nhood','favorite_to_users'=>function($query){
+      $searchResult = Product::with(['product_image','product_property','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
       ->where('title', 'LIKE', "%{$keyword}%")

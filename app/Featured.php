@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Featured extends Model
 {
     protected $fillable=['expire_date','product_id'];
-    protected $appends=['remaining_days','remaining_minute'];
+    protected $appends=['remaining_days'];
     public function product(){
         return $this->belongsTo('App\Product');
     }
@@ -18,10 +18,7 @@ class Featured extends Model
         return Carbon::now()->diffInDays($this->expire_date, false);
     }
 
-    public function getRemainingMinuteAttribute(){
-        return Carbon::now()->diffInMinutes($this->expire_date, false);
-        
-    }
+    
 
     public static function boot(){
         parent::boot();

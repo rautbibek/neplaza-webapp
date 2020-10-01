@@ -13,7 +13,7 @@ class WelcomeController extends Controller
     public function index(){
         return view('welcome');
     }
-    
+
     public function check(){
         return view('check');
     }
@@ -39,7 +39,7 @@ class WelcomeController extends Controller
                            ->where('user_id',$id)
                            ->where('deleted',false)
                            ->where('sold',false)
-                           ->with(['scategory','user','city','nhood','favorite_to_users'=>function($query){
+                           ->with(['product_property','favorite_to_users'=>function($query){
                                 $query->select('user_id')->where('user_id',Auth::id());
                             }])
                            ->latest()

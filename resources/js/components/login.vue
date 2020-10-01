@@ -38,7 +38,7 @@
             <v-icon>mdi-email</v-icon>
              &nbsp; Email
            </v-btn> -->
-          
+
            <v-btn large href="/login/twitter" color="primary" class="my-1" style="width:100%">
             <v-icon>mdi-twitter</v-icon>
              &nbsp; twitter

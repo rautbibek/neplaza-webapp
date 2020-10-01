@@ -43,7 +43,11 @@ class LoginController extends Controller
 
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        if($provider == 'facebook' || $provider =='google' || $provider == 'twitter'){
+          return Socialite::driver($provider)->redirect();
+        }else{
+          return redirect('/');
+        }
     }
 
     /**
@@ -53,6 +57,7 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($provider)
     {
+
         $userSocial = Socialite::driver($provider)->user();
         $isUser = User::where('email',$userSocial->email)->first();
         if($isUser){
@@ -63,7 +68,7 @@ class LoginController extends Controller
         if($user){
             Auth::login($user);
         }else{
-            
+
             $newuser = new User;
             $newuser->role_id  = 3;
             $newuser->name = $userSocial->name;
@@ -73,17 +78,25 @@ class LoginController extends Controller
             }else{
                 $newuser->email = $userSocial->email;
             }
-
+            if($provider =='google'){
+              $newuser->email_verified_at = date('Y-m-d H:i:s');
+            }
             $newuser->image = $userSocial->avatar;
             $newuser->login_provider = $provider;
             $newuser->provider_id = $userSocial->id;
-            $newuser->password = bcrypt('neplaza2311');
+            //$newuser->password = bcrypt('neplaza2311');
             //$newuser->remember_token = rememberToken();
-            
+
             $newuser->save();
             Auth::login($newuser);
         }
-        return redirect()->route('welcome');
+        return redirect()->intended();
         // $user->token;
+    }
+    public function username(){
+      $login = request()->input('email');
+      $fieldType = filter_var($login,FILTER_VALIDATE_EMAIL)?'email':'phone';
+      request()->merge([$fieldType =>$login]);
+      return $fieldType;
     }
 }

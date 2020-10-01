@@ -22,6 +22,11 @@ class EventServiceProvider extends ServiceProvider
         // add your listeners (aka providers) here
             'SocialiteProviders\\Yahoo\\YahooExtendSocialite@handle',
         ],
+        \App\Events\ProductDeletedEvent::class=>[
+          \App\Listeners\ProductDeletedListner::class,
+        ],
+
+
     ];
 
     /**

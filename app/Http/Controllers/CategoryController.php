@@ -3,32 +3,40 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function category(){
-        $category = Category::select('id','name','slug','icons')->where('visible',true)->get();
+       $category = cache()->remember('menu-category',60*60*24,function(){
+        return Category::select('id','name','slug','icons','product_count')->where('visible',true)->get();
+      });
         return response()->json($category,200);
     }
 
     public function subCategory(){
-        $subcategory = Category::select('id','name','slug','icons')->with('scategory')->get();
+        $subcategory = cache()->remember('meghamenu',60*60*24,function(){
+          return Category::select('id','name','slug','icons','product_count')->with('scategory')->get();
+        });
         return response()->json($subcategory,200);
-        
+
     }
 
 
     //category and category Product
     public function categoryProduct($slug){
         $category = Category::where('slug',$slug)->firstOrFail(['id','name','slug']);
-        
+        if(!Session::has($slug)){
+            $category->increment('view_count');
+            Session::put($slug,1);
+        }
         $product = Product::select('id','price','maxprice','title','slug','category_id','user_id','city_id','nhood_id','scategory_id','created_at')
                  ->where('category_id',$category->id)
                  ->where('deleted',false)
                  ->where('sold',false)
-                 ->with(['product_image','city','nhood','user','nhood','scategory','favorite_to_users'=>function($query){
+                 ->with(['product_image','product_property','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                  }])
                  ->simplePaginate(20);

@@ -22,7 +22,9 @@ class CreateCategoriesTable extends Migration
             $table->string('url');
             $table->boolean('visible')->default(true);
             $table->integer('view_count')->unsigned()->default(0);
+            $table->integer('product_count')->unsigned()->default(0);
             $table->integer('display_order')->unsigned()->default(0);
+            
             $table->timestamps();
         });
     }

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-   welcome to home page
+<div style="width:100%">
+
+   
 </div>
 @endsection

@@ -17,6 +17,7 @@ class CreateCitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
+            $table->integer('product_count')->unsigned()->default(0);
             $table->bigInteger('longitude')->nullable();
             $table->bigInteger('latitude')->nullable();
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Report;
+use App\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class ReportController extends Controller
     }
 
     public function reportApi(){
+      
         $report = Report::with('product','user')->latest()->paginate(30);
         return response()->json($report,200);
     }

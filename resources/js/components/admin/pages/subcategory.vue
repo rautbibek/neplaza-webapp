@@ -2,14 +2,14 @@
  <v-app >
   <admin-sidebar></admin-sidebar>
   <v-container class="mt-5">
-    
+
     <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
     <v-col class="text-right px-5">
       <v-btn @click="dialog = true" small color="primary">
         <v-icon small left>mdi-plus-circle</v-icon>
-        Add new 
+        Add new
         </v-btn>
     </v-col>
     <!-- dialog component -->
@@ -24,7 +24,7 @@
         <v-form class="px-3" ref="form" v-model="valid" lazy-validation>
                   <v-col cols="12" >
                     <v-select
-                    v-model="category_id" 
+                    v-model="category_id"
                     :items='desserts'
                     :item-text="'name'"
                     :item-value="'id'"
@@ -35,8 +35,8 @@
                     </v-select>
                   </v-col>
                   <v-col cols="12" >
-                    <v-text-field 
-                    v-model="name" 
+                    <v-text-field
+                    v-model="name"
                     clerable
                     label="Subcategory Name"
                     :rules="[required('subcategory Name')]"
@@ -44,8 +44,8 @@
                   </v-col>
 
                   <v-col cols="12" >
-                    <v-text-field 
-                    v-model="url" 
+                    <v-text-field
+                    v-model="url"
                     label="url"
                     counter="100"
                     :rules="[required('url')]"
@@ -71,7 +71,7 @@
           >
             Save subcategory
           </v-btn>
-          
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -88,7 +88,7 @@
         <v-form class="px-3" ref="form" v-model="valid" lazy-validation>
                   <v-col cols="12" >
                     <v-select
-                    v-model="category_id" 
+                    v-model="category_id"
                     :items='desserts'
                     :item-text="'name'"
                     :item-value="'id'"
@@ -99,8 +99,8 @@
                     </v-select>
                   </v-col>
                   <v-col cols="12" >
-                    <v-text-field 
-                    v-model="name" 
+                    <v-text-field
+                    v-model="name"
                     clerable
                     label="Subcategory Name"
                     :rules="[required('subcategory Name')]"
@@ -108,8 +108,8 @@
                   </v-col>
 
                   <v-col cols="12" >
-                    <v-text-field 
-                    v-model="url" 
+                    <v-text-field
+                    v-model="url"
                     label="url"
                     counter="100"
                     :rules="[required('url')]"
@@ -135,14 +135,16 @@
           >
             Update Subcategory
           </v-btn>
-          
+
         </v-card-actions>
       </v-card>
     </v-dialog>
     <!-- table componsent -->
     <div class="p-5" v-for="(category,index) in desserts" :key="index">
       <h5 class="border-bottom" :class="category.visible?'':'text-danger'" >
-        <i :class="category.icons"></i> {{category.name}} 
+        <span class="material-icons">
+        {{category.icons}}
+        </span> {{category.name}}
         <v-chip small
                     class="ma-2"
                     color="indigo"
@@ -186,7 +188,7 @@
                     text-color="white"
                     >
                     {{item.view_count}}
-                    
+
                 </v-chip>
               </td>
               <td>
@@ -209,7 +211,7 @@
 
 <script>
   export default {
-    
+
     data: () => ({
       overlay:false,
       name:'',
@@ -226,9 +228,9 @@
       required(propertyType) {
           return value => value && value.length > 0 || `you must input a ${propertyType}`
       },
-      desserts: [],      
+      desserts: [],
     }),
-    
+
 
     created () {
       this.initialize()
@@ -240,7 +242,7 @@
         axios.get(`/admin/category/create`)
              .then(response =>{
                this.desserts = response.data;
-               
+
                this.overlay = false;
              })
              .catch(error =>{
@@ -252,7 +254,7 @@
              });
       },
       del(id){
-        
+
         if(confirm('are you sure to want to delete this category item')){
           this.overlay = true;
           axios.delete(`/admin/subcategory/`+id)

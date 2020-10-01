@@ -1,8 +1,13 @@
 @component('mail::message')
-# warning , {{$p->user->name}}
+# warning , <?php
+$name = explode(' ',trim($p->user->name)); 
+echo $name[0];
+?>
 
-Your ad has been reported by customer check your ad again 
-if we got more reports your ad will be removed form this site 
+<p>Your ad has been reported as</p>
+
+<h3>{{$r}}</h3>
+if we got more reports your ad will be removed form this site
 
 <p></p>
 

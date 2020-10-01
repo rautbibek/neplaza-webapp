@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-content>
+        <v-main>
             <system-bar></system-bar>
             <top-bar></top-bar>
             <nav-bar></nav-bar>
@@ -8,11 +8,12 @@
                 <router-view></router-view>
             </div>
             <login></login>
+            <sign-up></sign-up>
             <update-profile></update-profile>
             <scroll></scroll>
             <footer-bar></footer-bar>
-            
-        </v-content>
+
+        </v-main>
     </v-app>
 </template>
 <script>
@@ -23,4 +24,4 @@ export default {
         }
     }
 }
-</script>  
+</script>

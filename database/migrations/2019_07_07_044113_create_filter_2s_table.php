@@ -20,6 +20,7 @@ class CreateFilter2sTable extends Migration
             $table->foreign('scategory_id')
                   ->references('id')->on('scategories')
                   ->onDelete('cascade');
+            $table->integer('product_count')->unsigned()->default(0);
             $table->timestamps();
         });
     }

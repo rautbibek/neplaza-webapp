@@ -1,0 +1,37 @@
+<template>
+<div class="message-composer px-3 pb-4">
+    
+                <v-textarea @keydown.enter="send"
+                    v-model="message"
+                    clear-icon="mdi-close-circle"
+                    append-outer-icon="mdi-send"
+                    outlined
+                    clearable
+                    label="Message"
+                    type="text"
+                    rows="2"
+                    @click:append-outer="send"
+                 >
+                 </v-textarea>
+                  
+</div>
+</template>
+<script>
+export default {
+    data(){
+        return{
+            message:'',
+        }
+    },
+    methods:{
+        send(e){
+            e.preventDefault();
+            if(this.message == ''){
+                return;
+            }
+            this.$emit('send',this.message);
+            this.message="";
+        }
+    }
+}
+</script>

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 use App\Product;
-
 use App\Observers\ProductObserver;
 use Illuminate\Support\ServiceProvider;
 

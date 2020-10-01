@@ -1,11 +1,9 @@
 <template>
   <v-card 
     class="mx-auto"
-    
-    tile
-  >
+    tile>
     <v-list dense>
-      <v-subheader class="d-none d-sm-flex">MYADS MENU</v-subheader>
+      <v-subheader>MYADS MENU</v-subheader>
       <v-list-item-group v-model="item" color="primary">
         
           

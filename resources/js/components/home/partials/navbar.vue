@@ -5,18 +5,24 @@
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           All Category
         </a>
-        <div class="dropdown-menu mega-area" aria-labelledby="navbarDropdown">  
+        <div class="dropdown-menu mega-area" aria-labelledby="navbarDropdown">
             <div class="container-fluid p-3">
                 <div class="card-columns">
                     <div v-for="(category,index) in categories" :key="index" class="card">
                         <div class="card-body">
 
-                            <router-link :to="`/category/${category.slug}`" style="padding:0px; margin:0px" class="nav-color"> <i :class="category.icons"> 
-                                </i> <strong>{{category.name}}</strong></router-link>
-                            
-                            <router-link :to="`/category/${category.id}/${sub.slug}`" v-for="(sub,index) in category.scategory" :key="index" 
+                            <router-link :to="`/category/${category.slug}`" style="padding:0px; margin-bottom:0px" class="nav-color mb-3">
+
+                               <span class="material-icons" style="font-size: 14px; margin:3px;">
+                                {{category.icons}}
+                              </span><b style="margin-bottom:10px">{{category.name}}</b>
+                             </router-link>
+
+                            <router-link :to="`/category/${category.id}/${sub.slug}`" v-for="(sub,index) in category.scategory" :key="index"
                              class="dropdown-item">
-                              <i class="fa fa-angle-right"></i> {{sub.name}}
+                             <span class="material-icons" style="font-size: 14px; margin:3px;">
+                              keyboard_arrow_right
+                            </span> {{sub.name}} &nbsp; ({{sub.product_count}})
                             </router-link>
                         </div>
                     </div>
@@ -33,7 +39,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active mr-2" v-for="(category,index) in cat" :key="index">
-        <router-link :to="`/category/${category.slug}`" class="nav-link" href="#"> <i :class="category.icons"></i> 
+        <router-link :to="`/category/${category.slug}`" class="nav-link" >
+          <span class="material-icons" style="font-size: 14px;">
+         {{category.icons}}
+       </span>
         {{category.name}} <span class="sr-only">(current)</span></router-link>
       </li>
     </ul>
@@ -63,13 +72,13 @@ export default {
     },
     computed:{
         category_url(){
-            return `/menu/category`;    
+            return `/menu/category`;
         },
 
         subcategory_url(){
-           return `/menu/subCategory`;  
+           return `/menu/subCategory`;
         }
-    
+
     }
 
 }

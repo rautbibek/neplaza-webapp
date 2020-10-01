@@ -50,10 +50,13 @@ Vue.component('premium', require('./components/home/front/index_page/premium.vue
 
 Vue.component('search', require('./components/home/partials/search.vue').default);
 Vue.component('login', require('./components/login.vue').default);
+Vue.component('sign-up', require('./components/signUp.vue').default);
 Vue.component('empty', require('./components/empty.vue').default);
 Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
 Vue.component('profile-form', require('./components/home/back/profile/form.vue').default);
+
+
 Vue.component('mymenu', require('./components/home/back/myAds/myMenu.vue').default);
 Vue.component('update-profile', require('./components/home/back/profileForm.vue').default);
 
@@ -87,7 +90,7 @@ Vue.component('filter-ad', require('./components/filter.vue').default);
 Vue.component('report-ad', require('./components/home/detail/report.vue').default);
 Vue.component('scroll', require('./components/scroll.vue').default);
 
-//product detail part 
+//product detail part
 Vue.component('ad-image', require('./components/home/detail/displayImage.vue').default);
 Vue.component('ad-user', require('./components/home/detail/displayUserDetail.vue').default);
 Vue.component('ad-description', require('./components/home/detail/displayDescription.vue').default);
@@ -114,6 +117,8 @@ Vue.component('admin-report', require('./components/admin/pages/adReport.vue').d
 Vue.component('admin-ad-detail', require('./components/admin/detail/productDetail.vue').default);
 Vue.component('admin-user-detail', require('./components/admin/detail/userDetail.vue').default);
 
+//chat app
+Vue.component('chat-app', require('./components/chat/chatApp.vue').default);
 
 import { routes } from './routes.js';
 const router = new VueRouter({
@@ -129,7 +134,9 @@ const router = new VueRouter({
 
 //Vue.prototype.$loggedIn = window.Auth.loggedIn;
 const app = new Vue({
+
     vuetify: Vuetify,
     el: '#app',
-    router
+    router,
+
 });

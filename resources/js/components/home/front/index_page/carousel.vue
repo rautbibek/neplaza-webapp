@@ -1,6 +1,5 @@
 <template>
-
-  <v-carousel  hide-delimiter-background hide-delimiters
+  <v-carousel   hide-delimiters
  height="350" cycle>
     <v-carousel-item
       v-for="(item,i) in items"
@@ -21,7 +20,7 @@
         items: [
 
           {
-            src: '/image/back.jpg',
+            src: '/image/cover.jpeg',
           },
         ],
       }

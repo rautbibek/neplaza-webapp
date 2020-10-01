@@ -18,7 +18,10 @@ class ProductObserver
         $product->slug = Str::slug($product->title);
         $product->productid = $p_id;
         $product->save();
-        //$product->category->increment('view_count');
+        $product->category->increment('product_count');
+        $product->scategory->increment('product_count');
+        $product->city->increment('product_count');
+        $product->nhood->increment('product_count');
     }
 
     /**
@@ -29,7 +32,7 @@ class ProductObserver
      */
     public function updated(Product $product)
     {
-        //
+
     }
 
     /**
@@ -51,7 +54,7 @@ class ProductObserver
      */
     public function restored(Product $product)
     {
-        
+
     }
 
     /**

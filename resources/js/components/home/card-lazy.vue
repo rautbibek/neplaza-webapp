@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+
         <v-lazy
          v-model="isActive"
          :options="{
@@ -11,8 +11,8 @@
         >
             <v-hover v-slot:default="{ hover }"
             open-delay="100">
-                <v-card tile :elevation="hover ? 16 : 3" class="ma-3 text-center" >
-                   
+                <v-card tile :elevation="hover ? 16 : 3" class="ma-2 text-center">
+
                     <favorite :is_favorite='ads.favorite_to_users.length?true:false' :product_id="ads.id"></favorite>
                     <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                     <!-- image part -->
@@ -29,7 +29,7 @@
                 </v-card>
             </v-hover>
         </v-lazy>
-            
+
     </div>
 </template>
 <script>
