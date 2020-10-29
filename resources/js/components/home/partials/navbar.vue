@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#2F3B59">
+<nav class="navbar navbar-expand-lg navbar-dark"  style="background-color:#2F3B59;">
     <ul class="navbar-nav pad">
       <li class="nav-item mr-auto menu-area">
         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

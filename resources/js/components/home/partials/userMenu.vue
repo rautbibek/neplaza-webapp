@@ -21,7 +21,7 @@
         <div class="col-4">
           <v-menu offset-y nudge-bottom="15" open-on-click close-on-content-click transition="scale-transition">
            <template v-slot:activator="{ on }">
-              <v-avatar size="38" color="grey" class="profile" v-on="on">
+              <v-avatar size="38"  class="profile grey" v-on="on">
                 <img
                   :src="loginUser.cover"
                   :alt="loginUser.name"
@@ -33,7 +33,7 @@
                   <div class="bg-blue">
                     <v-row align="end" class="lightbox white--text pa-2 fill-height">
                       <v-col class="text-center">
-                        <v-avatar size="70">
+                        <v-avatar size="70" class="grey">
                             <img
                               :src="loginUser.cover"
                               :alt="loginUser.name"

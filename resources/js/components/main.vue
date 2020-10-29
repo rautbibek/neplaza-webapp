@@ -9,6 +9,7 @@
             </div>
             <login></login>
             <sign-up></sign-up>
+            <email-verify-notif v-if="loggedIn"></email-verify-notif>
             <update-profile></update-profile>
             <scroll></scroll>
             <footer-bar></footer-bar>
