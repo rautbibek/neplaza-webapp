@@ -149,7 +149,7 @@ class Product extends Model
       if($count>0){
         return asset('storage/thumb/'.$this->product_image[0]->image);
       }else{
-        return asset('storage/noimage.png');
+        return asset('image/noimage.png');
       }
     }
 

@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-11  search">
+<div class="col-md-11  search" >
         <div class="input-group" >
             <input class="form-control searchinput" value="`${this.$route.query.q}`" @select="show==true" @keyup="search" v-model="keyword" type="text" @keydown.enter="submit"  placeholder="Enter your search keyword..." aria-label="Search">
             <div class="input-group-append ">

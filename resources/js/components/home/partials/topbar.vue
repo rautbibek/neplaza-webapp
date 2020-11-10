@@ -1,6 +1,6 @@
 <template >
     <!-- app bar -->
-    <div>
+    <v-card>
           <v-container>
             <div class="row">
               <div class="col-md-3 cleaner d-none d-md-flex">
@@ -35,8 +35,7 @@
             </div>
           </v-container>
             <!-- <span class="font-weight-light">Neplaza</span> -->
-
-</div>
+    </v-card>
 </template>
 
 <script>

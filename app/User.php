@@ -111,10 +111,10 @@ class User extends Authenticatable
             }elseif(file_exists(public_path().'/storage/profile/'.$this->image)){
                return asset('storage/profile/'.$this->image);
             }else{
-               return asset('storage/user.png');
+               return asset('image/user.png');
             }
     }else{
-      return asset('storage/user.png');
+      return asset('image/user.png');
    }
  }
 

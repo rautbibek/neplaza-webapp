@@ -15,9 +15,9 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            background-image: url("{{asset('storage/loading.svg')}}");
+            background-image: url("{{asset('image/preloader.gif')}}");
             background-repeat: no-repeat;
-            background-color: #171f30;
+            background-color: #ffffff;
             background-position: center;
             text-align: center;
             align-self: center;
@@ -54,7 +54,7 @@
     <script>
         let myVar;
         function myFunction() {
-           myVar = setTimeout(showPage, 500);
+           myVar = setTimeout(showPage, 100);
         }
 
         function showPage() {
