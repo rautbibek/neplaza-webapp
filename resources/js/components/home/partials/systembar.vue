@@ -10,7 +10,7 @@
       </div>
       <div class="d-none d-sm-flex">
       Welcome to Neplaza &nbsp;| &nbsp;
-      <img src="/storage/flag.png"  height="12" class="mt-1" alt="nepal">
+      <img src="/image/flag.png"  height="12" class="mt-1" alt="nepal">
         &nbsp; Nepal
       </div>
       <v-spacer></v-spacer>
@@ -18,7 +18,7 @@
         <v-icon left>phone</v-icon>
         <span>+977-9863756278</span>
       </v-btn>
-      
+
     </v-system-bar>
   </nav>
 </template>
