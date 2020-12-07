@@ -13,7 +13,8 @@
         <meta name="keywords" content="bikriBazzar, house, land,property,, buy and sell anything, classified website nepal,
          bikes, cars, new bike, old bikes, new cars, old cars, for sell, for rent">
          <meta name="author" content="Bibek raut">
-         <meta http-equiv="refresh" content="30">
+         <!-- <meta http-equiv="refresh" content="30"> -->
+         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <style>
             body{
                 background-color: #f8fafc !important;
