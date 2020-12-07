@@ -42,12 +42,14 @@ class UrgentNotification extends Command
       $urgents = Urgent::with(['product','product.user'=>function($q){
         $q->select('id','name','email');
       }])->get();
-      
-      foreach ($urgents as $urgent) {
-        if($urgent->remaining_days < 2){
-          if($urgent->product->user->valid_email !=''){
-          Mail::to($urgent->product->user->email)->send(new UrgentAdExpireNotification($urgent->product));
-         }
+
+      if($urgents->count()>0){
+        foreach ($urgents as $urgent) {
+          if($urgent->remaining_days < 2){
+            if($urgent->product->user->valid_email !=''){
+            //Mail::to($urgent->product->user->email)->send(new UrgentAdExpireNotification($urgent->product));
+           }
+          }
         }
       }
     }

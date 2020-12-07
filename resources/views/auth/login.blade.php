@@ -6,6 +6,9 @@
           @csrf
 
               <div class="col-md-10">
+                @if (session('message'))
+                    <div class="alert alert-danger">{{ session('message') }}</div>
+                @endif
                 @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     @foreach ($errors->all() as $error)

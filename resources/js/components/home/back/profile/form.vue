@@ -80,7 +80,7 @@
 
                           label="Email"
                           counter="30"
-                          :value="userData.email"
+                          :value="userData.valid_email"
                           readonly
                           outlined
 

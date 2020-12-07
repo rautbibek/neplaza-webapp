@@ -42,11 +42,13 @@ class FeatureNotification extends Command
         $featured = Featured::with(['product','product.user'=>function($q){
           $q->select('id','name','email');
         }])->get();
-        foreach ($featured as $feature) {
-          if($feature->remaining_days < 2){
-            if($feature->product->user->valid_email !=''){
-            Mail::to($feature->product->user->email)->send(new FeatureAdExpireNotification($feature->product));
-           }
+        if($featured->count()>0){
+          foreach ($featured as $feature) {
+            if($feature->remaining_days < 2){
+              if($feature->product->user->valid_email !=''){
+              //Mail::to($feature->product->user->email)->send(new FeatureAdExpireNotification($feature->product));
+             }
+            }
           }
         }
     }
