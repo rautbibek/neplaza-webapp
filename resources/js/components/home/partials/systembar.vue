@@ -2,23 +2,41 @@
   <!-- navabr of the template -->
   <nav>
     <!-- system bar -->
-    <v-system-bar height="35">
-      <div class="d-sm-none">
-        <router-link to="/">
-           <span  style="background:#2F3B59; border:1px solid #2F3B59; border-radius:57%;" class="p-1 text-white">N</span>ep<span style="color:red">la</span>za
-        </router-link>
-      </div>
-      <div class="d-none d-sm-flex">
-      Welcome to Neplaza &nbsp;| &nbsp;
-      <img src="/image/flag.png"  height="12" class="mt-1" alt="nepal">
-        &nbsp; Nepal
-      </div>
+    <v-system-bar height="45" class="system-bar">
+      <v-divider vertical></v-divider>
+      <div class="d-none d-sm-flex system-title">Welcome to Bikri Bazzar</div>
+      <v-divider vertical></v-divider>
       <v-spacer></v-spacer>
-      <v-btn text >
-        <v-icon left>phone</v-icon>
-        <span>+977-9863756278</span>
-      </v-btn>
-
+      <v-divider vertical></v-divider>
+      <v-btn text>Login</v-btn>
+      <v-divider vertical></v-divider>
+      <v-btn text>Register</v-btn>
+      <v-divider vertical></v-divider>
     </v-system-bar>
   </nav>
 </template>
+<style scoped>
+.system-bar {
+  background-color: #fff;
+  border-bottom: 1px solid #dfdfdf;
+}
+.system-bar > hr {
+  margin-top: 0px;
+}
+.system-bar > hr:first-child {
+  margin-left: 15px;
+}
+.system-bar > button {
+  text-transform: capitalize;
+}
+.system-bar > button:hover {
+  background: #fff;
+  color: #19916b;
+}
+.system-title {
+  color: #000;
+  letter-spacing: 0.03px;
+  margin-right: 16px;
+  margin-left: 15px;
+}
+</style>
