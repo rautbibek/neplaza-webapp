@@ -6,7 +6,7 @@ use Intervention\Image\Facades\Image;
 use App\Product_image;
 class ImageResizer{
     public function resizeImage($img ,$product_id){
-        
+
          //$images = $request->hasFile('image');
          foreach ($img as $image) {
            $currentDate = Carbon::now()->toDateString();
@@ -19,8 +19,8 @@ class ImageResizer{
            $productImage = Image::make($image)->resize(1600,790,function($constrain){
              $constrain->aspectRatio();
            })
-           ->insert(public_path('storage/watermark.png'), 'center')
-           
+           ->insert(public_path('image/watermark.png'), 'center')
+
            ->stream();
            Storage::disk('public')->put('product/'.$imagename,$productImage);
 
@@ -40,6 +40,6 @@ class ImageResizer{
            $product_image->image = $imagename;
            $product_image->save();
          }
-        
+
     }
 }

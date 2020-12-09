@@ -2,10 +2,19 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-
+        <link rel="apple-touch-icon-precomposed" href="{{asset('image/logo.png')}}" type="image/png" sizes="152x152">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bikri Bazzar</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Neplaza</title>
+        <meta property="og:title" content="buy and sell anything online">
+        <meta property="og:url" content="https://www.bikribazzar.com">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="{{asset('image/logo.png')}}">
+        <meta name="keywords" content="bikriBazzar, house, land,property,, buy and sell anything, classified website nepal,
+         bikes, cars, new bike, old bikes, new cars, old cars, for sell, for rent">
+         <meta name="author" content="Bibek raut">
+         <!-- <meta http-equiv="refresh" content="30"> -->
+         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <style>
             body{
                 background-color: #f8fafc !important;
@@ -15,14 +24,14 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            background-image: url("{{asset('storage/loading.svg')}}");
+            background-image: url("{{asset('image/preloader.gif')}}");
             background-repeat: no-repeat;
-            background-color: #171f30;
+            background-color: #ffffff;
             background-position: center;
             text-align: center;
             align-self: center;
             z-index: 9999;
-}
+            }
         </style>
     <link rel="stylesheet" href="{{asset('custom-css/style.css')}}" class="rel">
     <link rel="stylesheet" href="{{asset('css/app.css')}}" class="rel">
@@ -54,7 +63,7 @@
     <script>
         let myVar;
         function myFunction() {
-           myVar = setTimeout(showPage, 500);
+           myVar = setTimeout(showPage, 100);
         }
 
         function showPage() {

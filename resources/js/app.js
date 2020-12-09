@@ -40,6 +40,7 @@ Vue.component('main-component', require('./components/main.vue').default);
 Vue.component('top-bar', require('./components/home/partials/topbar.vue').default);
 Vue.component('nav-bar', require('./components/home/partials/navbar.vue').default);
 Vue.component('footer-bar', require('./components/home/partials/footer.vue').default);
+Vue.component('email-verify-notif', require('./components/home/partials/emailVerifyNotification.vue').default);
 
 // homepage data
 Vue.component('data-content', require('./components/home/front/index_page/content.vue').default);

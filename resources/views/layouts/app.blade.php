@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <title>{{ config('app.name', 'Neplaza') }}</title>
+    <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
     @stack('css')
     <style>
     .custom-control{
@@ -41,7 +41,9 @@
             <div class="shape2"></div>
 
             <div class="form">
-            <img src="{{asset('storage/login.svg')}}" alt="" class="form__img">
+              <a href="/">
+            <img src="{{asset('image/login.svg')}}" alt="" class="form__img">
+            </a>
             @yield('content')
           </div>
       </div>
