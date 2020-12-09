@@ -119,9 +119,12 @@ export default {
 .nav-item {
   font-family: "Nunito", sans-serif;
   font-size: 14px;
+  text-align: center;
 }
-.navbar-collapse > .navbar-nav {
-  align-items: center;
+@media screen and (min-width: 992px) {
+  .navbar-collapse > .navbar-nav {
+    align-items: center;
+  }
 }
 .nav-item > a:hover {
   transition: color 0.4s;
