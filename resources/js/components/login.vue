@@ -59,11 +59,5 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
-.v-btn__content {
-  font-size: 20px;
-}
-.v-btn {
-  padding: 0px !important;
-}
 </style>
 
