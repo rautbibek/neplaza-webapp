@@ -10913,8 +10913,33 @@ a.text-dark:focus {
   }
 }
 
+.v-card {
+  font-family: "Nunito", sans-serif;
+}
+
 .form-seperator {
   border-top: 1px solid black;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #0000001f;
+}
+
+.separator::before {
+  margin-right: 0.25em;
+}
+
+.separator::after {
+  margin-left: 0.25em;
 }
 
 .line {
