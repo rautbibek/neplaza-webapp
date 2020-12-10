@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'sms_api' => env('SMS_GATEWAY_KEY', '111111111'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -163,7 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
-        
+
 
         /*
          * Package Service Providers...
@@ -230,7 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        
+
 
     ],
 

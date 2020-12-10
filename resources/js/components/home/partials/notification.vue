@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-badge 
+        <v-badge
               :content="count"
               :value="count"
               color="red"
@@ -13,21 +13,21 @@
                     <v-icon>mdi-bell</v-icon>
                   </v-btn>
                   </template>
-                  
+
                 <v-card max-width="340" max-height="400"
                       class="overflow-y-auto">
                     <v-list subheader dense nav>
                     <v-subheader  style="width:300px">
                         <span  v-if="count == 0">No &nbsp; </span>
-                         New Notifications 
+                         New Notifications
                     </v-subheader>
-                    
+
                     <v-list-item href="comment" @click="markAsRead(item.id)"
                         v-for="(item,index) in notification"
                         :key="index"
                         router :to="`/ad/detail/${item.data['ad']['productid']}/${item.data['ad']['slug']}`"
-                        
-                        
+
+
                     >
                         <v-list-item-avatar color="grey">
                         <v-img color="grey" :src="item.data['ad']['cover']"></v-img>
@@ -36,7 +36,7 @@
                         <v-list-item-content >
                         <v-list-item-title>{{item.data['ad']['user']}}</v-list-item-title>
                         <v-list-item-subtitle>{{item.data['ad']['message']}}</v-list-item-subtitle>
-                        
+
                         </v-list-item-content>
 
                         <v-list-item-icon>
@@ -50,12 +50,12 @@
                     <v-subheader>
                          Old Notifications
                         </v-subheader>
-                    
+
                     <v-list-item
                         v-for="(item,index) in read"
                         :key="index"
                         router :to="`/ad/detail/${item.data['ad']['productid']}/${item.data['ad']['slug']}`"
-                        
+
                     >
                         <v-list-item-avatar>
                         <v-img :src="item.data['ad']['cover']"></v-img>
@@ -72,13 +72,13 @@
                         </v-list-item-icon>
                     </v-list-item>
                     </v-list> -->
-                    <p class="text-center px-5" > 
-                        <v-btn @click="getNotification" x-small text> <v-icon left small>refresh</v-icon> Refresh notification </v-btn>
+                    <p class="text-center px-5" >
+                        <v-btn @click="getNotification" x-small text> <v-icon left small>refresh</v-icon> Refresh Notification </v-btn>
                     </p>
                 </v-card>
-                
+
         </v-menu>
-        </v-badge> 
+        </v-badge>
     </div>
 </template>
 <script>
@@ -93,7 +93,7 @@
     },
     methods:{
         markAsRead(id){
-            
+
             axios.get(`/markAsRead/`+id)
                  .then(response =>{
                      this.getNotification();
@@ -110,7 +110,7 @@
                  .catch();
         },
 
-        
+
     },
     created(){
         this.getNotification();

@@ -563,7 +563,7 @@ trait ValidatesAttributes
             [1, 1], array_filter(sscanf($parameters['ratio'], '%f/%d'))
         );
 
-        $precision = 1 / max($width, $height);
+        $precision = 1 / (max($width, $height) + 1);
 
         return abs($numerator / $denominator - $width / $height) > $precision;
     }
@@ -656,6 +656,8 @@ trait ValidatesAttributes
                     return new FilterEmailValidation();
                 } elseif ($validation === 'filter_unicode') {
                     return FilterEmailValidation::unicode();
+                } elseif (is_string($validation) && class_exists($validation)) {
+                    return $this->container->make($validation);
                 }
             })
             ->values()
@@ -1062,7 +1064,7 @@ trait ValidatesAttributes
      */
     public function validateImage($attribute, $value)
     {
-        return $this->validateMimes($attribute, $value, ['jpeg', 'png', 'gif', 'bmp', 'svg', 'webp']);
+        return $this->validateMimes($attribute, $value, ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp']);
     }
 
     /**

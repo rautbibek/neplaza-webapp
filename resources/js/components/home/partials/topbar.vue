@@ -6,7 +6,7 @@
               <div class="col-md-3 cleaner d-none d-md-flex">
                 <router-link to="/" >
                 <v-toolbar-title class="text--grey">
-                  <img src="/image/logo.png" height="50" alt="">
+                  <img Class="mt-3" src="/image/logo.png" height="40" alt="">
                 </v-toolbar-title>
                 </router-link>
               </div>

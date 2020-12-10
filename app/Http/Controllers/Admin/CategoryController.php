@@ -74,7 +74,7 @@ class CategoryController extends Controller
       }
       $category = new Category();
       $category->name = $request->name;
-      $category->slug = $slug.'-'.uniqid();
+      $category->slug = $slug;
       $category->image= $imagename;
       $category->icons = $request->icon;
       $category->url = $request->url;
@@ -151,13 +151,13 @@ class CategoryController extends Controller
           $imagename= $category->image;
         }
         $category->name = $request->name;
-        $category->slug = $slug.'-'.uniqid();
+        $category->slug = $slug;
         $category->image= $imagename;
         $category->visible = $request->show;
         $category->icons = $request->icon;
         $category->url = $request->url;
         $category->update();
-        
+
         return response()->json('category updated succefully ',200);
     }
 
