@@ -7,7 +7,7 @@
           <div class="logo">
             <router-link to="/">
               <v-toolbar-title class="text--grey">
-                <img src="/storage/logo.png" alt="Bikri Bazzar Logo">
+                <img src="/image/logo.svg" alt="Bikri Bazzar Logo" />
               </v-toolbar-title>
             </router-link>
           </div>
@@ -20,11 +20,25 @@
             <user-menu></user-menu>
           </span>
           <span v-else>
-            <v-btn color="#2F3B59" class="button mr-3" @click="login" tile dark outlined>
+            <v-btn
+              color="#2F3B59"
+              class="button mr-3"
+              @click="login"
+              tile
+              dark
+              outlined
+            >
               <v-icon left>mdi-account-circle</v-icon>
               <span>Login</span>
             </v-btn>
-            <v-btn color="#2F3B59" tile dark outlined @click="signUp" class="button">
+            <v-btn
+              color="#2F3B59"
+              tile
+              dark
+              outlined
+              @click="signUp"
+              class="button"
+            >
               <v-icon left>person_add</v-icon>
               <span>Sign Up</span>
             </v-btn>
@@ -48,8 +62,8 @@ export default {
     },
     signUp() {
       EventBus.$emit("signUp", true);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
