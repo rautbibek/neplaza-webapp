@@ -10913,8 +10913,42 @@ a.text-dark:focus {
   }
 }
 
-.v-card {
-  font-family: "Nunito", sans-serif;
+.v-application {
+  font-family: "Nunito", sans-serif !important;
+}
+
+.product-card {
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid;
+  border-color: #eee;
+  padding-bottom: 10px;
+}
+
+.featured-title {
+  margin-bottom: 0px !important;
+  padding: 56px 0px 40px;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.favourite {
+  opacity: 0;
+  height: 10px;
+  transition: height 0.2s ease;
+}
+
+.favourite > i {
+  font-size: 0px;
+}
+
+.product-card:hover .favourite {
+  opacity: 1;
+  height: 32px;
+}
+
+.product-card:hover .favourite > i {
+  font-size: 18px;
 }
 
 .form-seperator {

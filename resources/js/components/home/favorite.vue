@@ -7,7 +7,7 @@
     dark
     fab
     right
-    color="#2f3b59"
+    :color="background"
   >
     <v-icon :color="color" v-if="fav">mdi-heart</v-icon>
     <v-icon :color="color" v-else>mdi-heart-outline</v-icon>
@@ -60,6 +60,10 @@ export default {
     color() {
       return this.fav ? "red" : "white";
     },
+    background() {
+      return this.fav ? "white" : "#2f3b59";
+    },
+
     url() {
       return `/favorite/${this.id}/add`;
     },

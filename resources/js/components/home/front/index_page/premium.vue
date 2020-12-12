@@ -1,15 +1,9 @@
 <template>
-  <v-card v-if="count > 0" outlined tile flat>
+  <div v-if="count > 0">
     <v-container class="py-0">
-      <p class="featured-title text-center">
-        Featured Products
-        <!-- <v-btn color="#0c1963" small dark tile router :to="`/feature/ads`" v-if="count>6"  >
-          view all
-          <v-icon right>keyboard_arrow_right</v-icon>
-        </v-btn> -->
-      </p>
+      <p class="featured-title text-center">Featured Products</p>
     </v-container>
-    <div class="container">
+    <div class="container mb-14">
       <v-container>
         <sliders
           style="margin: 0px; padding: 0px"
@@ -17,6 +11,7 @@
           :autoplayHoverPause="true"
           :scrollPerPage="false"
           :loop="true"
+          :spacePadding="1"
           :navigationEnabled="true"
           :paginationEnabled="true"
           :responsive="true"
@@ -34,7 +29,7 @@
             router
             :to="`/`"
           >
-            <v-card class="card">
+            <v-card class="card product-card">
               <favorite
                 :is_favorite="feature.favorite_to_users.length ? true : false"
                 :product_id="feature.id"
@@ -53,8 +48,22 @@
           </slide>
         </sliders>
       </v-container>
+      <v-container class="button-container">
+        <v-btn
+          color="#0c1963"
+          dark
+          tile
+          class="mt-10"
+          router
+          :to="`/feature/ads`"
+          v-if="count > 6"
+        >
+          view all
+          <v-icon right>keyboard_arrow_right</v-icon>
+        </v-btn>
+      </v-container>
     </div>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -86,42 +95,20 @@ export default {
 </script>
 
 <style scoped>
-.featured-title {
-  margin-bottom: 0px;
-  padding: 40px 0px 20px;
-  font-size: 25px;
-  font-weight: 600;
-  letter-spacing: 1px;
+.button-container {
+  display: flex;
+  justify-content: center;
 }
 .container {
-  padding: 12px 0px;
+  padding: 0px;
 }
-.card {
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.04);
-  border: 1px solid #eee;
-  padding-bottom: 10px;
-}
+
 .card-date {
   height: 40px;
   border-bottom: 1px solid #f2f2f2;
 }
 .featured-card {
   padding: 0px 12px;
-}
-.favourite {
-  opacity: 0;
-  height: 10px;
-  transition: height 0.2s ease;
-}
-.favourite > i {
-  font-size: 0px;
-}
-.card:hover .favourite {
-  opacity: 1;
-  height: 32px;
-}
-.card:hover .favourite > i {
-  font-size: 18px;
 }
 </style>
 
