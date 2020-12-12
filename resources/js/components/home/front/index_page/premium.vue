@@ -1,186 +1,127 @@
 <template>
-<v-card v-if="count>0" outlined tile flat>
+  <v-card v-if="count > 0" outlined tile flat>
     <v-container class="py-0">
-      <v-card-title style="padding-bottom:0px">
-        <!-- <v-btn icon >
-          <v-icon color="#0c1963">star</v-icon>
-        </v-btn> -->
-        Featured Ads
-        <v-spacer></v-spacer>
-        <v-btn color="#0c1963" small dark tile router :to="`/feature/ads`" v-if="count>6"  >
+      <p class="featured-title text-center">
+        Featured Products
+        <!-- <v-btn color="#0c1963" small dark tile router :to="`/feature/ads`" v-if="count>6"  >
           view all
           <v-icon right>keyboard_arrow_right</v-icon>
-        </v-btn>
-      </v-card-title>
-
+        </v-btn> -->
+      </p>
     </v-container>
-    <v-divider style="padding:0px"></v-divider>
-  <div class="" style=" " >
-    <!-- <h4 class="text-center pt-2">Featured Products</h4>
-     <div class="text-center mb-5"><hr class="line"></div> -->
-     <div class="container">
+    <div class="container">
       <v-container>
-          <sliders style="margin:0px; padding:0px"
-                :autoplay="true"
-                :autoplayHoverPause="true"
-                :scrollPerPage="false"
-                :loop="true"
-                :spacePadding="2"
-                :navigationEnabled="true"
-                :paginationEnabled="true"
-                :responsive="true"
-                :perPageCustom="[[300, 1], [500, 2],[600, 4]]"
-                class="row"
-            >
-           <slide v-for="(feature,index) in featured" :key="index" class="col-md-3 col-sm-6" router :to="`/`">
-            <v-hover v-slot:default="{ hover }"
-             open-delay="100">
-            <v-card tile :elevation="hover ? 16 : 3" class=" text-center">
-              <v-btn style="margin-top:-10px; margin-left:5px"
-                absolute
-                small
-                text
-                left
-              >
-                <favorite :is_favorite='feature.favorite_to_users.length?true:false' :product_id="feature.id"></favorite>
-              </v-btn>
+        <sliders
+          style="margin: 0px; padding: 0px"
+          :autoplay="true"
+          :autoplayHoverPause="true"
+          :scrollPerPage="false"
+          :loop="true"
+          :navigationEnabled="true"
+          :paginationEnabled="true"
+          :responsive="true"
+          :perPageCustom="[
+            [300, 1],
+            [500, 2],
+            [600, 4],
+          ]"
+          class="row"
+        >
+          <slide
+            v-for="(feature, index) in featured"
+            :key="index"
+            class="col-md-3 col-sm-6 featured-card"
+            router
+            :to="`/`"
+          >
+            <v-card class="card">
+              <favorite
+                :is_favorite="feature.favorite_to_users.length ? true : false"
+                :product_id="feature.id"
+              ></favorite>
               <!-- image part -->
               <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
-              <v-img
-                    class="white--text align-end"
-                    height="200px"
-                    :src="feature.product_cover"
-                  >
-                  <div class="ribbon ribbon-top-right"><span>FEATURED</span></div>
-                  <!-- category name part -->
-                  <div class="text-center mb-3">
-                                  <v-chip class="category"
-                                  dark
-                                  color="#000000b3"
-                                  small
-                                  label
-                                  >
-                                  <span v-if="feature.product_property.status_name">Status : {{feature.product_property.status_name}}</span>
-                                  <span v-else>{{feature.product_property.scategory_name}}</span>
-
-                                  </v-chip>
-                              </div>
-                  <!-- price part -->
-                  <div class="text-center">
-                    <v-alert style="opacity:0.9; padding-top:0px" height="25px" shaped color="red" elevation="20" dark prominent max-width="200px" dense>
-                      Rs. {{feature.product_price}} {{feature.product_max_price}}
-                    </v-alert>
-                 </div>
-
+                <v-img
+                  class="white--text align-end"
+                  height="190px"
+                  :src="feature.product_cover"
+                >
                 </v-img>
-
-                <!-- date and user name part -->
-                      <div class="card-date">
-                          <card-date :ads="feature"></card-date>
-                      </div>
-
-                      <!-- title and subtitle part -->
-                      <card-title :ads="feature"></card-title>
+                <card-title :ads="feature"></card-title>
               </router-link>
             </v-card>
-            </v-hover>
-
-
           </slide>
-     </sliders>
-
-     </v-container>
-
-     </div>
-  </div>
-</v-card>
+        </sliders>
+      </v-container>
+    </div>
+  </v-card>
 </template>
 
 <script>
-import { Carousel, Slide } from 'vue-carousel';
+import { Carousel, Slide } from "vue-carousel";
 
 export default {
   components: {
-    'sliders':Carousel,
-    Slide
+    sliders: Carousel,
+    Slide,
   },
-  data(){
-    return{
-      featured:[],
-      count:0,
-    }
+  data() {
+    return {
+      featured: [],
+      count: 0,
+    };
   },
-  methods:{
-    getFeatured(){
-      axios.get(`/front/featured/product`)
-            .then(response=>{
-              this.featured = response.data;
-              this.count = this.featured.length;
-            })
-    }
+  methods: {
+    getFeatured() {
+      axios.get(`/front/featured/product`).then((response) => {
+        this.featured = response.data;
+        this.count = this.featured.length;
+      });
+    },
   },
-  created(){
+  created() {
     return this.getFeatured();
-  }
+  },
 };
 </script>
 
 <style scoped>
-
-.ribbon {
-    width: 110px;
-    height: 111px;
-    overflow: hidden;
-    position: absolute;
+.featured-title {
+  margin-bottom: 0px;
+  padding: 40px 0px 20px;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
-.ribbon::before,
-.ribbon::after {
-    position: absolute;
-    z-index: -1;
-    content: '';
-    display: block;
-    border: 5px solid #cf0000;
+.container {
+  padding: 12px 0px;
 }
-.ribbon span {
-    position: absolute;
-    display: block;
-    width: 198px;
-    padding: 6px 0;
-    background-color: #cf0000;
-    box-shadow: 0 5px 10px rgba(0,0,0,.1);
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(0,0,0,.2);
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 14px;
+.card {
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #eee;
+  padding-bottom: 10px;
 }
-/* top right*/
-.ribbon-top-right {
-    top: -13px;
-    right: -13px;
+.card-date {
+  height: 40px;
+  border-bottom: 1px solid #f2f2f2;
 }
-.ribbon-top-right::before,
-.ribbon-top-right::after {
-    border-top-color: transparent;
-    border-right-color: transparent;
+.featured-card {
+  padding: 0px 12px;
 }
-.ribbon-top-right::before {
-    top: 0;
-    left: 0;
+.favourite {
+  opacity: 0;
+  height: 10px;
+  transition: height 0.2s ease;
 }
-.ribbon-top-right::after {
-    bottom: 0;
-    right: 0;
+.favourite > i {
+  font-size: 0px;
 }
-.ribbon-top-right span {
-    left: -30px;
-    top: 30px;
-    transform: rotate(45deg);
+.card:hover .favourite {
+  opacity: 1;
+  height: 32px;
 }
-
-  .card-date{
-    height: 40px;
-    border-bottom:1px solid #f2f2f2
-  }
-
+.card:hover .favourite > i {
+  font-size: 18px;
+}
 </style>
+
