@@ -10,7 +10,7 @@ class ImageResizer{
          //$images = $request->hasFile('image');
          foreach ($img as $image) {
            $currentDate = Carbon::now()->toDateString();
-           $imagename = 'name'.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+           $imagename = 'bikri-bazzar'.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
            if(!Storage::disk('public')->exists('product')){
              Storage::disk('public')->makeDirectory('product');
            }

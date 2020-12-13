@@ -80,9 +80,9 @@ class ProductRequest extends FormRequest
         $rule['price'] = 'required | numeric';
         $rule['nhood_id'] = 'required';
         $rule['city_id'] = 'required';
-        $rule['address'] = 'required';
+        $rule['address'] = 'required | max:100';
         $rule['image.*'] = 'mimes:jpeg,png,jpg,gif,svg|max:20648';
-        
+
         return $rule;
     }
 }
