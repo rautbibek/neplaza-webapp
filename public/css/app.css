@@ -10928,6 +10928,10 @@ a.text-dark:focus {
   background: #f3f2ed;
 }
 
+.breadcrumb-item > a:hover {
+  color: #19916B !important;
+}
+
 .featured-title {
   margin-bottom: 0px !important;
   padding: 56px 0px 40px;
