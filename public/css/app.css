@@ -11054,24 +11054,22 @@ v-text-field {
 
 .uploader {
   width: 100%;
-  background: #39525f;
-  color: #fff;
+  background: #fafafa;
+  color: #19916B;
   padding: 40px 15px;
   text-align: center;
   border-radius: 10px;
-  border: 3px dashed #fff;
-  font-size: 20px;
+  border: 1px dashed #d9d9d9;
+  font-size: 18px;
   position: relative;
 }
 
 .uploader.dragging {
-  background: #fff;
-  color: #2196F3;
-  border: 3px dashed #2196F3;
+  border-color: #19916B;
 }
 
 .uploader.dragging .file-input label {
-  background: #2196F3;
+  background: #19916B;
   color: #fff;
 }
 
@@ -11080,7 +11078,7 @@ v-text-field {
 }
 
 .uploader .file-input {
-  width: 200px;
+  width: 170px;
   margin: auto;
   height: 68px;
   position: relative;
@@ -11089,10 +11087,12 @@ v-text-field {
 .uploader .file-input label,
 .uploader .file-input input {
   background: #fff;
-  color: #2196F3;
+  color: #19916B;
   width: 100%;
+  font-size: 16px;
   position: absolute;
   left: 0;
+  border: 1px solid #19916B;
   top: 0;
   padding: 10px;
   border-radius: 4px;
@@ -11120,7 +11120,7 @@ v-text-field {
   justify-content: space-between;
   background: #fff;
   margin-bottom: 20px;
-  box-shadow: 5px 5px 20px #3e3737;
+  box-shadow: 2px 14px 4px #acacac;
 }
 
 .uploader .image-preview .img-wrapper img {
@@ -11140,12 +11140,20 @@ v-text-field {
 .uploader .image-preview .details .name {
   overflow: hidden;
   height: 18px;
+  width: 150px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #2f3b59;
+  font-weight: 600;
+}
+
+.uploader .image-preview .details .size {
+  color: #777777;
 }
 
 .uploader .upload-control {
   position: absolute;
   width: 100%;
-  background: #fff;
   top: 0;
   left: 0;
   border-top-left-radius: 7px;
@@ -11157,8 +11165,8 @@ v-text-field {
 
 .uploader .upload-control button,
 .uploader .upload-control label {
-  background: #2196F3;
-  border: 2px solid #03A9F4;
+  background: #19916B;
+  border: 2px solid #19916B;
   border-radius: 3px;
   color: #fff;
   font-size: 15px;
@@ -11168,6 +11176,14 @@ v-text-field {
 .uploader .upload-control label {
   padding: 2px 5px;
   margin-right: 10px;
+}
+
+.create-ad-button {
+  min-width: 200px !important;
+  margin-top: 30px;
+  font-weight: bold !important;
+  border-radius: 4px !important;
+  margin-bottom: 10px;
 }
 
 .searchdiv {
@@ -11207,5 +11223,32 @@ a:hover {
 
 .scroll {
   overflow-y: scroll;
+}
+
+.form-title {
+  margin-bottom: 50px;
+  line-height: 34px;
+  color: #19916b;
+}
+
+.form-wrapper {
+  background: #fff;
+  padding: 50px;
+  border-radius: 6px;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 425px) {
+  .form-wrapper {
+    padding: 20px;
+  }
+
+  .form-title {
+    margin-bottom: 25px;
+    font-size: 18px;
+  }
 }
 
