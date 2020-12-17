@@ -77,6 +77,7 @@ class UserController extends Controller
 
 
     public function send_otp(Request $request){
+
       $this->validate($request ,[
           'contact_number' => 'required|numeric|digits:10|unique:users,phone,'.Auth::id(),
       ]);
@@ -87,7 +88,7 @@ class UserController extends Controller
       $otp = rand(10000,99999);
       Session::put('OTP',$otp);
       Session::put('contact_number',$request->contact_number);
-      $authKey='ocLnN4JeWOyp7rc9VqbH';
+      $authKey= config('app.sms_api');
       $senderId='Demo';
       $data = array(
         'token' => $authKey,

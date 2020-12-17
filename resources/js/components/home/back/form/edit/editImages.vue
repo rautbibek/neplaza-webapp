@@ -15,7 +15,7 @@
                 <v-progress-circular indeterminate size="64"></v-progress-circular>
             </v-overlay>
            <v-row justify="center" no-gutters>
-               
+
                <v-col cols="12" lg="10" md="10" sm="12" xs="12" class="custom-border">
                     <v-card tile>
                          <div class="m-2">
@@ -35,13 +35,13 @@
                                         <v-container fluid>
                                         <v-row>
                                             <v-col
-                                            v-for="(productImg,index) in existing_images.product_image" 
+                                            v-for="(productImg,index) in existing_images.product_image"
                                             :key="index"
                                             class="d-flex child-flex"
                                             cols="4"
                                             sm="3" md="3" xs="6" lg="3"
                                             >
-                                            
+
                                                 <v-card flat tile class="d-flex border">
                                                     <v-hover >
                                                     <v-img
@@ -63,7 +63,7 @@
                                                         <v-overlay
                                                             overlay="hover"
                                                             absolute
-                                                            
+
                                                         >
                                                             <v-btn class="" @click="confirm(productImg.id)" fab dark x-small color="red">
                                                                 <v-icon dark>delete</v-icon>
@@ -74,13 +74,13 @@
                                                     </v-hover>
                                                     </v-card>
                                             </v-col>
-                                            
-                                        
+
+
                                         </v-row>
                                         </v-container>
                                     </v-card>
-                                </v-col> 
-                                
+                                </v-col>
+
                           </div>
                           <div style="border-top:0.5px solid black"></div>
                           <div class="m-2">
@@ -127,7 +127,7 @@
                                         </div>
                                     </div>
                                 </v-col>
-                                
+
                           </div>
                           <div style="border-top:0.5px solid black">
                                     <v-col cols="8 py-4 ml-4">
@@ -137,7 +137,7 @@
                                         </v-btn>
                                 </v-col>
                             </div>
-                        
+
                     </v-card>
                </v-col>
             </v-row>
@@ -183,10 +183,10 @@
         }
     },
     methods: {
-        
+
         confirm(id){
             this.dialog = true;
-            this.image_id = id; 
+            this.image_id = id;
         },
         remove(){
             this.dialog= false;
@@ -206,10 +206,10 @@
                             timeout: 3000,
                             position: 'topRight',
                         });
-                        
+
                  });
         },
-        
+
         OnDragEnter(e) {
             e.preventDefault();
 
@@ -284,7 +284,7 @@
                 axios.post(`/save/image/${this.product_id}`, formData, config)
                     .then(response => {
                         this.getImage();
-                        
+
                         this.$router.push('/user/myads');
                         this.$toast.success(response.data, 'success', {
                             timeout: 3000,

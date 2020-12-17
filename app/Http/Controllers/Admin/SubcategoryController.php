@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Scategory;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -44,7 +43,7 @@ class SubcategoryController extends Controller
 
       $scategory = new Scategory();
       $scategory->name = $request->name;
-      $scategory->slug = str_slug($request->name).'-'.uniqid();
+      $scategory->slug = str_slug($request->name);
       $scategory->url = $request->url;
       $scategory->category_id = $request->category_id;
       $scategory->save();
@@ -88,11 +87,11 @@ class SubcategoryController extends Controller
       ]);
       $scategory = Scategory::find($id);
       $scategory->name = $request->name;
-      $scategory->slug = str_slug($request->name).'-'.uniqid();
+      $scategory->slug = str_slug($request->name);
       $scategory->url = $request->url;
       $scategory->category_id = $request->category_id;
       $scategory->update();
-      
+
       return response()->json('subcategory updated succefully ',200);
     }
 

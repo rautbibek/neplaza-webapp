@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <link rel="apple-touch-icon-precomposed" href="{{asset('image/logo.png')}}" type="image/png" sizes="152x152">
+        <link rel="icon" href="{{asset('image/favicon.ico')}}" type="image/ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Bikri Bazzar</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">

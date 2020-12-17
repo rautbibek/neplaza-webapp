@@ -73,7 +73,7 @@ class Product extends Model
     }
 
     public function user(){
-      return $this->belongsTo('App\User')->select('id','name','phone','username','phone_verified','image');
+      return $this->belongsTo('App\User')->select('id','name','phone','username','phone_verified','hide_contact','image','created_at');
     }
 
     public function status(){

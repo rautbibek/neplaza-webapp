@@ -53,12 +53,12 @@
                     <v-subheader>
                          Old Notifications
                         </v-subheader>
-                    
+
                     <v-list-item
                         v-for="(item,index) in read"
                         :key="index"
                         router :to="`/ad/detail/${item.data['ad']['productid']}/${item.data['ad']['slug']}`"
-                        
+
                     >
                         <v-list-item-avatar>
                         <v-img :src="item.data['ad']['cover']"></v-img>
