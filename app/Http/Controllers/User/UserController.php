@@ -77,7 +77,6 @@ class UserController extends Controller
 
 
     public function send_otp(Request $request){
-
       $this->validate($request ,[
           'contact_number' => 'required|numeric|digits:10|unique:users,phone,'.Auth::id(),
       ]);
@@ -89,15 +88,15 @@ class UserController extends Controller
       Session::put('OTP',$otp);
       Session::put('contact_number',$request->contact_number);
       $authKey= config('app.sms_api');
-      $senderId='Demo';
+      $senderId='31001';
       $data = array(
-        'token' => $authKey,
+        'auth_token' => $authKey,
         'from'=>$senderId,
         'to' =>$request->contact_number,
-        'text'=>'your otp code '.$otp,
+        'text'=>'Your mobile verification code for '.config('app.name').' is '.$otp,
       );
 
-      $url = "http://api.sparrowsms.com/v2/sms/" ;
+      $url = "https://aakashsms.com/admin/public/sms/v1/send" ;
       $ch = curl_init();
 
       curl_setopt_array($ch, array(
