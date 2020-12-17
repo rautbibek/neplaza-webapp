@@ -1,33 +1,42 @@
 {
-    "name": "pusher/pusher-php-server",
-    "description" : "Library for interacting with the Pusher REST API",
-    "keywords": ["php-pusher-server", "pusher", "rest", "realtime", "real-time", "real time", "messaging", "push", "trigger", "publish", "events"],
+    "name": "pusher/pusher-http",
+    "type": "library",
+    "description": "Client code for the REST API",
+    "keywords": ["pusher", "http", "rest", "web service"],
+    "homepage": "https://github.com/pusher/pusher-http-php/",
     "license": "MIT",
+
     "require": {
-        "php": ">=5.4 <7.4",
-        "ext-curl": "*",
-        "psr/log": "^1.0",
-        "paragonie/sodium_compat": "^1.6"
+        "php": ">=5.3.3",
+        "ext-json": "*"
     },
+
+    "suggest": {
+        "ext-curl": "Pusher will use a different HTTP adapter if cURL is present"
+    },
+
     "require-dev": {
-        "phpunit/phpunit": "^4.8.35 || ^5.7"
+        "ext-curl": "*",
+        "phpunit/phpunit": "~4.0",
+        "phpdocumentor/phpdocumentor": "2.*",
+        "squizlabs/php_codesniffer": "2.x"
     },
+
     "autoload": {
         "psr-4": {
             "Pusher\\": "src/"
         }
     },
+
     "autoload-dev": {
-        "psr-4": { "": "tests/" }
-    },
-    "config": {
-        "preferred-install": "dist"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.4-dev"
+        "psr-4": {
+            "Pusher\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+
+    "extra": {
+        "branch-alias": {
+            "dev-new-lib": "3.0-dev"
+        }
+    }
 }
