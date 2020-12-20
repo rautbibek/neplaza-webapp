@@ -152,8 +152,8 @@ export default {
 .list-item .v-list-item__title {
   font-size: 14px;
 }
-.list-item:hover {
-  color: #19916b;
+.v-item--active {
+  color: #19916b !important;
 }
 .subheading {
   font-size: 16px;
