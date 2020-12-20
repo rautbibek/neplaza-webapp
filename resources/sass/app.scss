@@ -141,6 +141,28 @@ a {
     border-radius: 0px;
 }
 
+.expiry-date-chip {
+    margin-left: 12px;
+    margin-right: 12px;
+    white-space: inherit;
+    margin-top: 12px !important;
+    margin-bottom: -3px;
+    height: auto;
+    min-height: 24px;
+    text-align: center;
+}
+
+.menu-settings-btn {
+    position: absolute !important;
+    top: 10px;
+    right: 10px !important;
+    z-index: 1;
+    background: white;
+    color: #929598 !important;
+    height: 24px !important;
+    width: 24px !important;
+}
+
 .border-bottom {
     border-bottom: 0.5px solid black !important;
     padding: 15px;
@@ -353,5 +375,45 @@ a:hover {
     .form-title {
         margin-bottom: 25px;
         font-size: 18px;
+    }
+}
+
+.menu-box {
+    background: #f3f2ed;
+    padding: 25px;
+    position: sticky;
+    top: 25px;
+    border-radius: 4px;
+
+    .v-list-item-group .v-list-item--active {
+        color: #19916B !important;
+    }
+
+    >div {
+        box-shadow: none !important;
+        border-radius: 4px !important;
+    }
+}
+
+.menu-box-wrapper {
+    margin-top: 12px;
+}
+
+.no-products {
+    color: #545454;
+    font-size: 16px;
+    margin-top: 6px;
+}
+
+@media screen and (max-width:768px) {
+    .profile-wrapper {
+        max-width: 100% !important;
+    }
+}
+
+@media screen and (max-width:599px) {
+    .menu-box-wrapper {
+        margin-top: 0px;
+        padding-top: 0px !important;
     }
 }
