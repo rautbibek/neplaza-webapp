@@ -26,33 +26,22 @@
               v-for="(ads, index) in fav_ads"
               :key="index"
             >
-              <v-hover v-slot:default="{ hover }" open-delay="100">
-                <v-card
-                  tile
-                  :elevation="hover ? 16 : 3"
-                  class="ma-3 text-center"
-                >
-                  <div @click="remove(ads)">
-                    <favorite
-                      :is_favorite="ads.is_favorite"
-                      :product_id="ads.id"
-                    ></favorite>
-                  </div>
+              <v-card tile class="ma-3 product-card">
+                <div @click="remove(ads)">
+                  <favorite
+                    :is_favorite="ads.is_favorite"
+                    :product_id="ads.id"
+                  ></favorite>
+                </div>
 
-                  <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
-                    <!-- image part -->
-                    <cover :ads="ads"></cover>
+                <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
+                  <!-- image part -->
+                  <cover :ads="ads"></cover>
 
-                    <!-- date and user name part -->
-                    <div class="card-date">
-                      <card-date :ads="ads"></card-date>
-                    </div>
-
-                    <!-- title and subtitle part -->
-                    <card-title :ads="ads"></card-title>
-                  </router-link>
-                </v-card>
-              </v-hover>
+                  <!-- title and subtitle part -->
+                  <card-title :ads="ads"></card-title>
+                </router-link>
+              </v-card>
             </v-flex>
           </v-layout>
         </div>
