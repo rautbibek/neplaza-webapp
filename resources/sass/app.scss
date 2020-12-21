@@ -367,21 +367,36 @@ a:hover {
     box-shadow: none !important;
 }
 
-@media screen and (max-width:425px) {
-    .form-wrapper {
-        padding: 20px;
-    }
+.settings-form-title {
+    margin-bottom: 40px;
+    margin-top: 8px;
+    font-weight: 600;
+    color: #19916b;
+}
 
-    .form-title {
-        margin-bottom: 25px;
-        font-size: 18px;
-    }
+.container-wrapper {
+    max-width: 88% !important;
+}
+
+.switch>.v-input__control>.v-input__slot {
+    flex-wrap: wrap;
+}
+
+.alignCenter {
+    display: flex;
+    align-items: center;
+}
+
+.settings-submit {
+    min-height: 40px;
+    border-radius: 4px;
+    min-width: 200px !important;
 }
 
 .menu-box {
     background: #f3f2ed;
     padding: 25px;
-    position: sticky;
+    position: sticky !important;
     top: 25px;
     border-radius: 4px;
 
@@ -409,11 +424,31 @@ a:hover {
     .profile-wrapper {
         max-width: 100% !important;
     }
+
+    .container-wrapper {
+        max-width: 96% !important;
+    }
+
+    .favourite {
+        opacity: 1;
+        height: 32px;
+    }
 }
 
 @media screen and (max-width:599px) {
     .menu-box-wrapper {
         margin-top: 0px;
         padding-top: 0px !important;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .form-wrapper {
+        padding: 20px;
+    }
+
+    .form-title {
+        margin-bottom: 25px;
+        font-size: 18px;
     }
 }
