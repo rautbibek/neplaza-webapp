@@ -8,7 +8,7 @@
       min-height="200"
       transition="fade-transition"
     >
-      <v-card tile class="ma-2 text-center product-card">
+      <v-card tile class="ma-2 product-card">
         <favorite
           :is_favorite="ads.favorite_to_users.length ? true : false"
           :product_id="ads.id"

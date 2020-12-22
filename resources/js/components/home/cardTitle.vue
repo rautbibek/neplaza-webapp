@@ -6,7 +6,7 @@
       </p>
     </v-card-text>
     <p class="text-black ad-address">
-      <v-icon color="#19916b" left small>mdi-map-marker-circle</v-icon>
+      <v-icon color="#19916b" small>mdi-map-marker-circle</v-icon>
       {{ ads.product_property.nhood_name }},
       {{ ads.product_property.city_name }}
     </p>
@@ -45,10 +45,13 @@ export default {
 }
 .ad-address {
   font-size: 14px;
-  display: flex;
-  align-items: baseline;
-  margin-bottom: 3px;
-  margin-top: 2px;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 6px;
+  margin-top: 6px;
 }
 .text-black {
   color: black;
