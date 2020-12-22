@@ -17,6 +17,7 @@
               :item-text="'name'"
               :item-value="'id'"
               label="Type *"
+              tabindex="1"
               color="#19916B"
               :rules="[select('Type')]"
               outlined
@@ -35,6 +36,7 @@
               v-model="status"
               color="#19916B"
               :items="scat.status"
+              tabindex="2"
               :item-text="'title'"
               :item-value="'id'"
               label="Construction Status *"
@@ -55,6 +57,7 @@
               v-model="filter_1_id"
               :items="scat.filter_1"
               :item-text="'name'"
+              tabindex="3"
               :item-value="'id'"
               label="Listed By *"
               color="#19916B"
@@ -75,6 +78,7 @@
               v-model="property_3"
               color="#19916B"
               label="Builtup Area *"
+              tabindex="4"
               :rules="[required('Builtup Area')]"
               outlined
               clearable
@@ -91,6 +95,7 @@
               class="textfield"
               v-model="filter_3_id"
               :items="scat.filter_3"
+              tabindex="5"
               :item-text="'name'"
               :item-value="'id'"
               label="Builtup Area Unit *"
@@ -114,6 +119,7 @@
               <v-select
                 color="#19916B"
                 v-model="filter_2_id"
+                tabindex="6"
                 :items="scat.filter_2"
                 :item-text="'name'"
                 :item-value="'id'"
@@ -134,6 +140,7 @@
                 v-model="property_1"
                 :items="bedroom_items"
                 label="Bedroom *"
+                tabindex="7"
                 color="#19916B"
                 :rules="[select('Bedroom')]"
                 outlined
@@ -152,6 +159,7 @@
                 :items="bathroom_items"
                 label="Bathroom *"
                 color="#19916B"
+                tabindex="8"
                 :rules="[select('Bathroom')]"
                 outlined
                 clearable
@@ -168,6 +176,7 @@
                 v-model="filter_id"
                 :items="scat.filter"
                 :item-text="'name'"
+                tabindex="9"
                 color="#19916B"
                 :item-value="'id'"
                 label="Furnishing *"
@@ -191,6 +200,7 @@
             class="mb-1"
             v-model="title"
             label="Ad Title *"
+            tabindex="10"
             counter="100"
             :rules="[
               required('Title'),
@@ -204,6 +214,7 @@
             color="#19916B"
             v-model="description"
             class="mb-1"
+            tabindex="11"
             label="Ad description *"
             :rules="[
               required('Description'),
@@ -228,6 +239,7 @@
               color="#19916B"
               v-model="district"
               :items="city"
+              tabindex="12"
               :item-text="'name'"
               :item-value="'id'"
               class="mb-1"
@@ -253,6 +265,7 @@
               v-show="nhood_display && district"
               v-model="nhood"
               class="mb-1"
+              tabindex="13"
               :items="localArea"
               :item-text="'name'"
               :item-value="'id'"
@@ -266,6 +279,7 @@
               v-model="street"
               label="Street Address *"
               counter="100"
+              tabindex="14"
               class="mb-1"
               :rules="[
                 required('Location/Area'),
@@ -299,6 +313,7 @@
             type="number"
             v-model="price"
             label="Price *"
+            tabindex="15"
             color="#19916B"
             placeholder="Price"
             :rules="[required('Price'), priceVlidate('Price')]"
@@ -336,6 +351,7 @@
                   <input
                     type="file"
                     id="file"
+                    tabindex="16"
                     @change="onInputChange"
                     multiple
                   />

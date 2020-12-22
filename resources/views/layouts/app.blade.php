@@ -37,15 +37,8 @@
 <body >
     <div id="app">
         <div class="l-form">
-            <div class="shape1"></div>
-            <div class="shape2"></div>
-
-            <div class="form">
-              <a href="/">
-            <img src="{{asset('image/login.svg')}}" alt="" class="form__img">
-            </a>
+          
             @yield('content')
-          </div>
       </div>
     </div>
 

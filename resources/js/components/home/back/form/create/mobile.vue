@@ -13,6 +13,7 @@
             <v-autocomplete
               v-model="brand_id"
               :items="scat.brand"
+              tabindex="1"
               :item-text="'name'"
               :item-value="'id'"
               label="Brand *"
@@ -27,6 +28,7 @@
               v-model="filter_1_id"
               :items="scat.filter_1"
               :item-text="'name'"
+              tabindex="2"
               :item-value="'id'"
               label="RAM *"
               color="#19916B"
@@ -41,6 +43,7 @@
               :items="scat.filter_2"
               :item-text="'name'"
               :item-value="'id'"
+              tabindex="3"
               label="Storage *"
               color="#19916B"
               :rules="[select('Storage')]"
@@ -54,6 +57,7 @@
               :items="scat.status"
               :item-text="'title'"
               :item-value="'id'"
+              tabindex="4"
               label="Status *"
               color="#19916B"
               :rules="[select('Status')]"
@@ -76,6 +80,7 @@
             v-model="title"
             label="Ad Title *"
             color="#19916B"
+            tabindex="5"
             counter="100"
             :rules="[
               required('Title'),
@@ -89,6 +94,7 @@
             v-model="description"
             label="Ad description *"
             color="#19916B"
+            tabindex="6"
             :rules="[
               required('Ad Description'),
               minLength('description', 20),
@@ -110,6 +116,7 @@
           <v-autocomplete
             v-model="district"
             :items="city"
+            tabindex="7"
             :item-text="'name'"
             :item-value="'id'"
             label="District *"
@@ -132,6 +139,7 @@
             v-show="nhood_display && district"
             v-model="nhood"
             :items="localArea"
+            tabindex="8"
             :item-text="'name'"
             :item-value="'id'"
             color="#19916B"
@@ -147,6 +155,7 @@
             label="Street Address *"
             color="#19916B"
             counter="100"
+            tabindex="9"
             :rules="[
               required('Location/Area'),
               minLength('Location/Area', 10),
@@ -178,6 +187,7 @@
             type="number"
             v-model="price"
             label="Price *"
+            tabindex="10"
             color="#19916B"
             :rules="[required('Price'), priceVlidate('Price')]"
             outlined
@@ -214,6 +224,7 @@
                   <input
                     type="file"
                     id="file"
+                    tabindex="11"
                     @change="onInputChange"
                     multiple
                   />
