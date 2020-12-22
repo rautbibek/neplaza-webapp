@@ -13,6 +13,7 @@
             <v-autocomplete
               v-model="brand_id"
               :items="scat.brand"
+              tabindex="1"
               :item-text="'name'"
               :item-value="'id'"
               label="Brand *"
@@ -26,6 +27,7 @@
             <v-select
               v-model="status"
               :items="scat.status"
+              tabindex="2"
               :item-text="'title'"
               color="#19916B"
               :item-value="'id'"
@@ -38,6 +40,7 @@
           <v-col cols="12" sm="12" md="6" class="pa-0 pr-3">
             <v-select
               v-model="type"
+              tabindex="3"
               :items="scat.type"
               :item-text="'name'"
               :item-value="'id'"
@@ -51,6 +54,7 @@
           <v-col cols="12" sm="12" md="6" class="pa-0 pl-3">
             <v-text-field
               type="number"
+              tabindex="4"
               v-model="property_2"
               color="#19916B"
               label="Lot Number *"
@@ -63,6 +67,7 @@
             <v-text-field
               type="number"
               v-model="property_1"
+              tabindex="5"
               color="#19916B"
               label="KM Driven *"
               :rules="[required('KM Driven')]"
@@ -83,6 +88,7 @@
           <v-text-field
             v-model="title"
             label="Ad Title *"
+            tabindex="6"
             counter="100"
             color="#19916B"
             :rules="[
@@ -98,6 +104,7 @@
             v-model="description"
             color="#19916B"
             label="Ad description *"
+            tabindex="7"
             :rules="[
               required('Description'),
               minLength('Description', 20),
@@ -119,6 +126,7 @@
           <v-autocomplete
             v-model="district"
             :items="city"
+            tabindex="8"
             :item-text="'name'"
             color="#19916B"
             :item-value="'id'"
@@ -142,6 +150,7 @@
             v-model="nhood"
             :items="localArea"
             color="#19916B"
+            tabindex="9"
             :item-text="'name'"
             :item-value="'id'"
             label="Metro/Municipility/VDC *"
@@ -154,6 +163,7 @@
           <v-text-field
             v-model="street"
             label="Street Address *"
+            tabindex="10"
             color="#19916B"
             counter="100"
             :rules="[
@@ -185,6 +195,7 @@
         <v-col cols="12" class="p-0">
           <v-text-field
             type="number"
+            tabindex="11"
             v-model="price"
             color="#19916B"
             label="Price *"
@@ -222,6 +233,7 @@
                   <label for="file">Select a file</label>
                   <input
                     type="file"
+                    tabindex="12"
                     id="file"
                     @change="onInputChange"
                     multiple

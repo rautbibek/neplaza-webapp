@@ -14,6 +14,7 @@
               v-model="type"
               :items="scat.type"
               :item-text="'name'"
+              tabindex="1"
               :item-value="'id'"
               color="#19916B"
               label="Job Type"
@@ -26,6 +27,7 @@
             <v-select
               v-model="filter_id"
               :items="scat.filter"
+              tabindex="2"
               :item-text="'name'"
               color="#19916B"
               :item-value="'id'"
@@ -49,6 +51,7 @@
             v-model="title"
             label="Ad Title *"
             color="#19916B"
+            tabindex="3"
             counter="100"
             :rules="[
               required('Title'),
@@ -63,6 +66,7 @@
             v-model="description"
             label="Ad description *"
             color="#19916B"
+            tabindex="4"
             :rules="[
               required('Description'),
               minLength('Description', 20),
@@ -84,6 +88,7 @@
           <v-autocomplete
             v-model="district"
             color="#19916B"
+            tabindex="5"
             :items="city"
             :item-text="'name'"
             :item-value="'id'"
@@ -107,6 +112,7 @@
             v-model="nhood"
             :items="localArea"
             :item-text="'name'"
+            tabindex="6"
             :item-value="'id'"
             color="#19916B"
             label="Metro/Municipility/VDC *"
@@ -120,6 +126,7 @@
             v-model="street"
             label="Street Address *"
             color="#19916B"
+            tabindex="7"
             counter="100"
             :rules="[
               required('Location/Area'),
@@ -153,6 +160,7 @@
               type="number"
               v-model="price"
               label="From *"
+              tabindex="8"
               color="#19916B"
               :rules="[
                 required('From'),
@@ -167,6 +175,7 @@
               type="number"
               v-model="maxprice"
               label="To *"
+              tabindex="9"
               color="#19916B"
               :rules="[
                 required('To'),
@@ -207,6 +216,7 @@
                   <input
                     type="file"
                     id="file"
+                    tabindex="10"
                     @change="onInputChange"
                     multiple
                   />

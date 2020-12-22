@@ -68,6 +68,7 @@
 .separator {
     display: flex;
     align-items: center;
+    color: #999;
     text-align: center;
 }
 
@@ -376,6 +377,10 @@ a:hover {
 
 .container-wrapper {
     max-width: 88% !important;
+}
+
+.login_image {
+    height: 200px;
 }
 
 .switch>.v-input__control>.v-input__slot {

@@ -27,6 +27,7 @@
                 v-model="brand_id"
                 :items="subcategory.brand"
                 :item-text="'name'"
+                tabindex="1"
                 :item-value="'id'"
                 color="#19916B"
                 label="Brand *"
@@ -51,6 +52,7 @@
                 v-model="type"
                 :items="subcategory.type"
                 :item-text="'name'"
+                tabindex="2"
                 :item-value="'id'"
                 color="#19916B"
                 label="Type *"
@@ -75,6 +77,7 @@
                 v-model="filter_id"
                 :items="subcategory.filter"
                 :item-text="'name'"
+                tabindex="3"
                 :item-value="'id'"
                 color="#19916B"
                 label="For *"
@@ -99,6 +102,7 @@
                 v-model="status"
                 :items="subcategory.status"
                 :item-text="'title'"
+                tabindex="4"
                 :item-value="'id'"
                 color="#19916B"
                 label="Status *"
@@ -129,6 +133,7 @@
             <v-text-field
               v-model="title"
               label="Ad Title *"
+              tabindex="5"
               counter="100"
               color="#19916B"
               :rules="[
@@ -142,6 +147,7 @@
 
             <v-textarea
               v-model="description"
+              tabindex="6"
               label="Ad description *"
               color="#19916B"
               :rules="[
@@ -168,6 +174,7 @@
               v-model="district"
               :items="city"
               :item-text="'name'"
+              tabindex="7"
               :item-value="'id'"
               label="District *"
               color="#19916B"
@@ -188,6 +195,7 @@
             <v-autocomplete
               v-show="nhood_display && district"
               v-model="nhood"
+              tabindex="8"
               :items="localArea"
               :item-text="'name'"
               :item-value="'id'"
@@ -201,6 +209,7 @@
 
             <v-text-field
               v-model="street"
+              tabindex="9"
               label="Street Address *"
               color="#19916B"
               counter="100"
@@ -236,6 +245,7 @@
             <v-text-field
               type="number"
               v-model="price"
+              tabindex="10"
               color="#19916B"
               label="Price *"
               :rules="[required('Price'), priceVlidate('Price')]"
@@ -274,6 +284,7 @@
                     <label for="file">Select a file</label>
                     <input
                       type="file"
+                      tabindex="11"
                       id="file"
                       @change="onInputChange"
                       multiple
