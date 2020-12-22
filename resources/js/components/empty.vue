@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="text-center">
-      <img height="250px" src="/image/empty.svg" alt="" />
+      <img height="250px" src="/image/no-data.jpg" alt="" />
       <p class="no-products">{{ title || "No Products Found" }}</p>
       <v-btn
         class="sell-btn"
