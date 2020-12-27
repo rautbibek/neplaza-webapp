@@ -87,7 +87,7 @@ export default {
       },
 
       {
-        text: "Feature Products",
+        text: "Featured Products",
         icon: "star",
         url: "/myads/feature",
       },

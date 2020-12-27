@@ -11301,7 +11301,7 @@ a:hover {
 }
 
 .menu-box {
-  height: 100vh;
+  height: 100%;
   position: -webkit-sticky !important;
   position: sticky !important;
   top: 0px;
@@ -11441,10 +11441,6 @@ a:hover {
 
   .cover-image {
     height: 200px;
-  }
-
-  .profile-wrapper {
-    max-width: 100% !important;
   }
 
   .container-wrapper {
