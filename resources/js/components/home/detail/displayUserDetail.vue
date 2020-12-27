@@ -4,12 +4,39 @@
       <div class="flex">
         <small>{{ ad.created_date }}</small>
         <div>
-          <v-icon class="mr-1">mdi-share-variant-outline</v-icon>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-bind="attrs" v-on="on" class="mr-2"
+                >mdi-share-variant-outline</v-icon
+              >
+            </template>
+            <div class="share">
+              <span>Share</span>
+              <share-it iconSize="lg" :url="url" :icons="true" />
+            </div>
+          </v-menu>
           <favorite
             :product_id="ad.id"
             :from_details="true"
             :is_favorite="ad.favorite_to_users.length > 0 ? true : false"
           ></favorite>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon class="ml-1" v-bind="attrs" v-on="on"
+                >mdi-dots-vertical</v-icon
+              >
+            </template>
+            <v-list class="other-options">
+              <v-list-item>Copy Product ID</v-list-item>
+              <div v-if="ad.user_id === ad.user.id">
+                <v-list-item>Edit Image</v-list-item>
+                <v-list-item>Edit Details</v-list-item>
+                <v-list-item>Delete</v-list-item>
+                <v-list-item>Mark as Sold Out</v-list-item>
+              </div>
+              <v-list-item v-else>Report</v-list-item>
+            </v-list>
+          </v-menu>
         </div>
       </div>
       <v-card-title class="text-capitalize product-title">{{
@@ -23,7 +50,6 @@
       <p class="pre-formatted product-description" v-html="ad.description"></p>
       <p class="price">Rs. {{ ad.product_price }} {{ ad.product_max_price }}</p>
     </v-card>
-
     <!-- user information -->
     <v-card class="card-user" :to="`/seller/${ad.user.id}/${ad.user.username}`">
       <v-avatar size="100">
@@ -50,28 +76,6 @@
         >
       </div>
     </v-card>
-    <!-- product id -->
-    <!-- 
-    <v-card tile class="mt-3">
-      <v-card-text>
-        <v-row class="text-center">
-          <v-col cols="2">
-            <v-icon>share</v-icon>
-          </v-col>
-          <v-col cols="10">
-            <share-it iconSize="sm" :url="url" :icons="true" outline />
-          </v-col>
-        </v-row>
-        <v-row no-gutters class="mt-2">
-          <v-col class="mt-2" style="color: black">
-            <span class="text-uppercase ml-3"
-              >AD ID : #{{ ad.productid }}</span
-            ></v-col
-          >
-          <v-col class="text-right"> <report-ad :ads="ad"></report-ad> </v-col>
-        </v-row>
-      </v-card-text>
-    </v-card> -->
   </div>
 </template>
 <script>
@@ -141,5 +145,22 @@ export default {
   font-size: 20px;
   font-weight: 600;
   padding-left: 4px;
+}
+.share {
+  min-height: 60px;
+  display: flex;
+  min-width: 300px;
+  align-items: center;
+  background: #fff;
+  padding-left: 10px;
+}
+.share > span {
+  color: #0000008a;
+}
+.share > div {
+  justify-content: center;
+}
+.other-options {
+  min-width: 160px;
 }
 </style>

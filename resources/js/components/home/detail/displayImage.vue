@@ -83,11 +83,10 @@
         <v-row align="center" justify="center" class="pa-1">
           <v-col cols="12" elevation="10" class="no-margin">
             <v-img
-              :src="'/storage/emptyDetailImage.png'"
+              :src="'/image/no-image.jpg'"
               :lazy-src="'/storage/noimage.png'"
               aspect-ratio="1"
               class="image-placeholder"
-              contain
               max-width="720"
               max-height="390"
             >

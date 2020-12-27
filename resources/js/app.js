@@ -34,6 +34,7 @@ Vue.use(Authorization);
 
 //registering component
 
+Vue.component('cover-title', require('./components/cover-title.vue').default);
 Vue.component('system-bar', require('./components/home/partials/systembar.vue').default);
 Vue.component('notification', require('./components/home/partials/notification.vue').default);
 Vue.component('main-component', require('./components/main.vue').default);
