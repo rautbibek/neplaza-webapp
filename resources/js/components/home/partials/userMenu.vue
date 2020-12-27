@@ -109,7 +109,7 @@ export default {
         },
         {
           icon: "settings",
-          text: "Setting",
+          text: "Settings",
           url: "/user/setting",
         },
         {
