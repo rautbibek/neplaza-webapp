@@ -4,22 +4,31 @@
       <input
         class="form-control searchinput"
         value="`${this.$route.query.q}`"
-        @select="show==true"
+        @select="show == true"
         @keyup="search"
         v-model="keyword"
         type="text"
         @keydown.enter="submit"
         placeholder="Search something"
         aria-label="Search"
-      >
+      />
       <div class="input-group-append">
-        <a href="javascript:void(0)" class="input-group-text searchbtn" @click="submit()">
-          <span class="material-icons" style="color:white">search</span>
+        <a
+          href="javascript:void(0)"
+          class="input-group-text searchbtn"
+          @click="submit()"
+        >
+          <span class="material-icons" style="color: white">search</span>
         </a>
       </div>
     </div>
 
-    <div class="autocomplete" style="margin-top:-22px" v-show="show" v-if="searchResult.length">
+    <div
+      class="autocomplete"
+      style="margin-top: -22px"
+      v-show="show"
+      v-if="searchResult.length"
+    >
       <div class="container">
         <ul class="list-group" @click="select">
           <router-link
@@ -28,9 +37,9 @@
             v-for="search in searchResult"
             :key="search.id"
           >
-            <b>{{search.category.name}}</b>
-            <br>
-            {{search.title}}
+            <b>{{ search.category.name }}</b>
+            <br />
+            {{ search.title }}
           </router-link>
         </ul>
       </div>
@@ -38,7 +47,7 @@
   </div>
 </template>
 <script>
-$("body").click(function(e) {
+$("body").click(function (e) {
   if (e.target.className !== "search") {
     $(".autocomplete").hide();
   }
@@ -48,7 +57,7 @@ export default {
     return {
       keyword: "",
       show: false,
-      searchResult: []
+      searchResult: [],
     };
   },
   methods: {
@@ -57,26 +66,26 @@ export default {
       if (this.keyword) {
         this.$router
           .replace({ path: "/search/", query: { q: this.keyword } })
-          .catch(err => {});
+          .catch((err) => {});
       }
     },
     select() {
       this.keyword = this.$route.query.q;
       this.show = false;
     },
-    search: _.debounce(function() {
+    search: _.debounce(function () {
       axios
         .get("/ad/search", {
           params: {
-            search: this.keyword
-          }
+            search: this.keyword,
+          },
         })
-        .then(response => {
+        .then((response) => {
           this.show = true;
           this.searchResult = response.data;
         })
         .catch();
-    }, 2000)
+    }, 2000),
   },
   mounted() {
     this.keyword = this.$route.query.q;
@@ -86,8 +95,8 @@ export default {
       //return this.search();
       //console.log(this.cat_posts);
       this.keyword = this.$route.query.q;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
@@ -96,23 +105,7 @@ export default {
 }
 .search {
   padding: 0px;
-  /* min-width: 500px; */
 }
-/* @media screen and (max-width: 1045px) {
-  .search {
-    min-width: 400px;
-  }
-}
-@media screen and (max-width: 835px) {
-  .search {
-    min-width: 320px;
-  }
-}
-@media screen and (max-width: 748px) {
-  .search {
-    min-width: 200px;
-  }
-} */
 .form-control {
   border-radius: 0px;
 }

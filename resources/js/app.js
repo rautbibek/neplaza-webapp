@@ -51,6 +51,7 @@ Vue.component('premium', require('./components/home/front/index_page/premium.vue
 
 
 Vue.component('search', require('./components/home/partials/search.vue').default);
+Vue.component('search-top', require('./components/home/partials/search-top.vue').default);
 Vue.component('login', require('./components/login.vue').default);
 Vue.component('sign-up', require('./components/signUp.vue').default);
 Vue.component('empty', require('./components/empty.vue').default);

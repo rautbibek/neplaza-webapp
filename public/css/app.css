@@ -11353,6 +11353,10 @@ a:hover {
   top: 10px;
 }
 
+.drawer-icon::after {
+  opacity: 0 !important;
+}
+
 .myads-cards-wrapper {
   padding: 0px 40px;
 }
@@ -11396,9 +11400,21 @@ a:hover {
   .bottom-sheet-sm {
     display: none;
   }
+
+  .settings-form-title {
+    display: none;
+  }
+}
+
+.menu-box-wrapper {
+  min-height: 400px;
 }
 
 @media screen and (max-width: 768px) {
+  .collapse-wrapper {
+    margin-left: 0px !important;
+  }
+
   .myads-wrapper {
     border-left: none;
     margin-left: 0px;
@@ -11450,13 +11466,6 @@ a:hover {
   .favourite {
     opacity: 1;
     height: 32px;
-  }
-}
-
-@media screen and (max-width: 599px) {
-  .menu-box-wrapper {
-    margin-top: 0px;
-    padding-top: 0px !important;
   }
 }
 

@@ -158,4 +158,7 @@ export default {
 .subheading {
   font-size: 16px;
 }
+a:before {
+  opacity: 0 !important;
+}
 </style>

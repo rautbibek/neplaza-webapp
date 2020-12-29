@@ -1,119 +1,143 @@
 <template>
-  <div>
-    <nav aria-label="breadcrumb ">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item pull-right">
-          <router-link :to="`/`">Home</router-link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Settings</li>
-        <li class="breadcrumb-item active" aria-current="page">Change Email</li>
-      </ol>
-    </nav>
-    <div class="py-5">
-      <v-overlay :value="overlay">
-        <v-progress-circular indeterminate size="64"></v-progress-circular>
-      </v-overlay>
-      <v-container class="container-wrapper">
-        <v-row wrap>
-          <v-col cols="12" xs="12" sm="5" md="3" class="menu-box-wrapper pt-0">
-            <settingMenu></settingMenu>
-          </v-col>
-          <v-col cols="12" xs="12" sm="7" md="9">
-            <v-card outlined class="pa-8">
-              <h4 class="text-center settings-form-title">
-                Change or Verify Email
-              </h4>
-              <v-alert v-if="message" dense :type="type">
-                {{ message }}
-              </v-alert>
-              <v-form ref="form" v-model="valid" lazy-validation>
-                <v-card-subtitle class="alignCenter pl-0">
-                  Email
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-icon
-                        v-bind="attrs"
-                        :color="
-                          my_data.email_verified_at ? '#00a2f0' : '#b65454'
-                        "
-                        class="ml-2"
-                        small
-                        v-on="on"
-                        >{{
-                          my_data.email_verified_at
-                            ? "mdi-check-decagram"
-                            : "error"
-                        }}
-                      </v-icon>
-                    </template>
-                    <span>
-                      {{
-                        my_data.email_verified_at
-                          ? "Verified Email Address"
-                          : "Email Address not Verified"
-                      }}</span
-                    >
-                  </v-tooltip>
-                </v-card-subtitle>
-                <v-text-field
-                  outlined
-                  type="email"
-                  v-model="email"
-                  :rules="emailRules"
-                  append-icon="email"
-                  placeholder="Email"
-                ></v-text-field>
-                <v-col cols="12" class="text-center">
-                  <v-btn
-                    :loading="loading"
-                    dark
-                    tile
-                    class="settings-submit"
-                    color="#19916B"
-                    @click="email_verification"
-                  >
-                    <v-icon left>send</v-icon>
-                    send Code
-                  </v-btn>
-                </v-col>
-              </v-form>
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-dialog v-model="dialog" persistent max-width="430">
-          <v-card tile>
-            <v-card-title class="text-right">
-              Verification Code
-              <v-spacer></v-spacer>
-              <v-btn x-small fab @click="close"><v-icon>close</v-icon></v-btn>
-            </v-card-title>
-            <v-divider></v-divider>
+  <div class="profile-wrapper">
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
+    <v-row no-gutters class="pa-0">
+      <v-col
+        v-if="drawer"
+        cols="12"
+        :md="drawer ? 2 : 0"
+        :sm="3"
+        class="menu-box-wrapper"
+      >
+        <div class="menu-box">
+          <settingMenu></settingMenu>
+        </div>
+      </v-col>
+      <v-col
+        cols="12"
+        :sm="drawer ? 9 : 12"
+        :md="drawer ? 10 : 12"
+        class="content-wrapper"
+      >
+        <nav aria-label="breadcrumb ">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item pull-right">
+              <router-link :to="`/`">Home</router-link>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Change Email
+            </li>
+          </ol>
+        </nav>
+        <div class="bottom-sheet-sm">
+          <settingMenu></settingMenu>
+        </div>
+        <div :class="!drawer && 'collapse-wrapper'">
+          <v-icon
+            :class="
+              drawer ? 'drawer-icon expand-icon' : 'drawer-icon collapse-icon'
+            "
+            @click.stop="drawer = !drawer"
+            >{{ drawer ? "mdi-chevron-left" : "mdi-chevron-right" }}
+          </v-icon>
+          <v-card
+            outlined
+            :class="drawer ? 'my-7' : 'my-5'"
+            class="mx-10 pa-8 card"
+          >
+            <h4 class="text-center settings-form-title">
+              Change or Verify Email
+            </h4>
+            <v-alert v-if="message" dense :type="type">
+              {{ message }}
+            </v-alert>
             <v-form ref="form" v-model="valid" lazy-validation>
-              <v-row class="ma-3">
-                <v-col cols="12">
-                  <v-text-field
-                    type="number"
-                    v-model="code"
-                    label="Email vefirication Code"
-                    counter="5"
-                    :rules="[
-                      required('VERIFICATION CODE'),
-                      minLength('VERIFICATION CODE', 5),
-                    ]"
-                    outlined
-                    clearable
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-divider></v-divider>
-              <v-col cols="12" class="text-right">
-                <v-btn tile color="indigo" dark @click="verify"> verify </v-btn>
+              <v-card-subtitle class="alignCenter pl-0">
+                Email
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      v-bind="attrs"
+                      :color="my_data.email_verified_at ? '#00a2f0' : '#b65454'"
+                      class="ml-2"
+                      small
+                      v-on="on"
+                      >{{
+                        my_data.email_verified_at
+                          ? "mdi-check-decagram"
+                          : "error"
+                      }}
+                    </v-icon>
+                  </template>
+                  <span>
+                    {{
+                      my_data.email_verified_at
+                        ? "Verified Email Address"
+                        : "Email Address not Verified"
+                    }}</span
+                  >
+                </v-tooltip>
+              </v-card-subtitle>
+              <v-text-field
+                outlined
+                type="email"
+                v-model="email"
+                :rules="emailRules"
+                append-icon="email"
+                placeholder="Email"
+              ></v-text-field>
+              <v-col cols="12" class="text-center">
+                <v-btn
+                  :loading="loading"
+                  dark
+                  tile
+                  class="settings-submit"
+                  color="#19916B"
+                  @click="email_verification"
+                >
+                  <v-icon left>send</v-icon>
+                  send Code
+                </v-btn>
               </v-col>
             </v-form>
           </v-card>
-        </v-dialog>
-      </v-container>
-    </div>
+        </div>
+      </v-col>
+    </v-row>
+    <v-dialog v-model="dialog" persistent max-width="430">
+      <v-card tile>
+        <v-card-title class="text-right">
+          Verification Code
+          <v-spacer></v-spacer>
+          <v-btn x-small fab @click="close"><v-icon>close</v-icon></v-btn>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-row class="ma-3">
+            <v-col cols="12">
+              <v-text-field
+                type="number"
+                v-model="code"
+                label="Email vefirication Code"
+                counter="5"
+                :rules="[
+                  required('VERIFICATION CODE'),
+                  minLength('VERIFICATION CODE', 5),
+                ]"
+                outlined
+                clearable
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-divider></v-divider>
+          <v-col cols="12" class="text-right">
+            <v-btn tile color="indigo" dark @click="verify"> verify </v-btn>
+          </v-col>
+        </v-form>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -125,6 +149,7 @@ export default {
       my_data: {},
       code: null,
       dialog: false,
+      drawer: true,
       valid: true,
       message: "",
       loading: false,
@@ -234,3 +259,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.collapse-wrapper {
+  padding-top: 10px;
+}
+@media screen and (max-width: 425px) {
+  .card {
+    margin: 30px 20px !important;
+  }
+}
+</style>

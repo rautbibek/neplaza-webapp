@@ -12,7 +12,7 @@
             </router-link>
           </div>
           <div class="search-bar">
-            <search></search>
+            <search-top></search-top>
           </div>
         </div>
         <div class="buttons-container">
