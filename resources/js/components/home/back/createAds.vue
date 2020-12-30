@@ -5,40 +5,36 @@
         <li class="breadcrumb-item pull-right">
           <router-link :to="`/`">Home</router-link>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Create Ads</li>
+        <li class="breadcrumb-item active" aria-current="page">Sell</li>
       </ol>
     </nav>
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
-    <div class="container py-5">
-      <div class="card-columns">
-        <div
-          v-for="(category, index) in categories"
-          :key="index"
-          class="card mt-3"
-        >
-          <div class="">
+    <div class="cover-image">
+      <h3 class="text-center">Select a Category</h3>
+    </div>
+    <v-container class="cover-container create-ad">
+      <v-expansion-panels>
+        <v-expansion-panel v-for="(category, index) in categories" :key="index">
+          <v-expansion-panel-header>
+            {{ category.name }}
+          </v-expansion-panel-header>
+          <v-expansion-panel-content class="panel-content">
             <ul class="list-group">
-              <li
-                class="list-group-item"
-                style="background-color: #2f3b59; color: white"
-              >
-                <i :class="category.icons"> </i> {{ category.name }}
-              </li>
               <router-link
                 :to="`/create/ads/${cat.slug}`"
                 class="list-group-item list-group-item-action"
                 v-for="(cat, index) in category.scategory"
                 :key="index"
               >
-                <i class="fa fa-angle-right"> </i> {{ cat.name }}
+                {{ cat.name }}
               </router-link>
             </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+    </v-container>
   </div>
 </template>
 <script>
