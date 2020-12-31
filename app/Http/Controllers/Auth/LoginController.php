@@ -62,13 +62,13 @@ class LoginController extends Controller
         $isUser = User::where('email',$userSocial->email)->first();
         if($isUser){
             Auth::login($isUser);
-            return redirect()->route('welcome');
+            return redirect()->intended();
         }
         $user = User::where('provider_id',$userSocial->id)->first();
         if($user){
             Auth::login($user);
+            return redirect()->intended();
         }else{
-
             $newuser = new User;
             $newuser->role_id  = 3;
             $newuser->name = $userSocial->name;
@@ -89,6 +89,7 @@ class LoginController extends Controller
 
             $newuser->save();
             Auth::login($newuser);
+            return redirect()->intended();
         }
         return redirect()->intended();
         // $user->token;
