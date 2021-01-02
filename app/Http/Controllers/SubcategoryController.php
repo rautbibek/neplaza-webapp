@@ -66,12 +66,12 @@ class SubcategoryController extends Controller
 
     //category and category Product
     public function subcategoryFilter($slug){
-        $subcategoryFilter = Scategory::
-                   with(['type','category','status','filter','filter_1','filter_2','filter_3','brand','product'=>function($query){
-                        $query->select('id','scategory_id','created_at','price')->orderBy('price','desc')->first();
-                    }])
+        $subcategoryFilter = cache()->remember('filter-'.$slug,60*60*24,function() use ($slug){ 
+         return Scategory::
+                   with(['type','category','status','filter','filter_1','filter_2','filter_3','brand'])
                    ->where('slug',$slug)
                    ->get();
+        });
         return response()->json($subcategoryFilter,200);
     }
 }

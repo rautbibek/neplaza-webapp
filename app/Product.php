@@ -33,7 +33,7 @@ class Product extends Model
     ];
 
     protected $hidden =[];
-    protected $with=['product_image'];
+    //protected $with=['product_image'];
     protected $appends=[
       'created_date','product_price','product_max_price',
     'is_favorite','product_cover'];

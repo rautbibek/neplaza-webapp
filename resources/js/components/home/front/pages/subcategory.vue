@@ -21,7 +21,7 @@
                 <v-content class="pb-2">
                     <v-toolbar flat>
                       <v-spacer></v-spacer>
-
+                      <!-- mobile view starts form here -->
                        <v-row justify="center">
                         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                           <template v-slot:activator="{ on }">
@@ -57,6 +57,7 @@
                                 :items='city'
                                 :item-text="'name'"
                                 :item-value="'id'"
+                                dense
                                 outlined
                                 clearable
                                 label="District"
@@ -83,17 +84,9 @@
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- price part  -->
-                            <v-card-text v-if="max_price">
+                            <v-card-text >
                               <h5 class="title mb-2">Price Range</h5>
-                              <v-card-text>
-
-                                <v-range-slider @change="slide"
-                                  v-model="price"
-                                  thumb-label
-
-                                  min="0"
-                                  :max="max_price"
-                                ></v-range-slider>
+                              <v-card-text @mouseleave="changing">
                                 <div class="row">
                                   <div class="col">
                                     <v-text-field
@@ -234,7 +227,7 @@
                               <v-divider></v-divider>
                             </div>
 
-                            <div class="p-3" v-if="max_price">
+                            <div class="p-3" >
                               <v-btn @click="filter" color="indigo" dark  tile>
                                 <v-icon left>mdi-filter</v-icon>
                                 Apply Filter
@@ -246,6 +239,9 @@
                           </v-card>
                         </v-dialog>
                       </v-row>
+                      <!-- mobile view end here -->
+
+                      <!-- desktop view starts from here -->
                         <v-col cols="8" lg="3" md="3" sm="6" xs="8">
 
                           <v-select class="mt-4"
@@ -261,8 +257,8 @@
                           ></v-select>
                         </v-col>
                       </v-toolbar>
-                    </v-content>
-                  <!-- end of sorting -->
+                </v-content>
+                <!-- end of sorting -->
                 <v-row wrap no-gutters class="px-2">
                   <v-col cols="12" md="3" lg="3" sm="4" xs="12" class="d-none d-sm-flex">
                     <div class="mt-3">
@@ -273,7 +269,7 @@
                           <v-divider></v-divider>
                             <v-card-text>
                               <h5 class="title mb-2">Location</h5>
-                              <v-autocomplete class="py-2" style="border-radius:0px"
+                              <v-autocomplete class="py-2" 
                                 v-model="city_id"
                                 :items='city'
                                 :item-text="'name'"
@@ -290,7 +286,7 @@
                                   </div>
                               </div>
 
-                              <v-autocomplete class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
+                              <v-autocomplete class="py-1"  v-show="nhood_display && city_id"
                                 v-model="nhood_id"
                                 :items='localArea'
                                 :item-text="'name'"
@@ -304,38 +300,35 @@
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- price part  -->
-                            <v-card-text v-if="max_price">
-                              <h5 class="title mb-2">Price Range</h5>
-                              <v-card-text>
+                            <v-card-text >
+                              <h5 class="title mb-1">Price Range</h5>
+                              
 
-                                <v-range-slider @change="slide"
-                                  v-model="price"
-                                  thumb-label
-
-                                  min="0"
-                                  :max="max_price"
-                                ></v-range-slider>
-                                <div class="row">
-                                  <div class="col">
+                                
+                                <div class="row" >
+                                  <div class="col" @mouseout="changing" >
                                     <v-text-field
-
+                                      outlined
+                                      placeholder="Min"
                                       type="number"
                                       v-model="min_p"
-                                      label="Minimum Price"
-                                      single-line
+                                      label="Min Price"
+                                      
                                     ></v-text-field>
                                   </div>
 
                                   <div class="col text-right">
-                                    <v-text-field @keyup="changing"
+                                    <v-text-field @mouseout="changing"
+                                      outlined
+                                      placeholder="Max"
                                       type="number"
                                       v-model="max_p"
-                                      label="Maximum price"
-                                      single-line
+                                      label="Max price"
+                                      
                                     ></v-text-field>
                                   </div>
                                 </div>
-                              </v-card-text>
+                              
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- PART 2 -->
@@ -455,7 +448,7 @@
                               <v-divider></v-divider>
                             </div>
 
-                            <div class="p-3" v-if="max_price">
+                            <div class="p-3">
                               <v-btn @click="filter" color="indigo" dark tile>
                                 <v-icon left>mdi-filter</v-icon>
                                 Apply Filter
@@ -514,7 +507,7 @@ export default {
         surl:'',
         min_p:'',
         max_p:'',
-        max_price:'',
+        
         category_name:'',
         category_slug:'',
         scategory_name:'',
@@ -541,10 +534,7 @@ export default {
       }
     },
     methods:{
-      slide(){
-        this.min_p= this.price[0];
-        this.max_p = this.price[1];
-      },
+      
       changing(){
         //this.price.push(this.max_p,1)
         this.price[1] = this.max_p;
@@ -590,7 +580,11 @@ export default {
                      this.count = this.all_ads.length;
                      this.all_ads = data.data;
                      this.overlay= false;
-            })
+            }).catch((error) => {
+            if (error.response.status === 404) {
+              window.location.href = '/pageNotFound';
+            }
+          });
       },
       more(nextUrl){
         this.loading=true;
@@ -611,14 +605,9 @@ export default {
                this.scategory_name = this.subcategory[0].name;
                this.url = this.subcategory[0].category.url;
                this.surl = this.subcategory[0].url;
-               this.max_p = this.subcategory[0].product[0].price;
-               this.min_p=0;
-               this.max_price = this.subcategory[0].product[0].price;
-               this.price[0]= 0;
-               this.price[1]= this.max_price;
                this.overlay= false;
-             })
-             .catch()
+             });
+             
       },
       getCity() {
             axios.get(`/all/city`)

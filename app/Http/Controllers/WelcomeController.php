@@ -14,10 +14,6 @@ class WelcomeController extends Controller
         return view('welcome');
     }
 
-    public function check(){
-        return view('check');
-    }
-
     public function city(){
         $city= City::select('id','name')->orderBy('name','ASC')->get();
         return response()->json($city,200);

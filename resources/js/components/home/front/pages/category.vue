@@ -73,7 +73,11 @@ export default {
                      this.category = data[1];
                      this.count = this.all_ads.length;
                      this.overlay= false;
-            })
+            }).catch((error) => {
+            if (error.response.status === 404) {
+              window.location.href = '/pageNotFound'
+            }
+          });
       },
       more(nextUrl){
         this.loading=true;

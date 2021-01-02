@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
+    <link rel="icon" href="{{asset('image/favicon.ico')}}" type="image/ico">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
@@ -29,7 +30,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('custom-css/styles.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('custom-css/styles.css') }}" rel="stylesheet"> -->
     <!-- ===== BOX ICONS ===== -->
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Category;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
@@ -34,6 +35,9 @@ class CategoryController extends Controller
                              ->orderBy('product_count','desc')
                              ->withCount('product')
                              ->get();
+                             foreach ($category as $key => $cat) {
+                              $c = Category::where('id',$cat->id)->update(['product_count'=>$cat->product_count]);
+                            }
         return response()->json($category,200);
     }
 
@@ -79,6 +83,8 @@ class CategoryController extends Controller
       $category->icons = $request->icon;
       $category->url = $request->url;
       $category->save();
+      Cache::forget('menu-category');
+      Cache::forget('meghamenu');
       $message = "Category succefully Saved";
       return response()->json($message,200);
     }
@@ -157,7 +163,8 @@ class CategoryController extends Controller
         $category->icons = $request->icon;
         $category->url = $request->url;
         $category->update();
-
+        Cache::forget('menu-category');
+        Cache::forget('meghamenu');
         return response()->json('category updated succefully ',200);
     }
 
@@ -178,6 +185,8 @@ class CategoryController extends Controller
             Storage::disk('public')->delete('thumb/'.'/'.$category->image);
           }
           $category->delete();
+          Cache::forget('menu-category');
+          Cache::forget('meghamenu');
           return response()->json('Category item deleted succefully ',200);
       }
       return response()->json('Cannot deleted this category it contains '.$category->product->count().' ads',200);

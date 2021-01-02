@@ -3,9 +3,9 @@
     <v-lazy
       v-model="isActive"
       :options="{
-        threshold: 0.2,
+        threshold: 0.1,
       }"
-      min-height="200"
+      
       transition="fade-transition"
     >
       <v-card tile class="ma-2 product-card">

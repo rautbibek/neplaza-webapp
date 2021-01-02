@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Scategory;
+
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,14 +29,16 @@ class HomeController extends Controller
     }
 
     public function subcategory($slug){
-        $subcategory= Scategory::where('slug',$slug)->with('category','brand','type','status','filter','filter_1','filter_2','filter_3')->firstOrFail();
-        return response()->json($subcategory,200);
+        $subcategory = cache()->remember($slug,60*60*24,function() use ($slug){ 
+            return Scategory::where('slug',$slug)->with('category','brand','type','status','filter','filter_1','filter_2','filter_3')->firstOrFail();
+        });
+       return response()->json($subcategory,200);
     }
 
     public function otherSub($slug){
         $subcategory= Scategory::where('slug',$slug)
-                    ->with('category','brand','type','status','filter','filter_1','filter_2','filter_3')
-                    ->get();
+                     ->with('category','brand','type','status','filter','filter_1','filter_2','filter_3')
+                     ->get();
         return response()->json($subcategory,200);
     }
 }

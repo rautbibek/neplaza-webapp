@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function homeProduct(){
+        
         $product = Product::select('id','price','slug','maxprice','title','created_at')
                    ->with(['product_property','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
@@ -23,7 +24,8 @@ class ProductController extends Controller
 
     //homepage urgent product display only 4 products
     public function urgentProduct(){
-        $product= Product::select('id','price','slug','maxprice','title','created_at')
+        $product = cache()->remember('urgent-ads',60*60*24,function(){
+            return Product::select('id','price','slug','maxprice','title','created_at')
                    ->with(['product_property','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
                       }])
@@ -33,6 +35,8 @@ class ProductController extends Controller
                    ->latest()
                    ->take(4)
                    ->get();
+        });
+        
         return response()->json($product,200);
     }
 
@@ -66,14 +70,15 @@ class ProductController extends Controller
     }
 
     public function premium(){
-        $product= Product::select('id','price','premium','maxprice','title','slug','scategory_id','user_id','city_id','nhood_id','created_at')
+        $product = cache()->remember('premium-ads',60*60*24,function(){
+        return Product::select('id','price','premium','maxprice','title','slug','scategory_id','user_id','city_id','nhood_id','created_at')
                   ->where('premium',1)
                   ->where('deleted',false)
                   ->where('sold',false)
                   ->with(['product_property','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
                   }])->take(8)->get();
-
+        });
         return response()->json($product,200);
     }
 

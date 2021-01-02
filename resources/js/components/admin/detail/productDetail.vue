@@ -294,7 +294,7 @@
                         timeout: 3000,
                         position: 'topRight',
                     });
-                    window.location.replace("/admin/product");
+                    
                  })
                  .catch(error=>{
                      this.$toast.error(error.response.data.message,'error' , {
@@ -313,7 +313,7 @@
                         timeout: 3000,
                         position: 'topRight',
                     });
-                    window.location.replace("/admin/product");
+                    
                  })
                  .catch(error=>{
                      this.$toast.error(error.response.data.message,'error' , {
@@ -331,7 +331,7 @@
                         timeout: 3000,
                         position: 'topRight',
                     });
-                    window.location.replace("/admin/product");
+                    
                  })
                  .catch(error=>{
                      this.$toast.error(error.response.data.message,'error' , {
@@ -349,7 +349,7 @@
                         timeout: 3000,
                         position: 'topRight',
                     });
-                    window.location.replace("/admin/product");
+                    
                  })
                  .catch(error=>{
                      this.$toast.error(error.response.data.message,'error' , {

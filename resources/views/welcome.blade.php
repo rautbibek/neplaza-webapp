@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <link rel="icon" href="{{asset('image/favicon.ico')}}" type="image/ico">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bikri Bazzar</title>
+        <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta property="og:title" content="buy and sell anything online">
         <meta property="og:url" content="https://www.bikribazzar.com">
@@ -16,22 +16,7 @@
          <!-- <meta http-equiv="refresh" content="30"> -->
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <style>
-            body{
-                background-color: #f8fafc !important;
-            }
-
-            #loader {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-image: url("{{asset('image/preloader.gif')}}");
-            background-repeat: no-repeat;
-            background-color: #ffffff;
-            background-position: center;
-            text-align: center;
-            align-self: center;
-            z-index: 9999;
-            }
+            
         </style>
     <link rel="stylesheet" href="{{asset('custom-css/style.css')}}" class="rel">
     <link rel="stylesheet" href="{{asset('css/app.css')}}" class="rel">

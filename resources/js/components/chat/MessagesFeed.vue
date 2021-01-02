@@ -1,6 +1,5 @@
 <template>
     <div class="feed" ref="feed">
-        
         <ul v-if="contact">
             <li v-for="message in messages" :key="message.id" class="message" :class="(message.to_id == contact.id)?'sent':'received'">
                 <div class="text" style="p-2">
@@ -60,8 +59,8 @@ export default {
 </script>
 <style scoped lang="scss">
     .feed{
-        min-height: 400px;
-        max-height: 400px;/* or any height you want */
+        min-height: 300px;
+        max-height: 300px;/* or any height you want */
         overflow-y:auto;
         //background-color:#b8babf36;
         }

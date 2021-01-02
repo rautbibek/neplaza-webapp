@@ -2,6 +2,7 @@
 
 namespace App;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,12 +27,13 @@ class Featured extends Model
             DB::table('products')
             ->where('id', $featured->product_id)
             ->update(['premium' => 1]);
+            Cache::forget('premium-ads');
         });
        static::deleted(function($featured){
             DB::table('products')
              ->where('id', $featured->product_id)
              ->update(['premium' => 0]);
-            
+             Cache::forget('premium-ads');
         });
     }
 }

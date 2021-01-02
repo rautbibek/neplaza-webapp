@@ -2,6 +2,7 @@
 
 namespace App;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 class Urgent extends Model
@@ -25,11 +26,13 @@ class Urgent extends Model
             DB::table('products')
             ->where('id', $urgent->product_id)
             ->update(['emergency_sell' => 1]);
+            Cache::forget('urgent-ads');
         });
        static::deleted(function($urgent){
             DB::table('products')
             ->where('id', $urgent->product_id)
             ->update(['emergency_sell' => 0]);
+            Cache::forget('urgent-ads');
         });
     }
 }

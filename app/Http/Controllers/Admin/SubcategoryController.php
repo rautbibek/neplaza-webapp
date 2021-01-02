@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Scategory;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,13 @@ class SubcategoryController extends Controller
     public function create()
     {
         $subcategory = Scategory::orderBy('category_id','asc')->withCount('product')->get();
+        
+        foreach ($subcategory as $key => $scat) {
+          //echo $scat->name .'-'. $scat->product_count."<br>";
+          cache::forget('meghamenu');
+          Scategory::where('id',$scat->id)->update(['product_count'=>$scat->product_count]);
+          
+        }
         return response()->json($subcategory,200);
     }
 

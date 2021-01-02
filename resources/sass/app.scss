@@ -4,6 +4,7 @@
 @import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import "../../public/custom-css/styles.css";
 
 .card-columns {
     @include media-breakpoint-only(lg) {
