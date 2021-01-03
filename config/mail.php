@@ -53,6 +53,10 @@ return [
             'transport' => 'sendinblue',
         ],
 
+        'sendgrid' => [
+            'transport' => 'sendgrid',
+        ],
+
         'mailgun' => [
             'transport' => 'mailgun',
         ],
@@ -88,7 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'rautbibek47@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@bikribazzar.com'),
         'name' => env('MAIL_FROM_NAME', 'Bikri Bazzar'),
     ],
 
@@ -110,5 +114,7 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    
 
 ];

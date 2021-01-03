@@ -6,7 +6,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Events\ProductDeletedEvent;
 use App\product;
-
+use Illuminate\Support\Facades\Cache;
 use App\Product_property;
 use Illuminate\Support\Facades\Auth;
 use App\Http\imageExtractor\ImageResizer;

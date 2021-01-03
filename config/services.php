@@ -26,6 +26,10 @@ return [
         'key' => env('SENDINBLUE_KEY'),
     ],
 
+    'sendgrid' => [
+        'api_key' => env('SENDGRID_API_KEY'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],

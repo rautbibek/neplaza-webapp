@@ -38,7 +38,7 @@ class CategoryController extends Controller
                  ->where('sold',false)
                  ->with(['product_image','product_property','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
-                 }])
+                 }])->latest()
                  ->simplePaginate(20);
                  return response()->json([
                   $product,

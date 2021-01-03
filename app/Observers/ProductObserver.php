@@ -3,6 +3,7 @@
 namespace App\Observers;
 use Illuminate\Support\Str;
 use App\Product;
+use Illuminate\Support\Facades\Cache;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 class ProductObserver
 {
@@ -22,6 +23,7 @@ class ProductObserver
         $product->scategory->increment('product_count');
         $product->city->increment('product_count');
         $product->nhood->increment('product_count');
+        cache::forget('meghamenu');
     }
 
     /**

@@ -5798,67 +5798,6 @@
         "homepage": "https://github.com/sebastianbergmann/version"
     },
     {
-        "name": "sendinblue/api-v3-sdk",
-        "version": "v7.3.0",
-        "version_normalized": "7.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sendinblue/APIv3-php-library.git",
-            "reference": "9eca20295edca98bca842dadcb2218157009c012"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sendinblue/APIv3-php-library/zipball/9eca20295edca98bca842dadcb2218157009c012",
-            "reference": "9eca20295edca98bca842dadcb2218157009c012",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "ext-mbstring": "*",
-            "guzzlehttp/guzzle": "^6.2 || ^7.0",
-            "php": ">=5.6"
-        },
-        "require-dev": {
-            "friendsofphp/php-cs-fixer": "~1.12",
-            "phpunit/phpunit": "^4.8",
-            "squizlabs/php_codesniffer": "~2.6"
-        },
-        "time": "2020-12-29T10:37:24+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "7.x.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "SendinBlue\\Client\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "SendinBlue Developers",
-                "email": "contact@sendinblue.com",
-                "homepage": "https://www.sendinblue.com/"
-            }
-        ],
-        "description": "Official SendinBlue provided RESTFul API V3 php library",
-        "homepage": "https://github.com/sendinblue/APIv3-php-library",
-        "keywords": [
-            "api",
-            "php",
-            "sdk",
-            "sendinblue",
-            "swagger"
-        ]
-    },
-    {
         "name": "socialiteproviders/manager",
         "version": "v3.6",
         "version_normalized": "3.6.0.0",
@@ -8612,68 +8551,6 @@
             "assert",
             "check",
             "validate"
-        ]
-    },
-    {
-        "name": "webup/laravel-sendinblue",
-        "version": "v3.1.0",
-        "version_normalized": "3.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/agence-webup/laravel-sendinblue.git",
-            "reference": "dd1deeb9e114945d592a26fb79de08b38bbb8a3d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/agence-webup/laravel-sendinblue/zipball/dd1deeb9e114945d592a26fb79de08b38bbb8a3d",
-            "reference": "dd1deeb9e114945d592a26fb79de08b38bbb8a3d",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "^6.2|^7.0",
-            "illuminate/mail": "^7.0|^8.0",
-            "sendinblue/api-v3-sdk": "^7.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^8.0|^9.0"
-        },
-        "time": "2020-10-02T18:21:40+00:00",
-        "type": "library",
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "Webup\\LaravelSendinBlue\\SendinBlueServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Webup\\LaravelSendinBlue\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Baptiste Ducatel",
-                "email": "baptiste@agence-webup.com",
-                "homepage": "http://agence-webup.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Laravel's mail transport for SendinBlue",
-        "keywords": [
-            "laravel",
-            "laravel5",
-            "laravel7",
-            "laravel8",
-            "lumen",
-            "mailing",
-            "sendinblue",
-            "stmp"
         ]
     }
 ]

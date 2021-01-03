@@ -15,12 +15,17 @@ class WelcomeController extends Controller
     }
 
     public function city(){
-        $city= City::select('id','name')->orderBy('name','ASC')->get();
+        $city = cache()->remember('city',60*60*24,function(){
+           return City::select('id','name')->orderBy('name','ASC')->get();
+        });
+        
         return response()->json($city,200);
     }
 
     public function nhood($id){
-        $nhood= Nhood::select('id','name')->where('city_id',$id)->orderBy('name','ASC')->get();
+        $nhood = cache()->remember('nhood-'.$id,60*60*24,function() use ($id){ 
+            return Nhood::select('id','name')->where('city_id',$id)->orderBy('name','ASC')->get();
+        });
         return response()->json($nhood,200);
     }
 

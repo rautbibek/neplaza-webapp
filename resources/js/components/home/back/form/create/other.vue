@@ -1,4 +1,8 @@
 <template>
+<div>
+  <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   <v-form ref="form" v-model="valid" lazy-validation>
     <div v-for="(subcategory, index) in sub" :key="index">
       <v-row no-gutters>
@@ -317,6 +321,7 @@
       >
     </v-col>
   </v-form>
+</div>
 </template>
 <script>
 import imageMixins from "../../../../../mixins/common";
