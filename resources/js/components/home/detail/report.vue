@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-btn color="red" @click="report" text>Report ad</v-btn>
+    <v-list-item @mouseover="report">Report This Ad</v-list-item>
+    
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent width="700">
         <v-card>
@@ -128,7 +129,7 @@ export default {
         EventBus.$emit("changeDialog", true);
         return;
       }
-      this.dialog = true;
+     return this.dialog = true;
     },
     postReport() {
       if (this.$refs.form.validate()) {

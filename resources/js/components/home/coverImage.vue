@@ -16,6 +16,16 @@
             ></v-progress-circular>
           </v-row>
         </template>
+        <v-chip
+            small
+            class="mx-5 mb-2  d-sm-none"
+            color="#000000ab"
+            label
+            text-color="white"
+          >
+            Rs. {{ ads.product_price }}
+        {{ ads.product_max_price }}
+          </v-chip>
       </v-img>
     </v-responsive>
   </div>

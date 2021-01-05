@@ -1,9 +1,9 @@
 <template>
-  <v-app>
+  <v-app style="margin:0px; padding:0px">
     <v-main>
       <!-- <system-bar></system-bar> -->
       <top-bar></top-bar>
-      <nav-bar></nav-bar>
+      <nav-bar ></nav-bar> 
       <div style="min-height:400px">
         <router-view></router-view>
       </div>

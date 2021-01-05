@@ -1,6 +1,6 @@
 <template>
   <div v-if="count > 0" class="urgent-container">
-    <v-container class="py-0">
+    <v-container >
       <p class="featured-title text-center">
         Urgent Products
         <!-- <v-btn
@@ -18,32 +18,46 @@
       </p>
     </v-container>
     <v-container class="pb-14">
-      <v-layout row wrap class="px-4">
-        <v-overlay :value="overlay">
-          <v-progress-circular indeterminate size="64"></v-progress-circular>
-        </v-overlay>
-        <v-flex
-          xs12
-          sm6
-          md4
-          lg3
-          xl2
-          v-for="(ads, index) in all_ads"
-          :key="index"
-        >
-          <card-lazy :ads="ads"></card-lazy>
-        </v-flex>
-      </v-layout>
+          <v-slide-group
+            v-model="model"
+            center-active
+            show-arrows
+    >
+      <v-slide-item
+        v-for="(feature, index) in all_ads"
+        :key="index"
+         >
+        <v-card class="card product-card ma-2" width="250"
+          >
+              <!-- <favorite
+                :is_favorite="feature.favorite_to_users.length ? true : false"
+                :product_id="feature.id"
+              ></favorite>  -->
+              <!-- image part -->
+              <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
+                <v-img
+                  class="white--text align-end"
+                  height="190px"
+                  :src="feature.product_cover"
+                >
+                </v-img>
+                <card-title :ads="feature"></card-title>
+              </router-link>
+        </v-card>
+      </v-slide-item>
+    </v-slide-group>
     </v-container>
   </div>
 </template>
 <script>
+
 export default {
   data() {
     return {
       all_ads: [],
       overlay: false,
       count: 0,
+      model: null,
     };
   },
   methods: {

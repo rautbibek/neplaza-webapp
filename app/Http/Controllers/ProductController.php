@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function homeProduct(){
         
         $product = Product::select('id','price','slug','maxprice','title','created_at')
-                   ->with(['product_property','favorite_to_users'=>function($query){
+                   ->with(['product_property','image','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
                       }])
                    ->where('deleted',false)
@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function urgentProduct(){
         $product = cache()->remember('urgent-ads',60*60*24,function(){
             return Product::select('id','price','slug','maxprice','title','created_at')
-                   ->with(['product_property','favorite_to_users'=>function($query){
+                   ->with(['product_property','image','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
                       }])
                    ->where('emergency_sell',true)
@@ -43,7 +43,7 @@ class ProductController extends Controller
     //all urgent product  display with simaple pagination
     public function urgent(){
         $product = Product::select('id','price','slug','maxprice','title','created_at')
-                 ->with(['product_property','favorite_to_users'=>function($query){
+                 ->with(['product_property','image','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
                  ->where('emergency_sell',true)
@@ -57,7 +57,7 @@ class ProductController extends Controller
 
     public function allProduct(){
         $product = Product::select('id','price','slug','maxprice','title','created_at')
-                 ->with(['product_property','favorite_to_users'=>function($query){
+                 ->with(['product_property','image','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
                  ->where('deleted',false)
@@ -75,7 +75,7 @@ class ProductController extends Controller
                   ->where('premium',1)
                   ->where('deleted',false)
                   ->where('sold',false)
-                  ->with(['product_property','favorite_to_users'=>function($query){
+                  ->with(['product_property','image','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
                   }])->take(8)->get();
         });
@@ -87,7 +87,7 @@ class ProductController extends Controller
                 ->where('premium',1)
                 ->where('deleted',false)
                 ->where('sold',false)
-                ->with(['product_property','favorite_to_users'=>function($query){
+                ->with(['product_property','image','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                 }])->simplePaginate(20);
         return response()->json($product,200);

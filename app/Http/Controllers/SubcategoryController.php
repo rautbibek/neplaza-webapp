@@ -47,7 +47,7 @@ class SubcategoryController extends Controller
         $p = $product->where('scategory_id',$scategory->id)
                   ->where('deleted',false)
                   ->where('sold',false)
-                  ->with(['product_property','favorite_to_users'=>function($query){
+                  ->with(['product_property','image','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
                   ->simplePaginate(15)->appends([

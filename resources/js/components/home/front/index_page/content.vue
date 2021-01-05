@@ -1,18 +1,18 @@
 <template>
   <v-card tile flat>
-    <v-container class="py-0">
+    <v-container >
       <p class="featured-title text-center">Recent Listing</p>
     </v-container>
     <div>
       <v-container>
-        <v-layout row wrap class="px-4">
+        <v-layout row wrap >
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
           </v-overlay>
           <v-flex
-            xs12
+            xs6
             sm6
-            md3
+            md4
             lg3
             xl2
             v-for="(ads, index) in all_ads"

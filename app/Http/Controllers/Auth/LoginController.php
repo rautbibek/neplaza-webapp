@@ -5,6 +5,8 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use URL;
+use Session;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -43,6 +45,8 @@ class LoginController extends Controller
 
     public function redirectToProvider($provider)
     {
+        Session::put('previous_url', url()->previous());
+        
         if($provider == 'facebook' || $provider =='google' || $provider == 'twitter'){
           return Socialite::driver($provider)->redirect();
         }else{
@@ -58,16 +62,20 @@ class LoginController extends Controller
     public function handleProviderCallback($provider)
     {
 
-        $userSocial = Socialite::driver($provider)->user();
+        
+        $userSocial = Socialite::driver($provider)->stateless()->user();
+        
+       // $userSocial = Socialite::driver($provider)->user();
         $isUser = User::where('email',$userSocial->email)->first();
         if($isUser){
-            Auth::login($isUser);
-            return redirect()->intended();
+            Auth::login($isUser);  
+            return redirect()->intended(session('previous_url'));
         }
         $user = User::where('provider_id',$userSocial->id)->first();
         if($user){
             Auth::login($user);
-            return redirect()->intended();
+            return redirect()->intended(session('previous_url'));
+            
         }else{
             $newuser = new User;
             $newuser->role_id  = 3;
@@ -89,9 +97,9 @@ class LoginController extends Controller
 
             $newuser->save();
             Auth::login($newuser);
-            return redirect()->intended();
+            return redirect()->intended(session('previous_url'));
         }
-        return redirect()->intended();
+        return redirect()->intended(session('previous_url'));
         // $user->token;
     }
     public function username(){

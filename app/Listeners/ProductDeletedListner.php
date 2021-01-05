@@ -28,10 +28,10 @@ class ProductDeletedListner
     public function handle($event)
     {
       $p = Product::findOrFail($event->product->id);
-      $p->category->decrement('product_count');
-      $p->scategory->decrement('product_count');
-      $p->city->decrement('product_count');
-      $p->nhood->decrement('product_count');
+      //$p->category->decrement('product_count');
+      //$p->scategory->decrement('product_count');
+      //$p->city->decrement('product_count');
+      //$p->nhood->decrement('product_count');
       Cache::forget('urgent-ads');
       Cache::forget('premium-ads');
       cache::forget('meghamenu');

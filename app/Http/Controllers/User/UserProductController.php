@@ -20,7 +20,7 @@ class UserProductController extends Controller
                 ->where('deleted',false)
                 ->where('sold',false)
                 ->latest()
-                ->with('product_property','product_image')->simplePaginate(12);
+                ->with('product_property','image')->simplePaginate(12);
         return response()->json($product,200);
     }
 
@@ -28,7 +28,7 @@ class UserProductController extends Controller
         $user_id = Auth::user()->id;
       //$fav_product = Product::;
       $fav = Auth::user()->with(
-      'favourit_products.product_image','favourit_products.product_property')->where('id',$user_id)->get();
+      'favourit_products.image','favourit_products.product_property')->where('id',$user_id)->get();
       return response()->json($fav,200);
     }
 
@@ -40,7 +40,7 @@ class UserProductController extends Controller
                 ->where('sold',false)
                 ->where('premium',true)
                 ->latest()
-                ->with('product_property','product_image','featured')->simplePaginate(16);
+                ->with('product_property','image','featured')->simplePaginate(16);
         return response()->json($product,200);
     }
 
@@ -50,7 +50,7 @@ class UserProductController extends Controller
                 ->where('user_id',$user_id)
                 ->where('sold',true)
                 ->latest()
-                ->with('product_property','product_image')->simplePaginate(16);
+                ->with('product_property','image')->simplePaginate(16);
         return response()->json($product,200);
     }
 
@@ -60,7 +60,7 @@ class UserProductController extends Controller
                 ->where('user_id',$user_id)
                 ->where('deleted',true)
                 ->latest()
-                ->with('product_property','product_image')->simplePaginate(16);
+                ->with('product_property','image')->simplePaginate(16);
         return response()->json($product,200);
     }
 
@@ -70,7 +70,7 @@ class UserProductController extends Controller
                 ->where('user_id',$user_id)
                 ->where('emergency_sell',true)
                 ->latest()
-                ->with('product_property','product_image','urgent')->simplePaginate(16);
+                ->with('product_property','image','urgent')->simplePaginate(16);
         return response()->json($product,200);
     }
 }

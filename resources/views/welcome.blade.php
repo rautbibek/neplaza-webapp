@@ -32,8 +32,10 @@
         </div>
         <div id="myDiv" style="min-height: 300px">
             <div id="app">
+                
                 <main-component></main-component>
             </div>
+            
         </div>
 
     </body>

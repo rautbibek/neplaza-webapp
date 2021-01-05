@@ -47,8 +47,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
-
         $product= $request->user()->product()->create($request->except('image'));
         $p_prop = new Product_property();
         $p_prop->product_id = $product->id;

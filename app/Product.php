@@ -33,13 +33,17 @@ class Product extends Model
     ];
 
     protected $hidden =[];
-    //protected $with=['product_image'];
+    //protected $with=['image'];
     protected $appends=[
       'created_date','product_price','product_max_price',
     'is_favorite','product_cover'];
 
     public function product_image(){
       return $this->hasMany('App\Product_image')->select('id','image','product_id');
+    }
+
+    public function image(){
+      return $this->hasOne('App\Product_image')->select('id','image','product_id');
     }
 
     public function category(){
@@ -145,9 +149,9 @@ class Product extends Model
 
 
     public function getProductCoverAttribute(){
-      $count = $this->product_image->count();
-      if($count>0){
-        return asset('storage/thumb/'.$this->product_image[0]->image);
+      
+      if($this->image != null){
+        return asset('storage/thumb/'.$this->image->image);
       }else{
         return asset('image/no-image.jpg');
       }

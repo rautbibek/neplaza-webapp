@@ -1,5 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#2F3B59">
+<div>
+  <div>
+      <nav class="navbar navbar-expand-lg navbar-dark d-none d-sm-flex" style="background-color:#2F3B59">
     <ul class="navbar-nav pad">
       <li class="nav-item mr-auto menu-area">
         <a
@@ -72,6 +74,9 @@
       </ul>
     </div>
   </nav>
+  </div>
+</div>
+  
 </template>
 
 
@@ -175,4 +180,5 @@ export default {
   background: #19916b;
   color: #fff;
 }
+
 </style>

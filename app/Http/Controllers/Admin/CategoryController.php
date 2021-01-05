@@ -36,7 +36,7 @@ class CategoryController extends Controller
                              ->withCount('product')
                              ->get();
                              foreach ($category as $key => $cat) {
-                              $c = Category::where('id',$cat->id)->update(['product_count'=>$cat->product_count]);
+                               Category::where('id',$cat->id)->update(['product_count'=>$cat->product_count]);
                             }
         return response()->json($category,200);
     }

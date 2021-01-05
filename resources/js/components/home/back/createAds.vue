@@ -18,7 +18,10 @@
       <v-expansion-panels>
         <v-expansion-panel v-for="(category, index) in categories" :key="index">
           <v-expansion-panel-header>
-            {{ category.name }}
+            <v-icon style="display:block;" :to="`/category/${category.slug}`"
+            left
+            medium
+          >{{category.icons}}</v-icon>{{ category.name }}
           </v-expansion-panel-header>
           <v-expansion-panel-content class="panel-content">
             <ul class="list-group">
@@ -85,5 +88,8 @@ export default {
 }
 a:hover {
   color: #19916b;
+}
+.v-expansion-panel-header > *:not(.v-expansion-panel-header__icon) {
+    flex: none;
 }
 </style>

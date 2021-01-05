@@ -18,7 +18,9 @@ class CategoryController extends Controller
 
     public function subCategory(){
         $subcategory = cache()->remember('meghamenu',60*60*24,function(){
-          return Category::select('id','name','slug','icons','product_count')->with('scategory')->get();
+          return Category::select('id','name','slug','icons','product_count')->with(['scategory'=>function($q){
+            $q->withCount('product');
+          }])->get();
         });
         return response()->json($subcategory,200);
 
@@ -27,7 +29,7 @@ class CategoryController extends Controller
 
     //category and category Product
     public function categoryProduct($slug){
-        $category = Category::where('slug',$slug)->firstOrFail(['id','name','slug']);
+        $category = Category::where('slug',$slug)->with('scategory')->firstOrFail(['id','name','slug']);
         if(!Session::has($slug)){
             $category->increment('view_count');
             Session::put($slug,1);
@@ -36,7 +38,7 @@ class CategoryController extends Controller
                  ->where('category_id',$category->id)
                  ->where('deleted',false)
                  ->where('sold',false)
-                 ->with(['product_image','product_property','favorite_to_users'=>function($query){
+                 ->with(['image','product_property','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                  }])->latest()
                  ->simplePaginate(20);

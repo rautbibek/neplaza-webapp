@@ -65,6 +65,9 @@ export default {
     },
   },
   created() {
+    EventBus.$on("profileChanged", data => {
+      this.userProfile()
+    });
     if (!this.loggedIn) {
       this.$router.push("/");
       EventBus.$emit("changeDialog", true);

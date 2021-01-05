@@ -20,11 +20,6 @@ return [
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
-    'sendinblue' => [
-        // api-key or partner-key
-        'key_identifier' => env('SENDINBLUE_KEY_IDENTIFIER', 'api-key'),
-        'key' => env('SENDINBLUE_KEY'),
-    ],
 
     'sendgrid' => [
         'api_key' => env('SENDGRID_API_KEY'),

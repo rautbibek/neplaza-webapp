@@ -139,6 +139,7 @@ export default {
     this.total_unread_count();
   },
   created() {
+    
     EventBus.$on("updateMessageNotification", (data) => {
       this.total_unread_count();
     });

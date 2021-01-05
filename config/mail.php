@@ -49,10 +49,6 @@ return [
             'transport' => 'ses',
         ],
 
-        'sendinblue' => [
-            'transport' => 'sendinblue',
-        ],
-
         'sendgrid' => [
             'transport' => 'sendgrid',
         ],

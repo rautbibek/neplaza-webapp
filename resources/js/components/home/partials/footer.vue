@@ -25,7 +25,7 @@
 
                   <div class="col-6 col-md text-left ">
                     <div >
-                      <h5 class="ml-5 text-muted">NEPLAZA</h5>
+                      <h5 class="ml-5 text-muted">BIKRIBAZZAR</h5>
                       <ul class="list-unstyled text-small">
                         <li><router-link class="text-light" to="/contact/us" >Contact Us</router-link></li>
                         <li><router-link class="text-light" to="/about/us" >About Us</router-link></li>
@@ -90,7 +90,7 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text text-center">
-        &#9400; 2020-{{ new Date().getFullYear() }} - <strong>Neplaza</strong> All rights reservd
+        &#9400; 2020-{{ new Date().getFullYear() }} - <strong>Bikribazzar</strong> All rights reservd
       </v-card-text>
     </v-card>
   </v-footer>

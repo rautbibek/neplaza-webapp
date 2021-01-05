@@ -259,17 +259,19 @@ export default {
         axios
           .post(`/update/cover`, formData, config)
           .then((response) => {
-            this.userProfile();
             this.overlay = false;
             this.dialog = false;
+            this.form.reset();
             this.$toast.success(response.data, "success", {
               timeout: 3000,
               position: "topRight",
             });
+            this.freshUser();
+
           })
           .catch((error) => {
             if (error.response.status === 422) {
-              this.overlay = fale;
+              this.overlay = false;
               if (error.response.data.errors.image.length > 0) {
                 this.$toast.error(
                   error.response.data.errors.image[0],
@@ -330,6 +332,9 @@ export default {
           this.getNhood();
         })
         .catch();
+    },
+    freshUser(){
+      EventBus.$emit("profileChanged", true);
     },
 
     getNhood() {

@@ -12,12 +12,12 @@
     </p>
     <!-- category name part -->
     <div class="d-flex">
-      <v-chip class="category ad-price" outlined small label>
+      <v-chip  class="category ad-price d-none d-sm-flex" outlined small label>
         Rs. {{ ads.product_price }}
         {{ ads.product_max_price }}
       </v-chip>
       <v-chip class="category text-capitalize" outlined small label>
-        {{ ads.product_property.user_name }}
+        <v-icon x-small left>mdi-account-circle</v-icon>{{ ads.product_property.user_name }}
       </v-chip>
     </div>
   </div>

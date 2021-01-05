@@ -20,27 +20,29 @@
             :from_details="true"
             :is_favorite="ad.favorite_to_users.length > 0 ? true : false"
           ></favorite>
-          <v-menu offset-y>
+          <v-menu offset-y close-on-content-click>
             <template v-slot:activator="{ on, attrs }">
               <v-icon class="ml-1" v-bind="attrs" v-on="on"
                 >mdi-dots-vertical</v-icon
               >
             </template>
             <v-list class="other-options">
-              <v-list-item>Copy Product ID</v-list-item>
-              <div v-if="ad.user_id === ad.user.id">
-                <v-list-item>Edit Image</v-list-item>
-                <v-list-item>Edit Details</v-list-item>
-                <v-list-item>Delete</v-list-item>
-                <v-list-item>Mark as Sold Out</v-list-item>
+              <v-list-item @click="copy(ad.productid)">Copy Product ID</v-list-item>
+              <div v-if="loggedIn">
+                <div v-if="loginUser.id === ad.user_id">
+                  <v-list-item route :to="`/edit/ad/${ad.id}/image`">Edit Image</v-list-item>
+                  <v-list-item route :to="`/edit/${ad.id}/ad`">Edit Details</v-list-item>
+                  <v-list-item @click="softDelete(ad)">Delete</v-list-item>
+                  <v-list-item @click="soldOut(ad)">Mark as Sold Out</v-list-item>
+                </div>
               </div>
-              <v-list-item v-else>Report</v-list-item>
+              <div><report-ad :ads='ad'></report-ad></div>
             </v-list>
           </v-menu>
         </div>
       </div>
       <v-card-title class="text-capitalize product-title">{{
-        ad.title
+        ad.title 
       }}</v-card-title>
       <p class="">
         <v-icon color="#19916b" small>mdi-map-marker-circle</v-icon>
@@ -93,6 +95,54 @@ export default {
       return window.location.href;
     },
   },
+  methods:{
+    softDelete(ads) {
+      if (
+        confirm(
+          "Are you sure you want to delete this? You can still recover the item later."
+        )
+      ) {
+        this.overlay = true;
+        axios
+          .put(`/trash/ad/${ads.id}`)
+          .then((response) => {
+            this.$toast.success(response.data, "success", {
+              timeout: 3000,
+              position: "topRight",
+            });
+            window.location.href = "/myads/deleted";
+            this.overlay = false;
+          })
+          .catch();
+      }
+    },
+    soldOut(ads) {
+      this.overlay = true;
+      axios
+        .put(`/sold/ad/${ads.id}`)
+        .then((response) => {
+          this.$toast.success(response.data, "success", {
+            timeout: 3000,
+            position: "topRight",
+          });
+          window.location.href = "/myads/soldout";
+          this.overlay = false;
+        })
+        .catch();
+    },
+    copy(productId){
+      console.log(productId);
+      try{
+        navigator.clipboard.writeText(productId)
+        this.$toast.success(' to clipboard <b>'+ productId+" </b>" , "Copied", {
+            timeout: 15000,
+            position: "topRight",
+          });
+      }catch(e){
+        throw e;
+      }
+    },
+  }
 };
 </script>
 <style scoped>

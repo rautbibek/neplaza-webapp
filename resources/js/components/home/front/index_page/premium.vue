@@ -1,39 +1,26 @@
 <template>
-  <div v-if="count > 0">
+  <div  v-if="count > 0">
     <v-container class="py-0">
       <p class="featured-title text-center">Featured Products</p>
     </v-container>
     <div class="container mb-14">
       <v-container>
-        <sliders
-          style="margin: 0px; padding: 0px"
-          :autoplay="true"
-          :autoplayHoverPause="true"
-          :scrollPerPage="false"
-          :loop="true"
-          :spacePadding="1"
-          :navigationEnabled="true"
-          :paginationEnabled="true"
-          :responsive="true"
-          :perPageCustom="[
-            [300, 1],
-            [500, 2],
-            [600, 4],
-          ]"
-          class="row"
-        >
-          <slide
+        <v-slide-group
+            v-model="model"
+            center-active
+            show-arrows
+    >
+          <v-slide-item
             v-for="(feature, index) in featured"
             :key="index"
-            class="col-md-3 col-sm-6 featured-card"
-            router
-            :to="`/`"
+            
+           
           >
-            <v-card class="card product-card">
-              <favorite
+            <v-card class="card product-card ma-2" width="250">
+              <!-- <favorite
                 :is_favorite="feature.favorite_to_users.length ? true : false"
                 :product_id="feature.id"
-              ></favorite>
+              ></favorite> -->
               <!-- image part -->
               <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
                 <v-img
@@ -45,8 +32,8 @@
                 <card-title :ads="feature"></card-title>
               </router-link>
             </v-card>
-          </slide>
-        </sliders>
+          </v-slide-item>
+        </v-slide-group>
       </v-container>
       <v-container class="button-container">
         <v-btn
