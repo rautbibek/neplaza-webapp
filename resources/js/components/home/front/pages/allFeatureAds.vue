@@ -11,9 +11,9 @@
         </v-overlay>
       <div class="">
         <v-container>
-            <v-layout row wrap class="px-4">
+            <v-layout row wrap >
             
-                <v-flex xs12 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
+                <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
                     <card-lazy :ads="ads"></card-lazy>
                 </v-flex>
             

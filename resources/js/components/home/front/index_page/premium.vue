@@ -65,6 +65,7 @@ export default {
     return {
       featured: [],
       count: 0,
+      model:null,
     };
   },
   methods: {

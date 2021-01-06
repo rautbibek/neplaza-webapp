@@ -61,9 +61,11 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-
-        
-        $userSocial = Socialite::driver($provider)->stateless()->user();
+        try{
+            $userSocial = Socialite::driver($provider)->user();
+        }catch(\Exception $exception){
+            return view('auth.login')->withMessage('something went wrong with '.$provider. ' provider please try login again ');
+        }
         
        // $userSocial = Socialite::driver($provider)->user();
         $isUser = User::where('email',$userSocial->email)->first();

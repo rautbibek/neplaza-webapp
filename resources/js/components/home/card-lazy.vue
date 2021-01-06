@@ -8,7 +8,7 @@
       
       transition="fade-transition"
     >
-      <v-card tile class="ma-2 product-card" :width="width">
+      <v-card tile class="ma-1 product-card" >
         <favorite
           :is_favorite="ads.favorite_to_users.length ? true : false"
           :product_id="ads.id"
@@ -32,16 +32,6 @@ export default {
       isActive: false,
     };
   },
-  computed: {
-      width () {
-        switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 200
-          case 'sm': return 
-          case 'md': return 
-          case 'lg': return 
-          case 'xl': return 
-        }
-      },
-    },
+  
 };
 </script>

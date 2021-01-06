@@ -4,7 +4,7 @@
       <v-img
         style="position: relative"
         class="white--text align-end"
-        height="190px"
+        :height="height"
         :src="ads.product_cover"
         :lazy-src="ads.product_cover"
       >
@@ -16,16 +16,7 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        <v-chip
-            small
-            class="mx-5 mb-2  d-sm-none"
-            color="#000000ab"
-            label
-            text-color="white"
-          >
-            Rs. {{ ads.product_price }}
-        {{ ads.product_max_price }}
-          </v-chip>
+        
       </v-img>
     </v-responsive>
   </div>
@@ -43,5 +34,16 @@ export default {
     //   return this.show =false;
     // }
   },
+  computed: {
+      height () {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return '170px'
+          case 'sm': return '190px'
+          case 'md': return '190px'
+          case 'lg': return '190px'
+          case 'xl': return '190px'
+        }
+      },
+    },
 };
 </script>

@@ -2,9 +2,14 @@
   <div class="ad-card-body">
     <v-card-text text-left class="text-capitalize">
       <p class="d-inline-block text-truncate ad-title text-black">
-        {{ ads.title }}
+        Rs. {{ ads.product_price }}
+        {{ ads.product_max_price }}
       </p>
     </v-card-text>
+    <v-card-subtitle class="text-capitalize pt-2"><div class="text--primary text-truncate py-1">
+        {{ads.title}}
+    </div></v-card-subtitle>
+    
     <p class="text-black ad-address">
       <v-icon color="#19916b" small>mdi-map-marker-circle</v-icon>
       {{ ads.product_property.nhood_name }},
@@ -12,11 +17,10 @@
     </p>
     <!-- category name part -->
     <div class="d-flex">
-      <v-chip  class="category ad-price d-none d-sm-flex" outlined small label>
-        Rs. {{ ads.product_price }}
-        {{ ads.product_max_price }}
+      <v-chip  class="category ad-price " outlined small label>
+        <v-icon x-small>query_builder</v-icon> &nbsp; {{ ads.created_date}}
       </v-chip>
-      <v-chip class="category text-capitalize" outlined small label>
+      <v-chip class="category text-capitalize d-none d-sm-flex" outlined small label>
         <v-icon x-small left>mdi-account-circle</v-icon>{{ ads.product_property.user_name }}
       </v-chip>
     </div>

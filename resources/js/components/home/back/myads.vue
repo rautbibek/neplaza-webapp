@@ -47,7 +47,7 @@
               xs12
               sm6
               md4
-              lg4
+              lg3
               xl2
               v-for="(ads, index) in my_ads"
               :key="index"

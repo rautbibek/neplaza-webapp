@@ -82,7 +82,7 @@ export default {
 <style scoped>
 .favourite {
   right: 8px;
-  bottom: 8px;
+  bottom: 20px;
 }
 .favourite-icon i {
   font-size: 24px !important;
