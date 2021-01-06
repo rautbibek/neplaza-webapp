@@ -8,7 +8,7 @@
       
       transition="fade-transition"
     >
-      <v-card tile class="ma-1 product-card" >
+      <v-card class="ma-2 product-card" outlined>
         <favorite
           :is_favorite="ads.favorite_to_users.length ? true : false"
           :product_id="ads.id"

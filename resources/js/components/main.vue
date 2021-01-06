@@ -1,5 +1,5 @@
 <template>
-  <v-app style="margin:0px; padding:0px">
+  <v-app style="margin:0px; padding:0px background:#00000000">
     <v-main>
       <!-- <system-bar></system-bar> -->
       <top-bar></top-bar>
@@ -16,6 +16,7 @@
   </v-app>
 </template>
 <script>
+
 export default {
   data() {
     return {
@@ -24,3 +25,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .theme--light.v-application{
+    background:#00000000;
+    color:#002f34;
+  }
+</style>

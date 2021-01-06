@@ -41,7 +41,7 @@
         <div class="py-5" v-if="count>0">
 
             <v-container>
-                <v-layout row wrap >
+                <v-layout row wrap class="px-1">
                 
                 <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
                     <card-lazy :ads="ads"></card-lazy>

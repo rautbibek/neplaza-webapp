@@ -16,7 +16,7 @@
         </v-overlay>
         <div class="py-2" >
 
-            <v-content class="px-3">
+            <v-content class="px-0">
               <!-- sorting -->
                 <v-content class="pb-2">
                     <v-toolbar flat>
