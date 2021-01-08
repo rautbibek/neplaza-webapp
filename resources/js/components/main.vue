@@ -26,8 +26,8 @@ export default {
 };
 </script>
 <style scoped>
-  .theme--light.v-application{
+  /* .theme--light.v-application{
     background:#00000000;
     color:#002f34;
-  }
+  } */
 </style>

@@ -5,11 +5,11 @@
     </v-container>
     <div>
       <v-container>
-        <v-layout row wrap >
+        <v-layout row wrap class="px-1">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
           </v-overlay>
-          <v-flex
+          <v-flex 
             xs6
             sm6
             md4

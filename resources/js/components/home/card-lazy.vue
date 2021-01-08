@@ -8,7 +8,7 @@
       
       transition="fade-transition"
     >
-      <v-card class="ma-2 product-card" outlined>
+      <v-card class="product-card" outlined style="margin:5px">
         <favorite
           :is_favorite="ads.favorite_to_users.length ? true : false"
           :product_id="ads.id"
@@ -32,6 +32,7 @@ export default {
       isActive: false,
     };
   },
+  
   
 };
 </script>

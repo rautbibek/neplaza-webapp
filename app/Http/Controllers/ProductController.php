@@ -33,7 +33,7 @@ class ProductController extends Controller
                    ->where('deleted',false)
                    ->where('sold',false)
                    ->latest()
-                   ->take(4)
+                   ->take(8)
                    ->get();
         });
         

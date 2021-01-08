@@ -1,66 +1,54 @@
 <template>
   <div  v-if="count > 0">
-    <v-container class="py-0">
-      <p class="featured-title text-center">Featured Products</p>
-    </v-container>
-    <div class="container mb-14">
+    
+    <div class="container">
       <v-container>
-        <v-slide-group
-            v-model="model"
-            center-active
-            show-arrows
-    >
-          <v-slide-item
-            v-for="(feature, index) in featured"
-            :key="index"
-            
-           
-          >
-            <v-card class="card product-card ma-2" width="250">
-              <!-- <favorite
-                :is_favorite="feature.favorite_to_users.length ? true : false"
-                :product_id="feature.id"
-              ></favorite> -->
-              <!-- image part -->
-              <router-link :to="`/ad/detail/${feature.id}/${feature.slug}`">
+        <p class="featured-title text-center">Featured Products</p>
+        <div class="px-2">
+            <vue-horizontal :button-between="false">
+            <section v-for="(ads,index) in featured" :key="index" style="margin:5px; padding:0xp">
+             <v-card class="card product-card" >
+             
+              <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                 <v-img
                   class="white--text align-end"
                   height="190px"
-                  :src="feature.product_cover"
+                  :src="ads.product_cover"
                 >
                 </v-img>
-                <card-title :ads="feature"></card-title>
+                <card-title :ads="ads"></card-title>
               </router-link>
             </v-card>
-          </v-slide-item>
-        </v-slide-group>
+              
+            </section>
+            <section v-if="count > 7">
+                <v-col  class="text-center " style=" margin-top:170px">
+                  <router-link :to="`/feature/ads`">
+                  <v-card-title >Veiw all<v-btn
+                    class="mx-2"
+                    fab
+                    light
+                    small
+                  >
+                    <v-icon light>
+                      keyboard_arrow_right
+                    </v-icon>
+                  </v-btn></v-card-title>
+                  </router-link>
+                </v-col>
+            </section>
+          </vue-horizontal>
+          </div>
       </v-container>
-      <v-container class="button-container">
-        <v-btn
-          color="#0c1963"
-          dark
-          tile
-          class="mt-10"
-          router
-          :to="`/feature/ads`"
-          v-if="count > 6"
-        >
-          view all
-          <v-icon right>keyboard_arrow_right</v-icon>
-        </v-btn>
-      </v-container>
+      
     </div>
   </div>
 </template>
 
 <script>
-import { Carousel, Slide } from "vue-carousel";
-
+import VueHorizontal from "vue-horizontal";
 export default {
-  components: {
-    sliders: Carousel,
-    Slide,
-  },
+  components: {VueHorizontal},
   data() {
     return {
       featured: [],
@@ -97,6 +85,41 @@ export default {
 }
 .featured-card {
   padding: 0px 12px;
+}
+section >div {
+  padding: 0px 0px;
+  width: 100%;
+  margin-right: 5px;
+}
+.v-hl-responsive{
+  margin:5px;
+}
+@media (min-width: 300px) {
+  section {
+    width: calc((100% - (24px)) / 1);
+  }
+}
+@media (min-width: 360px) {
+  section {
+    width: calc((100% - (24px)) / 2);
+  }
+}
+@media (min-width: 640px) {
+  section {
+    width: calc((100% - (24px)) / 2);
+  }
+}
+
+@media (min-width: 768px) {
+  section {
+    width: calc((100% - (2 * 24px)) / 3);
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    width: calc((100% - (3 * 24px)) / 4);
+  }
 }
 </style>
 

@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
         $product = Product::select('id','productid','premium','sold',
         'emergency_sell','user_id','title','category_id','deleted','created_at')
-        ->with(['user','category','featured','urgent']);
+        ->with(['user','category','featured','urgent','product_image']);
 
         if(request()->has('premium') && request('premium') !== null){
             $product->where('premium',request('premium'));
@@ -85,7 +85,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $ad = Product::with('user','featured','urgent','report')->where('id',$id)->first();
+        $ad = Product::with('user','featured','urgent','report','product_image')->where('id',$id)->first();
         //return $ad;
         return view('admin.detail.adDetail',compact('ad'));
     }
