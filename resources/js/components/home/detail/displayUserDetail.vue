@@ -1,9 +1,12 @@
 <template>
   <div>
+    
     <v-card>
+      
       <div class="flex">
         <small>{{ ad.created_date }}</small>
         <div>
+          <Message :seller="owner"/>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs" v-on="on" class="mr-2"
@@ -20,6 +23,7 @@
             :from_details="true"
             :is_favorite="ad.favorite_to_users.length > 0 ? true : false"
           ></favorite>
+          
           <v-menu offset-y close-on-content-click>
             <template v-slot:activator="{ on, attrs }">
               <v-icon class="ml-1" v-bind="attrs" v-on="on"
@@ -39,25 +43,32 @@
               <div><report-ad :ads='ad'></report-ad></div>
             </v-list>
           </v-menu>
+          
         </div>
       </div>
       <v-card-title class="text-capitalize product-title">{{
         ad.title 
       }}</v-card-title>
+      
       <p class="">
         <v-icon color="#19916b" small>mdi-map-marker-circle</v-icon>
         {{ ad.address }}, {{ ad.product_property.nhood_name }},
         {{ ad.product_property.city_name }}
+        
       </p>
       <p class="pre-formatted product-description" v-html="ad.description"></p>
       <p class="price">Rs. {{ ad.product_price }} {{ ad.product_max_price }}</p>
+      
     </v-card>
     <!-- user information -->
     <v-card class="card-user" :to="`/seller/${ad.user.id}/${ad.user.username}`">
+    
       <v-avatar size="100">
         <img :src="ad.user.cover" :alt="ad.user.name" />
       </v-avatar>
+      
       <div class="product-username">
+        
         <p class="owner mb-1">Owner</p>
         <p class="user-name d-flex mb-1">
           {{ ad.user.name }}
@@ -78,6 +89,7 @@
         >
       </div>
     </v-card>
+    
   </div>
 </template>
 <script>

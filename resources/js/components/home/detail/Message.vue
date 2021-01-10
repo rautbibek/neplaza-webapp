@@ -17,8 +17,8 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-message</v-icon>
-
+              <v-icon >mdi-message</v-icon>
+             
             </v-btn>
           </template>
               <v-card

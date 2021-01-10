@@ -17,8 +17,7 @@ class ProductController extends Controller
                    ->where('deleted',false)
                    ->where('sold',false)
                    ->latest()
-                   ->take(12)
-                   ->get();
+                   ->simplePaginate(20);
         return response()->json($product,200);
     }
 

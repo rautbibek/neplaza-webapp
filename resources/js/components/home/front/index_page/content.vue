@@ -21,13 +21,17 @@
             <card-lazy :ads="ads"></card-lazy>
           </v-flex>
         </v-layout>
-        <update-profile></update-profile>
-        <p class="text-center mt-5">
-          <v-btn class="mt-3" color="#0c1963" small router :to="`/ads`" dark>
-            view all
-            <v-icon right>keyboard_arrow_right</v-icon>
-          </v-btn>
-        </p>
+        <!-- <update-profile></update-profile> -->
+        <div class="text-center ma-5" v-if="nextUrl">
+            <v-btn :loading="loading" dark  tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
+
+                Load More
+                <template v-slot:loader>
+                    <span>Loading...</span>
+                </template>
+                <v-icon right>cached</v-icon>
+            </v-btn>
+            </div>
       </v-container>
     </div>
   </v-card>
@@ -38,19 +42,39 @@ export default {
     return {
       all_ads: [],
       overlay: false,
+      isActive: false,
+      loading:false,
+      nextUrl : null,
     };
   },
   methods: {
+    fetch(url){
+          this.overlay= true
+          this.loading=true;
+          axios.get(url)
+               .then(({data}) =>{
+                     this.all_ads.push(...data.data);
+                     this.nextUrl = data.next_page_url
+                     this.loading = false;
+                     this.overlay = false;
+                 })
+      },
+      more(nextUrl){
+        this.loading=true;
+        axios.get(nextUrl)
+             .then(({data}) =>{
+                this.all_ads.push(...data.data);
+                this.nextUrl = data.next_page_url
+                this.loading = false;
+            })
+      },
     favorite() {
       this.color = "red";
       this.background = "white";
     },
     getAds() {
       this.overlay = true;
-      axios.get(`/front/home/product`).then((response) => {
-        this.all_ads = response.data;
-        this.overlay = false;
-      });
+      this.fetch(`/front/home/product`);
     },
   },
 

@@ -11,14 +11,29 @@
         </ul>
         <ul v-else class="mt-5">
             <div class="text-center mt-5">
-            <v-chip
-                class="ma-2"
-                color="indigo darken-3"
-                outlined
-                >
-                
-                Select A Contact To start Conversation 
+                <v-chip 
+                    class="ma-2 d-sm-none"
+                    color="primary"
+                    outlined
+                    pill
+                    @click="show_dialog"
+                    >
+                    
+                    Select A Contact To start Conversation 
+                    <v-icon right>
+                        mdi-account-outline
+                    </v-icon>
                 </v-chip>
+                <div class="ma-10 px-5 d-none d-sm-flex">
+                    <v-chip
+                
+                color="primary"
+                outlined
+                pill
+                >
+                    Select A Contact To start Conversation 
+                </v-chip>
+                </div>
             </div>
         </ul>
     </div>
@@ -45,6 +60,9 @@ export default {
                 this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
             },50)
             
+        },
+        show_dialog(){
+          EventBus.$emit('showDialog', true);
         }
     },
     watch:{
