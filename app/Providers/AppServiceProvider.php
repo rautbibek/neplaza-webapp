@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         if(env('APP_ENV') !== 'local')
         {
-            $url->forceSchema('https');
+            \URL::forceScheme('https');
         }
         
     }
