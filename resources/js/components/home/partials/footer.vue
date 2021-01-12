@@ -20,7 +20,8 @@
         </v-btn>
       </v-card-text>
       <v-divider></v-divider>
-              <div class="container">
+      <div class="d-none d-sm-flex">
+       <div class="container">
                 <div class="row">
 
                   <div class="col-6 col-md text-left ">
@@ -84,10 +85,10 @@
                     </div>
                   </div>
                 </div>
-              </div>
-
-
-      <v-divider></v-divider>
+       </div>
+      
+      </div>
+      <v-divider class="d-none d-sm-flex"></v-divider>
 
       <v-card-text class="white--text text-center">
         &#9400; 2020-{{ new Date().getFullYear() }} - <strong>Bikribazzar</strong> All rights reservd

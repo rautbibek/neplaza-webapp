@@ -259,18 +259,17 @@ export default {
         axios
           .post(`/update/cover`, formData, config)
           .then((response) => {
-            this.overlay = false;
-            this.dialog = false;
-            this.form.reset();
+            this.freshUser();
+            this.$refs.form.reset();
             this.$toast.success(response.data, "success", {
               timeout: 3000,
               position: "topRight",
             });
-            this.freshUser();
-
+            this.overlay = false;
+            this.dialog = false;
           })
           .catch((error) => {
-            if (error.response.status === 422) {
+            if (error.response.status == 422) {
               this.overlay = false;
               if (error.response.data.errors.image.length > 0) {
                 this.$toast.error(

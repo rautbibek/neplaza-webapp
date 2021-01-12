@@ -3,7 +3,7 @@
     <v-list-item @mouseover="report">Report This Ad</v-list-item>
     
     <v-row justify="center">
-      <v-dialog v-model="dialog" persistent width="700">
+      <v-dialog v-model="dialog" persistent width="450">
         <v-card>
           <v-card-title class="text-right">
             Report This Ad
@@ -11,11 +11,7 @@
             <v-btn x-small fab @click="close"><v-icon>close</v-icon></v-btn>
           </v-card-title>
           <v-divider></v-divider>
-          <v-row>
-            <v-col cols="12" xs="12" md="6">
-              <card-lazy :ads="ads"></card-lazy>
-            </v-col>
-            <v-col cols="12" xs="12" md="6">
+            <v-col cols="12" >
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-card-text>
                   <v-col cols="12">
@@ -64,7 +60,6 @@
                 </v-card-text>
               </v-form>
             </v-col>
-          </v-row>
         </v-card>
       </v-dialog>
     </v-row>

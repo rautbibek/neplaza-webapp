@@ -66,7 +66,7 @@ export default {
   },
   created() {
     EventBus.$on("profileChanged", data => {
-      this.userProfile()
+      this.userProfile();
     });
     if (!this.loggedIn) {
       this.$router.push("/");
@@ -76,6 +76,7 @@ export default {
     return this.userProfile();
   },
   mounted() {
+    
     EventBus.$on("updateUser", (data) => {
       return this.userProfile();
     });

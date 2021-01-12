@@ -38,8 +38,10 @@
             <a class="prev" @click="prevSlides" v-if="first_slide">&#10094;</a>
           </v-col>
         </v-row>
-        <v-row no-gutters>
-          <v-col
+        
+          <div style=" overflow-x:auto">
+            <v-row no-gutters >
+            <v-col 
             v-for="(image, index) in images"
             :key="index"
             class="d-flex child-flex px-1"
@@ -75,7 +77,9 @@
               </v-img>
             </v-card>
           </v-col>
-        </v-row>
+          </v-row>
+          </div>
+        
       </v-col>
     </v-card>
     <v-card tile v-else>

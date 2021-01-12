@@ -15,9 +15,9 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-        $p_id = IdGenerator::generate(['table' => 'products', 'field'=>'productid', 'length' => 10, 'prefix' =>'BKB-']);
+        $config =['table' => 'products', 'field'=>'productid', 'length' => 10, 'prefix' =>'BKB-','reset_on_prefix_change'=>true];
         $product->slug = Str::slug($product->title);
-        $product->productid = $p_id;
+        $product->productid = IdGenerator::generate($config);
         $product->save();
         $product->category->increment('product_count');
         $product->scategory->increment('product_count');

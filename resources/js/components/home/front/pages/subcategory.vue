@@ -11,470 +11,494 @@
             </ol>
         </nav>
         <div>
-        <v-overlay :value="overlay">
-            <v-progress-circular indeterminate size="64"></v-progress-circular>
-        </v-overlay>
-        <div class="py-2" >
+          <!-- overlay -->
+          <v-overlay :value="overlay">
+              <v-progress-circular indeterminate size="64"></v-progress-circular>
+          </v-overlay>
+          <!-- end of overlay -->
 
-            <v-content class="px-0">
-              <!-- sorting -->
-                <v-content class="pb-2">
-                    <v-toolbar flat>
-                      <v-spacer></v-spacer>
-                      <!-- mobile view starts form here -->
-                       <v-row justify="center">
-                        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-                          <template v-slot:activator="{ on }">
-                            <v-btn color="primary" outlined v-on="on" class="mr-4 d-flex d-sm-none">
-                               <v-icon left>mdi-filter</v-icon> filter
-                            </v-btn>
-                          </template>
-                          <v-card>
-                            <v-toolbar dark color="primary">
-                              <v-btn icon dark @click="dialog = false">
-                                <v-icon>mdi-close</v-icon>
-                              </v-btn>
-                              <v-toolbar-title>Filter</v-toolbar-title>
-                              <v-spacer></v-spacer>
-                              <v-toolbar-items>
-                                <v-btn dark text @click="dialog = false">Close</v-btn>
-                              </v-toolbar-items>
-                            </v-toolbar>
-                            <v-list three-line subheader>
-                              <v-subheader>Ad filter</v-subheader>
-
-                            </v-list>
-                            <v-divider></v-divider>
-                            <v-card outlined tile v-for="(scat,index) in subcategory" :key="index">
-                        <v-card-title> <v-icon>mdi-filter</v-icon> FILTER</v-card-title>
-                        <v-card-subtitle>{{scat.name}}</v-card-subtitle>
-                        <!-- PART ONE -->
-                          <v-divider></v-divider>
-                            <v-card-text>
-                              <h5 class="title mb-2">Location</h5>
-                              <v-autocomplete class="py-2" style="border-radius:0px"
-                                v-model="city_id"
-                                :items='city'
-                                :item-text="'name'"
-                                :item-value="'id'"
-                                dense
-                                outlined
-                                clearable
-                                label="District"
-                                append-icon="mdi-map-marker"
-                                @change="getNhood"
-                              ></v-autocomplete>
-                              <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
-                                  <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                              </div>
-
-                              <v-autocomplete class="py-1" style="border-radius:0px" v-show="nhood_display && city_id"
-                                v-model="nhood_id"
-                                :items='localArea'
-                                :item-text="'name'"
-                                :item-value="'id'"
-                                outlined
-                                clearable
-                                label="Metro/Municipility/VDC"
-                                append-icon="mdi-map-marker"
-
-                              ></v-autocomplete>
-                            </v-card-text>
-                            <v-divider></v-divider>
-                            <!-- price part  -->
-                            <v-card-text >
-                              <h5 class="title mb-2">Price Range</h5>
-                              <v-card-text @mouseleave="changing">
-                                <div class="row">
-                                  <div class="col">
-                                    <v-text-field
-
-                                      type="number"
-                                      v-model="min_p"
-                                      label="Minimum Price"
-                                      single-line
-                                    ></v-text-field>
-                                  </div>
-
-                                  <div class="col text-right">
-                                    <v-text-field @keyup="changing"
-                                      type="number"
-                                      v-model="max_p"
-                                      label="Maximum price"
-                                      single-line
-                                    ></v-text-field>
-                                  </div>
+          <!-- sort by mobile view -->
+          
+              <div class="text-center">
+                <v-bottom-sheet v-model="sheet">
+                  <v-list>
+                      <v-col class="text-right pa-0 ma-0">
+                      <v-btn icon @click="sheet=false">
+                        <v-icon>mdi-close</v-icon>
+                      </v-btn>
+                      </v-col>
+                    
+                      <v-subheader>-- SORT BY --</v-subheader>
+                      <v-radio-group @change="filter" class="px-3"
+                        v-model="sorting"
+                      >
+                        <v-radio v-for="(sort,index) in sort" :key="index"
+                          :label="sort.title"
+                          :value="sort.value"
+                        ></v-radio>
+                      </v-radio-group>
+                    
+                  </v-list>
+                </v-bottom-sheet>
+              </div>
+          <!-- end of sort by mobile view -->
+          <!-- mobile view filter button and sort by button navigation -->
+          <v-row justify="center">
+            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                          
+               <v-card flat v-for="(scat,index) in subcategory" :key="index">
+                <v-toolbar dark color="#2f3b59">
+                  
+                  <v-toolbar-title>Filter</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <v-toolbar-items>
+                    <v-btn icon dark @click="dialog = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                  </v-toolbar-items>
+                </v-toolbar>
+                <v-list three-line subheader>
+                  <v-subheader>Ad filter</v-subheader>
+                </v-list>
+                  <v-container>
+                  <v-form ref="form">
+                       <!-- location -->
+                          <v-card-text>
+                                <p class="subtitle-1 text-uppercase font-weight-bold">LOCATIONS</p>
+                                <v-autocomplete class="py-1" 
+                                  v-model="city_id"
+                                  :items='city'
+                                  :item-text="'name'"
+                                  :item-value="'id'"
+                                  outlined
+                                  clearable
+                                  dense
+                                  label="District"
+                                  append-icon="keyboard_arrow_down"
+                                  @change="getNhood"
+                                ></v-autocomplete>
+                                <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
+                                    <div class="spinner-border" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
                                 </div>
-                              </v-card-text>
-                            </v-card-text>
-                            <v-divider></v-divider>
-                            <!-- PART 2 -->
-                            <div v-if="scat.type.length>0">
-                              <v-card-text>
-                              <h5 class="title mb-2">{{type_title}}</h5>
-                                <v-chip-group
-                                  v-model="type_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="type.id" outlined v-for="(type,index) in scat.type" :key="index">{{type.name}}</v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                          </div>
 
-                            <!-- PART 3 -->
-                            <div v-if="scat.status.length>0">
-                              <v-card-text>
-                              <h5 class="title mb-2">Status</h5>
-                                <v-chip-group
-                                  v-model="status_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="status.id" outlined v-for="(status,index) in scat.status" :key="index">
-                                    {{status.title}}
-                                  </v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                            </div>
+                                <v-autocomplete   v-show="nhood_display && city_id"
+                                  v-model="nhood_id"
+                                  :items='localArea'
+                                  :item-text="'name'"
+                                  :item-value="'id'"
+                                  outlined
+                                  dense
+                                  clearable
+                                  label="Metro/Municipility/VDC"
+                                  append-icon="keyboard_arrow_down"
 
-                            <!-- PART 4 -->
-                            <div v-if="scat.brand.length > 0">
-                              <v-card-text>
-                              <h5 class="title mb-2">Brand</h5>
-                                <v-chip-group
-                                  v-model="brand_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="brand.id" outlined v-for="(brand,index) in scat.brand" :key="index">
-                                    {{brand.name}}
-                                    </v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                            </div>
-
-                            <!-- PART 5 -->
-                            <div v-if="scat.filter.length>0">
-                              <v-card-text>
-                              <h5 class="title mb-2">{{filter_title}}</h5>
-                                <v-chip-group
-                                  v-model="filter_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="filter.id" outlined v-for="(filter,index) in scat.filter" :key="index">
-                                    {{filter.name}}
-                                    </v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                            </div>
-
-                            <!-- PART 5 -->
-                            <div v-if="scat.filter_1.length>0">
-                              <v-card-text>
-                              <h5 class="title mb-2">{{filter_1_title}}</h5>
-                                <v-chip-group
-                                  v-model="filter_1_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="filter_1.id" outlined v-for="(filter_1,index) in scat.filter_1" :key="index">
-                                    {{filter_1.name}}
-                                    </v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                            </div>
-
-                            <!-- PART 5 -->
-                            <div v-if="scat.filter_2.length>0">
-                              <v-card-text>
-                              <h5 class="title mb-2">{{filter_2_title}}</h5>
-                                <v-chip-group
-                                  v-model="filter_2_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="filter_2.id" outlined v-for="(filter_2,index) in scat.filter_2" :key="index">
-                                    {{filter_2.name}}
-                                    </v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                            </div>
-
-                            <!-- PART 5 -->
-                            <div v-if="scat.filter_3.length>0">
-                              <v-card-text>
-                              <h5 class="title mb-2">{{filter_3_title}}</h5>
-                                <v-chip-group
-                                  v-model="filter_3_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="filter_3.id" outlined v-for="(filter_3,index) in scat.filter_3" :key="index">
-                                    {{filter_3.name}}
-                                    </v-chip>
-                                </v-chip-group>
-                              </v-card-text>
-                              <v-divider></v-divider>
-                            </div>
-
-                            <div class="p-3" >
-                              <v-btn @click="filter" color="indigo" dark  tile>
-                                <v-icon left>mdi-filter</v-icon>
-                                Apply Filter
-                                </v-btn>
-                            </div>
-
-
-                      </v-card>
-                          </v-card>
-                        </v-dialog>
-                      </v-row>
-                      <!-- mobile view end here -->
-
-                      <!-- desktop view starts from here -->
-                        <v-col cols="8" lg="3" md="3" sm="6" xs="8">
-
-                          <v-select class="mt-4"
-                            @change="filter"
-                            v-model="sorting"
-                            clearable
-                            :items="sort"
-                            :item-text="'title'"
-                             label="SORT BY"
-                             dense
-
-
-                          ></v-select>
-                        </v-col>
-                      </v-toolbar>
-                </v-content>
-                <!-- end of sorting -->
-                <v-row wrap no-gutters class="px-2">
-                  <v-col cols="12" md="3" lg="3" sm="4" xs="12" class="d-none d-sm-flex">
-                    <div class="mt-3">
-                      <v-card outlined v-for="(scat,index) in subcategory" :key="index">
-                        <v-card-title> <v-icon>mdi-filter</v-icon> filter</v-card-title>
-                        <v-card-subtitle>{{scat.name}}</v-card-subtitle>
-                        <!-- PART ONE -->
+                                ></v-autocomplete>
+                          </v-card-text>
                           <v-divider></v-divider>
-                            <v-card-text>
-                              <h5 class="title mb-2">Location</h5>
-                              <v-autocomplete class="py-2" 
-                                v-model="city_id"
-                                :items='city'
-                                :item-text="'name'"
-                                :item-value="'id'"
-                                outlined
-                                clearable
-                                label="District"
-                                append-icon="mdi-map-marker"
-                                @change="getNhood"
-                              ></v-autocomplete>
-                              <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
-                                  <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
-                                  </div>
-                              </div>
-
-                              <v-autocomplete class="py-1"  v-show="nhood_display && city_id"
-                                v-model="nhood_id"
-                                :items='localArea'
-                                :item-text="'name'"
-                                :item-value="'id'"
-                                outlined
-                                clearable
-                                label="Metro/Municipility/VDC"
-                                append-icon="mdi-map-marker"
-
-                              ></v-autocomplete>
-                            </v-card-text>
-                            <v-divider></v-divider>
-                            <!-- price part  -->
-                            <v-card-text >
-                              <h5 class="title mb-1">Price Range</h5>
-                              
-
-                                
-                                <div class="row" >
-                                  <div class="col" @mouseout="changing" >
+                        <!-- location -->
+                        <!-- price part  -->
+                          <v-card-text >
+                              <p class="subtitle-1 text-uppercase font-weight-bold">BUDGET</p>
+                                <v-row >
+                                  <v-col  @mouseout="changing" >
                                     <v-text-field
                                       outlined
+                                      dense
                                       placeholder="Min"
                                       type="number"
                                       v-model="min_p"
                                       label="Min Price"
                                       
                                     ></v-text-field>
-                                  </div>
+                                  </v-col>
 
-                                  <div class="col text-right">
+                                  <v-col class=" text-right">
                                     <v-text-field @mouseout="changing"
                                       outlined
+                                      dense
                                       placeholder="Max"
                                       type="number"
                                       v-model="max_p"
                                       label="Max price"
                                       
                                     ></v-text-field>
-                                  </div>
-                                </div>
+                                  </v-col>
+                                  
+                                </v-row>
                               
-                            </v-card-text>
-                            <v-divider></v-divider>
-                            <!-- PART 2 -->
-                            <div v-if="scat.type.length>0">
+                          </v-card-text>
+                          <v-divider></v-divider>
+                        <!-- end of price -->
+                        <!-- type -->
+                        <div v-if="scat.type.length>0">
                               <v-card-text>
-                              <h5 class="title mb-2">{{type_title}}</h5>
-                                <v-chip-group
-                                  v-model="type_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="type.id" outlined v-for="(type,index) in scat.type" :key="index">{{type.name}}</v-chip>
-                                </v-chip-group>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{type_title}}</p>
+                              
+                              <v-checkbox v-for="(type,index) in scat.type" :key="index" class="checkbox"
+                                multiple
+                                v-model="type_id"
+                                :label="type.name"
+                                :value="type.id"
+                              ></v-checkbox>
+                                
                               </v-card-text>
                               <v-divider></v-divider>
                           </div>
+                          <!-- end of type -->
 
-                            <!-- PART 3 -->
+                          <!-- status -->
                             <div v-if="scat.status.length>0">
                               <v-card-text>
-                              <h5 class="title mb-2">Status</h5>
-                                <v-chip-group
-                                  v-model="status_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="status.id" outlined v-for="(status,index) in scat.status" :key="index">
-                                    {{status.title}}
-                                  </v-chip>
-                                </v-chip-group>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">Status</p>
+                              
+                                <v-checkbox v-for="(status,index) in scat.status" :key="index" class="checkbox"
+                                multiple
+                                v-model="status_id"
+                                :label="status.title"
+                                :value="status.id"
+                              ></v-checkbox>
+                                
                               </v-card-text>
                               <v-divider></v-divider>
                             </div>
+                            <!-- status end -->
 
-                            <!-- PART 4 -->
-                            <div v-if="scat.brand.length > 0">
-                              <v-card-text>
-                              <h5 class="title mb-2">Brand</h5>
-                                <v-chip-group
-                                  v-model="brand_id"
-                                  column
-                                  multiple
-                                >
-                                  <v-chip filter :value="brand.id" outlined v-for="(brand,index) in scat.brand" :key="index">
-                                    {{brand.name}}
-                                    </v-chip>
-                                </v-chip-group>
+                            <!-- brand start -->
+                            <div v-if="scat.brand.length > 0" >
+                              <v-card-text style="max-height:300px; overflow-y:auto">
+
+                              <p class="subtitle-1 text-uppercase font-weight-bold">brands</p>
+                              <v-checkbox v-for="(brand,index) in scat.brand" :key="index" style="margin:0px; padding:0px"
+                                multiple
+                                v-model="brand_id"
+                                :label="brand.name"
+                                :value="brand.id"
+                              ></v-checkbox>
+                                
                               </v-card-text>
                               <v-divider></v-divider>
                             </div>
-
-                            <!-- PART 5 -->
+                            <!-- end of brand -->
+                            <!-- filter start -->
                             <div v-if="scat.filter.length>0">
                               <v-card-text>
-                              <h5 class="title mb-2">{{filter_title}}</h5>
-                                <v-chip-group
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_title}}</p>
+                                <v-checkbox v-for="(filter,index) in scat.filter" :key="index" class="checkbox"
                                   v-model="filter_id"
-                                  column
+                                  :value="filter.id"
+                                  :label="filter.name"
                                   multiple
                                 >
-                                  <v-chip filter :value="filter.id" outlined v-for="(filter,index) in scat.filter" :key="index">
-                                    {{filter.name}}
-                                    </v-chip>
-                                </v-chip-group>
+                                  
+                                </v-checkbox>
                               </v-card-text>
                               <v-divider></v-divider>
                             </div>
+                            <!-- filter end -->
 
-                            <!-- PART 5 -->
+                            <!-- filter 1 start -->
                             <div v-if="scat.filter_1.length>0">
                               <v-card-text>
-                              <h5 class="title mb-2">{{filter_1_title}}</h5>
-                                <v-chip-group
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_1_title}}</p>
+                                <v-checkbox v-for="(filter_1,index) in scat.filter_1" :key="index" class="checkbox"
                                   v-model="filter_1_id"
-                                  column
+                                  :value="filter_1.id"
+                                  :label="filter_1.name"
                                   multiple
                                 >
-                                  <v-chip filter :value="filter_1.id" outlined v-for="(filter_1,index) in scat.filter_1" :key="index">
-                                    {{filter_1.name}}
-                                    </v-chip>
-                                </v-chip-group>
+                                </v-checkbox>
                               </v-card-text>
                               <v-divider></v-divider>
                             </div>
+                            <!-- filter 1 end -->
 
-                            <!-- PART 5 -->
+                            <!-- filter 2 start -->
                             <div v-if="scat.filter_2.length>0">
                               <v-card-text>
-                              <h5 class="title mb-2">{{filter_2_title}}</h5>
-                                <v-chip-group
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_2_title}}</p>
+                                <v-checkbox v-for="(filter_2,index) in scat.filter_2" :key="index" class="checkbox"
                                   v-model="filter_2_id"
-                                  column
+                                  :value="filter_2.id"
+                                  :label="filter_2.name"
                                   multiple
                                 >
-                                  <v-chip filter :value="filter_2.id" outlined v-for="(filter_2,index) in scat.filter_2" :key="index">
-                                    {{filter_2.name}}
-                                    </v-chip>
-                                </v-chip-group>
+                                </v-checkbox>
                               </v-card-text>
                               <v-divider></v-divider>
                             </div>
+                            <!-- filter 2 end -->
 
-                            <!-- PART 5 -->
+                            <!-- filter 2 start -->
                             <div v-if="scat.filter_3.length>0">
                               <v-card-text>
-                              <h5 class="title mb-2">{{filter_3_title}}</h5>
-                                <v-chip-group
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_3_title}}</p>
+                                <v-checkbox v-for="(filter_3,index) in scat.filter_3" :key="index" class="checkbox"
                                   v-model="filter_3_id"
-                                  column
+                                  :value="filter_3.id"
+                                  :label="filter_3.name"
                                   multiple
                                 >
-                                  <v-chip filter :value="filter_3.id" outlined v-for="(filter_3,index) in scat.filter_3" :key="index">
-                                    {{filter_3.name}}
-                                    </v-chip>
-                                </v-chip-group>
+                                </v-checkbox>
                               </v-card-text>
                               <v-divider></v-divider>
                             </div>
+                            <!-- filter 2 end -->
+                            
+                            
+                  </v-form>
+                  <v-row>
+                        <v-col><v-btn @click="filter" color="primary" dark >Apply Filter</v-btn></v-col>
+                      </v-row>
+                  </v-container>
+              </v-card> 
+            </v-dialog>
+            </v-row>
+          <!--end of mobile view filter button and sort by button navigation -->
+          <v-main>
+            <v-row no-gutters style="margin:0px; padding:0px">
+              <!-- desktop view -->
+              <v-col cols="6" lg="3" md="4" class="border-right d-none d-sm-flex " >
+                <v-container class="mt-2">
+                  <v-card  flat v-for="(scat,index) in subcategory" :key="index">
+                    <!-- form start -->
+                    <v-form ref="form">
+                       <!-- location -->
+                          <v-card-text>
+                                <p class="subtitle-1 text-uppercase font-weight-bold">LOCATIONS</p>
+                                <v-autocomplete class="py-1" 
+                                  v-model="city_id"
+                                  :items='city'
+                                  :item-text="'name'"
+                                  :item-value="'id'"
+                                  outlined
+                                  clearable
+                                  dense
+                                  label="District"
+                                  append-icon="keyboard_arrow_down"
+                                  @change="getNhood"
+                                ></v-autocomplete>
+                                <div class="d-flex justify-content-center" style="margin-bottom:20px" v-if="loading">
+                                    <div class="spinner-border" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
 
-                            <div class="p-3">
-                              <v-btn @click="filter" color="indigo" dark tile>
-                                <v-icon left>mdi-filter</v-icon>
-                                Apply Filter
-                                </v-btn>
+                                <v-autocomplete   v-show="nhood_display && city_id"
+                                  v-model="nhood_id"
+                                  :items='localArea'
+                                  :item-text="'name'"
+                                  :item-value="'id'"
+                                  outlined
+                                  dense
+                                  clearable
+                                  label="Metro/Municipility/VDC"
+                                  append-icon="keyboard_arrow_down"
+
+                                ></v-autocomplete>
+                          </v-card-text>
+                          <v-divider></v-divider>
+                        <!-- location -->
+                        <!-- price part  -->
+                          <v-card-text >
+                              <p class="subtitle-1 text-uppercase font-weight-bold">BUDGET</p>
+                                <v-row >
+                                  <v-col  @mouseout="changing" >
+                                    <v-text-field
+                                      outlined
+                                      dense
+                                      placeholder="Min"
+                                      type="number"
+                                      v-model="min_p"
+                                      label="Min Price"
+                                      
+                                    ></v-text-field>
+                                  </v-col>
+
+                                  <v-col class=" text-right">
+                                    <v-text-field @mouseout="changing"
+                                      outlined
+                                      dense
+                                      placeholder="Max"
+                                      type="number"
+                                      v-model="max_p"
+                                      label="Max price"
+                                      
+                                    ></v-text-field>
+                                  </v-col>
+                                  
+                                </v-row>
+                              
+                          </v-card-text>
+                          <v-divider></v-divider>
+                        <!-- end of price -->
+                        <!-- type -->
+                        <div v-if="scat.type.length>0">
+                              <v-card-text>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{type_title}}</p>
+                              
+                              <v-checkbox v-for="(type,index) in scat.type" :key="index" class="checkbox"
+                                multiple
+                                v-model="type_id"
+                                :label="type.name"
+                                :value="type.id"
+                              ></v-checkbox>
+                                
+                              </v-card-text>
+                              <v-divider></v-divider>
+                          </div>
+                          <!-- end of type -->
+
+                          <!-- status -->
+                            <div v-if="scat.status.length>0">
+                              <v-card-text>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">Status</p>
+                              
+                                <v-checkbox v-for="(status,index) in scat.status" :key="index" class="checkbox"
+                                multiple
+                                v-model="status_id"
+                                :label="status.title"
+                                :value="status.id"
+                              ></v-checkbox>
+                                
+                              </v-card-text>
+                              <v-divider></v-divider>
                             </div>
+                            <!-- status end -->
 
+                            <!-- brand start -->
+                            <div v-if="scat.brand.length > 0" >
+                              <v-card-text style="max-height:300px; overflow-y:auto">
 
-                      </v-card>
-                    </div>
-                  </v-col>
-                  <v-col cols="12" md="9" lg="9" sm="8" xs="12" class="mt-1">
-                     <filter-ad :all_ads="all_ads" :count="count"></filter-ad>
-                  </v-col>
-                </v-row>
-                <div class="text-center mt-5 mb-5" v-if="nextUrl">
-                    <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
-                        Load More
-                        <template v-slot:loader>
-                            <span>Loading...</span>
-                        </template>
-                        <v-icon right>cached</v-icon>
-                    </v-btn>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">brands</p>
+                              <v-checkbox v-for="(brand,index) in scat.brand" :key="index" style="margin:0px; padding:0px"
+                                multiple
+                                v-model="brand_id"
+                                :label="brand.name"
+                                :value="brand.id"
+                              ></v-checkbox>
+                                
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+                            <!-- end of brand -->
+                            <!-- filter start -->
+                            <div v-if="scat.filter.length>0">
+                              <v-card-text>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_title}}</p>
+                                <v-checkbox v-for="(filter,index) in scat.filter" :key="index" class="checkbox"
+                                  v-model="filter_id"
+                                  :value="filter.id"
+                                  :label="filter.name"
+                                  multiple
+                                >
+                                  
+                                </v-checkbox>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+                            <!-- filter end -->
+
+                            <!-- filter 1 start -->
+                            <div v-if="scat.filter_1.length>0">
+                              <v-card-text>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_1_title}}</p>
+                                <v-checkbox v-for="(filter_1,index) in scat.filter_1" :key="index" class="checkbox"
+                                  v-model="filter_1_id"
+                                  :value="filter_1.id"
+                                  :label="filter_1.name"
+                                  multiple
+                                >
+                                </v-checkbox>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+                            <!-- filter 1 end -->
+
+                            <!-- filter 2 start -->
+                            <div v-if="scat.filter_2.length>0">
+                              <v-card-text>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_2_title}}</p>
+                                <v-checkbox v-for="(filter_2,index) in scat.filter_2" :key="index" class="checkbox"
+                                  v-model="filter_2_id"
+                                  :value="filter_2.id"
+                                  :label="filter_2.name"
+                                  multiple
+                                >
+                                </v-checkbox>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+                            <!-- filter 2 end -->
+
+                            <!-- filter 2 start -->
+                            <div v-if="scat.filter_3.length>0">
+                              <v-card-text>
+                              <p class="subtitle-1 text-uppercase font-weight-bold">{{filter_3_title}}</p>
+                                <v-checkbox v-for="(filter_3,index) in scat.filter_3" :key="index" class="checkbox"
+                                  v-model="filter_3_id"
+                                  :value="filter_3.id"
+                                  :label="filter_3.name"
+                                  multiple
+                                >
+                                </v-checkbox>
+                              </v-card-text>
+                              <v-divider></v-divider>
+                            </div>
+                            <!-- filter 2 end -->
+                            
+                            
+                    </v-form>
+                      <v-row>
+                        <v-col><v-btn @click="filter" color="primary" dark >Apply Filter</v-btn></v-col>
+                      </v-row>
+
+                      <!-- end of form -->
+                  </v-card>
+                </v-container>
+              </v-col>
+              <!-- end of desktop view -->
+
+              <!-- product display column -->
+              <v-col  cols="12" lg="9" md="8" xs="12">
+                
+                <v-toolbar class="d-sm-none" style="padding:0px">
+                  <v-row no-gutters >
+                    <v-col cols="6" class="text-center border-right" @click="sheet=true" style="margin:0px; padding:0px">
+                        <span class="subtitle-1"> Sort By</span> <v-icon>sort</v-icon>
+                    </v-col>
+                    
+                    <v-col cols="6" class="text-center" @click="dialog=true" >
+                        <span class="subtitle-1"> Filter </span> <v-icon>filter_list</v-icon>
+                    </v-col>
+                  </v-row>
+                </v-toolbar>
+
+                <div class="d-none d-sm-flex">
+                  <v-toolbar flat>
+                      
+                      <v-spacer></v-spacer>
+                      <!-- mobile view starts form here -->
+                        <v-col cols="8" lg="3" md="3" sm="6" xs="8" class="text-right mt-1">
+                          <v-select class="mt-4"
+                            @change="filter"
+                            v-model="sorting"
+                            clearable
+                           prepend-icon="sort"
+                            :items="sort"
+                            :item-text="'title'"
+                             label="SORT BY"
+                             dense
+                          ></v-select>
+                        </v-col>
+                </v-toolbar>
                 </div>
-            </v-content>
-        </div>
-
+                <filter-ad :all_ads="all_ads" class="px-2" :count="count"></filter-ad>
+              </v-col>
+              <!-- end of display product column -->
+            </v-row>
+          </v-main>
         </div>
     </div>
 </template>
@@ -483,6 +507,7 @@
 export default {
     data(){
       return{
+        
         dialog:false,
         nhood_display: false,
         city:[],
@@ -512,6 +537,7 @@ export default {
         category_slug:'',
         scategory_name:'',
         nextUrl : null,
+        sheet: false,
         sorting:'',
         sort:[
             {
@@ -534,7 +560,9 @@ export default {
       }
     },
     methods:{
-      
+      clear_filter() {
+        this.$refs.form.reset();
+      },
       changing(){
         //this.price.push(this.max_p,1)
         this.price[1] = this.max_p;
@@ -544,13 +572,13 @@ export default {
       favorite(){
         if(this.$loggedIn){
             this.color= 'red';
-
             this.background= 'white';
         }else{
             EventBus.$emit('changeDialog', true);
         }
       },
       filter(){
+        this.sheet = false;
         this.dialog= false;
         this.fetch(`/front/scategory/product/${this.$route.params.slug}`);
         window.scrollTo(0,100);
@@ -636,7 +664,7 @@ export default {
           return "Property Type"
         }else if(this.url === 'job'){
           return "Job Type"
-        }else if(this.surl === 'Car'){
+        }else if(this.surl === 'car'){
           return "Fuel Type"
         }else{
           return "Type";
@@ -689,3 +717,43 @@ export default {
 
 }
 </script>
+<style scoped>
+
+  .checkbox {
+    margin:0px;
+    padding:0px;
+  }
+ 
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.v-input__slot {
+  margin-bottom:0px;
+}
+
+.theme--light.v-label {
+    color: #000000ed;
+}
+label {
+    
+    margin-bottom: 0rem;
+}
+
+</style>

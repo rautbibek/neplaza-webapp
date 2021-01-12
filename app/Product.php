@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
+      
       'title',
       'description',
       'price',
@@ -30,6 +31,7 @@ class Product extends Model
       'property_3',
       'property_4',
       'join'
+      
     ];
 
     protected $hidden =[];

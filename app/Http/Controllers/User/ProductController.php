@@ -47,41 +47,44 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+      
         $product= $request->user()->product()->create($request->except('image'));
-        $p_prop = new Product_property();
-        $p_prop->product_id = $product->id;
-        $p_prop->category_name = $product->category->name;
+        if($product){
+          $p_prop = new Product_property();
+          $p_prop->product_id = $product->id;
+          $p_prop->category_name = $product->category->name;
 
-        $p_prop->scategory_name = $product->scategory->name;
-        $p_prop->city_name = $product->city->name;
-        $p_prop->nhood_name = $product->nhood->name;
-        if($product->brand_id){
-          $p_prop->brand_name = $product->brand->name;
-        }
-        if($product->type_id){
-          $p_prop->type_name = $product->type->name;
-        }
-        if($product->status_id){
-          $p_prop->status_name = $product->status->title;
-        }
-        if($product->filter_id){
-          $p_prop->filter_name = $product->filter->name;
-        }
-        if($product->filter_1_id){
-          $p_prop->filter_1_name = $product->filter_1->name;
-        }
-        if($product->filter_2_id){
-          $p_prop->filter_2_name = $product->filter_2->name;
-        }
+          $p_prop->scategory_name = $product->scategory->name;
+          $p_prop->city_name = $product->city->name;
+          $p_prop->nhood_name = $product->nhood->name;
+          if($product->brand_id){
+            $p_prop->brand_name = $product->brand->name;
+          }
+          if($product->type_id){
+            $p_prop->type_name = $product->type->name;
+          }
+          if($product->status_id){
+            $p_prop->status_name = $product->status->title;
+          }
+          if($product->filter_id){
+            $p_prop->filter_name = $product->filter->name;
+          }
+          if($product->filter_1_id){
+            $p_prop->filter_1_name = $product->filter_1->name;
+          }
+          if($product->filter_2_id){
+            $p_prop->filter_2_name = $product->filter_2->name;
+          }
 
-        if($product->filter_3_id){
-          $p_prop->filter_3_name = $product->filter_3->name;
+          if($product->filter_3_id){
+            $p_prop->filter_3_name = $product->filter_3->name;
+          }
+          $p_prop->user_name = Auth::user()->name;
+          $p_prop->save();
+          if($request->hasFile('image')){
+              return $this->imageResizer->resizeImage($request->image,$product->id);
+          }
         }
-        $p_prop->user_name = Auth::user()->name;
-        $p_prop->save();
-         if($request->hasFile('image')){
-             return $this->imageResizer->resizeImage($request->image,$product->id);
-         }
 
         $message="Ad posted succefully !!"  ;
         return response()->json($message,200);

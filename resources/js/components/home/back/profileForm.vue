@@ -5,26 +5,28 @@
     </v-overlay>
     <v-dialog v-model="dialog" persistent max-width="430">
       <v-card tile>
-        <v-card-title class="text-right">
+        <v-card-title class="text-right text-light bg-blue" >
           Contact Number
           <v-spacer></v-spacer>
-          <v-btn x-small fab @click="close"><v-icon>close</v-icon></v-btn>
+          <v-btn x-small icon @click="dialog = false">
+            <v-icon color="#fff">close</v-icon>
+          </v-btn>
         </v-card-title>
-        <v-divider></v-divider>
+        
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-col cols="12" v-if="show">
             <v-row no-gutters class="ma-3">
-              <v-col cols="3">
+              <v-col cols="2">
                 <v-text-field
                   outlined
-                  readonly
+                  disabled
                   placeholder="+977"
-                  style="border-radius: 0px; margin-bottom: 20px"
+                  style="border-radius: 0px; margin-bottom: 20px border-right:0px"
                 ></v-text-field>
               </v-col>
               <v-col cols="9" md="9" sm="9">
                 <v-text-field
-                  style="border-radius: 0px; margin-bottom: 20px"
+                  style="border-radius: 0px; margin-bottom: 20px border-left:0px"
                   type="number"
                   v-model="contact"
                   label="Contact Number"
@@ -59,7 +61,7 @@
               </v-btn>
             </v-col>
           </v-row>
-          <v-divider></v-divider>
+          
           <v-col cols="12" class="text-right">
             <v-btn tile color="indigo" dark v-if="show" @click="submit">
               <v-icon small left>send</v-icon>
