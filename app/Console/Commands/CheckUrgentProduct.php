@@ -38,8 +38,11 @@ class CheckUrgentProduct extends Command
     public function handle()
     {
         $urgent_ad = Urgent::where('expire_date','<=',now())->get();
-        foreach($urgent_ad as $urgent){
-            $urgent->delete();
+        if($urgent_ad->count()>0){
+            print "hello";
+            foreach($urgent_ad as $urgent){
+                $urgent->delete();
+            }
         }
     }
 }

@@ -28,10 +28,10 @@ class ImageResizer{
            if(!Storage::disk('public')->exists('thumb')){
              Storage::disk('public')->makeDirectory('thumb');
            }
-           $thumb = Image::make($image)->resize(350,300,function($constrain){
+           $thumb = Image::make($image)->resize(200,150,function($constrain){
              $constrain->aspectRatio();
            })
-           ->resizeCanvas(350,null,'center', false, '#e0e0e0')
+           ->resizeCanvas(200,null,'center', false, '#e0e0e0')
            ->stream();
            Storage::disk('public')->put('thumb/'.$imagename,$thumb);
 

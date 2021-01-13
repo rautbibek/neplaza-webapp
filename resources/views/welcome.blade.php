@@ -18,16 +18,14 @@
         <style>
             
         </style>
-    <link rel="stylesheet" href="{{asset('custom-css/style.css')}}" class="rel">
+    
     <link rel="stylesheet" href="{{asset('css/app.css')}}" class="rel">
-    <link rel="stylesheet" href="{{asset('custom-css/preloader.css')}}" class="rel">
-        <!-- Fonts -->
-        <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
-
+    
+       
     </head>
     <body onload="myFunction()" style="margin:0;">
     <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&autoLogAppEvents=1&version=v8.0&appId=562877321241826" nonce="sECcTRII"></script>
+
         <div id="loader">
         </div>
         <div id="myDiv" style="min-height: 300px">

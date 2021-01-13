@@ -39,10 +39,10 @@ class CheckFeaturedProduct extends Command
     public function handle()
     {
         $featured = Featured::where('expire_date','<',now())->get();
-
-        foreach($featured as $feature){
-            $feature->delete();
+        if($featured->count()>0){
+            foreach($featured as $feature){
+                $feature->delete();
+            }
         }
-
     }
 }

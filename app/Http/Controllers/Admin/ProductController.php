@@ -134,8 +134,6 @@ class ProductController extends Controller
         foreach ($products->product_image as $product) {
             $product->delete();
         }
-        $products->category->decrement('product_count');
-        $products->scategory->decrement('product_count');
         $products->delete();
         //$products->update(['deleted' => 1]);
         return response()->json('ad deleted succefully ',200);

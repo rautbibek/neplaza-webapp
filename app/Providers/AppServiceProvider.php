@@ -25,9 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Product::observe(ProductObserver::class);
+
         if(env('APP_ENV') !== 'local')
         {
-            \URL::forceScheme('https');
+            $this->app['request']->server->set('HTTPS','on');
         }
         
     }

@@ -51,6 +51,9 @@ class RepordedAdDelete extends Command
             Mail::to($product->user->email)->send(new ProductDeletedMail($product));
           }
           event(new ProductDeletedEvent($product));
+          foreach ($product->product_image as $p) {
+              $p->delete();
+          }
           $product->delete();
         }
       }

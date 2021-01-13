@@ -77,11 +77,7 @@
                   <div class="col-12 col-md">
                     <h5 class="text-muted">FACEBOOK PAGE</h5>
                     <div class="ml-5">
-                    <div class="fb-page"
-                    data-href="https://www.facebook.com/btgroup.pvt"
-                    data-width="290px"
-                    data-hide-cover="false"
-                    data-show-facepile="true"></div>
+                    
                     </div>
                   </div>
                 </div>

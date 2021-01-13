@@ -46,7 +46,7 @@ class FeatureNotification extends Command
           foreach ($featured as $feature) {
             if($feature->remaining_days < 2){
               if($feature->product->user->valid_email !=''){
-              //Mail::to($feature->product->user->email)->send(new FeatureAdExpireNotification($feature->product));
+               Mail::to($feature->product->user->email)->send(new FeatureAdExpireNotification($feature->product));
              }
             }
           }
