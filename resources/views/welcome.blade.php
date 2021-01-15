@@ -10,8 +10,11 @@
         <meta property="og:url" content="https://www.bikribazzar.com">
         <meta property="og:type" content="website">
         <meta property="og:image" content="{{asset('image/logo.png')}}">
-        <meta name="keywords" content="bikriBazzar, house, land,property,, buy and sell anything, classified website nepal,
-         bikes, cars, new bike, old bikes, new cars, old cars, for sell, for rent">
+        <meta name="keywords" content="bikribazzar,Bikribazzar,bikri bazzar,house, land, 
+            classified website nepal,
+         bikes, cars, new bike, old bikes">
+         <meta name="description" content="buy and sell anything online">
+         <meta name=”robots” content="index, follow">
          <meta name="author" content="Bibek raut">
          <!-- <meta http-equiv="refresh" content="30"> -->
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">

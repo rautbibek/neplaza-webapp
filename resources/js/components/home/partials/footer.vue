@@ -2,13 +2,16 @@
   <v-footer
     dark
     padless
+    
+    
   >
     <v-card width="100%"
       flat
       tile
       class="lighten-1 white--text" style="background-color:#2F3B59"
     >
-      <v-card-text class="text-center">
+      <div class="d-none d-sm-flex">
+        <v-card-text class="text-center " >
         <v-btn small text> follow us :</v-btn>
         <v-btn small fab
           v-for="icon in icons"
@@ -19,7 +22,8 @@
           <v-icon>{{ icon }}</v-icon>
         </v-btn>
       </v-card-text>
-      <v-divider></v-divider>
+      </div>
+      <v-divider class="d-none d-sm-flex"></v-divider>
       <div class="d-none d-sm-flex">
        <div class="container">
                 <div class="row">
@@ -110,4 +114,9 @@
     padding-top:5px;
     font-size:13px;
   }
+  .footer {  
+    position: fixed;  
+    bottom: 0;  
+    z-index: 100;  
+}
 </style>

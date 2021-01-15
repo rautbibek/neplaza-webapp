@@ -12,7 +12,7 @@ class Scategory extends Model
     }
 
     public function brand(){
-      return $this->hasMany('App\Brand')->orderBy('name','asc');
+      return $this->hasMany('App\Brand')->orderBy('id','asc')->orderBy('name','asc');
     }
 
     public function product(){
@@ -30,7 +30,7 @@ class Scategory extends Model
     }
 
     public function filter(){
-      return $this->hasMany('App\Filter')->orderBy('name','asc');
+      return $this->hasMany('App\Filter')->orderBy('id','asc');
     }
 
     public function filter_1(){

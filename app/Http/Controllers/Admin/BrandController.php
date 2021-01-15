@@ -39,7 +39,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-        'name' => 'required|unique:brands',
+        'name' => 'required',
         'scategory_id'  => 'required'
       ]);
       $image = $request->file('image');
@@ -99,7 +99,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name' => 'required|unique:brands,name,'.$id,
+            'name' => 'required',
             'scategory_id'  => 'required'
         ]);
         $image = $request->file('image');

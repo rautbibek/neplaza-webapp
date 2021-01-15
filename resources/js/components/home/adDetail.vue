@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      <nav aria-label="breadcrumb ">
+      <div class="">
+        <nav aria-label="breadcrumb " >
         <ol class="breadcrumb">
           <li class="breadcrumb-item pull-right">
             <router-link :to="`/`">Home</router-link>
@@ -21,12 +22,13 @@
           </li>
         </ol>
       </nav>
+      </div>
 
       <v-overlay :value="overlay" absolute>
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
       <div>
-        <div v-for="(ad, index) in detail" :key="index">
+        <div v-for="(ad, index) in detail" :key="index" >
           <v-container>
             <v-row>
               <v-col
@@ -69,6 +71,10 @@
 </template>
 <script>
 export default {
+  metaInfo: {
+    title: 'Default App Title',
+    
+  },
   data() {
     return {
       overlay: false,
@@ -92,6 +98,9 @@ export default {
           this.category = response.data[0].category;
           this.scategory = response.data[0].scategory;
           this.productId = response.data[0].productid;
+          this.$route.meta.title = this.detail[0].title
+          this.$route.meta.metaTags[0].content = this.detail[0].title
+          this.$route.meta.metaTags[1].content = this.detail[0].description
           this.overlay = false;
         }).catch((error) => {
             window.location.href = '/pageNotFound';
@@ -102,6 +111,7 @@ export default {
     //console.log(window.location.pathname);
     //localStorage.url = window.location.pathname;
     this.getAd();
+
   },
   watch: {
     $route(to, from) {

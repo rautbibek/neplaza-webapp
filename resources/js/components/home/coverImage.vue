@@ -4,6 +4,7 @@
       <v-img
         style="position: relative"
         class="white--text align-end"
+        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
         :height="height"
         :src="ads.product_cover"
         :lazy-src="ads.product_cover"

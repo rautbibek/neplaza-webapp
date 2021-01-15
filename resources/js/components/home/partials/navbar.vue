@@ -74,6 +74,68 @@
       </ul>
     </div>
   </nav>
+  <v-navigation-drawer
+      v-model="drawer"
+      width="90%"
+      app
+      temporary
+    >
+    <div  class="mt-4 text-center">
+      <v-img route to="`/`" style="display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom:5px;
+          width: 50%;" src="/image/logo.svg"
+          ></v-img>
+          <v-btn small text> follow us :</v-btn>
+        <v-btn small fab
+          v-for="icon in icons"
+          :key="icon"
+          class="white--dark"
+          icon
+        >
+          <v-icon>{{ icon }}</v-icon>
+        </v-btn>
+    </div>
+    <v-divider></v-divider>
+      <v-list>
+        <v-list-item router :to="`/`">
+        <v-list-item-icon>
+          <v-icon>mdi-home</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>Home</v-list-item-title>
+      </v-list-item>
+      <v-list-item router :to="`/contact/us`">
+        <v-list-item-icon>
+          <v-icon>mdi-phone</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>Contact Us</v-list-item-title>
+      </v-list-item>
+      <v-subheader>Brows all categories</v-subheader>
+      
+      <v-list-group
+        v-for="(category,index) in categories" :key="index"
+        :prepend-icon="category.icons"
+        no-action
+      >
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="category.name"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item 
+          v-for="(scat,index) in category.scategory"
+          :key="index"
+          router :to="`/category/${category.id}/${scat.slug}`"
+        >
+          <v-list-item-content>
+            <v-list-item-title v-text="scat.name"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
+    </v-list>
+    </v-navigation-drawer>
   </div>
 </div>
   
@@ -85,7 +147,14 @@ export default {
   data() {
     return {
       categories: {},
-      cat: {}
+      cat: {},
+      drawer:false,
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
+      ],
     };
   },
   created() {
@@ -96,6 +165,11 @@ export default {
     axios.get(this.subcategory_url).then(response => {
       this.categories = response.data;
     });
+    
+    EventBus.$on("navigationDrawer", data => {
+      this.drawer = true;
+    });
+  
   },
   computed: {
     category_url() {

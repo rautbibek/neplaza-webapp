@@ -19,7 +19,7 @@ export default {
     return {
       items: [
         {
-          src: "/image/cover.jpeg",
+          src: "/image/cover.webp",
         },
       ],
     };

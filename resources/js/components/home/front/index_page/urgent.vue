@@ -4,7 +4,7 @@
         <p class="featured-title text-center">
           Urgent Products
         </p>
-          <div class="px-2">
+          <div class="px-2 mb-4">
             <vue-horizontal :button-between="false">
             <section v-for="(ads,index) in all_ads" :key="index" style="margin:5px; padding:0xp">
              <v-card class="card product-card " >
@@ -12,6 +12,7 @@
               <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                 <v-img
                   class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
                   height="190px"
                   :src="ads.product_cover"
                 >

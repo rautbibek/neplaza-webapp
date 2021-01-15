@@ -174,6 +174,19 @@ export const routes = [{
     {
         path: '/ad/detail/:id/:slug',
         component: AdDetail,
+        meta:{
+            title: '',metaTags: [
+            {
+              name: 'title',
+              content: ''
+            },
+            {
+              property: 'description',
+              content: ''
+            }
+          ] 
+        } 
+        
     },
 
     //search

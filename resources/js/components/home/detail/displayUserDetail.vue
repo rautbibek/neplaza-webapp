@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <v-card>
+    <v-card color="#00000000">
       
       <div class="flex">
         <small>{{ ad.created_date }}</small>

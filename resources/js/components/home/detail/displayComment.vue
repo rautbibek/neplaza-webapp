@@ -3,7 +3,7 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
-    <v-card>
+    <v-card color="#00000000">
       <v-card-title class="pl-0 no-comment" v-if="ad_comments.length === 0"
         >Be the First to Comment</v-card-title
       >

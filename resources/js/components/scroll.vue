@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container class="scroll-y">
+        <v-container class="scroll-y" style="margin:0px; padding:0px">
             <v-layout align-center justify-center>
                 <v-flex xs12>
                     <v-btn

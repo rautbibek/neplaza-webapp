@@ -28,7 +28,7 @@ class SubcategoryController extends Controller
         $subcategory = Scategory::orderBy('category_id','asc')->withCount('product')->get();
         
         foreach ($subcategory as $key => $scat) {
-          echo $scat->name .'-'. $scat->product_count."<br>";
+          
           Scategory::where('id',$scat->id)->update(['product_count'=>$scat->product_count]);
         }
         cache::forget('meghamenu');

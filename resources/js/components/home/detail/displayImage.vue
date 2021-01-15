@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3">
-    <v-card tile v-if="total_image > 0">
+    <v-card color="#00000000" v-if="total_image > 0">
       <v-col>
         <vue-easy-lightbox
           :visible="visible"
@@ -87,7 +87,7 @@
         <v-row align="center" justify="center" class="pa-1">
           <v-col cols="12" elevation="10" class="no-margin">
             <v-img
-              :src="'/image/no-image.jpg'"
+              :src="'/image/no-image.webp'"
               :lazy-src="'/storage/noimage.png'"
               aspect-ratio="1"
               class="image-placeholder"

@@ -1,5 +1,5 @@
 <template>
-  <v-card tile flat >
+  <v-card tile flat color="#00000000">
     <v-container >
       <p class="featured-title text-center">Recent Listing</p>
     </v-container>

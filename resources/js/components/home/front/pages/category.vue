@@ -11,32 +11,48 @@
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
         <!-- mobile view subcategoryt -->
-        <div class="d-sm-none">
-        <div >
-            <div class="cover-image">
-            <h3 class="text-center">{{category.name}}</h3>
-           </div >
-            <v-container class="cover-container create-ad">
-            <v-list dense class="border">
-                <v-list-item-group
-                    color="primary"
+                <div style="max-width:170px" class="ma-3 d-flex d-sm-none">
+                <v-chip @click.stop="subcategory = !subcategory" class=""
+                color="primary"
+                label
+                outlined
                 >
-                    <v-list-item router :to="`/category/${category.id}/${scat.slug}`"
-                    v-for="(scat, i) in category.scategory"
-                    :key="i"
+                Subcategory Menu
+                <v-icon right>
+                   keyboard_arrow_down
+                </v-icon>
+            </v-chip>
+            </div>
+            <v-navigation-drawer
+                v-model="subcategory"
+                app
+                bottom
+                temporary
+                >
+                <v-list
+                    nav
+                    dense
+                  >
+                  <v-subheader>Choose your subcategory</v-subheader>
+                    <v-list-item-group
+                    
+                    active-class="deep-purple--text text--accent-4"
                     >
-                    <v-list-item-icon>
-                        <v-icon>keyboard_arrow_right</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title v-text="scat.name"></v-list-item-title>
-                    </v-list-item-content>
-                    </v-list-item>
-                </v-list-item-group>
+                    <v-list-item 
+                        v-for="(scat, i) in category.scategory"
+                        :key="i"
+                        router :to="`/category/${category.id}/${scat.slug}`"
+                        >
+                        <v-list-item-icon>
+                            <v-icon >keyboard_arrow_right</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-content>
+                            <v-list-item-title v-text="scat.name"></v-list-item-title>
+                        </v-list-item-content>
+                        </v-list-item>
+                    </v-list-item-group>
                 </v-list>
-            </v-container>
-        </div>
-        </div>
+            </v-navigation-drawer>
         <!-- end of mobile view subcategory -->
         <div class="py-5" v-if="count>0">
 
@@ -77,6 +93,7 @@ export default {
         count:1,
         all_ads:[],
         category:{},
+        subcategory:false,
         nextUrl : null,
         items: [
         { text: 'Real-Time', icon: 'mdi-clock' },

@@ -1,7 +1,7 @@
 <template>
   <div  v-if="count > 0">
     
-    <div class="container">
+    <div class="container mb-4">
       <v-container>
         <p class="featured-title text-center">Featured Products</p>
         <div class="px-2">
@@ -13,6 +13,7 @@
                 <v-img
                   class="white--text align-end"
                   height="190px"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
                   :src="ads.product_cover"
                 >
                 </v-img>

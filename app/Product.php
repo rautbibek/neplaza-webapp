@@ -155,7 +155,7 @@ class Product extends Model
       if($this->image != null){
         return asset('storage/thumb/'.$this->image->image);
       }else{
-        return asset('image/no-image.jpg');
+        return asset('image/no-image.webp');
       }
     }
 

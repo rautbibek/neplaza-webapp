@@ -1,6 +1,7 @@
 <template>
     <div>
-        <nav aria-label="breadcrumb ">
+      <div >
+        <nav aria-label="breadcrumb "  :class="display">
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                 <li class="breadcrumb-item pull-right">
@@ -10,6 +11,8 @@
                 <li class="breadcrumb-item active" aria-current="page">{{scategory_name}}</li>
             </ol>
         </nav>
+      </div>
+        
         <div>
           <!-- overlay -->
           <v-overlay :value="overlay">
@@ -47,15 +50,19 @@
             <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                           
                <v-card flat v-for="(scat,index) in subcategory" :key="index">
-                <v-toolbar dark color="#2f3b59">
-                  
-                  <v-toolbar-title>Filter</v-toolbar-title>
-                  <v-spacer></v-spacer>
-                  <v-toolbar-items>
-                    <v-btn icon dark @click="dialog = false">
+                <v-toolbar dark dense color="#2f3b59">
+                  <v-btn
+                    icon
+                    dark
+                    @click="dialog = false"
+                  >
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
-                  </v-toolbar-items>
+                  <v-toolbar-title>Filter</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <v-toolbar-title @click="clearFilter">
+                    Clear Filter
+                  </v-toolbar-title>
                 </v-toolbar>
                 <v-list three-line subheader>
                   <v-subheader>Ad filter</v-subheader>
@@ -560,9 +567,7 @@ export default {
       }
     },
     methods:{
-      clear_filter() {
-        this.$refs.form.reset();
-      },
+      
       changing(){
         //this.price.push(this.max_p,1)
         this.price[1] = this.max_p;
@@ -657,8 +662,31 @@ export default {
                 })
                 .catch()
         },
+        clearFilter(){
+              this.type_id = [],
+              this.status_id  = [];
+               this.filter_id = [];
+               this.filter_1_id = [];
+               this.filter_2_id =[];
+               this.filter_3_id =[];
+               this.brand_id =[];
+               this.city_id =[];
+               this.nhood_id =[];
+               this.price =[];
+               this.sorting ='';
+               this.filter();
+        }
     },
     computed:{
+      display () {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 'd-none d-sm-flex'
+          case 'sm': return 'd-none d-sm-flex'
+          case 'md': return ''
+          case 'lg': return ''
+          case 'xl': return ''
+        }
+      },
       type_title(){
         if(this.url === 'property'){
           return "Property Type"
@@ -715,7 +743,7 @@ export default {
       }
     }
 
-}
+}  
 </script>
 <style scoped>
 
