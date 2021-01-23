@@ -5,7 +5,8 @@
         style="position: relative"
         class="white--text align-end"
         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
-        :height="height"
+        aspect-ratio="1.4"
+        max-height="190px"
         :src="ads.product_cover"
         :lazy-src="ads.product_cover"
       >
@@ -35,16 +36,5 @@ export default {
     //   return this.show =false;
     // }
   },
-  computed: {
-      height () {
-        switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return '170px'
-          case 'sm': return '190px'
-          case 'md': return '190px'
-          case 'lg': return '190px'
-          case 'xl': return '190px'
-        }
-      },
-    },
 };
 </script>

@@ -16,6 +16,7 @@
         <v-btn small fab
           v-for="icon in icons"
           :key="icon"
+          router to="https://www.facebook.com/Bikri-bazzar-106546471305792"
           class="white--text"
           icon
         >
@@ -45,10 +46,10 @@
                     <div class="ml-5">
                       <h5 class="ml-5 text-muted">SOCIAL</h5>
                       <ul class="list-unstyled text-small">
-                        <li><a class="text-light" href="#">Facebook</a></li>
-                        <li><a class="text-light" href="#">Instagram</a></li>
-                        <li><a class="text-light" href="#">Twitter</a></li>
-                        <li><a class="text-light" href="#">Linked In</a></li>
+                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Facebook</a></li>
+                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Instagram</a></li>
+                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Twitter</a></li>
+                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Linked In</a></li>
                       </ul>
                     </div>
                   </div>
@@ -59,19 +60,18 @@
                           <p class="footer-head">
                               MAIL US
                           </p>
-                          <p class="footer-link">
-
-                            <a style="color:white" class="underline" href="mailto:rautbibek47@gmail.com">rautbibek47@gmail.com</a>
-                          </p>
-                          <p class="footer-head">
-                              REGISTERED OFFICE ADDRESS
-                          </p>
+                          
+                          
                           <p class="footer-link">Naya Basti,Boudha, Kathmandu, Nepal</p>
                           <p class="footer-head">
-                            CONTACT NUMBER
+                             CALL OR EMAIL US
                           </p>
                           <p class="footer-head">
                               <a style="color:white" href="tel:9863756278">+977-9863756278</a>&nbsp;,&nbsp;<a style="color:white" href="tel:9813074153">+977-9813074153</a>
+                          </p>
+                          <p class="footer-link">
+
+                            <a style="color:white" class="underline" href="mailto:bikribazzar@gmail.com">bikribazzar@gmail.com</a>
                           </p>
                       </div>
 
@@ -79,10 +79,12 @@
                   </div>
 
                   <div class="col-12 col-md">
-                    <h5 class="text-muted">FACEBOOK PAGE</h5>
-                    <div class="ml-5">
-                    
-                    </div>
+                    <h5 class="text-muted">ABOUT</h5>
+                    <p>
+                      <strong>BIKRI BAZZAR </strong> is a classified website in <strong>Nepal</strong> where you can buy and sell locally. 
+                      Find the latest classified ads for realestate, jobs, cars, bikes, furniture, fashion, 
+                      mobiles and more for sale in <strong>Nepal</strong>. Find buyers and sellers that suit your need.
+                    </p>
                   </div>
                 </div>
        </div>

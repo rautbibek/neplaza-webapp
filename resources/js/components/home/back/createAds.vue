@@ -14,7 +14,7 @@
     <div class="cover-image">
       <h3 class="text-center">Select a Category</h3>
     </div>
-    <v-container class="cover-container create-ad">
+    <v-container class="cover-container create-ad mb-5">
       <v-expansion-panels>
         <v-expansion-panel v-for="(category, index) in categories" :key="index">
           <v-expansion-panel-header>

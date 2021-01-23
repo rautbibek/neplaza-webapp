@@ -22,8 +22,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-//vue carousel importing
-import VueCarousel from 'vue-carousel';
 
 //vue event bus
 window.EventBus = new Vue();

@@ -1,34 +1,39 @@
 <template>
   <div>
-    
     <v-card color="#00000000">
-      
       <div class="flex">
         <small>{{ ad.created_date }}</small>
+        
+        
         <div>
+          
           <Message :seller="owner"/>
+         
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
+              
               <v-icon v-bind="attrs" v-on="on" class="mr-2"
-                >mdi-share-variant-outline</v-icon
-              >
+                >mdi-share-variant-outline</v-icon>
             </template>
             <div class="share">
               <span>Share</span>
               <share-it iconSize="lg" :url="url" :icons="true" />
             </div>
           </v-menu>
+          <!-- <div><report-ad :ads='ad'></report-ad></div> -->
           <favorite
             :product_id="ad.id"
             :from_details="true"
             :is_favorite="ad.favorite_to_users.length > 0 ? true : false"
           ></favorite>
           
+          
           <v-menu offset-y close-on-content-click>
             <template v-slot:activator="{ on, attrs }">
               <v-icon class="ml-1" v-bind="attrs" v-on="on"
                 >mdi-dots-vertical</v-icon
               >
+              
             </template>
             <v-list class="other-options">
               <v-list-item @click="copy(ad.productid)">Copy Product ID</v-list-item>
@@ -40,11 +45,12 @@
                   <v-list-item @click="soldOut(ad)">Mark as Sold Out</v-list-item>
                 </div>
               </div>
-              <div><report-ad :ads='ad'></report-ad></div>
+              
             </v-list>
           </v-menu>
           
         </div>
+        
       </div>
       <v-card-title class="text-capitalize product-title">{{
         ad.title 
@@ -62,11 +68,11 @@
     </v-card>
     <!-- user information -->
     <v-card class="card-user" :to="`/seller/${ad.user.id}/${ad.user.username}`">
-    
-      <v-avatar size="100">
+    <v-responsive style="margin:0px; padding:0px; flex:none">
+      <v-avatar size="120">
         <img :src="ad.user.cover" :alt="ad.user.name" />
       </v-avatar>
-      
+      </v-responsive>
       <div class="product-username">
         
         <p class="owner mb-1">Owner</p>

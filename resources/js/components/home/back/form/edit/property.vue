@@ -282,7 +282,6 @@
             color="#19916B"
             :rules="[
               required('Location/Area'),
-              minLength('Location/Area', 10),
               maxLength('Location/Area', 100),
             ]"
             outlined
@@ -311,6 +310,7 @@
           class="textfield"
           color="#19916B"
           tabindex="15"
+          min="0"
           label="Price *"
           :rules="[priceVlidate('price')]"
           outlined

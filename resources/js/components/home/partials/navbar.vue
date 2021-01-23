@@ -76,7 +76,7 @@
   </nav>
   <v-navigation-drawer
       v-model="drawer"
-      width="90%"
+      width="80%"
       app
       temporary
     >
@@ -101,17 +101,17 @@
       <v-list>
         <v-list-item router :to="`/`">
         <v-list-item-icon>
-          <v-icon>mdi-home</v-icon>
+          <v-icon small>mdi-home</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>Home</v-list-item-title>
+        <v-list-item-title style="font-size:12px"> Home</v-list-item-title>
       </v-list-item>
       <v-list-item router :to="`/contact/us`">
         <v-list-item-icon>
-          <v-icon>mdi-phone</v-icon>
+          <v-icon small>mdi-phone</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>Contact Us</v-list-item-title>
+        <v-list-item-title style="font-size:12px">Contact Us</v-list-item-title>
       </v-list-item>
-      <v-subheader>Brows all categories</v-subheader>
+      <v-subheader>Browse all categories</v-subheader>
       
       <v-list-group
         v-for="(category,index) in categories" :key="index"
@@ -120,7 +120,7 @@
       >
         <template v-slot:activator>
           <v-list-item-content>
-            <v-list-item-title v-text="category.name"></v-list-item-title>
+            <v-list-item-title style="font-size:12px" v-text="category.name"></v-list-item-title>
           </v-list-item-content>
         </template>
 
@@ -130,7 +130,7 @@
           router :to="`/category/${category.id}/${scat.slug}`"
         >
           <v-list-item-content>
-            <v-list-item-title v-text="scat.name"></v-list-item-title>
+            <v-list-item-title style="font-size:11px" v-text="scat.name"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>

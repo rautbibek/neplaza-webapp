@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-list-item @mouseover="report">Report This Ad</v-list-item>
-    
+    <v-icon color="blue" @click="report">report</v-icon>
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent width="450">
         <v-card>

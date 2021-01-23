@@ -12,7 +12,8 @@
               <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                 <v-img
                   class="white--text align-end"
-                  height="190px"
+                  aspect-ratio="1.4"
+                  max-height="190px"
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
                   :src="ads.product_cover"
                 >

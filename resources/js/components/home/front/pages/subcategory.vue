@@ -1,8 +1,8 @@
 <template>
     <div>
       <div >
-        <nav aria-label="breadcrumb "  :class="display">
-            <ol class="breadcrumb ">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb " style="padding-left:5px">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                 <li class="breadcrumb-item pull-right">
                   <router-link :to="`/category/${category_slug}`">
@@ -49,24 +49,22 @@
           <v-row justify="center">
             <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                           
-               <v-card flat v-for="(scat,index) in subcategory" :key="index">
+               <v-card  flat v-for="(scat,index) in subcategory" :key="index">
                 <v-toolbar dark dense color="#2f3b59">
                   <v-btn
                     icon
                     dark
                     @click="dialog = false"
                   >
-                    <v-icon>mdi-close</v-icon>
+                    <v-icon small>mdi-close</v-icon>
                   </v-btn>
-                  <v-toolbar-title>Filter</v-toolbar-title>
+                  <v-toolbar-button>AD Filter</v-toolbar-button>
                   <v-spacer></v-spacer>
-                  <v-toolbar-title @click="clearFilter">
-                    Clear Filter
-                  </v-toolbar-title>
+                  <v-toolbar-button @click="clearFilter">
+                    Clear filter
+                  </v-toolbar-button>
                 </v-toolbar>
-                <v-list three-line subheader>
-                  <v-subheader>Ad filter</v-subheader>
-                </v-list>
+                
                   <v-container>
                   <v-form ref="form">
                        <!-- location -->
@@ -264,11 +262,11 @@
             </v-row>
           <!--end of mobile view filter button and sort by button navigation -->
           <v-main>
-            <v-row no-gutters style="margin:0px; padding:0px">
+            <v-row no-gutters style="margin:0px; padding:0px;">
               <!-- desktop view -->
-              <v-col cols="6" lg="3" md="4" class="border-right d-none d-sm-flex " >
+              <v-col cols="6" lg="3" sm="4" md="4" class="border-right d-none d-sm-flex " >
                 <v-container class="mt-2">
-                  <v-card  flat v-for="(scat,index) in subcategory" :key="index">
+                  <v-card color="#00000000" flat v-for="(scat,index) in subcategory" :key="index">
                     <!-- form start -->
                     <v-form ref="form">
                        <!-- location -->
@@ -458,7 +456,8 @@
                             
                     </v-form>
                       <v-row>
-                        <v-col><v-btn @click="filter" color="primary" dark >Apply Filter</v-btn></v-col>
+                        <v-col cols="6"><v-btn tile @click="filter" color="primary" dark >Apply filter</v-btn></v-col>
+                        <v-col cols="6"><v-btn tile text @click="clearFilter" color="red" dark >Clear filter</v-btn></v-col>
                       </v-row>
 
                       <!-- end of form -->
@@ -468,15 +467,15 @@
               <!-- end of desktop view -->
 
               <!-- product display column -->
-              <v-col  cols="12" lg="9" md="8" xs="12">
+              <v-col  cols="12" sm="8" lg="9" md="8" xs="12">
                 
-                <v-toolbar class="d-sm-none" style="padding:0px">
+                <v-toolbar class="d-sm-none" dense height="40px" style="padding:0px;">
                   <v-row no-gutters >
                     <v-col cols="6" class="text-center border-right" @click="sheet=true" style="margin:0px; padding:0px">
                         <span class="subtitle-1"> Sort By</span> <v-icon>sort</v-icon>
                     </v-col>
                     
-                    <v-col cols="6" class="text-center" @click="dialog=true" >
+                    <v-col cols="6" style="margin:0px; padding:0px" class="text-center" @click="dialog=true" >
                         <span class="subtitle-1"> Filter </span> <v-icon>filter_list</v-icon>
                     </v-col>
                   </v-row>
@@ -502,9 +501,19 @@
                 </v-toolbar>
                 </div>
                 <filter-ad :all_ads="all_ads" class="px-2" :count="count"></filter-ad>
+                <div class="text-center mt-5 mb-5" v-if="nextUrl">
+                    <v-btn :loading="loading" outlined tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
+                        Load More
+                        <template v-slot:loader>
+                            <span>Loading...</span>
+                        </template>
+                        <v-icon right>cached</v-icon>
+                    </v-btn>
+                </div>
               </v-col>
               <!-- end of display product column -->
             </v-row>
+            
           </v-main>
         </div>
     </div>

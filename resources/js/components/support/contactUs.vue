@@ -8,11 +8,11 @@
       </nav>
 
       <div>
-          <v-container>
-            <v-card tile flat >
+          <v-container class="mt-5">
+            
               <v-row>
-                <v-col cols="12" md="4" xs="12">
-                  <v-card tile elevation="12">
+                <v-col cols="12" md="4" xs="12" class="mb-3">
+                  <v-card tile>
                       <v-fab-transition>
                         <v-btn
                           color="rgb(47 59 89)"
@@ -38,7 +38,7 @@
                   </v-card>
                 </v-col>
                 <v-col cols="12" md="4" xs="12">
-                  <v-card tile elevation="12">
+                  <v-card tile >
                       <v-fab-transition>
                         <v-btn
                           color="rgb(47 59 89)"
@@ -56,7 +56,7 @@
                         <v-card-title>E-mail US</v-card-title>
 
                         <div class="text--primary">
-                          <a href="mailto:rautbibek47@gmail.com">rautbibek47@gmail.com</a>,<br>
+                          <a href="mailto:rautbibek47@gmail.com">bikribazzar@gmail.com</a>,<br>
                           <a href="mailto:aiskabasnet@gmail.com">aiskabasnet@gmail.com</a>
 
                         </div>
@@ -64,7 +64,7 @@
                   </v-card>
                 </v-col>
                 <v-col cols="12" md="4" xs="12">
-                  <v-card tile elevation="12">
+                  <v-card tile >
                       <v-fab-transition>
                         <v-btn
                           color="rgb(47 59 89)"
@@ -92,7 +92,7 @@
                 </v-col>
               </v-row>
 
-                <v-card tile elevation="12">
+                <v-card tile >
                   <v-row>
                     <v-col cols="12" md="6" lg="6" sm="6" xs="12">
                       <v-card-title>OFFICE LOCATION</v-card-title>
@@ -164,7 +164,7 @@
                   </v-row>
                 </v-card>
 
-            </v-card>
+            
           </v-container>
       </div>
 

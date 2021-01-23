@@ -122,7 +122,6 @@
           counter="100"
           :rules="[
             required('Location/Area'),
-            minLength('Location/Area', 10),
             maxLength('Location/Area', 100),
           ]"
           outlined
@@ -139,7 +138,7 @@
           color="#2f3b59"
           text-color="white"
         >
-          Rs. {{ Number(price).toLocaleString() }}
+          Rs. Rs. {{ Number(price).toLocaleString() }} - {{ Number(maxprice).toLocaleString()}}
         </v-chip>
       </v-card-title>
       <v-row no-gutters>
@@ -147,6 +146,7 @@
           <v-text-field
             color="#19916B"
             tabindex="8"
+            min="0"
             type="number"
             v-model="price"
             label="From *"
@@ -159,6 +159,7 @@
           <v-text-field
             color="#19916B"
             tabindex="9"
+            min="0"
             type="number"
             v-model="maxprice"
             label="To *"

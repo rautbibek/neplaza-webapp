@@ -148,7 +148,6 @@
         tabindex="9"
         :rules="[
           required('Location/Area'),
-          minLength('Location/Area', 10),
           maxLength('Location/Area', 100),
         ]"
         outlined
@@ -174,6 +173,7 @@
         type="number"
         v-model="price"
         label="Price *"
+        min="0"
         tabindex="10"
         color="#19916B"
         :rules="[required('Price'), priceVlidate('Price')]"
@@ -216,28 +216,44 @@
           </div>
 
           <div class="image-preview" v-show="image.length">
-            <div
-              class="img-wrapper"
-              v-for="(image, index) in image"
-              :key="index"
-            >
-              <img :src="image" :alt="`Image Uplaoder ${index}`" />
-              <div class="details">
-                <span class="name" v-text="files[index].name"></span>
-                <span
-                  class="size"
-                  v-text="getFileSize(files[index].size)"
-                ></span>
-                <a
-                  class="hover"
-                  href="javascript:void(0)"
-                  @click="removeimage(index)"
-                  style="color: red"
-                  >remove</a
+              <div
+                class="img-wrapper"
+                v-for="(image, index) in image"
+                :key="index"
+              >
+              <v-fade-transition>
+                <v-overlay
+                  v-if="hover"
+                  absolute
+                  color="#036358"
                 >
+                  <v-btn>See more info</v-btn>
+                </v-overlay>
+              </v-fade-transition>
+                <v-card>
+                  <img :src="image" style="object-fit: cover;" :alt="`Image Uplaoder ${index}`" />
+                  <v-overlay v-if="index==0"
+            
+                  absolute
+                  color="#036358"
+                >
+                  <v-btn x-small color="green">Cover</v-btn>
+                </v-overlay>
+                </v-card>
+                <a href="javascript:void(0)" @click="removeimage(index)" style="color: red"
+                  >Remove</a>
+                 
+
+                <div class="details">
+                  <span class="name" v-text="files[index].name"></span>
+                  <span
+                    class="size"
+                    v-text="getFileSize(files[index].size)"
+                  ></span>
+                  
+                </div>
               </div>
             </div>
-          </div>
         </div>
         <div v-if="errors.image" class="invalid-feedback">
           {{ errors.image }}

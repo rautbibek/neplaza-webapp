@@ -10,20 +10,22 @@
         {{ads.title}}
     </div></v-card-subtitle>
     
-    <p class="text-black ad-address">
+    <p class="text-black ad-address " >
       <v-icon color="#19916b" small>mdi-map-marker-circle</v-icon>
       {{ ads.product_property.nhood_name }},
       {{ ads.product_property.city_name }}
     </p>
     <!-- category name part -->
-    <div class="d-flex">
+    <div class="d-none d-sm-flex">
       <v-chip  class="category ad-price " outlined small label>
         <v-icon x-small>query_builder</v-icon> &nbsp; {{ ads.created_date}}
       </v-chip>
-      <v-chip class="category text-capitalize d-none d-sm-flex" outlined small label>
+      <v-chip class="category text-capitalize " outlined small label>
         <v-icon x-small left>mdi-account-circle</v-icon>{{ ads.product_property.user_name }}
       </v-chip>
+      
     </div>
+    <small class="d-flex d-sm-none" style="color:black"><v-icon x-small left>query_builder</v-icon>{{ ads.created_date}}</small>
   </div>
 </template>
 <script>
@@ -32,6 +34,9 @@ export default {
 };
 </script>
 <style scoped>
+.font{
+  font-size:10px;
+}
 .text-capitalize {
   padding: 0px;
   display: flex;
@@ -48,7 +53,7 @@ export default {
   padding: 12px;
 }
 .ad-address {
-  font-size: 14px;
+  font-size: 11px;
   display: inline-block;
   white-space: nowrap;
   text-overflow: ellipsis;

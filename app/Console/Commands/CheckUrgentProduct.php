@@ -39,7 +39,6 @@ class CheckUrgentProduct extends Command
     {
         $urgent_ad = Urgent::where('expire_date','<=',now())->get();
         if($urgent_ad->count()>0){
-            print "hello";
             foreach($urgent_ad as $urgent){
                 $urgent->delete();
             }

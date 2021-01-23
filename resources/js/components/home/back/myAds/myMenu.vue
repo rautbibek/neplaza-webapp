@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-navigation-drawer class="drawer" v-model="drawer" absolute permanent>
+  <div >
+    <v-navigation-drawer class="drawer" style="min-height:550px" absolute permanent>
       <v-list dense class="p-0">
         <v-list-item-group v-model="item" color="primary">
           <v-list-item
@@ -9,18 +9,15 @@
             router
             :to="item.url"
           >
-            <v-tooltip left>
-              <template v-slot:activator="{ on, attrs }">
-                <v-list-item-icon v-bind="attrs" v-on="on">
+                <v-list-item-icon>
                   <v-icon v-text="item.icon"></v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title v-text="item.text"></v-list-item-title>
                 </v-list-item-content>
-              </template>
-              <span>{{ item.text }}</span>
-            </v-tooltip>
+ 
           </v-list-item>
+          
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>

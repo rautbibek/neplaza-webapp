@@ -5,12 +5,9 @@
     class="mx-auto"
     height="auto"
   >
-    <v-app-bar class="d-sm-none" fixed color="#2f3b59"
-      dark
-    >
+    <v-app-bar flat dense class="d-sm-none" fixed color="#2f3b59" dark>
       <v-app-bar-nav-icon style="padding-right:0px; margin-right:0px" @click="drawer"></v-app-bar-nav-icon>
-      
-      <v-toolbar-title style="width:100%;"><search></search></v-toolbar-title>
+      <v-toolbar-title style="width:100%; padding:0px"><search></search></v-toolbar-title>
     </v-app-bar>
     <div style="height:40px" class="d-flex d-sm-none"></div>
     <v-container class="container">

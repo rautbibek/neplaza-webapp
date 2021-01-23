@@ -112,7 +112,7 @@
       </v-col>
     </v-row>
 
-    <div class="text-center mt-5" v-if="nextUrl">
+    <div class="text-center ma-5" v-if="nextUrl">
       <v-btn
         :loading="loading"
         outlined

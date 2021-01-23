@@ -1,6 +1,6 @@
 <template>
   <div v-if="count > 0" class="urgent-container">
-    <v-container class="" >
+    <v-container class="pb-1" >
         <p class="featured-title text-center">
           Urgent Products
         </p>
@@ -13,7 +13,8 @@
                 <v-img
                   class="white--text align-end"
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
-                  height="190px"
+                  aspect-ratio="1.4"
+                  max-height="190px"
                   :src="ads.product_cover"
                 >
                 </v-img>
@@ -74,6 +75,7 @@ export default {
   created() {
     this.getAds();
   },
+  
 };
 </script>
 <style scoped>

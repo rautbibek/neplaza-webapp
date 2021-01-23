@@ -158,7 +158,6 @@
           counter="100"
           :rules="[
             required('Location/Area'),
-            minLength('Location/Area', 10),
             maxLength('Location/Area', 100),
           ]"
           outlined
@@ -183,6 +182,7 @@
           color="#19916B"
           tabindex="11"
           type="number"
+          min="0"
           v-model="price"
           label="Price *"
           :rules="[priceVlidate('Price')]"

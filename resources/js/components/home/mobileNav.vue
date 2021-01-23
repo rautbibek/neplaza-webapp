@@ -2,7 +2,7 @@
   <div style="background-color:#eef3eb" >
      <v-container>
       <v-row>
-        <v-col cols="9"><h4 class="text-caption">Brows Categories</h4></v-col>
+        <v-col cols="9"><h4 class="text-caption">Browse Categories</h4></v-col>
         <v-col cols="3" class="text-right" >
           <u>
             <h4 @click="navigationDrawer" class="text-caption">

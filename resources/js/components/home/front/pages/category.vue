@@ -66,7 +66,7 @@
                 </v-layout>
                 <div class="text-center mt-5" v-if="nextUrl">
 
-                <v-btn :loading="loading" dark tile color="#2F3B59" class="" @click.prevent="more(nextUrl)">
+                <v-btn :loading="loading"  outlined  color="#2F3B59" @click.prevent="more(nextUrl)">
                     Load More
                     <template v-slot:loader>
                         <span>Loading...</span>

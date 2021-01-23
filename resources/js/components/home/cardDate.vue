@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-row no-gutters>
-            <v-col cols="6" class="my-2">
+            <v-col cols="6" >
                 <v-chip style=""
                 draggable
                 small
@@ -14,7 +14,7 @@
                 {{ads.created_date}}
                 </v-chip>
             </v-col>
-            <v-col cols="6" class="my-2">
+            <v-col cols="6" >
                 <v-chip
                 small
                 color="#f2f2f2"

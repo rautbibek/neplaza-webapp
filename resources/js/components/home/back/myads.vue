@@ -72,7 +72,7 @@
                 </v-card>
               </v-lazy>
             </v-flex>
-            <div class="mt-5 mx-auto" v-if="nextUrl">
+            <div class="ma-5 mx-auto" v-if="nextUrl">
               <v-btn
                 :loading="loading"
                 dark

@@ -50,7 +50,7 @@ class SubcategoryController extends Controller
                   ->with(['product_property','image','favorite_to_users'=>function($query){
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
-                  ->simplePaginate(15)->appends([
+                  ->simplePaginate(28)->appends([
                       'price' => request('price'),
                       'filter' => request('filter'),
                       'filter_1_id' => request('filter_1_id'),

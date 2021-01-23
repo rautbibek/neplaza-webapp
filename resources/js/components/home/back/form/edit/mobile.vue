@@ -149,7 +149,6 @@
           counter="100"
           :rules="[
             required('Location/Area'),
-            minLength('SLocation/Area', 10),
             maxLength('Location/Area', 100),
           ]"
           outlined
@@ -173,6 +172,7 @@
         <v-text-field
           color="#19916B"
           tabindex="10"
+          min="0"
           type="number"
           v-model="price"
           label="Price *"

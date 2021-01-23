@@ -45,9 +45,9 @@
         <v-col
           cols="12"
           sm="12"
-          md="6"
-          class="pa-0"
-          v-bind:class="scat.url !== 'land' ? 'pr-3' : 'pl-3'"
+          md="12"
+         class="pa-0 "
+          v-bind:class="scat.url !== 'land' "
         >
           <v-select
             class="textfield"
@@ -65,11 +65,33 @@
         </v-col>
         <v-col
           cols="12"
-          md="6"
-          sm="12"
+          xs="12"
           class="pa-0"
-          v-bind:class="scat.url !== 'land' ? 'pl-3' : 'pr-3'"
+          v-bind:class="scat.url === 'land' && 'pl-3'"
+          v-bind:md="scat.url !== 'land' ? '12' : '6'"
         >
+        
+        </v-col>
+        <v-col
+          cols="12"
+          
+          class="pa-0"
+          v-bind:class="scat.url !== 'land' "
+        >
+        <p>Choose your area and unit:</p>
+        <v-chip-group
+          v-model="filter_3_id"
+          mandatory
+          column
+        >
+        <v-chip v-for="(s,i) in scat.filter_3" :key="i"
+            filter
+            :value="s.id"
+            outlined
+          >
+            {{s.name}}
+          </v-chip>
+      </v-chip-group>
           <v-text-field
             type="number"
             v-model="property_3"
@@ -81,27 +103,7 @@
             clearable
           ></v-text-field>
         </v-col>
-        <v-col
-          cols="12"
-          xs="12"
-          class="pa-0"
-          v-bind:class="scat.url === 'land' && 'pl-3'"
-          v-bind:md="scat.url !== 'land' ? '12' : '6'"
-        >
-          <v-select
-            class="textfield"
-            v-model="filter_3_id"
-            :items="scat.filter_3"
-            tabindex="5"
-            :item-text="'name'"
-            :item-value="'id'"
-            label="Builtup Area Unit *"
-            color="#19916B"
-            :rules="[select('Builtup area unit')]"
-            outlined
-            clearable
-          ></v-select>
-        </v-col>
+        
       </v-row>
       <div v-if="scat.url !== 'land'">
         <v-divider></v-divider>
@@ -274,7 +276,6 @@
             class="mb-1"
             :rules="[
               required('Location/Area'),
-              minLength('Location/Area', 10),
               maxLength('Location/Area', 100),
             ]"
             outlined
@@ -301,6 +302,7 @@
           type="number"
           v-model="price"
           label="Price *"
+          min="0"
           tabindex="15"
           color="#19916B"
           :rules="[required('Price'), priceVlidate('Price')]"
@@ -348,20 +350,36 @@
                 v-for="(image, index) in image"
                 :key="index"
               >
-                <img :src="image" :alt="`Image Uplaoder ${index}`" />
+              <v-fade-transition>
+                <v-overlay
+                  v-if="hover"
+                  absolute
+                  color="#036358"
+                >
+                  <v-btn>See more info</v-btn>
+                </v-overlay>
+              </v-fade-transition>
+                <v-card>
+                  <img :src="image" style="object-fit: cover;" :alt="`Image Uplaoder ${index}`" />
+                  <v-overlay v-if="index==0"
+            
+                  absolute
+                  color="#036358"
+                >
+                  <v-btn x-small color="green">Cover</v-btn>
+                </v-overlay>
+                </v-card>
+                <a href="javascript:void(0)" @click="removeimage(index)" style="color: red"
+                  >Remove</a>
+                 
+
                 <div class="details">
                   <span class="name" v-text="files[index].name"></span>
                   <span
                     class="size"
                     v-text="getFileSize(files[index].size)"
                   ></span>
-                  <a
-                    class="hover"
-                    href="javascript:void(0)"
-                    @click="removeimage(index)"
-                    style="color: red"
-                    >Remove</a
-                  >
+                  
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="toggle" class="favourite-icon" v-if="fromDetails" x-small icon>
+  <v-btn @click="toggle" small class="favourite-icon" v-if="fromDetails" x-small icon>
     <v-icon :color="colorOutlined" v-if="fav">mdi-heart</v-icon>
     <v-icon :color="colorOutlined" v-else>mdi-heart-outline</v-icon>
   </v-btn>
@@ -82,7 +82,7 @@ export default {
 <style scoped>
 .favourite {
   right: 8px;
-  bottom: 20px;
+  bottom: 8px;
 }
 .favourite-icon i {
   font-size: 24px !important;
