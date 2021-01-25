@@ -7,7 +7,7 @@
         
         <div>
           
-          <Message :seller="owner"/>
+          <Message class="d-none d-sm-flex" :seller="owner"/>
          
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
@@ -95,7 +95,17 @@
         >
       </div>
     </v-card>
-    
+        <v-footer padless elevation="10" height="40px"  fixed class="d-flex d-sm-none">
+              <v-btn-toggle  style="width:100%;">
+              <v-btn outlined dark style="width:49%;" color="red">
+               <report-ad :ads='ad'></report-ad>
+              </v-btn>
+              
+              <v-btn outlined dark style="width:49%" color="#2f3b59">
+                <Message  :seller="owner"/>
+              </v-btn>
+            </v-btn-toggle>
+      </v-footer>
   </div>
 </template>
 <script>

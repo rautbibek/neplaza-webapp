@@ -4,7 +4,7 @@
       top offset-y
       >
       <template v-slot:activator="{ on, attrs }" >
-            <v-btn v-show="show"
+            <v-btn v-show="show" class="d-none d-sm-flex"
               elevation="25"
               fab
               fixed
@@ -20,6 +20,16 @@
               <v-icon >mdi-message</v-icon>
              
             </v-btn>
+            
+            <div v-show="show" class="d-flex mt-2 px-5 py-3  d-sm-none text-center"
+              @click="getMessage"
+              v-bind="attrs"
+              v-on="on"
+            >
+            Chat
+              <v-icon color="2f3b59" right>mdi-message</v-icon>
+             
+            </div>
           </template>
               <v-card
                 width="330px"

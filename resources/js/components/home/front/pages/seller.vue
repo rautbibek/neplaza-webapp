@@ -23,12 +23,15 @@
                                 >
                                 </v-avatar>
                             </v-responsive>
+                        
                         </v-col>
 
                         <v-list-item-content class="text-center">
                         <v-list-item-title>{{seller_detail.name}}</v-list-item-title>
                         <small style="color:grey" class="my-1" >user since : {{seller_detail.register_date}}</small>
                         </v-list-item-content>
+                        
+                        
                     </v-card>
                     <v-card tile class="mt-3 pa-3" v-if="seller_detail.city">
                             <h5 class="m-2 text-center"><i class="fa fa-map-marker"> </i> Address Location </h5>
@@ -44,7 +47,7 @@
                     </v-card>
                     <!-- contact number -->
                     <v-card class="mt-3 pa-3">
-                      <Message :seller="seller_detail"/>
+                      
                         <v-list-item-content class="text-center">
                         <v-list-item-title class="mt-2">
                             Contact Number :
@@ -53,16 +56,17 @@
                             <a :href="'tel:'+seller_detail.contact_number">{{ seller_detail.contact_number}} </a>
                         </v-list-item-title>
                         </v-list-item-content>
+                        
 
                         <v-card-text class="text-center" style="background-color:#3f51b5" v-if="seller_detail.hide_contact ==true">
 
                             <small class="my-1 text-white">Seller Set the Contact {{seller_detail.contact_status}}</small>
                         </v-card-text>
                     </v-card>
-
+                    <Message class="d-none d-sm-flex" :seller="seller_detail"/>
                 </v-col>
 
-
+                
                 <v-col cols="12"  lg="9" sm="8" md="9"> 
 
                     <!-- <v-card class="mt-3" tile v-if="seller_detail.about">
@@ -93,7 +97,12 @@
 
 
             </v-row>
-                
+            <v-footer padless elevation="10"  fixed class="d-flex d-sm-none">
+              <v-btn tile dark style="width:100%" color="#2f3b59">
+                <Message :seller="seller_detail"/>
+              </v-btn>
+            
+          </v-footer> 
          </div>
         </div>
     </div>

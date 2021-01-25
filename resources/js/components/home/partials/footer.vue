@@ -2,8 +2,6 @@
   <v-footer
     dark
     padless
-    
-    
   >
     <v-card width="100%"
       flat
@@ -14,13 +12,14 @@
         <v-card-text class="text-center " >
         <v-btn small text> follow us :</v-btn>
         <v-btn small fab
-          v-for="icon in icons"
-          :key="icon"
-          router to="https://www.facebook.com/Bikri-bazzar-106546471305792"
+          v-for="(icon,index) in icons"
+          :key="index"
+          :href="icon.link"
+          target="_blank"
           class="white--text"
           icon
         >
-          <v-icon>{{ icon }}</v-icon>
+          <v-icon>{{ icon.icon }}</v-icon>
         </v-btn>
       </v-card-text>
       </div>
@@ -46,10 +45,14 @@
                     <div class="ml-5">
                       <h5 class="ml-5 text-muted">SOCIAL</h5>
                       <ul class="list-unstyled text-small">
-                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Facebook</a></li>
-                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Instagram</a></li>
-                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Twitter</a></li>
-                        <li><a class="text-light" href="https://www.facebook.com/Bikri-bazzar-106546471305792">Linked In</a></li>
+                        <li  v-for="(icon,index) in icons"
+                           :key="index"
+                        
+                        class="white--text"
+                        icon>
+                          <a class="text-light" target="_blank" :href="icon.link">{{icon.name}}</a>
+                        </li>
+                       
                       </ul>
                     </div>
                   </div>
@@ -93,7 +96,7 @@
       <v-divider class="d-none d-sm-flex"></v-divider>
 
       <v-card-text class="white--text text-center">
-        &#9400; 2020-{{ new Date().getFullYear() }} - <strong>Bikribazzar</strong> All rights reservd
+        &#9400; 2020-{{ new Date().getFullYear() }} - <strong>Bikribazzar</strong> All rights reserved
       </v-card-text>
     </v-card>
   </v-footer>
@@ -103,10 +106,10 @@
   export default {
     data: () => ({
       icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
+        { link: 'https://www.facebook.com/bikribazzar/', icon: 'mdi-facebook' , name:'Facebook'},
+        { link: '#', icon: 'mdi-twitter' , name:'Twitter'},
+        { link: '#', icon: 'mdi-linkedin' , name:'LinkedIn'},
+        { link: '#', icon: 'mdi-instagram', name:'Instagram' },
       ],
     }),
   }

@@ -18,13 +18,14 @@
                   :src="ads.product_cover"
                 >
                 </v-img>
-                <card-title :ads="ads"></card-title>
+                <div class="feature-top-left">Featured</div>
+                <card-title style="border-left:2px solid yellow" :ads="ads"></card-title>
               </router-link>
             </v-card>
               
             </section>
             <section v-if="count > 7">
-                <v-col  class="text-center " style=" margin-top:170px">
+                <v-col  class="text-center " style=" margin-top:100px">
                   <router-link :to="`/feature/ads`">
                   <v-card-title >Veiw all<v-btn
                     class="mx-2"
@@ -73,6 +74,15 @@ export default {
 </script>
 
 <style scoped>
+.feature-top-left {
+  position: absolute;
+  color: white;
+  padding:2px 10px 2px 10px;
+  background:#bfaf1efa;
+  border-radius:3px;
+  top: 8px;
+  left: 16px;
+}
 .button-container {
   display: flex;
   justify-content: center;

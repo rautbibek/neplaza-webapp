@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Nhood;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,7 @@ class NeighbourhoodController extends Controller
         $nhood->city_id = $request->city_id;
         $nhood->slug = $slug;
         $nhood->save();
+        cache::forget('nhood-'.$request->city_id);
         return response()->json('metro/vdc created succefully',200);
     }
 
@@ -82,6 +84,7 @@ class NeighbourhoodController extends Controller
             'city_id' =>'required'
         ]);
         //return $request;
+        cache::forget('nhood-'.$request->city_id);
         $slug = str_slug($request->name);
         $nhood = Nhood::findOrFail($id);
         $nhood->name = $request->name;

@@ -81,20 +81,24 @@
       temporary
     >
     <div  class="mt-4 text-center">
-      <v-img route to="`/`" style="display: block;
+      <router-link to="/">
+      <v-img style="display: block;
           margin-left: auto;
           margin-right: auto;
           margin-bottom:5px;
           width: 50%;" src="/image/logo.svg"
           ></v-img>
-          <v-btn small text> follow us :</v-btn>
-        <v-btn small fab
-          v-for="icon in icons"
-          :key="icon"
+          </router-link>
+          <v-btn x-small text> follow us :</v-btn>
+        <v-btn x-small fab
+          v-for="(icon,index) in icons"
+          :key="index"
           class="white--dark"
+          :href="icon.link"
+          target="_blank"
           icon
         >
-          <v-icon>{{ icon }}</v-icon>
+          <v-icon >{{ icon.icon }}</v-icon>
         </v-btn>
     </div>
     <v-divider></v-divider>
@@ -150,10 +154,11 @@ export default {
       cat: {},
       drawer:false,
       icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
+        { link: 'https://www.facebook.com/bikribazzar/', icon: 'mdi-facebook' },
+        { link: '', icon: 'mdi-twitter' },
+        { link: '', icon: 'mdi-linkedin' },
+        { link: '', icon: 'mdi-instagram' },
+        
       ],
     };
   },

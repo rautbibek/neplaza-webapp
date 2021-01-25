@@ -1,19 +1,20 @@
 <template>
   <div>
-    <v-icon color="blue" @click="report">report</v-icon>
+    <div class="pa-4" @click="report">report <v-icon color="red" >report</v-icon></div>
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent width="450">
         <v-card>
-          <v-card-title class="text-right">
-            Report This Ad
-            <v-spacer></v-spacer>
-            <v-btn x-small fab @click="close"><v-icon>close</v-icon></v-btn>
-          </v-card-title>
-          <v-divider></v-divider>
+          <v-card-title class="text-right text-light bg-blue" >
+          Report this AD
+          <v-spacer></v-spacer>
+          <v-btn x-small icon @click="close">
+            <v-icon color="#fff">close</v-icon>
+          </v-btn>
+        </v-card-title>
             <v-col cols="12" >
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-card-text>
-                  <v-col cols="12">
+                  <v-col cols="12" style="padding:0px">
                     <v-select
                       dense
                       v-model="reason"
@@ -26,7 +27,7 @@
                       clearable
                     ></v-select>
                   </v-col>
-                  <v-col cols="12">
+                  <v-col cols="12" style="padding:0px">
                     <v-textarea
                       auto-grow
                       rows="3"

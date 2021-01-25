@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\City;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -45,6 +46,7 @@ class CityController extends Controller
       $city->name = $request->name;
       $city->slug = $slug;
       $city->save();
+      cache::forget('city');
       return response()->json('District succefully Saved',200);
     }
 
@@ -88,7 +90,7 @@ class CityController extends Controller
       $city->show = $request->show;
       $city->slug = str_slug($request->name);
       $city->save();
-      
+      cache::forget('city');
       return response()->json('district updated succefully !!',200);
     }
 

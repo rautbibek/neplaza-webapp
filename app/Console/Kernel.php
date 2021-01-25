@@ -28,13 +28,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('feature:update')->everyTwoMinutes();
-         //$schedule->command('expire:feature')->everyTwoMinutes();
-         //$schedule->command('expire:urgent')->everyTwoMinutes();
-         $schedule->command('urgent:update')->everyFiveMinutes();
-         //$schedule->command('urgent:update')->daily('14:00');
-         //$schedule->command('reported')->everyMinutes();
-         
+         $schedule->command('feature:update')->dailyAt('10:00');;
+         $schedule->command('expire:feature')->dailyAt('10:15');;
+         $schedule->command('expire:urgent')->dailyAt('10:40');;
+         $schedule->command('urgent:update')->dailyAt('11:00');;
+         $schedule->command('urgent:update')->daily('11:20');
+         $schedule->command('reported')->dailyAt('11:40');;
     }
 
     /**

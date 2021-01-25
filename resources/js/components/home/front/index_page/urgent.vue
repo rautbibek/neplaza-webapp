@@ -7,9 +7,10 @@
           <div class="px-2 mb-4">
             <vue-horizontal :button-between="false">
             <section v-for="(ads,index) in all_ads" :key="index" style="margin:5px; padding:0xp">
-             <v-card class="card product-card " >
+             <v-card class="card product-card"  
+             >
              
-              <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
+              <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`" >
                 <v-img
                   class="white--text align-end"
                   gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
@@ -18,13 +19,14 @@
                   :src="ads.product_cover"
                 >
                 </v-img>
-                <card-title :ads="ads"></card-title>
+                <div class="urgent-top-left">Urgent</div>
+                <card-title  :ads="ads"></card-title>
               </router-link>
             </v-card>
               
             </section>
             <section v-if="count > 7">
-                <v-col  class="text-center " style=" margin-top:170px">
+                <v-col  class="text-center " style=" margin-top:100px; margin-left:20px">
                   <router-link :to="`/urgent/sell`">
                   <v-card-title>Veiw all<v-btn
                     class="mx-2"
@@ -79,6 +81,15 @@ export default {
 };
 </script>
 <style scoped>
+.urgent-top-left {
+  position: absolute;
+  color: white;
+  padding:2px 10px 2px 10px;
+  background:#2f3b59;
+  border-radius:3px;
+  top: 8px;
+  left: 16px;
+}
 .urgent-container {
   background: #f3f2ed;
 }
