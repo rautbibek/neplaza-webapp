@@ -5,7 +5,7 @@
         class="form-control searchinput"
         value="`${this.$route.query.q}`"
         @select="show==true"
-        @keyup="search"
+        
         v-model="keyword"
         type="text"
         @keydown.enter="submit"
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="autocomplete" style="margin-top:-22px" v-show="show" v-if="searchResult.length">
+    <!-- <div class="autocomplete" style="margin-top:-22px" v-show="show" v-if="searchResult.length">
       <div class="container">
         <ul class="list-group" @click="select">
           <router-link
@@ -34,15 +34,11 @@
           </router-link>
         </ul>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
-$("body").click(function(e) {
-  if (e.target.className !== "search") {
-    $(".autocomplete").hide();
-  }
-});
+
 export default {
   data() {
     return {
@@ -125,16 +121,7 @@ export default {
   border: 1px solid #d9d9d9;
   border-right: 0px;
 }
-.autocomplete {
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-  display: inline-block;
-  top: 100%;
-  overflow: hidden;
-  max-height: 410px;
-  left: 0;
-}
+
 .form-control:focus {
   border-color: white;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #2f3b59;

@@ -32,12 +32,9 @@ class CategoryController extends Controller
           $q->orderBy('product_count','desc');
           $q->withCount('product');
         }])
-                             ->orderBy('product_count','desc')
-                             ->withCount('product')
-                             ->get();
-                             foreach ($category as $key => $cat) {
-                               Category::where('id',$cat->id)->update(['product_count'=>$cat->product_count]);
-                            }
+         ->orderBy('product_count','desc')
+         ->withCount('product')
+         ->get();
         return response()->json($category,200);
     }
 

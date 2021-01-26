@@ -26,12 +26,6 @@ class SubcategoryController extends Controller
     public function create()
     {
         $subcategory = Scategory::orderBy('category_id','asc')->withCount('product')->get();
-        
-        foreach ($subcategory as $key => $scat) {
-          
-          Scategory::where('id',$scat->id)->update(['product_count'=>$scat->product_count]);
-        }
-        cache::forget('meghamenu');
         return response()->json($subcategory,200);
     }
 
@@ -54,6 +48,7 @@ class SubcategoryController extends Controller
       $scategory->url = $request->url;
       $scategory->category_id = $request->category_id;
       $scategory->save();
+      cache::forget('meghamenu');
       return response()->json('new subcategory added succefully ',200);
     }
 
@@ -98,7 +93,7 @@ class SubcategoryController extends Controller
       $scategory->url = $request->url;
       $scategory->category_id = $request->category_id;
       $scategory->update();
-
+      cache::forget('meghamenu');
       return response()->json('subcategory updated succefully ',200);
     }
 
@@ -113,8 +108,10 @@ class SubcategoryController extends Controller
       $scategory = Scategory::find($id);
       if($scategory->product->count() < 1){
         $scategory->delete();
+        cache::forget('meghamenu');
         return response()->json('Subcategory Deleted succefully',200);
       }
+      
       return response()->json('Subcategory cannot delete it contains '.$scategory->product->count().' ads',200);
     }
 }

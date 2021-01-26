@@ -18,12 +18,11 @@
          <meta name=”robots” content="index, follow">
          <meta name="author" content="Bibek raut">
          <!-- <meta http-equiv="refresh" content="30"> -->
-         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-        <style>
-            
-        </style>
-    
-    <link rel="stylesheet" href="{{asset('css/app.css')}}" class="rel">
+         <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+         <script  src="{{asset('js/app.js')}}" defer></script>
+         <link rel="stylesheet" href="{{asset('css/app.css')}}">
+         <link rel="stylesheet" href="{{asset('/custom-css/preloader.css')}}">
+         
     
        
     </head>
@@ -41,7 +40,6 @@
         </div>
 
     </body>
-
     {{-- script part --}}
     <script type="text/javascript">
         window.Auth ={!! json_encode([
@@ -60,6 +58,4 @@
             document.getElementById("myDiv").style.display = "block";
         }
     </script>
-<script src="{{asset('js/app.js')}}"></script>
-
 </html>

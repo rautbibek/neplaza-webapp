@@ -1,9 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-                    <form method="POST" action="{{ route('password.update') }}">
+<div class="form__img">
+  <a href="/login">
+    <i class='bx bx-arrow-back' ></i>
+  </a>
+  <h2>Reset Password</h2>
+</div>
+<div  class="form">
+<form method="POST" action="{{ route('password.update') }}">
                         @csrf
-                        <h1 class="form__title">Reset Password</h1>
+                        
 
                         <div class="col-md-10">
                           <input type="hidden" name="token" value="{{ $token }}">
@@ -45,6 +52,8 @@
                             </div>
                         </div>
                     </form>
+</div>
+                    
 
 
 @endsection
