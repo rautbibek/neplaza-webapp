@@ -1,25 +1,29 @@
 <template>
   <div>
-    <nav aria-label="breadcrumb ">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item pull-right">
-          <router-link :to="`/`">Home</router-link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Settings</li>
-        <li class="breadcrumb-item active" aria-current="page">
-          Change Password
-        </li>
-      </ol>
-    </nav>
-    <div class="py-5">
-      <v-container class="container-wrapper">
-        <v-row wrap>
-          <v-col cols="12" xs="12" sm="5" md="3" class="menu-box-wrapper pt-0">
+    <div >
+        <v-row no-gutters>
+          <v-col v-if="drawer"
+            cols="12"
+            :md="drawer ? 2 : 0"
+            :sm="3" >
             <settingMenu></settingMenu>
           </v-col>
-          <v-col cols="12" xs="12" sm="7" md="9">
-            <v-card outlined class="pa-8">
-              <h4 class="text-center settings-form-title">Change Password</h4>
+          <v-col :sm="drawer ? 9 : 12"
+            :md="drawer ? 10 : 12"
+            class="content-wrapper">
+            <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item pull-right">
+                    <router-link :to="`/`">Home</router-link>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Change Password
+                  </li>
+                </ol>
+              </nav>
+            <div class="pa-8 col-md-8">
+              <h4 class="settings-form-title">Change Password</h4>
               <v-alert v-if="message.length" dense :type="message[0]">
                 {{ message[1] }}
               </v-alert>
@@ -75,10 +79,10 @@
                   </v-btn>
                 </v-col>
               </v-form>
-            </v-card>
+            </div>
           </v-col>
         </v-row>
-      </v-container>
+      
     </div>
   </div>
 </template>
@@ -88,6 +92,7 @@ export default {
   components: { SettingMenu },
   data() {
     return {
+      drawer:true,
       value: String,
       value1: String,
       value2: String,

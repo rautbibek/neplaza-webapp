@@ -1,26 +1,33 @@
 <template>
   <div>
-    <nav aria-label="breadcrumb ">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item pull-right">
-          <router-link :to="`/`">Home</router-link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Settings</li>
-        <li class="breadcrumb-item active" aria-current="page">Change Email</li>
-      </ol>
-    </nav>
-    <div class="py-5">
+    
+    <div >
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
-      <v-container class="container-wrapper">
-        <v-row wrap>
-          <v-col cols="12" xs="12" sm="5" md="3" class="menu-box-wrapper pt-0">
+      <div>
+        
+        <v-row no-gutters>
+          <v-col v-if="drawer"
+            cols="12"
+            :md="drawer ? 2 : 0"
+            :sm="3" >
             <settingMenu></settingMenu>
           </v-col>
-          <v-col cols="12" xs="12" sm="7" md="9">
-            <v-card outlined class="pa-8">
-              <h4 class="text-center settings-form-title">
+          <v-col :sm="drawer ? 9 : 12"
+            :md="drawer ? 10 : 12"
+            class="content-wrapper">
+            <nav aria-label="breadcrumb ">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item pull-right">
+                  <router-link :to="`/`">Home</router-link>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                <li class="breadcrumb-item active" aria-current="page">Change Email</li>
+              </ol>
+            </nav>
+            <div outlined class="pa-8 col-md-8">
+              <h4 class=" settings-form-title">
                 Change or Verify Email
               </h4>
               <v-alert v-if="message" dense :type="type">
@@ -77,7 +84,7 @@
                   </v-btn>
                 </v-col>
               </v-form>
-            </v-card>
+            </div>
           </v-col>
         </v-row>
         <v-dialog v-model="dialog" persistent max-width="430">
@@ -112,7 +119,7 @@
             </v-form>
           </v-card>
         </v-dialog>
-      </v-container>
+      </div>
     </div>
   </div>
 </template>
@@ -123,6 +130,7 @@ export default {
   data() {
     return {
       my_data: {},
+      drawer:true,
       code: null,
       dialog: false,
       valid: true,
@@ -147,6 +155,7 @@ export default {
   },
   methods: {
     userData() {
+      
       this.overlay = true;
       axios
         .get(`/get/login/user`)

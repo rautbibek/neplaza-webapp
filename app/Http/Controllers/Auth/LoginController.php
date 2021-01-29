@@ -10,7 +10,6 @@ use Session;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
 class LoginController extends Controller
 {
     /*
@@ -53,7 +52,6 @@ class LoginController extends Controller
           return redirect('/');
         }
     }
-
     /**
      * Obtain the user information from GitHub.
      *
@@ -64,10 +62,9 @@ class LoginController extends Controller
         try{
             $userSocial = Socialite::driver($provider)->user();
         }catch(\Exception $exception){
-            return view('auth.login')->withMessage('something went wrong with '.$provider. ' provider please try login again ');
+            $socialite = Socialite::driver($provider)->stateless()->user();
+            // return redirect('/login')->withMessage('something went wrong with '.$provider. ' provider please try login again ');
         }
-        
-       // $userSocial = Socialite::driver($provider)->user();
         $isUser = User::where('email',$userSocial->email)->first();
         if($isUser){
             Auth::login($isUser);  
@@ -76,8 +73,7 @@ class LoginController extends Controller
         $user = User::where('provider_id',$userSocial->id)->first();
         if($user){
             Auth::login($user);
-            return redirect()->intended(session('previous_url'));
-            
+            return redirect()->intended(session('previous_url'));   
         }else{
             $newuser = new User;
             $newuser->role_id  = 3;
@@ -94,15 +90,11 @@ class LoginController extends Controller
             $newuser->image = $userSocial->avatar;
             $newuser->login_provider = $provider;
             $newuser->provider_id = $userSocial->id;
-            //$newuser->password = bcrypt('neplaza2311');
-            //$newuser->remember_token = rememberToken();
-
             $newuser->save();
             Auth::login($newuser);
             return redirect()->intended(session('previous_url'));
         }
         return redirect()->intended(session('previous_url'));
-        // $user->token;
     }
     public function username(){
       $login = request()->input('email');

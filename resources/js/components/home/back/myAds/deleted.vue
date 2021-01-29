@@ -3,7 +3,7 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
-    <v-row no-gutters class="pa-0">
+    <v-row no-gutters >
       <v-col
         v-if="drawer"
         cols="12"

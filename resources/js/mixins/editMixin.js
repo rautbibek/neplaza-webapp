@@ -1,8 +1,8 @@
 export default {
+    
     props: ['scat'],
     data() {
         return {
-
             //loading and display
             product: [],
             loading: false,
@@ -130,20 +130,18 @@ export default {
                     .catch(error => {
                         this.errors = error.response.data.errors;
                         if (error.response.status === 422) {
-
-
                             this.$toast.error('Invalid data please check your form again', 'error', {
                                 timeout: 3000,
                                 position: 'topRight',
                             });
 
-                            if (this.errors.image) {
+                            if (error.response.data.errors.image) {
                                 this.$toast.error('Image size can`t be grater than 12MB', 'error', {
-                                    timeout: 3000,
+                                    timeout: 15000,
                                     position: 'topRight',
                                 });
-
                             }
+                            
                             this.overlay = false;
                         }
                         if(error.response.status === 403){
@@ -168,7 +166,7 @@ export default {
         }
     },
     created() {
-
         this.getCity();
-    }
+    },
+    
 }

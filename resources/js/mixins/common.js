@@ -1,8 +1,10 @@
+import { reduce } from "lodash"
+import colors from "vuetify/lib/util/colors"
 export default {
     props: ['scat'],
+    
     data() {
         return {
-
             //loading and display
             loading: false,
             valid: false,
@@ -216,20 +218,20 @@ export default {
 
                     })
                     .catch(error => {
-
+                        
                         if (error.response.status === 422) {
                             this.$toast.error(error.response.data.message, 'error', {
                                 timeout: 3000,
                                 position: 'topRight',
                             });
 
-                            if (this.errors.image) {
+                            if (error.response.data.errors.image) {
                                 this.$toast.error('Image size can`t be grater than 12MB', 'error', {
-                                    timeout: 3000,
+                                    timeout: 15000,
                                     position: 'topRight',
                                 });
-
                             }
+                            
                             this.overlay = false;
                         }
 
@@ -252,5 +254,6 @@ export default {
         this.getCity();
         this.userData();
         this.hasContact = this.my_data.phone_verified;
-    }
+    },
+
 }

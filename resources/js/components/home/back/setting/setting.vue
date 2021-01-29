@@ -1,32 +1,43 @@
 <template>
   <div>
-    <nav aria-label="breadcrumb ">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item pull-right">
-          <router-link :to="`/`">Home</router-link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Settings</li>
-      </ol>
-    </nav>
-    <div class="py-5">
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
-      <v-container class="container-wrapper">
-        <v-row wrap>
-          <v-col cols="12" xs="12" sm="4" md="3" class="menu-box-wrapper pt-0">
+      <div>
+        <v-row no-gutters>
+          <v-col v-if="drawer"
+            cols="12"
+            :md="drawer ? 2 : 0"
+            :sm="3">
+            <div class="menu-box">
             <settingMenu></settingMenu>
+            </div>
           </v-col>
-          <v-col cols="12" xs="12" sm="8" md="9">
-            <v-card outlined class="pa-8 card">
-              <v-row no-gutters>
-                <v-col lg="9" sm="9">
+          <v-col cols="12"
+            :sm="drawer ? 9 : 12"
+            :md="drawer ? 10 : 12"
+        class="content-wrapper">
+            
+              <nav aria-label="breadcrumb ">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item pull-right">
+                    <router-link :to="`/`">Home</router-link>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                </ol>
+              </nav>
+            
+            
+              <div class="pa-8 col-md-8">
+              <h4 class="settings-form-title">Contact Setting</h4>
+                <v-row>
+                <v-col cols="12" lg="6" md="6" sm="6" xs="12">
                   <p class="settings-title">Contact Visibility</p>
                   <span class="settings-subtitle">
                     Choose whether to hide or show your phone number
                   </span>
                 </v-col>
-                <v-col lg="3" sm="3">
+                <v-col cols="12" lg="6" md="6" sm="6" xs="12">
                   <v-switch
                     color="#19916B"
                     v-model="contact_status"
@@ -37,8 +48,8 @@
                   </v-switch>
                 </v-col>
               </v-row>
-              <v-row no-gutters>
-                <v-col lg="9" sm="9">
+              <v-row>
+                <v-col cols="12" lg="6" md="6" sm="6" xs="12">
                   <h5 class="settings-title">
                     Contact Number
                     <v-tooltip bottom>
@@ -72,11 +83,10 @@
                     {{ my_data.phone_verified ? "" : "not " }}verified
                   </span>
                 </v-col>
-                <v-col lg="3" sm="3" class="d-flex phone-container">
+                <v-col cols="12" lg="6" md="6" sm="6" xs="12" class=" phone-container">
                   <p class="phone">
                     {{ my_data.contact_number || "-" }}
-                  </p>
-                  <v-btn
+                    <v-btn
                     class="change"
                     small
                     color="#19916B"
@@ -88,13 +98,14 @@
                     </v-icon>
                     {{ my_data.contact_number ? "Edit" : "Add" }}
                   </v-btn>
+                  </p>  
                 </v-col>
               </v-row>
-            </v-card>
+              </div>
+            
           </v-col>
         </v-row>
-      </v-container>
-    </div>
+      </div>
   </div>
 </template>
 <script>
@@ -103,6 +114,7 @@ export default {
   components: { SettingMenu },
   data() {
     return {
+      drawer:true,
       my_data: {},
       user_id: this.loginUser.id,
       contact_status: true,
@@ -143,6 +155,10 @@ export default {
     },
   },
   created() {
+    if (!this.loggedIn) {
+      this.$router.push("/");
+      return;
+    }
     EventBus.$on("contactUpdated", (data) => {
       this.userData();
     });

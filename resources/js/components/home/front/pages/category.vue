@@ -11,18 +11,6 @@
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
         <!-- mobile view subcategoryt -->
-                <div style="max-width:170px" class="ma-3 d-flex d-sm-none">
-                <v-chip @click.stop="subcategory = !subcategory" class=""
-                color="primary"
-                label
-                outlined
-                >
-                Subcategory Menu
-                <v-icon right>
-                   keyboard_arrow_down
-                </v-icon>
-            </v-chip>
-            </div>
             <v-navigation-drawer
                 v-model="subcategory"
                 app
@@ -57,6 +45,17 @@
         <div class="py-5" v-if="count>0">
 
             <v-container>
+                <v-btn class="mb-3 d-flex d-sm-none" absolute  @click.stop="subcategory = !subcategory"
+                        small
+                        fab
+                        bottom
+                        left
+                        fixed
+                        dark
+                        color="#2f3b59" 
+                    >
+                        <v-icon>mdi-reorder-horizontal</v-icon>
+                    </v-btn>
                 <v-layout row wrap class="px-1">
                 
                 <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >

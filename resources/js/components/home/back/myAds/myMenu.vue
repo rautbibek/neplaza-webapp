@@ -15,9 +15,7 @@
                 <v-list-item-content>
                   <v-list-item-title v-text="item.text"></v-list-item-title>
                 </v-list-item-content>
- 
           </v-list-item>
-          
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -64,7 +62,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   props: ["drawer"],

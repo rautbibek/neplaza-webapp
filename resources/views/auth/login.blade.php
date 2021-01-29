@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="form__img">
   <a href="/">
@@ -10,7 +9,6 @@
 <div class="form">
   <form class="auth-form" action="{{ route('login') }}" method="POST">
     @csrf
-
         <div class="">
           @if (session('message'))
               <div class="alert alert-danger">{{ session('message') }}</div>
@@ -25,9 +23,7 @@
               @endforeach
           </div>
           @endif
-
           <div class="input-group mb-4">
-
             <div class="input-group-prepend">
               <div class="input-group-text" style="font-size:20px"><i class='bx bx-user-circle'></i></div>
             </div>
@@ -63,6 +59,5 @@
     display: flex !important;
     justify-content: space-between;
 }
-
 </style>
 @endpush
