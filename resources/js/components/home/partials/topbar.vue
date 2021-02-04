@@ -5,7 +5,7 @@
     class="mx-auto"
     height="auto"
   >
-    <v-app-bar style="border:radius:0px;" dense class="d-sm-none" fixed color="#2f3b59" dark>
+    <v-app-bar style="border-radius:0px;" dense class="d-sm-none" fixed color="#2f3b59" dark>
       <v-app-bar-nav-icon style="padding-right:0px; margin-right:0px" @click="drawer"></v-app-bar-nav-icon>
       <v-toolbar-title style="width:100%; padding:0px"><search></search></v-toolbar-title>
     </v-app-bar>

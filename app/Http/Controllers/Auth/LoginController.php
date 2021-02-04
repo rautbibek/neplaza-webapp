@@ -62,8 +62,8 @@ class LoginController extends Controller
         try{
             $userSocial = Socialite::driver($provider)->user();
         }catch(\Exception $exception){
-            $socialite = Socialite::driver($provider)->stateless()->user();
-            // return redirect('/login')->withMessage('something went wrong with '.$provider. ' provider please try login again ');
+            //$socialite = Socialite::driver($provider)->stateless()->user();
+            return redirect('/login')->withMessage('something went wrong with '.$provider. ' provider please try login again ');
         }
         $isUser = User::where('email',$userSocial->email)->first();
         if($isUser){

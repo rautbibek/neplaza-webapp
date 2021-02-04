@@ -62,7 +62,10 @@
         {{ ad.product_property.city_name }}
         
       </p>
-      <p class="pre-formatted product-description" v-html="ad.description"></p>
+      <VueReadMoreSmooth  :lines="7">
+        <p class="pre-formatted product-description" v-html="ad.description"></p>
+      </VueReadMoreSmooth>
+      
       <p class="price">Rs. {{ ad.product_price }} {{ ad.product_max_price }}</p>
       
     </v-card>
@@ -95,13 +98,13 @@
         >
       </div>
     </v-card>
-        <v-footer padless elevation="10" height="40px"  fixed class="d-flex d-sm-none">
-              <v-btn-toggle  style="width:100%;">
+        <v-footer padless elevation="10" height="50px" light fixed class="d-flex d-sm-none">
+              <v-btn-toggle light style="width:100%;">
               <v-btn outlined dark style="width:49%;" color="red">
                <report-ad :ads='ad'></report-ad>
               </v-btn>
               
-              <v-btn outlined dark style="width:49%" color="#2f3b59">
+              <v-btn outlined dark style="width:51%" color="#2f3b59">
                 <Message  :seller="owner"/>
               </v-btn>
             </v-btn-toggle>
@@ -111,11 +114,13 @@
 <script>
 import shareIt from "vue-share-it";
 import Message from "./Message";
+import VueReadMoreSmooth from "vue-read-more-smooth";
 var Vue = require("vue");
 Vue.use(shareIt);
 export default {
   components: {
     Message,
+    VueReadMoreSmooth,
   },
   props: ["ad", "owner"],
   computed: {

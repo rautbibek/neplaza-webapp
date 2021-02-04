@@ -76,11 +76,20 @@
   </nav>
   <v-navigation-drawer
       v-model="drawer"
-      width="80%"
+      width="100%"
       app
       temporary
     >
+    
     <div  class="mt-4 text-center">
+      <div class="top-right"><v-btn
+              icon
+              x-small
+              @click="drawer = false"
+              color="blue"
+            >
+              <v-icon>close</v-icon>
+            </v-btn></div>
       <router-link to="/">
       <v-img style="display: block;
           margin-left: auto;
@@ -190,6 +199,11 @@ export default {
 <style scoped>
 .menu-area {
   position: static;
+}
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
 }
 .dropdown-item {
   white-space: unset;

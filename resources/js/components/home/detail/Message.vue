@@ -68,13 +68,10 @@
       <div class="text-center ma-2">
 
         <v-snackbar
-          color="cyan"
+          color="dark"
           v-model="snackbar"
-          bottom right
-          success
-          shaped
-          multi-line
-        >
+          center right
+          >
           {{ snack_text }}
 
           <template v-slot:action="{ attrs }">
