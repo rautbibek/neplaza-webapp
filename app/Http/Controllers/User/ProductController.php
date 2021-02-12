@@ -65,6 +65,7 @@ class ProductController extends Controller
           }
           if($product->status_id){
             $p_prop->status_name = $product->status->title;
+            $p_prop->status_color = $product->status->color;
           }
           if($product->filter_id){
             $p_prop->filter_name = $product->filter->name;
@@ -213,6 +214,7 @@ class ProductController extends Controller
         }
         if($product->status_id){
           $p_prop->status_name = $product->status->title;
+          $p_prop->status_color = $product->status->color;
         }
         if($product->filter_id){
           $p_prop->filter_name = $product->filter->name;

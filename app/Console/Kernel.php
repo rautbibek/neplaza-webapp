@@ -28,12 +28,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('feature:update')->dailyAt('10:00');;
-         $schedule->command('expire:feature')->dailyAt('10:15');;
-         $schedule->command('expire:urgent')->dailyAt('10:40');;
-         $schedule->command('urgent:update')->dailyAt('11:00');;
-         $schedule->command('urgent:update')->daily('11:20');
-         $schedule->command('reported')->dailyAt('11:40');;
+         $schedule->command('feature:update')->timezone('Asia/Kathmandu')->runInBackground();
+        // $schedule->command('expire:feature')->timezone('Asia/Kathmandu')->dailyAt('22:15');
+         //$schedule->command('expire:urgent')->timezone('Asia/Kathmandu')->dailyAt('22:40');
+         $schedule->command('urgent:update')->timezone('Asia/Kathmandu')->runInBackground();
+         //$schedule->command('reported')->timezone('Asia/Kathmandu')->dailyAt('23:40');
     }
 
     /**

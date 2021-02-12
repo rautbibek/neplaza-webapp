@@ -18,7 +18,17 @@
             ></v-progress-circular>
           </v-row>
         </template>
-        
+        <div class="text-center">
+          
+          <v-chip  v-if="ads.product_property.status_name"
+          x-small
+         
+          class="text-white text-uppercase mb-2"
+          :color="ads.product_property.status_color">
+          <v-icon left x-small>mdi-list-status</v-icon>
+          {{ads.product_property.status_name}}        
+        </v-chip>
+        </div>
       </v-img>
     </v-responsive>
   </div>

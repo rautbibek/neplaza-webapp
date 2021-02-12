@@ -45,7 +45,7 @@ class RepordedAdDelete extends Command
                   $q->select('id','name','email');
                 }])->withCount('report')->get();
       foreach ($products as $product) {
-        if($product->report_count>2){
+        if($product->report_count>4){
 
           if($product->user->valid_email !=''){
             Mail::to($product->user->email)->send(new ProductDeletedMail($product));
