@@ -137,7 +137,7 @@
 </script>
 <style scped>
     .flow{
-        height: 100vh;/* or any height you want */
+        height: 60vh;/* or any height you want */
         overflow-y:auto
         }
 </style>

@@ -84,8 +84,11 @@
   </div>
 </template>
 <script>
+import commentReply from  './reply';
 export default {
-  //props:['ad_comments'],
+ components:{
+   'comment-reply': commentReply,
+ },
   data() {
     return {
       loading: false,

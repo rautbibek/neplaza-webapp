@@ -11,88 +11,127 @@
           <v-container class="mt-5">
             
               <v-row>
-                <v-col cols="12" md="4" xs="12" class="mb-3">
-                  <v-card tile>
-                      <v-fab-transition>
-                        <v-btn
-                          color="rgb(47 59 89)"
-                          dark
-                          absolute
-                          top
-                          right
-                          fab
-                        >
-                          <v-icon>phone</v-icon>
-                        </v-btn>
-                      </v-fab-transition>
-                      <v-card-text>
-                        <v-card-title>Call US</v-card-title>
-
-                        <div class="text--primary">
-                          <a href="tel:9863756278">+977-9863756278</a>
-                          <br>
-                          <a href="tel:9813074153">+977-9813074153</a>
-
-                        </div>
-                      </v-card-text>
-                  </v-card>
-                </v-col>
-                <v-col cols="12" md="4" xs="12">
-                  <v-card tile >
-                      <v-fab-transition>
-                        <v-btn
-                          color="rgb(47 59 89)"
-                          dark
-                          absolute
-                          top
-                          right
-                          fab
-                        >
-                          <v-icon>email</v-icon>
-                        </v-btn>
-                      </v-fab-transition>
-                      <v-card-text>
-
-                        <v-card-title>E-mail US</v-card-title>
-
-                        <div class="text--primary">
-                          <a href="mailto:rautbibek47@gmail.com">bikribazzar@gmail.com</a>,<br>
-                          <a href="mailto:aiskabasnet@gmail.com">aiskabasnet@gmail.com</a>
-
-                        </div>
-                      </v-card-text>
-                  </v-card>
-                </v-col>
-                <v-col cols="12" md="4" xs="12">
-                  <v-card tile >
-                      <v-fab-transition>
-                        <v-btn
-                          color="rgb(47 59 89)"
-                          dark
-                          absolute
-                          top
-                          right
-                          fab
-                        >
-                          <v-icon>home</v-icon>
-                        </v-btn>
-                      </v-fab-transition>
-                      <v-card-text>
-
-                        <v-card-title>
-                          Address
+                <v-col cols="12" md="4" sm="6" lg="4">
+                    <v-card
+                        color="#385F73"
+                        dark
+                        
+                    >
+                        <v-card-title class="headline mb-3">
+                          <v-btn outlined
+                            class="mr-3"
+                            fab
+                            dark
+                            small
+                            color="white"
+                            >
+                            <v-icon dark>
+                                phone
+                            </v-icon>
+                            </v-btn> CALL US
                         </v-card-title>
+                        <v-card-subtitle>
+                          <v-chip small href="tel:9863756278"
+                            class="ma-2"
+                            color="white"
+                            outlined
+                          >
+                            <v-icon x-small left>
+                              phone
+                            </v-icon>
+                            +977-9863756278
+                          </v-chip>
 
-                        <div class="text--primary">
-                          Naya Basti, Bouddha-6,<br>
-                          Kathmandu,Nepal
-                        </div>
-                      </v-card-text>
-                  </v-card>
+                          <v-chip small href="tel:9813074153"
+                            class="ma-2"
+                            color="white"
+                            outlined
+                          >
+                            <v-icon x-small left>
+                              phone
+                            </v-icon>
+                            +977-9813074153
+                          </v-chip>
+                        </v-card-subtitle>
+                        <v-card-actions>
+                        
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" md="4" sm="6" lg="4">
+                    <v-card
+                        color="#952175"
+                        dark
+                        
+                    >
+                        <v-card-title class="headline mb-3">
+                          <v-btn outlined
+                            class="mr-3"
+                            fab
+                            dark
+                            small
+                            color="white"
+                            >
+                            <v-icon dark>
+                                email
+                            </v-icon>
+                            </v-btn> MAIL US
+                        </v-card-title>
+                        <v-card-subtitle>
+                          <v-chip small href="mailto:bikribazzar@gmail.com"
+                            class="ma-2"
+                            color="white"
+                            outlined
+                          >
+                            <v-icon x-small left>
+                              email
+                            </v-icon>
+                            bikribazzar@gmail.com
+                          </v-chip>
+                        </v-card-subtitle>
+                        <v-card-actions>
+                        
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" md="4" sm="6" lg="4">
+                    <v-card
+                        color="#1F7087"
+                        dark
+                    >
+                        <v-card-title class="headline mb-3">
+                          <v-btn outlined
+                            class="mr-3"
+                            fab
+                            dark
+                            small
+                            color="white"
+                            >
+                            <v-icon dark>
+                                map
+                            </v-icon>
+                            </v-btn> OFFICE ADDRESS
+                        </v-card-title>
+                        <v-card-subtitle>
+                          <v-chip small
+                            class="ma-2"
+                            color="white"
+                            outlined
+                          >
+                            <v-icon x-small left>
+                              map
+                            </v-icon>
+                            Patitar, Nayabasti ,Bouddha-6 , Kathmandu
+                          </v-chip>
+                        </v-card-subtitle>
+                        <v-card-actions>
+                        
+                        </v-card-actions>
+                    </v-card>
                 </v-col>
               </v-row>
 
-                <v-card tile >
+                <v-card flat class="mb-5">
                   <v-row>
                     <v-col cols="12" md="6" lg="6" sm="6" xs="12">
                       <v-card-title>OFFICE LOCATION</v-card-title>

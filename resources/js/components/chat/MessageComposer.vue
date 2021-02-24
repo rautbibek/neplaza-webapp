@@ -17,6 +17,7 @@
 </div>
 </template>
 <script>
+let message = new Audio('http://localhost:8000/audio/notification.mp3');
 export default {
     data(){
         return{
@@ -29,8 +30,11 @@ export default {
             if(this.message == ''){
                 return;
             }
+            message.play();
             this.$emit('send',this.message);
+            
             this.message="";
+            //message.pause();
         }
     }
 }

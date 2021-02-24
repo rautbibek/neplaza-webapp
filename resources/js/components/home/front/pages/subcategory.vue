@@ -543,7 +543,7 @@ export default {
         scategory:{},
         city_id:'',
         nhood_id:'',
-        price:[],
+        price:[0,0],
         url:'',
         surl:'',
         min_p:'',
@@ -582,6 +582,7 @@ export default {
         this.price[1] = this.max_p;
         this.price[0] = this.min_p;
         this.price;
+        
       },
       favorite(){
         if(this.$loggedIn){
@@ -743,7 +744,7 @@ export default {
         this.getScategory();
         this.getCity();
     },
-
+    
 
     watch:{
       $route(to,from){

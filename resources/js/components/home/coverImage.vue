@@ -22,7 +22,6 @@
           
           <v-chip  v-if="ads.product_property.status_name"
           x-small
-         
           class="text-white text-uppercase mb-2"
           :color="ads.product_property.status_color">
           <v-icon left x-small>mdi-list-status</v-icon>

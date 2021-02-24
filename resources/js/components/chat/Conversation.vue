@@ -78,10 +78,7 @@ export default {
 }
 </script>
 <style scoped>
-    .message-feed{
-        /* min-height: 400px;
-        max-height: 400px;/* or any height you want */
-        /* overflow-y:auto;  */
+    .message-feed{        
         background-color:#b8babf36;
         }
 </style>

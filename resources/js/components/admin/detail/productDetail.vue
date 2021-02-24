@@ -276,7 +276,13 @@
 </template>
 
 <script>
+import adImage from  '../../home/detail/displayImage';
   export default {
+      components:{
+    'ad-image':adImage,
+    
+    
+  },
     props:['ad'],
     data: () => ({
       product_id:'',

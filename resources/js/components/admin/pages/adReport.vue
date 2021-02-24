@@ -1,7 +1,7 @@
 <template>
  <v-app >
   <admin-sidebar></admin-sidebar>
-  <v-container class="mt-5">
+  <v-main class="mt-5">
 
     <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -21,6 +21,7 @@
 
             <th class="text-left">Report Reason</th>
             <th class="text-left">Report Description</th>
+            <th class="text-left">Report Status</th>
             <th class="text-left">Reportd At</th>
             <th class="text-left">Action</th>
 
@@ -35,6 +36,16 @@
             <td><a :href="'/admin/user/'+item.user_id">{{ item.user.name }}</a></td>
             <td>{{ item.reason_for_report }}</td>
             <td>{{ item.description }}</td>
+            <td>
+                <v-checkbox 
+                    v-model="item.seen"
+                    :value="item.seen"
+                    label="Mark as seen"
+                    color="green"
+                    @click="checked(item.id)"
+                    hide-details
+                    ></v-checkbox>
+            </td>
             <td>{{ item.created }}</td>
             <td>
               <v-btn x-small text >
@@ -57,7 +68,7 @@
             <v-icon right>cached</v-icon>
         </v-btn>
     </div>
-  </v-container>
+  </v-main>
   <dialog-component></dialog-component>
   </v-app>
 </template>
@@ -77,6 +88,18 @@
     },
 
     methods: {
+      checked(id){
+          this.overlay = true;
+          axios.put(`/admin/report/update/`+id)
+             .then(response=>{
+                this.$toast.success(response.data, 'success', {
+                      timeout: 3000,
+                      position: 'topRight',
+                });
+                this.overlay = false;
+                
+             }).catch();
+        },
       remove(report){
         if(confirm('are you sure to wnat to delete this report')){
         this.overlay = true;

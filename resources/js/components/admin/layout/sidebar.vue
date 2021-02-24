@@ -70,8 +70,9 @@ export default {
         { icon: 'class', text: 'Type',url:'/admin/type' },
         { icon: 'assignment', text: 'Status',url:'/admin/status' },
         { icon: 'mdi-account-circle', text: 'Users',url:'/admin/user' },
-        { icon: 'shop', text: 'Ads',url:'/admin/product' },
-        { icon: 'report', text: 'Reported Ad',url:'/admin/report' },
+        { icon: 'shop', text: 'Product',url:'/admin/product' },
+        { icon: 'report', text: 'Report',url:'/admin/report' },
+        { icon: 'assignment_ind', text: 'Contact',url:'/admin/contact' },
       ],
     }),
     methods:{

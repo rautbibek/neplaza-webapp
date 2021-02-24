@@ -182,9 +182,8 @@ class UserController extends Controller
         return response()->json($notification,200);
     }
 
-    public function readNotification(){
-        $notification = Auth::user()->readNotifications()->take(3)->get();
-        return response()->json($notification,200);
+    public function markAllAsRead(){
+        Auth::user()->notifications()->delete();;
     }
 
     public function read($id){

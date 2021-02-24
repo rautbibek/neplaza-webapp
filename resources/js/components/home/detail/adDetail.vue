@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card>
     <div>
       <div class="">
         <nav aria-label="breadcrumb " >
@@ -69,10 +69,22 @@
         
       </div>
     </div>
-  </div>
+  </v-card>
 </template>
 <script>
+import adImage from  './displayImage';
+import adUser from  './displayUserDetail';
+import adDescription from  './displayDescription';
+import adComment from  './displayComment';
+
 export default {
+  components:{
+    'ad-image':adImage,
+    'ad-user':adUser,
+    'ad-description': adDescription,
+    'ad-comment': adComment,
+    
+  },
   metaInfo: {
     title: 'Default App Title',
     

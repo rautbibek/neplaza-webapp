@@ -26,4 +26,12 @@ class ReportController extends Controller
 
     }
 
+    public function update($id){
+        $report = Report::findOrFail($id);
+        $report->seen = true;
+        $report->update();
+        return response()->json('report reviewed succefully');
+
+    }
+
 }

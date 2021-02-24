@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card min-height="400px">
     <nav aria-label="breadcrumb ">
       <ol class="breadcrumb">
         <li class="breadcrumb-item pull-right">
@@ -26,5 +26,5 @@
         </v-card>
       </div>
     </v-container>
-  </div>
+  </v-card>
 </template>

@@ -20,7 +20,7 @@ class FeatureNotification extends Command
      *
      * @var string
      */
-    protected $description = 'Featured Ad Expire Notification';
+    protected $description = 'Featured Ad Expire email Notification';
 
     /**
      * Create a new command instance.
@@ -44,7 +44,7 @@ class FeatureNotification extends Command
         }])->get();
         if($featured->count()>0){
           foreach ($featured as $feature) {
-            if($feature->remaining_days < 2){
+            if($feature->remaining_days == 3){
               if($feature->product->user->valid_email !=''){
                Mail::to($feature->product->user->email)->send(new FeatureAdExpireNotification($feature->product));
              }

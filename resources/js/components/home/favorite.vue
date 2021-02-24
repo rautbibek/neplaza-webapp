@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="toggle" small class="favourite-icon" v-if="fromDetails" x-small icon>
+  <v-btn @click="toggle" class="favourite-icon" v-if="fromDetails" x-small icon>
     <v-icon :color="colorOutlined" v-if="fav">mdi-heart</v-icon>
     <v-icon :color="colorOutlined" v-else>mdi-heart-outline</v-icon>
   </v-btn>

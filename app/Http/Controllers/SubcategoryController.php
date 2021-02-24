@@ -23,15 +23,14 @@ class SubcategoryController extends Controller
                   ->send(Product::query())
                   ->through([
                       \App\Filter\Type::class,
-                      \App\Filter\Status::class,
-                      \App\Filter\Filters::class,
-                      \App\Filter\Sort::class,
-                      \App\Filter\Filter_1::class,
-                      \App\Filter\Filter_2::class,
-                      \App\Filter\Filter_3::class,
-                      \App\Filter\Brand::class,
-                      \App\Filter\Price::class,
-                      \App\Filter\Sort::class,
+                       \App\Filter\Status::class,
+                       \App\Filter\Filters::class,
+                       \App\Filter\Filter_1::class,
+                       \App\Filter\Filter_2::class,
+                       \App\Filter\Filter_3::class,
+                       \App\Filter\Brand::class,
+                       \App\Filter\Sort::class,
+                       \App\Filter\Price::class,
 
                   ])
                   ->thenReturn();

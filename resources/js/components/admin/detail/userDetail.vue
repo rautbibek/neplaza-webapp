@@ -39,7 +39,7 @@
                         <v-list-item-title class="mt-2">
                             Contact Number :
                             <v-icon small color="green"> phone</v-icon>
-                            {{ user.phone}} 
+                            {{ user.contact_number}} 
                         </v-list-item-title>
                         </v-list-item-content>
 

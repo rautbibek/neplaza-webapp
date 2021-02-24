@@ -33,24 +33,11 @@ Vue.use(Authorization);
 //registering component
 
 Vue.component('cover-title', require('./components/cover-title.vue').default);
-Vue.component('system-bar', require('./components/home/partials/systembar.vue').default);
 Vue.component('notification', require('./components/home/partials/notification.vue').default);
 Vue.component('main-component', require('./components/main.vue').default);
-Vue.component('top-bar', require('./components/home/partials/topbar.vue').default);
-Vue.component('nav-bar', require('./components/home/partials/navbar.vue').default);
-Vue.component('footer-bar', require('./components/home/partials/footer.vue').default);
-Vue.component('email-verify-notif', require('./components/home/partials/emailVerifyNotification.vue').default);
-
-// homepage data
-Vue.component('data-content', require('./components/home/front/index_page/content.vue').default);
-Vue.component('urgent-sell', require('./components/home/front/index_page/urgent.vue').default);
-Vue.component('carousel', require('./components/home/front/index_page/carousel.vue').default);
-Vue.component('premium', require('./components/home/front/index_page/premium.vue').default);
-
 
 Vue.component('search', require('./components/home/partials/search.vue').default);
-Vue.component('login', require('./components/login.vue').default);
-Vue.component('sign-up', require('./components/signUp.vue').default);
+
 Vue.component('empty', require('./components/empty.vue').default);
 Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
@@ -58,7 +45,7 @@ Vue.component('profile-form', require('./components/home/back/profile/form.vue')
 
 
 Vue.component('mymenu', require('./components/home/back/myAds/myMenu.vue').default);
-Vue.component('update-profile', require('./components/home/back/profileForm.vue').default);
+
 
 Vue.component('cover', require('./components/home/coverImage.vue').default);
 Vue.component('card-date', require('./components/home/cardDate.vue').default);
@@ -90,12 +77,7 @@ Vue.component('filter-ad', require('./components/filter.vue').default);
 Vue.component('report-ad', require('./components/home/detail/report.vue').default);
 Vue.component('scroll', require('./components/scroll.vue').default);
 
-//product detail part
-Vue.component('ad-image', require('./components/home/detail/displayImage.vue').default);
-Vue.component('ad-user', require('./components/home/detail/displayUserDetail.vue').default);
-Vue.component('ad-description', require('./components/home/detail/displayDescription.vue').default);
-Vue.component('ad-comment', require('./components/home/detail/displayComment.vue').default);
-Vue.component('comment-reply', require('./components/home/detail/reply.vue').default);
+// support layouts
 
 
 
@@ -116,6 +98,7 @@ Vue.component('admin-product', require('./components/admin/pages/product.vue').d
 Vue.component('admin-report', require('./components/admin/pages/adReport.vue').default);
 Vue.component('admin-ad-detail', require('./components/admin/detail/productDetail.vue').default);
 Vue.component('admin-user-detail', require('./components/admin/detail/userDetail.vue').default);
+Vue.component('admin-contact', require('./components/admin/pages/contact.vue').default);
 
 //chat app
 Vue.component('chat-app', require('./components/chat/chatApp.vue').default);

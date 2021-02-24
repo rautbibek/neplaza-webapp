@@ -45,7 +45,7 @@ class UrgentNotification extends Command
 
       if($urgents->count()>0){
         foreach ($urgents as $urgent) {
-          if($urgent->remaining_days < 2){
+          if($urgent->remaining_days == 3){
             if($urgent->product->user->valid_email !=''){
             Mail::to($urgent->product->user->email)->send(new UrgentAdExpireNotification($urgent->product));
            }

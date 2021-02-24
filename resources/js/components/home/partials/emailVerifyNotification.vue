@@ -11,7 +11,7 @@
       <template v-slot:action="{ attrs }">
         <v-btn
           to="/user/email/setting"
-          color="indigo"
+          color="pink"
           text
           v-bind="attrs"
           @click="snackbar = false"
@@ -33,6 +33,7 @@
     mounted(){
       if(!this.loginUser.email_verified_at){
         this.snackbar = true;
+        this.$router.push('/user/email/setting');
       }
     }
   }

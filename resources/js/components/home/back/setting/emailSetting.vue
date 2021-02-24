@@ -8,6 +8,7 @@
       <div>
         
         <v-row no-gutters>
+          
           <v-col v-if="drawer"
             cols="12"
             :md="drawer ? 2 : 0"
@@ -82,6 +83,7 @@
                     <v-icon left>send</v-icon>
                     send Code
                   </v-btn>
+                  
                 </v-col>
               </v-form>
             </div>
@@ -124,6 +126,7 @@
   </div>
 </template>
 <script>
+
 import SettingMenu from "./settingMenu";
 export default {
   components: { SettingMenu },
@@ -154,6 +157,7 @@ export default {
     };
   },
   methods: {
+    
     userData() {
       
       this.overlay = true;
@@ -168,7 +172,6 @@ export default {
     },
     verify() {
       if (this.$refs.form.validate()) {
-        //this.overlay= true
         axios
           .post(`/user/email/veriried/at`, {
             verification_code: this.code,

@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::get('/verify/email', function () {
+//     $p = \App\Product::where('id',254)->with('user')->first();
+//     $r ="fake product";
+//     return view('email.ProductDeleted',compact('p','r'));
+// });
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::post('/send/contact/message', 'ContactController@save')->name('send.contact.message');
 Route::get('/seller/detail/{id}/{username}', 'WelcomeController@seller')->name('seller');
@@ -56,7 +60,17 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::get('/report', 'ReportController@index')->name('report');
     Route::delete('/report/delete/{id}', 'ReportController@delete')->name('report.delete');
     Route::get('/report/record', 'ReportController@reportApi')->name('report.api');
-
+    Route::get('/dayuser/{day}', 'DashboardController@dayuser')->name('day.user');
+    Route::get('productday/{day}', 'DashboardController@dayproduct')->name('day.product');
+    //total user // seller // urgen ad // count
+    Route::get('graph', 'DashboardController@userGraph')->name('user.graph');
+    Route::get('count/all', 'DashboardController@countAll')->name('count.all');
+    //contact us
+    Route::get('/contact', 'ContactController@index')->name('admin.contact');
+    Route::get('/all/contact', 'ContactController@allContact')->name('admin.contact.all');
+    Route::delete('/contact/delete/{id}', 'ContactController@delete')->name('admin.contact.delete');
+    Route::put('/contact/update/{id}', 'ContactController@update')->name('admin.contact.update');
+    Route::put('/report/update/{id}', 'ReportController@update')->name('admin.report.update');
 });
 
 
@@ -99,7 +113,7 @@ Route::group(['middleware'=>['auth']], function(){
     //notification
     Route::get('/get/notification','User\UserController@notification');
     Route::get('/markAsRead/{id}','User\UserController@read');
-    Route::get('/read/notification','User\UserController@readNotification');
+    Route::delete('/read/all/notification','User\UserController@markAllAsRead');
 
     //comment controller
 

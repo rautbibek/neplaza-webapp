@@ -1,5 +1,5 @@
 <template>
-<div>
+<div> 
     <nav aria-label="breadcrumb ">
             <ol class="breadcrumb ">
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
@@ -7,8 +7,8 @@
             </ol>
         </nav>
 
-<div class="px-3">
-    <v-card style="border-radius:0px "  >
+<div class="pa-5">
+    <v-card style="border-radius:0px " >
         <!-- <v-toolbar style="border-radius:0px"
         color="indigo"
         dark

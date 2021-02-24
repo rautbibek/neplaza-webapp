@@ -64,7 +64,7 @@
                 </v-list-item-content>
                 <hr />
               </v-list-item>
-
+              
               <v-list-item @click="logout">
                 <v-list-item-icon>
                   <v-icon>logout</v-icon>
@@ -81,6 +81,7 @@
   </div>
 </template>
 <script>
+let notification = new Audio('http://localhost:8000/audio/notification.mp3');
 export default {
   data() {
     return {
@@ -115,7 +116,7 @@ export default {
         {
           icon: "help",
           text: "Help & Support",
-          url: "/help",
+          url: "/support",
         },
       ],
     };
@@ -131,6 +132,9 @@ export default {
         .get(`/total/unread/message`)
         .then((response) => {
           this.unread_message_count = response.data;
+          if(this.unread_message_count > 0){
+            notification.play();
+          }
         })
         .catch();
     },

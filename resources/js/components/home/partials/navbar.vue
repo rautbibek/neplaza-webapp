@@ -76,7 +76,7 @@
   </nav>
   <v-navigation-drawer
       v-model="drawer"
-      width="100%"
+      width="85%"
       app
       temporary
     >

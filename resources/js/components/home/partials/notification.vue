@@ -76,8 +76,8 @@
                     </v-list-item>
                     </v-list> -->
           <p class="text-center px-5">
-            <v-btn @click="getNotification" x-small text>
-              <v-icon left small>refresh</v-icon> Refresh notification
+            <v-btn @click="markAllAsRead" x-small text>
+              <v-icon left small>remove</v-icon> Clear notification
             </v-btn>
           </p>
         </v-card>
@@ -86,6 +86,7 @@
   </div>
 </template>
 <script>
+let notification = new Audio('http://localhost:8000/audio/message.mp3');
 export default {
   data() {
     return {
@@ -101,7 +102,8 @@ export default {
         .get(`/markAsRead/` + id)
         .then((response) => {
           this.getNotification();
-          this.raadNotification();
+          //this.raadNotification();
+          
         })
         .catch();
     },
@@ -111,6 +113,18 @@ export default {
         .then((response) => {
           this.notification = response.data;
           this.count = this.notification.length;
+          if(this.count > 0){
+            notification.play();
+          }
+          //audio.pause();
+        })
+        .catch();
+    },
+    markAllAsRead() {
+      axios
+        .delete(`/read/all/notification`)
+        .then((response) => {
+          this.getNotification();
         })
         .catch();
     },

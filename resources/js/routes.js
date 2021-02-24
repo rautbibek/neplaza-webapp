@@ -26,7 +26,7 @@ import CreateController from './components/home/back/createController.vue';
 import EditController from './components/home/back/editController.vue';
 import EditImage from './components/home/back/form/edit/editImages.vue';
 
-import AdDetail from './components/home/adDetail.vue';
+import AdDetail from './components/home/detail/adDetail.vue';
 
 
 // search
@@ -41,6 +41,7 @@ import ChatComponent from './components/chat/chatApp.vue';
 import PageNotFound from './components/404.vue';
 
 //help and support
+import SupportComponent from './components/support/support.vue';
 import ContactUsComponent from './components/support/contactUs.vue';
 import AboutUsComponent from './components/support/aboutUs.vue';
 import FaqComponent from './components/support/faq.vue';
@@ -241,5 +242,11 @@ export const routes = [{
         path: '/contact/us',
         name: 'contactUs',
         component:ContactUsComponent,
+    },
+
+    {
+        path: '/support',
+        name: 'support',
+        component:SupportComponent,
     },
 ]
