@@ -45,10 +45,7 @@
     </div>
 
     <script type="text/javascript">
-        window.Auth ={!! json_encode([
-            'loggedIn' => Auth::check(),
-            'user'     => Auth::user()
-        ]) !!}
+        window.Auth ={!! json_encode(['loggedIn'=>Auth::check(),'user'=>Auth::user()]) !!}
     </script>
     <!-- <script src="{{asset('js/app.js')}}" charset="utf-8"></script> -->
 

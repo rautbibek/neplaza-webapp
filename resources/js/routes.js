@@ -40,14 +40,7 @@ import ChatComponent from './components/chat/chatApp.vue';
 //404 console.error();
 import PageNotFound from './components/404.vue';
 
-//help and support
-import SupportComponent from './components/support/support.vue';
-import ContactUsComponent from './components/support/contactUs.vue';
-import AboutUsComponent from './components/support/aboutUs.vue';
-import FaqComponent from './components/support/faq.vue';
-import HelpCenterComponent from './components/support/helpCenter.vue';
-import PrivacyPolicyComponent from './components/support/privacyPolicy.vue';
-import TermsAndConditionComponent from './components/support/termsAndCondition.vue';
+
 
 
 export const routes = [{
@@ -206,47 +199,5 @@ export const routes = [{
     {
         path: '/message',
         component: ChatComponent,
-    },
-
-    //help and support routing
-    {
-        path: '/helpCenter',
-        name: 'helpCenter',
-        component: HelpCenterComponent,
-    },
-
-    {
-        path: '/terms/condition',
-        name: 'termsAndCondition',
-        component: TermsAndConditionComponent,
-    },
-
-    {
-        path: '/privacyPolicy',
-        name: 'privacyPolicy',
-        component: PrivacyPolicyComponent,
-    },
-    {
-        path: '/FAQ',
-        name: 'faq',
-        component: FaqComponent,
-    },
-
-    {
-        path: '/about/us',
-        name: 'aboutUs',
-        component: AboutUsComponent,
-    },
-
-    {
-        path: '/contact/us',
-        name: 'contactUs',
-        component:ContactUsComponent,
-    },
-
-    {
-        path: '/support',
-        name: 'support',
-        component:SupportComponent,
-    },
+    }
 ]

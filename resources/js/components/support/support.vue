@@ -1,22 +1,17 @@
 <template>
     <div>
-        <nav aria-label="breadcrumb ">
-            <ol class="breadcrumb ">
-                <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
-                <li class="breadcrumb-item active" aria-current="page">Help and support</li>
-                
-            </ol>
-        </nav>
-        <div class="cover-image">
+        
+    <div class="support-image">
       <h3 class="text-center">Welcome to our support center</h3>
+    <p style="color:white; text-align:center"><a style="color:white" href="/">Home</a> > Help & Support </p>
     </div>
         <v-container class="cover-container create-ad mb-5">
             <v-row>
-                <v-col v-for="(item,index) in items" :key="index" cols="12" md="3" sm="6" lg="3">
+                <v-col v-for="(item,index) in items" :key="index" cols="12" md="4" sm="6" lg="4">
                     <v-card
                         :color="item.color"
                         dark
-                        router :to="item.url"
+                        :href="item.url"
                     >
                         <v-card-title class="headline mb-3">
                           <v-btn outlined
@@ -40,11 +35,7 @@
 
             </v-row>  
         </v-container>
-         <!-- Your Chat Plugin code -->
-         <div class="fb-customerchat"
-             attribution="setup_tool"
-             page_id="106546471305792">
-         </div>
+         
     </div>
     
 </template>
@@ -55,35 +46,52 @@ export default {
         return{
             n:1,
             items: [
+               
                 {
+                    icon: "help_outline",
+                    text: "FAQ",
+                    url: "/faq",
+                    color:"#1F7087",
+                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                },
+                {
+                    icon: "lightbulb",
+                    text: "Trust & Safety",
+                    url: "/trust&safety",
+                    color:"#3eb54b",
+                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                },
+
+                {
+                    icon: "pan_tool",
+                    text: "Legal & Policy info.",
+                    url: "/policy",
+                    color:"#111796",
+                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                },
+                {
+                    icon: "cases",
+                    text: "Career",
+                    url: "/career",
+                    color:"deep-purple lighten-1",
+                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                },
+                 {
                     icon: "phone",
                     text: "Contact Us",
-                    url: "/",
+                    url: "/contact",
                     color:'#385F73',
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
                 },
 
                 {
                     icon: "call_to_action",
                     text: "About Us",
-                    url: "/",
+                    url: "/aboutUs",
                     color:"#952175",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
                 },
-                {
-                    icon: "help_outline",
-                    text: "FAQ",
-                    url: "/",
-                    color:"#1F7087",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.",
-                },
-                {
-                    icon: "cases",
-                    text: "Career",
-                    url: "/",
-                    color:"deep-purple lighten-1",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.",
-                },
+                
             ],
         }
     }

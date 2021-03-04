@@ -3,7 +3,7 @@
     <v-overlay :value="overlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
-    <v-row no-gutters class="pa-0">
+    <v-row no-gutters class="pb-0">
       <v-col
         v-if="drawer"
         cols="12"
@@ -60,7 +60,7 @@
                 min-height="200"
                 transition="fade-transition"
               >
-                <v-card tile class="ma-3 product-card">
+                <v-card tile class="ma-2 product-card">
                   <!-- image part -->
                   <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                     <cover :ads="ads"></cover>

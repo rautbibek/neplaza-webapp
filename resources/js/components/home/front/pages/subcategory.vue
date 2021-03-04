@@ -682,8 +682,10 @@ export default {
                this.brand_id =[];
                this.city_id =[];
                this.nhood_id =[];
-               this.price =[];
+               this.price =[0,0];
                this.sorting ='';
+               this.min_p='';
+               this.max_p='';
                this.filter();
         }
     },

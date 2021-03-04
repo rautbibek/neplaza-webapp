@@ -64,6 +64,14 @@
                 </v-list-item-content>
                 <hr />
               </v-list-item>
+              <v-list-item href="/support" target="_blank">
+                <v-list-item-icon>
+                  <v-icon>help</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Help & Support</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
               
               <v-list-item @click="logout">
                 <v-list-item-icon>
@@ -112,11 +120,6 @@ export default {
           icon: "settings",
           text: "Settings",
           url: "/user/setting",
-        },
-        {
-          icon: "help",
-          text: "Help & Support",
-          url: "/support",
         },
       ],
     };

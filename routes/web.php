@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 //     $r ="fake product";
 //     return view('email.ProductDeleted',compact('p','r'));
 // });
+
+
+Route::get('/support', 'SupportController@index')->name('support');
+Route::get('/contact', 'SupportController@contact')->name('contact');
+Route::get('/faq', 'SupportController@faq')->name('faq');
+Route::get('/aboutUs', 'SupportController@aboutUs')->name('about.us');
+Route::get('/trust&safety', 'SupportController@truesAndSafety')->name('trues.safety');
+Route::get('/policy', 'SupportController@legalAndPolicy')->name('legal.policy');
+
+
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::post('/send/contact/message', 'ContactController@save')->name('send.contact.message');
 Route::get('/seller/detail/{id}/{username}', 'WelcomeController@seller')->name('seller');
@@ -28,7 +38,10 @@ Route::get('/searchResult', 'SearchController@searchResult')->name('/search/resu
 Route::get('/ad/comment/{id}','CommentController@getComment');
 Route::post('/post/ad/report','ReportController@report');
 
-
+Route::domain('{subdomain}.'.config('app.url'))->group(function () {
+    Route::get('/', 'WelcomeController@sub')->name('sub');
+    
+});
 
 
 

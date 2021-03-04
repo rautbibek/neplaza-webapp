@@ -10,8 +10,9 @@ class SearchController extends Controller
 {
     public function search(Request $request){
       $keyword = request()->search;
-      $products = Product::select('id','category_id','slug','brand_id','nhood_id','description','title','created_at')->with('category','brand','nhood')
+      $products = Product::select('id','productid','category_id','slug','brand_id','nhood_id','description','title','created_at')->with('category','brand','nhood')
       ->where('title', 'LIKE', "%{$keyword}%")
+      ->orWhere('productid', 'LIKE', "%{$keyword}%")
       ->orWhereHas('brand', function($q) use ($keyword){
         return $q->where('name','like','%'. $keyword . '%');
       })
@@ -28,6 +29,7 @@ class SearchController extends Controller
                      $query->select('user_id')->where('user_id',Auth::id());
                     }])
       ->where('title', 'LIKE', "%{$keyword}%")
+      ->orWhere('productid', 'LIKE', "%{$keyword}%")
       ->orWhereHas('brand', function($q) use ($keyword){
         return $q->where('name','like','%'. $keyword . '%');
       })

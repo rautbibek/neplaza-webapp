@@ -55,7 +55,7 @@
               v-for="(ads, index) in my_ads"
               :key="index"
             >
-              <v-card class="ma-3 product-card">
+              <v-card class="ma-2 product-card">
                 <v-menu>
                   <template v-slot:activator="{ on: menu, attrs }">
                     <v-tooltip bottom>

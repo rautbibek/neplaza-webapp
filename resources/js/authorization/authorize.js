@@ -10,5 +10,6 @@ export default {
         };
         Vue.prototype.loggedIn = window.Auth.loggedIn;
         Vue.prototype.loginUser = window.Auth.user;
+        
     }
 }

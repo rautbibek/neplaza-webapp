@@ -55,7 +55,7 @@
               v-for="(ads, index) in my_ads"
               :key="index"
             >
-              <v-card tile class="ma-3 product-card">
+              <v-card tile class="ma-2 product-card">
                 <card-menu :ads="ads"></card-menu>
                 <!-- image part -->
                 <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">

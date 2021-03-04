@@ -78,9 +78,6 @@ export default {
 
     remove(item) {
       this.fav_ads.splice(this.fav_ads.indexOf(item), 1);
-
-      //this.fav_ads.splice(index,1);
-      //
     },
   },
   created() {

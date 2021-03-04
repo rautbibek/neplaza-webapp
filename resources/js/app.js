@@ -43,6 +43,19 @@ Vue.component('favorite', require('./components/home/favorite.vue').default);
 Vue.component('page-not-found', require('./components/empty.vue').default);
 Vue.component('profile-form', require('./components/home/back/profile/form.vue').default);
 
+Vue.component('footer-bar', require('./components/home/partials/footer.vue').default);
+
+
+//support bar
+Vue.component('support-topbar', require('./components/support/layouts/top.vue').default);
+Vue.component('support-footer', require('./components/support/layouts/bottom.vue').default);
+Vue.component('support', require('./components/support/support.vue').default);
+Vue.component('contact', require('./components/support/contactUs.vue').default);
+Vue.component('faq', require('./components/support/faq.vue').default);
+Vue.component('about', require('./components/support/aboutUs.vue').default);
+Vue.component('policy', require('./components/support/privacyPolicy.vue').default);
+Vue.component('safety', require('./components/support/safety.vue').default);
+//endof supportbar
 
 Vue.component('mymenu', require('./components/home/back/myAds/myMenu.vue').default);
 

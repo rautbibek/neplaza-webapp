@@ -40,6 +40,15 @@
 .breadcrumb-item>a:hover {
     color: #19916B !important;
 }
+.support-image {
+    background: url("https://i0.wp.com/www.akamai.com/uk/en/multimedia/images/intro/the-future-of-customer-experience-in-financial-services-intro.jpg?imwidth=1366?resize=650,400") no-repeat center/cover;
+    height: 350px;
+  }
+  
+  .support-image > h3 {
+    padding-top: 65px;
+    color: white;
+  }
 
 .featured-title {
     margin-bottom: 0px !important;

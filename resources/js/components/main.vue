@@ -18,7 +18,6 @@
 <script>
 import topbar from './home/partials/topbar';
 import Navbar from './home/partials/navbar';
-import Footer from './home/partials/footer';
 import login from './login';
 import signUp from './signUp';
 import emailVerifyNotif from './home/partials/emailVerifyNotification';
@@ -30,7 +29,7 @@ export default {
             'update-profile':profileForm,
             'sign-up':signUp,
             'nav-bar':Navbar,
-            'footer-bar':Footer,
+            
             'email-verify-notif':emailVerifyNotif,
          },
   data() {

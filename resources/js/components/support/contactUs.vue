@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div >
       <nav aria-label="breadcrumb ">
           <ol class="breadcrumb ">
-              <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
+              <li class="breadcrumb-item pull-right"><a href="/">Home</a></li>
+              <li class="breadcrumb-item pull-right"><a href="/support">Support</a></li>
               <li class="breadcrumb-item active" aria-current="page">Contact US</li>
           </ol>
       </nav>
@@ -131,7 +132,7 @@
                 </v-col>
               </v-row>
 
-                <v-card flat class="mb-5">
+                <v-card flat class="mb-5 mt-2">
                   <v-row>
                     <v-col cols="12" md="6" lg="6" sm="6" xs="12">
                       <v-card-title>OFFICE LOCATION</v-card-title>
@@ -143,7 +144,7 @@
                       </v-col>
                     </v-col>
                     <v-col cols="12" class="border-left" md="6" lg="6" sm="6" xs="12">
-                      <v-card-title>CONTACT FORM</v-card-title>
+                      <v-card-title>CONTACT US</v-card-title>
                       <v-card-subtitle>Ask if you have any queries.</v-card-subtitle>
 
                       <v-form ref="form" v-model="valid">
