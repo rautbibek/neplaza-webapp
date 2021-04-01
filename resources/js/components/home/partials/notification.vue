@@ -86,7 +86,7 @@
   </div>
 </template>
 <script>
-let notification = new Audio(window.URL+'/audio/message.mp3');
+let message_notification = new Audio(window.URL+'/audio/message.mp3');
 export default {
   data() {
     return {
@@ -114,7 +114,7 @@ export default {
           this.notification = response.data;
           this.count = this.notification.length;
           if(this.count > 0){
-            notification.play();
+            message_notification.play();
           }
           //audio.pause();
         })

@@ -108,14 +108,14 @@
             </div>
 
             <div class="col-12 col-md">
-              <h5 class="text-muted">ABOUT</h5>
-              <p>
-                <strong>BIKRI BAZZAR </strong> is a classified website in
-                <strong>Nepal</strong> where you can buy and sell locally. Find
-                the latest classified ads for realestate, jobs, cars, bikes,
-                furniture, fashion, mobiles and more for sale in
-                <strong>Nepal</strong>. Find buyers and sellers that suit your
-                need.
+              <h5 class="text-muted">ABOUT US</h5>
+              <p style="text-align:justify">
+                <strong>BIKRI BAZZAR </strong>  is the best platform to reach the buyers and seller for goods 
+                and services of your need. In our website we provide online marketplace for 
+                products/services, of large number of sellers/vendors, which can be reached by a 
+                wider range of customers/potential buyers. To fulfil your need visit the page and 
+                find what you are looking for. <strong>We aim to serve.</strong>
+                
               </p>
             </div>
           </div>

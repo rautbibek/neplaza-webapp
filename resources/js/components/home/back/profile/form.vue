@@ -217,12 +217,12 @@ export default {
           `${propertyType} size should be less than 2 MB!`;
       },
 
-      district: this.loginUser.city_id,
-      name: this.loginUser.name,
-      email: this.loginUser.valid_email,
-      contact: this.loginUser.phone,
-      about: this.loginUser.about,
-      nhood: this.loginUser.nhood_id,
+      district: null,
+      name: '',
+      email: '',
+      contact: '',
+      about: '',
+      nhood: null,
       city: [],
       localArea: [],
       required(propertyType) {
@@ -346,6 +346,15 @@ export default {
         })
         .catch();
     },
+  },
+  mounted(){
+    if(this.loggedIn){
+      this.name = this.loginUser.name;
+      this.district=  this.loginUser.city_id;
+      this.email= this.loginUser.valid_email;
+      this.about= this.loginUser.about;
+      this.nhood= this.loginUser.nhood_id;
+    }
   },
   created() {
     return this.getCity();

@@ -1,9 +1,9 @@
 <template>
-<div>
+<div v-cloak>
   <div>
       <nav class="navbar navbar-expand-lg navbar-dark d-none d-sm-flex" style="background-color:#2F3B59">
     <ul class="navbar-nav pad">
-      <li class="nav-item mr-auto menu-area">
+      <li class="nav-item mr-auto menu-area" >
         <a
           class="nav-link dropdown-toggle active"
           href="#"
@@ -23,7 +23,7 @@
                     style="padding:0px; margin-bottom:0px"
                     class="nav-color mb-3"
                   >
-                    <span
+                    <span v-cloak
                       class="material-icons"
                       style="font-size: 14px; margin:3px;"
                     >{{category.icons}}</span>
@@ -62,11 +62,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"  v-cloak>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active mr-2" v-for="(category,index) in cat" :key="index">
+        <li v-cloak class="nav-item active mr-2" v-for="(category,index) in cat" :key="index">
           <router-link :to="`/category/${category.slug}`" class="nav-link">
-            <span class="material-icons" style="font-size: 14px;">{{category.icons}}</span>
+            <span class="material-icons"  v-cloak style="font-size: 14px;">{{category.icons}}</span>
             {{category.name}}
             <span class="sr-only">(current)</span>
           </router-link>
@@ -107,7 +107,7 @@
           target="_blank"
           icon
         >
-          <v-icon >{{ icon.icon }}</v-icon>
+          <v-icon  v-cloak>{{ icon.icon }}</v-icon>
         </v-btn>
     </div>
     <v-divider></v-divider>
@@ -126,7 +126,7 @@
       </v-list-item>
       <v-subheader>Browse all categories</v-subheader>
       
-      <v-list-group
+      <v-list-group v-cloak
         v-for="(category,index) in categories" :key="index"
         :prepend-icon="category.icons"
         no-action

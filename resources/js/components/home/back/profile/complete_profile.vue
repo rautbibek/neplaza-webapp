@@ -1,21 +1,21 @@
 <template>
-  <v-row justify="center" v-if="!loginUser.completion">
-    <v-dialog v-model="dialog" persistent scrollable max-width="550px">
-
+  <v-row justify="center" v-if="!check">
+    <v-dialog v-model="dialog" persistent scrollable max-width="500px">
       <v-card>
-        <v-toolbar dark color="primary">
-
-          <v-toolbar-title>Set a new password</v-toolbar-title>
+        <v-card-title class="text-right text-light bg-blue" >
+          Set a new password
           <v-spacer></v-spacer>
-          <v-btn x-small fab @click="dialog = false" text><v-icon>close</v-icon></v-btn>
-        </v-toolbar>
+          <v-btn x-small icon @click="dialog = false">
+            <v-icon color="#fff">close</v-icon>
+          </v-btn>
+        </v-card-title>
               <v-alert v-if="error_message"
                   dense
                   type="error"
                   >
                   {{error_message}}
               </v-alert>
-              <v-card flat class="my-5">
+              <v-card flat class="my-3">
                 <v-card-text>
                   <v-form ref="form" v-model="valid" lazy-validation>
                     <v-col cols="12">
@@ -47,7 +47,7 @@
                   </v-form>
 
                   <v-col cols="12" class="text-right ">
-                    <v-btn color="primary" dark @click="save"> <v-icon x-small left>save</v-icon> save </v-btn>
+                    <v-btn color="indigo" dark @click="save"> <v-icon x-small left>save</v-icon> save </v-btn>
                   </v-col>
                 </v-card-text>
               </v-card>
@@ -64,6 +64,7 @@
     data () {
 
       return {
+        check: true,
         error_message:'',
         value:String,
         value1:String,
@@ -117,6 +118,12 @@
 
               });
         }
+      }
+    },
+    mounted(){
+      if(this.loggedIn){
+        this.check = this.loginUser.completion
+
       }
     },
 

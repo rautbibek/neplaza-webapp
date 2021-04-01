@@ -15,7 +15,7 @@
     </v-overlay>
     <div class="py-5">
       <v-container>
-        <div v-if="count > 0">
+        <div v-if="fav_ads.length > 0">
           <v-layout row wrap class="px-4">
             <v-flex
               xs12
@@ -27,12 +27,20 @@
               :key="index"
             >
               <v-card tile class="ma-3 product-card">
-                <div @click="remove(ads)">
-                  <favorite
-                    :is_favorite="ads.is_favorite"
-                    :product_id="ads.id"
-                  ></favorite>
-                </div>
+                <v-btn
+                  @click="remove(ads.id,index)"
+                  class="favourite"
+                  color="white"
+                  absolute
+                  x-small
+                  dark
+                  fab
+                  right
+                  
+                >
+                  <v-icon color="red">mdi-heart</v-icon>
+                  
+                </v-btn>
 
                 <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                   <!-- image part -->
@@ -76,8 +84,14 @@ export default {
       });
     },
 
-    remove(item) {
-      this.fav_ads.splice(this.fav_ads.indexOf(item), 1);
+    remove(id,index) {
+      this.fav = false;
+      axios
+        .post(`/favorite/${id}/add`)
+        .then((response) => {
+          this.fav_ads.splice(index, 1);
+        })
+        .catch();
     },
   },
   created() {
@@ -85,3 +99,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.favourite {
+  right: 8px;
+  bottom: 8px;
+}
+.favourite-icon i {
+  font-size: 24px !important;
+}
+</style>

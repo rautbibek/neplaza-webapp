@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pa-4" @click="report">report <v-icon color="red" >report</v-icon></div>
+    <v-list-item @click="report"><v-icon color="red" >report</v-icon> Report  </v-list-item>
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent width="450">
         <v-card>

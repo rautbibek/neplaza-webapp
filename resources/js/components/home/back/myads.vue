@@ -137,6 +137,7 @@ export default {
     });
     this.fetch(`/user/product/myads`);
   },
+  
 };
 </script>
 

@@ -8,7 +8,7 @@
         <div>
           
           <Message class="d-none d-sm-flex" :seller="owner"/>
-         <v-btn class="" style="padding:0px; margin:5px" text><report-ad class="d-none d-sm-flex" :ads='ad'></report-ad></v-btn>
+         
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
               
@@ -37,7 +37,6 @@
             </template>
             <v-list class="other-options">
               <v-list-item @click="copy(ad.productid)">Copy Product ID</v-list-item>
-              
               <div v-if="loggedIn">
                 <div v-if="loginUser.id === ad.user_id">
                   <v-list-item route :to="`/edit/ad/${ad.id}/image`">Edit Image</v-list-item>
@@ -46,7 +45,7 @@
                   <v-list-item @click="soldOut(ad)">Mark as Sold Out</v-list-item>
                 </div>
               </div>
-              
+              <v-list-item >{{ad.view_count}} Views</v-list-item>
             </v-list>
           </v-menu>
           

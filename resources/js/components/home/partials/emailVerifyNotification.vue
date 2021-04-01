@@ -33,7 +33,6 @@
     mounted(){
       if(!this.loginUser.email_verified_at){
         this.snackbar = true;
-        this.$router.push('/user/email/setting');
       }
     }
   }

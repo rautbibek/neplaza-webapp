@@ -77,9 +77,10 @@ export default {
     }),
     methods:{
       logout(){
-        axios.post(`/logout`)
+        axios.post(`/admin/logout`)
              .then(response=>{
-               location.reload();
+               console.log(response.data);
+               window.location.href = '/admin/login';
           });
       },
     },

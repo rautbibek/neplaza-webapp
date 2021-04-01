@@ -100,14 +100,20 @@
           ></v-select>
         </v-col>
       </v-row>
-      <v-divider
-        v-if="
-          scat.brand.length ||
-          scat.type.length ||
-          scat.filter.length ||
-          scat.status.length
-        "
-      ></v-divider>
+      <v-col cols="12" class="p-0">
+      <v-select
+          v-model="delivery"
+          :items="delivery_option"
+          :item-text="'name'"
+          :item-value="'name'"
+          tabindex="4"
+          label="Delivery Option *"
+          color="#19916B"
+          outlined
+          clearable
+        ></v-select>
+      </v-col>
+      <v-divider></v-divider>
       <div>
         <v-card-title
           class="font-weight-bold pa-0 mb-10"
@@ -287,11 +293,12 @@ export default {
           this.filter_id = this.product.filter_id;
           this.status = this.product.status_id;
           this.street = this.product.address;
+          this.delivery = this.product.delivery;
           this.getNhood();
         });
     },
   },
-  mounted() {
+  created() {
     this.getProduct();
   },
 };

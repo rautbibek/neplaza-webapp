@@ -21,9 +21,6 @@ class User extends Authenticatable
 
     protected $guard = ['role_id'];
 
-
-
-
     protected $appends =['cover','register_date','contact_status','contact_number','valid_email','completion'];
 
     /**
@@ -133,4 +130,10 @@ class User extends Authenticatable
          return false;
       }
    }
+
+   // slack notification
+   public function routeNotificationForSlack($notification)
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
 }

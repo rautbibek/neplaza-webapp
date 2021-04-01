@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use URL;
 use Session;
+use App\Notifications\SlackNotifiaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -91,6 +93,7 @@ class LoginController extends Controller
             $newuser->login_provider = $provider;
             $newuser->provider_id = $userSocial->id;
             $newuser->save();
+            $newuser->notify(new SlackNotifiaction($newuser->name.' :new user registered'));
             Auth::login($newuser);
             return redirect()->intended(session('previous_url'));
         }
@@ -101,5 +104,17 @@ class LoginController extends Controller
       $fieldType = filter_var($login,FILTER_VALIDATE_EMAIL)?'email':'phone';
       request()->merge([$fieldType =>$login]);
       return $fieldType;
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        $user->notify(new SlackNotifiaction($user->name.' :Is logged in'));
     }
 }

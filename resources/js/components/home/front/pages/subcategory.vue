@@ -50,7 +50,10 @@
             <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
                           
                <v-card  flat v-for="(scat,index) in subcategory" :key="index">
-                <v-toolbar dark dense color="#2f3b59">
+                <v-toolbar dark color="#2f3b59">
+                  
+                  <v-toolbar-title>AD FILTER</v-toolbar-title>
+                  <v-spacer></v-spacer>
                   <v-btn
                     icon
                     dark
@@ -58,11 +61,6 @@
                   >
                     <v-icon small>mdi-close</v-icon>
                   </v-btn>
-                  <v-toolbar-button>AD Filter</v-toolbar-button>
-                  <v-spacer></v-spacer>
-                  <v-toolbar-button @click="clearFilter">
-                    Clear filter
-                  </v-toolbar-button>
                 </v-toolbar>
                 
                   <v-container>
@@ -254,7 +252,7 @@
                             
                   </v-form>
                   <v-row>
-                        <v-col><v-btn @click="filter" color="primary" dark >Apply Filter</v-btn></v-col>
+                        <v-col><v-btn @click="filter" color="primary" dark >Apply Filter</v-btn><v-btn class="ml-1"  @click="clearFilter" color="error" dark >Clear filter</v-btn></v-col>
                       </v-row>
                   </v-container>
               </v-card> 
@@ -469,7 +467,7 @@
               <!-- product display column -->
               <v-col  cols="12" sm="8" lg="9" md="8" xs="12">
                 
-                <v-toolbar class="d-sm-none" dense height="40px" style="padding:0px;">
+                <v-toolbar class="d-sm-none" flat height="40px" style="padding:0px; background:none">
                   <v-row no-gutters >
                     <v-col cols="6" class="text-center border-right" @click="sheet=true" style="margin:0px; padding:0px">
                         <span class="subtitle-1"> Sort By</span> <v-icon>sort</v-icon>
@@ -482,7 +480,7 @@
                 </v-toolbar>
 
                 <div class="d-none d-sm-flex">
-                  <v-toolbar flat>
+                  <v-toolbar flat style="background:none">
                       
                       <v-spacer></v-spacer>
                       <!-- mobile view starts form here -->

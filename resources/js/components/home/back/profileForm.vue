@@ -15,21 +15,17 @@
         
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-col cols="12" v-if="show">
-            <v-row no-gutters class="ma-3">
-              <v-col cols="2">
-                <v-text-field
-                  outlined
-                  disabled
-                  placeholder="+977"
-                  style="border-radius: 0px; margin-bottom: 20px border-right:0px"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="9" md="9" sm="9">
-                <v-text-field
+            <v-row no-gutters class="ma-2">
+              
+              <v-col cols="12">
+                
+                <v-text-field  class="mt-2"
                   style="border-radius: 0px; margin-bottom: 20px border-left:0px"
                   type="number"
+                  prepend-inner-icon="mdi-phone"
+                  prefix="+977"
                   v-model="contact"
-                  label="Contact Number"
+                  label=" Contact Number"
                   counter="10"
                   :rules="[
                     required('Contact Number'),
@@ -84,7 +80,7 @@ export default {
   data() {
     return {
       overlay: false,
-      contact: "",
+      contact: '',
       show: true,
       otp: "",
       loading: false,
@@ -164,6 +160,14 @@ export default {
           });
       }
     },
+    getUser(){
+      axios
+        .get(`/get/login/user/`)
+        .then((response) => {
+          this.contact = response.data.phone;
+        })
+        .catch();
+    },
     submit() {
       if (this.$refs.form.validate()) {
         this.overlay = true;
@@ -200,6 +204,11 @@ export default {
           });
       }
     },
+  },
+  mounted(){  
+   if(this.loggedIn){
+     this.getUser();
+   }
   },
   created() {
     EventBus.$on("profileForm", (data) => {

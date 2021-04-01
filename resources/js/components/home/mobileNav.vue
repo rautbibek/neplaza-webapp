@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color:#eef3eb" >
+  <div style="background-color:#eef3eb">
      <v-container>
       <v-row>
         <v-col cols="9"><h4 class="text-caption">Browse Categories</h4></v-col>
@@ -12,11 +12,11 @@
           </v-col>
       </v-row>
       <vue-horizontal scroll :button="false">
-        <section v-for="(category,index) in categories" :key="index" style="width:110px;" class=" text-center" >
+        <section v-cloak v-for="(category,index) in categories" :key="index" style="width:110px;" class=" text-center">
           <router-link router :to="`/category/${category.slug}`" >
-              <div style="background:#1b3063eb"
-              class="pa-3 rounded-circle d-inline-block">
-                  <v-icon medium style="color:white">{{category.icons}}</v-icon> 
+              <div  v-cloak style="background:#1b3063eb"
+              class="pa-3 rounded-circle d-inline-block" >
+                  <v-icon  v-cloak medium style="color:white">{{category.icons}}</v-icon> 
               </div>
               <h4 class="text-caption text-dark">
                 {{category.name}}

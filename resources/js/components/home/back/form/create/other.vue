@@ -107,16 +107,26 @@
           ></v-select>
         </v-col>
       </v-row>
-      <v-divider
-        v-if="
-          subcategory.brand.length ||
-          subcategory.type.length ||
-          subcategory.filter.length ||
-          subcategory.status.length
-        "
-      ></v-divider>
+      <v-col cols="12" class="p-0">
+      
+      </v-col>
+      
     </div>
 
+    <v-col cols="12" class="p-0 pr-3">
+      <v-select
+          v-model="delivery"
+          :items="delivery_option"
+          :item-text="'name'"
+          :item-value="'name'"
+          tabindex="4"
+          label="Delivery Option *"
+          color="#19916B"
+          outlined
+          clearable
+        ></v-select>
+      </v-col>
+        <v-divider></v-divider>
     <div>
       <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
         {{ "Title & Description" }}

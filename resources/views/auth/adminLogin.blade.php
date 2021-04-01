@@ -1,69 +1,32 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="overlay">
-<!-- LOGN IN FORM by Omar Dsoky -->
-<form action="" method="POST">
-@csrf
-   <!--   con = Container  for items in the form-->
-   <div class="con">
-   <!--     Start  header Content  -->
-   <header class="head-form">
-      <h4>Admin Login</h4>
-   </header>
-   <!--     End  header Content  -->
-   <br>
-   <div style="width:100%; text-align:center">
-   @if ($errors->any())
-            <div class="text-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li style="list-style:none">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-   </div>
-   <div class="field-set">
-     
-      <!--   user name -->
-         <span class="input-item">
-           <i class="fa fa-user-circle"></i>
-         </span>
-        <!--   user name Input-->
-         <input class="form-input" id="txt-input" name="email" type="email" value="{{ old('email') }}" placeholder="UserName or Email" required>
-         
-      <br>
-     
-           <!--   Password -->
-     
-      <span class="input-item">
-        <i class="fa fa-key"></i>
-       </span>
-      <!--   Password Input-->
-      <input class="form-input" type="password" name="password" placeholder="Password" id="pwd"  name="password" required>
+<main class="form-signin " style=" min-width:350px;border-radius:10px; background:#2f3b5940">
+  <form method="POST">
+  @csrf
+    <div  class="text-center text-white">
+       <a href="/">
+       <img class="mb-4" src="{{asset('image/mob_logo.png')}}" alt="" width="72" height="70">
+       </a>
+      </div>
+      <h4 class="text-center">ADMIN LOGIN</h4>
+      @if ($errors->any())
+      @foreach ($errors->all() as $error)
+            <li style="list-style:none; color: red ">** {{ $error }} **</li>
+       @endforeach
+      @endif
       
-<!--      Show/hide password  -->
-     <span>
-        <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i>
-     </span>
-
-      <br><br>
-<!--        buttons -->
-<!--      button LogIn -->
-      <button class="log-in"> Log In </button>
-   </div>
-  
-   <a href="{{route('welcome')}}" class="btn submits sign-up mt-5">GOTO HOMEPAGE &nbsp;
-<!--         Sign Up font icon -->
-      <i class="fa fa-home" aria-hidden="true"></i>
-      </a>
-     
-<!--   End Conrainer  -->
-  </div>
-  
-  <!-- End Form -->
-</form>
-</div>
-
+    <label for="inputEmail" class="visually-hidden text-left">Email address</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="visually-hidden">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control text-left" placeholder="Password" required>
+    <div class="checkbox mb-3">
+      <label>
+        <input {{ old('remember') ? 'checked' : '' }} type="checkbox" name="remember" value="remember" > Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">LOGIN</button>
+    
+  </form>
+</main>
 @endsection

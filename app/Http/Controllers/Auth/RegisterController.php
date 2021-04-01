@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Notifications\SlackNotifiaction;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,8 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => uniqid(),
             'phone' => $data['phone'],
@@ -75,5 +75,7 @@ class RegisterController extends Controller
             'role_id' => 3,
             'username' =>str_slug($data['name']).'-'.uniqid(),
         ]);
+        $user->notify(new SlackNotifiaction($user->name.' :register as a new user'));
+        return $user;
     }
 }

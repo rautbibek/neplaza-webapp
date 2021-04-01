@@ -51,6 +51,21 @@ export default {
             property_1: '',
             property_2: '',
             property_3: '',
+            delivery_option:[
+                {
+                    name:'Whole Nepal'
+                },
+                {
+                    name:'Within my city'
+                },
+                {
+                    name: 'Within my area'
+                },
+                {
+                    name:'Not Available'
+                }
+            ],
+            delivery:'',
 
 
             select(propertyType) {
@@ -156,7 +171,6 @@ export default {
 
 
         submit() {
-
             this.category_id = this.scat.category.id;
             this.scategory_id = this.scat.id;
             this.url = this.scat.url;
@@ -204,6 +218,7 @@ export default {
                 formData.append('price', this.price);
                 formData.append('address', this.street);
                 formData.append('join', this.url);
+                formData.append('delivery', this.delivery);
                 this.files.forEach(file => {
                     formData.append('image[]', file, file.name);
                 });

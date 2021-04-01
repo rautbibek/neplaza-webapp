@@ -116,7 +116,7 @@ export default {
     return {
       drawer:true,
       my_data: {},
-      user_id: this.loginUser.id,
+      user_id: null,
       contact_status: true,
       overlay: false,
     };
@@ -155,10 +155,7 @@ export default {
     },
   },
   created() {
-    if (!this.loggedIn) {
-      this.$router.push("/");
-      return;
-    }
+    
     EventBus.$on("contactUpdated", (data) => {
       this.userData();
     });

@@ -62,7 +62,19 @@
         ></v-select>
       </v-col>
     </v-row>
-
+    <v-col cols="12" class="p-0">
+      <v-select
+          v-model="delivery"
+          :items="delivery_option"
+          :item-text="'name'"
+          :item-value="'name'"
+          tabindex="4"
+          label="Delivery Option *"
+          color="#19916B"
+          outlined
+          clearable
+        ></v-select>
+    </v-col>
     <v-divider></v-divider>
     <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
       {{ "Title & Description" }}

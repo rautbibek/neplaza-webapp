@@ -158,6 +158,19 @@
             </span>
           </div>
         </v-col>
+        <!-- static property 3 -->
+        <v-col cols="12" lg="6" md="6" sm="12" xs="12" v-if="ad.delivery">
+          <div class="d-flex ma-2">
+            <strong 
+              ><v-icon small left>mdi-truck-delivery</v-icon>Delivery</strong
+            >
+            <v-divider vertical></v-divider>
+            <span>
+              {{ ad.delivery }}
+              
+            </span>
+          </div>
+        </v-col>
       </v-row>
     </v-card-text>
   </v-card>

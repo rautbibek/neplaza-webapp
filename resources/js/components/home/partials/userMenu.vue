@@ -89,7 +89,7 @@
   </div>
 </template>
 <script>
-let notification = new Audio('http://localhost:8000/audio/notification.mp3');
+let notification = new Audio(window.URL+'/audio/notification.mp3');
 export default {
   data() {
     return {

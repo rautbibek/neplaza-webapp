@@ -2,7 +2,7 @@
   <v-card>
     <div>
       <div class="">
-        <nav aria-label="breadcrumb " >
+        <nav aria-label="breadcrumb " v-if="!overlay">
         <ol class="breadcrumb">
           <li class="breadcrumb-item pull-right">
             <router-link :to="`/`">Home</router-link>
@@ -24,7 +24,7 @@
       </nav>
       </div>
 
-      <v-overlay :value="overlay" absolute>
+      <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
       <div>

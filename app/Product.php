@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-      
       'title',
       'description',
       'price',
@@ -21,6 +20,7 @@ class Product extends Model
       'type_id',
       'brand_id',
       'brand_model',
+      'delivery',
       'filter_id',
       'maxprice',
       'filter_1_id',
@@ -35,10 +35,8 @@ class Product extends Model
     ];
 
     protected $hidden =[];
-    //protected $with=['image'];
-    protected $appends=[
-      'created_date','product_price','product_max_price',
-    'is_favorite','product_cover'];
+    
+    protected $appends=['created_date','product_price','product_max_price','is_favorite','product_cover'];
 
     public function product_image(){
       return $this->hasMany('App\Product_image')->select('id','image','product_id');

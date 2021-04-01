@@ -62,7 +62,19 @@
           ></v-select>
         </v-col>
       </v-row>
-
+      <v-col cols="12" class="p-0">
+      <v-select
+          v-model="delivery"
+          :items="delivery_option"
+          :item-text="'name'"
+          :item-value="'name'"
+          tabindex="4"
+          label="Delivery Option *"
+          color="#19916B"
+          outlined
+          clearable
+        ></v-select>
+      </v-col>
       <v-divider></v-divider>
       <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
         {{ "Title & Description" }}
@@ -221,13 +233,11 @@ export default {
           this.price = this.product.price;
           this.description = this.product.description;
           this.street = this.product.address;
-
           this.brand_id = this.product.brand_id;
-
           this.filter_1_id = this.product.filter_1_id;
           this.filter_2_id = this.product.filter_2_id;
           this.status = this.product.status_id;
-
+          this.delivery = this.product.delivery;
           this.getNhood();
         });
     },

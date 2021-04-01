@@ -42,7 +42,21 @@ export default {
             property_1: '',
             property_2: '',
             property_3: '',
-
+            delivery_option:[
+                {
+                    name:'Whole Nepal'
+                },
+                {
+                    name:'Within my city'
+                },
+                {
+                    name: 'Within my area'
+                },
+                {
+                    name:'Not Available'
+                }
+            ],
+            delivery:'',
 
 
             select(propertyType) {
@@ -67,7 +81,6 @@ export default {
         }
     },
     methods: {
-
         getCity() {
             axios.get(`/all/city`)
                 .then(response => {
@@ -97,7 +110,6 @@ export default {
             this.overlay = true;
             if (this.$refs.form.validate()) {
                 axios.put(`/user/add/product/${this.$route.params.id}`, {
-
                         'type_id': this.type,
                         'status_id': this.status,
                         'filter_id': this.filter_id,
@@ -116,7 +128,7 @@ export default {
                         'city_id': this.district,
                         'nhood_id': this.nhood,
                         'address': this.street,
-
+                        'delivery': this.delivery,
                     })
                     .then(response => {
                         this.overlay = false;

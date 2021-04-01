@@ -34,7 +34,7 @@
               <v-alert v-if="message" dense :type="type">
                 {{ message }}
               </v-alert>
-              <v-form ref="form" v-model="valid" lazy-validation>
+              <v-form ref="form1" v-model="valid" lazy-validation>
                 <v-card-subtitle class="alignCenter pl-0">
                   Email
                   <v-tooltip bottom>
@@ -81,7 +81,7 @@
                     @click="email_verification"
                   >
                     <v-icon left>send</v-icon>
-                    send Code
+                      send Code
                   </v-btn>
                   
                 </v-col>
@@ -113,6 +113,11 @@
                     clearable
                   ></v-text-field>
                 </v-col>
+               <v-col cols="12" class="text-right">
+                <v-btn text x-small color="indigo" @click="resend">
+                  change email address <v-icon x-small right>edit</v-icon>
+                </v-btn>
+              </v-col>
               </v-row>
               <v-divider></v-divider>
               <v-col cols="12" class="text-right">
@@ -141,6 +146,7 @@ export default {
       loading: false,
       overlay: false,
       email: "",
+      otp_box:false,
       required(propertyType) {
         return (v) => (v && v.length > 0) || `You must input a ${propertyType}`;
       },
@@ -157,9 +163,7 @@ export default {
     };
   },
   methods: {
-    
     userData() {
-      
       this.overlay = true;
       axios
         .get(`/get/login/user`)
@@ -182,6 +186,7 @@ export default {
                 timeout: 3000,
                 position: "topRight",
               });
+              this.otp_box = false;
               this.message = response.data[1];
               this.dialog = false;
               this.overlay = false;
@@ -218,8 +223,20 @@ export default {
       this.dialog = false;
       this.$refs.form.reset();
     },
+    resend() {
+      this.dialog = false;
+      this.otp_box = false;
+      this.message ='';
+      this.$refs.form.reset();
+    },
+    
     email_verification() {
-      if (this.$refs.form.validate()) {
+      if(this.otp_box){
+        this.dialog =true;
+        return;
+      }
+
+      if (this.$refs.form1.validate()) {
         this.loading = true;
         axios
           .post(`/user/email/verification`, {
@@ -230,6 +247,7 @@ export default {
             this.message = response.data;
             this.loading = false;
             this.dialog = true;
+            this.otp_box = true;
           })
           .catch((error) => {
             if (error.response.status === 422) {
@@ -237,6 +255,12 @@ export default {
               this.type = "error";
               this.loading = false;
             }
+            if (error.response.status === 500) {
+              this.message = error.response.data.errors.message;
+              this.type = "error";
+              this.loading = false;
+            }
+            this.loading = false;
           });
       }
     },

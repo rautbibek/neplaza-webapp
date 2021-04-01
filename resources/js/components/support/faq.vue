@@ -3,22 +3,22 @@
       <v-container>
         <v-col class="text-center"><h3>FAQ</h3></v-col>
         <v-col cols="12" style="padding-bottom:0px; margin-bottom:0px">
-          <v-text-field 
+          <v-text-field
             prepend-inner-icon="search"
             v-model="search"
             label="search"
             outlined
-            
+
           ></v-text-field>
-          
+
         </v-col>
          <v-col class="text-center">
-           
+
            <v-btn dark color="green" @click="sell">seller faq</v-btn>
            <v-btn dark @click="buy">buyer faq</v-btn>
           </v-col>
          <v-col>
-            
+
             <div v-if="sellers">
               <v-alert v-for="(seller,index) in faq" :key="index" style="background:#80808017">
                 <v-card-title>{{index+1}}. {{seller.question}}</v-card-title>
@@ -121,7 +121,7 @@
             question:"If I couldn’t make sale of the product(previously owned/used)in 180 days what options do I have?",
             answer:"After the expiry of 180 days you need to renew your listing by visiting the website with your registered username."
           },
-          
+
         ],
         buyer_faq:[
           {
@@ -169,11 +169,11 @@
       faq(){
         if(this.sellers ==true){
           return this.seller_faq.filter((data)=>{
-            return data.question.match(this.search);
+            return data.question.toLowerCase().match(this.search);
           })
         }else{
           return this.buyer_faq.filter((data)=>{
-            return data.question.match(this.search);
+            return data.question.toLowerCase().match(this.search);
           })
         }
       }

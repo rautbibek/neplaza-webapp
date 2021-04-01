@@ -1,30 +1,32 @@
 <template>
   <div  v-if="count > 0">
     
-    <div class="container mb-4">
+    <div class="container">
       <v-container>
         <p class="featured-title text-center">Featured Products</p>
         <div class="px-2">
-            <vue-horizontal :button-between="false">
-            <section v-for="(ads,index) in featured" :key="index" style="margin:5px; padding:0xp">
-             <v-card class="card product-card" >
-             
-              <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
-                <v-img
-                  class="white--text align-end"
-                  aspect-ratio="1.4"
-                  max-height="190px"
-                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
-                  :src="ads.product_cover"
-                >
-                </v-img>
-                <div class="feature-top-left">Featured</div>
-                <card-title style="border-left:2px solid yellow" :ads="ads"></card-title>
-              </router-link>
-            </v-card>
-              
-            </section>
-            <section v-if="count > 7">
+            
+            <carousel :autoplay="true" :autoplaySpeed="1000" :lazyLoad="true" :autoplayHoverPause="true" :nav="false" :responsive="{0:{items:2,nav:false},600:{items:2,nav:true},770:{items:3,nav:true},970:{items:4,nav:true}}">
+               
+              <div v-for="(ads,index) in featured" :key="index" style="margin:5px; padding:0xp">
+               
+                <v-card class="card product-card" >
+                
+                  <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
+                    <v-img
+                      class="white--text align-end"
+                      aspect-ratio="1.4"
+                      max-height="190px"
+                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
+                      :src="ads.product_cover"
+                    >
+                    </v-img>
+                    <div class="feature-top-left">Featured</div>
+                    <card-title style="border-left:2px solid yellow" :ads="ads"></card-title>
+                  </router-link>
+                </v-card>
+              </div>
+              <div v-if="count > 7">
                 <v-col  class="text-center " style=" margin-top:100px">
                   <router-link :to="`/feature/ads`">
                   <v-card-title >Veiw all<v-btn
@@ -39,8 +41,9 @@
                   </v-btn></v-card-title>
                   </router-link>
                 </v-col>
-            </section>
-          </vue-horizontal>
+            </div>
+            </carousel>
+            
           </div>
       </v-container>
       
@@ -49,9 +52,10 @@
 </template>
 
 <script>
-import VueHorizontal from "vue-horizontal";
+//import VueHorizontal from "vue-horizontal";
+import carousel from 'vue-owl-carousel'
 export default {
-  components: {VueHorizontal},
+  components: {carousel },
   data() {
     return {
       featured: [],
@@ -133,5 +137,6 @@ section >div {
     width: calc((100% - (3 * 24px)) / 4);
   }
 }
+
 </style>
 

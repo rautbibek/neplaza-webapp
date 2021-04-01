@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Events\ProductDeletedEvent;
 use App\product;
 use Illuminate\Support\Facades\Cache;
+use App\Notifications\SlackNotifiaction;
 use App\Product_property;
 use Illuminate\Support\Facades\Auth;
 use App\Http\imageExtractor\ImageResizer;
@@ -83,10 +84,10 @@ class ProductController extends Controller
           $p_prop->user_name = Auth::user()->name;
           $p_prop->save();
           if($request->hasFile('image')){
-              return $this->imageResizer->resizeImage($request->image,$product->id);
+              $this->imageResizer->resizeImage($request->image,$product->id);
           }
         }
-
+        Auth::user()->notify(new SlackNotifiaction(Auth::user()->name.' :Added new product with title '.$request->title));
         $message="Ad posted succefully !!"  ;
         return response()->json($message,200);
     }
@@ -194,7 +195,7 @@ class ProductController extends Controller
         if($request->filter_id != null &&  $request->filter_id != ''){
             $product->filter_id      = $request->filter_id;
         }
-
+        $product->delivery    = $request->delivery;
         $product->title       = $request->title;
         $product->description = $request->description;
         $product->city_id     = $request->city_id;
@@ -296,6 +297,7 @@ class ProductController extends Controller
         foreach ($products->product_image as $product) {
             $product->delete();
         }
+        
         $products->delete();
         return response()->json('ad deleted succefully ',200);
     }

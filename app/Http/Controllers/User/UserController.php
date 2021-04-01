@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -23,9 +24,11 @@ class UserController extends Controller
     }
 
     public function contact_status(Request $request){
+        
         $contact = User::where('id',Auth::id())->firstOrFail();
         $contact->hide_contact = $request->status;
         $contact->update();
+        
         $message="status changed succefully";
         return response()->json($message,200);
     }
@@ -82,7 +85,7 @@ class UserController extends Controller
       ]);
 
       if($request->contact_number ==  Auth::user()->phone && Auth::user()->phone_verified == true){
-        return response()->json(['message','Provided contact number is already verified '],200);
+        return response()->json(['errors','Provided contact number is already verified'],422);
       }
       $otp = rand(10000,99999);
       Session::put('OTP',$otp);
@@ -226,13 +229,10 @@ class UserController extends Controller
         ]);
         $user = User::where('id',Auth::id())->firstOrFail();
 
-        $user->email = $request->email;
-        if($user->email !== $request->email){
-            $user->email_verified_at = null;
-        }
-        $user->update();
+        
         $activation_code = rand(10000,99999);
         Session::put('ACTIVE_CODE',$activation_code);
+        Session::put('email',$request->email);
         Mail::to($request->email)->queue(new VerifyMail($activation_code));
         //$user->sendEmailVerificationNotification();
         return response()->json('Verification code sent succefully. Please Check Your Email.');
@@ -247,8 +247,10 @@ class UserController extends Controller
 
       if($request->verification_code == $request->session()->get('ACTIVE_CODE')){
           $user->email_verified_at = date('Y-m-d H:i:s');
+          $user->email = session()->get('email');
           $user->update();
           $request->session()->forget('ACTIVE_CODE');
+          $request->session()->forget('email');
           return response()->json(['success','Email verified succefully.'],200);
       }
       return response()->json(['error','Verification code doesn`t match.'],200);

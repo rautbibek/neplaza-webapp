@@ -19,8 +19,8 @@
          <meta name="author" content="Bibek raut">
          <!-- <meta http-equiv="refresh" content="30"> -->
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-         <script  src="{{asset('js/app.js')}}" defer></script>
-         <link rel="stylesheet" href="{{asset('css/app.css')}}">
+         <script  src="{{mix('js/app.js')}}" defer></script>
+         <link rel="stylesheet" href="{{mix('css/app.css')}}">
          <link rel="stylesheet" href="{{asset('/custom-css/preloader.css')}}">
          
     
@@ -36,17 +36,11 @@
                 <main-component></main-component>
             </div>
         </div>
-
     </body>
     {{-- script part --}}
-    <script type="text/javascript">
-        window.Auth ={!! json_encode([
-            'loggedIn' => Auth::check(),
-            'user'     => Auth::user()
-        ]) !!}
+    <script type="text/javascript"> window.Auth = {!! json_encode(['loggedIn'=>Auth::check(),'user'=>Auth::user()]) !!}
     </script>
     <script type="text/javascript">
-
         window.URL = "{{config('app.url')}}"
     </script>
     <script>

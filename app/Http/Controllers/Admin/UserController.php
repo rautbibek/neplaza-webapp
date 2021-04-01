@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Product;
 use Intervention\Image\Facades\Image;
@@ -120,4 +121,9 @@ class UserController extends Controller
         
         return response()->json('user cannot be deleted user has '.$user->product->count().' Ads',200);
     }
+
+    public function logout(Request $request){
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
+     }
 }
