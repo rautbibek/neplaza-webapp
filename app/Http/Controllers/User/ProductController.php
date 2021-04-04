@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-      
+        
         $product= $request->user()->product()->create($request->except('image'));
         if($product){
           $p_prop = new Product_property();
@@ -81,6 +81,7 @@ class ProductController extends Controller
           if($product->filter_3_id){
             $p_prop->filter_3_name = $product->filter_3->name;
           }
+          
           $p_prop->user_name = Auth::user()->name;
           $p_prop->save();
           if($request->hasFile('image')){

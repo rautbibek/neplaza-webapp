@@ -1,6 +1,7 @@
 <template>
     <v-card>
       <v-container>
+        
         <v-col class="text-center"><h3>FAQ</h3></v-col>
         <v-col cols="12" style="padding-bottom:0px; margin-bottom:0px">
           <v-text-field

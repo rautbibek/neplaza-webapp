@@ -26,7 +26,7 @@
                             </v-icon>
                             </v-btn> {{item.text}}
                         </v-card-title>
-                        <v-card-subtitle>{{item.description}}</v-card-subtitle>
+                        <v-card-subtitle class="text--primary text-truncate ">{{item.description}}</v-card-subtitle>
                         <v-card-actions>
                         
                         </v-card-actions>
@@ -52,14 +52,14 @@ export default {
                     text: "FAQ",
                     url: "/faq",
                     color:"#1F7087",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Have a problem/question? Find your solution here or Contact Us.",
                 },
                 {
                     icon: "lightbulb",
                     text: "Trust & Safety",
                     url: "/trust&safety",
                     color:"#3eb54b",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Consider these to safeguard yourselves while using the services of this Platform.",
                 },
 
                 {
@@ -67,21 +67,21 @@ export default {
                     text: "Legal & Policy info.",
                     url: "/policy",
                     color:"#111796",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Before you utilize the services of this website have a look at the terms of use privacy policy of the website.",
                 },
-                {
-                    icon: "cases",
-                    text: "Career",
-                    url: "/career",
-                    color:"deep-purple lighten-1",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
-                },
+                // {
+                //     icon: "cases",
+                //     text: "Career",
+                //     url: "#",
+                //     color:"deep-purple lighten-1",
+                //     description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                // },
                  {
                     icon: "phone",
                     text: "Contact Us",
                     url: "/contact",
                     color:'#385F73',
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Have some suggestions for us?  Or, so you need to contact our office for any official reasons.",
                 },
 
                 {
@@ -89,7 +89,7 @@ export default {
                     text: "About Us",
                     url: "/aboutUs",
                     color:"#952175",
-                    description:"Listen to your favorite artists and albums whenever and wherever, online and offline.Listen to your favorite artists and albums whenever and wherever, online and offline.",
+                    description:"Want to know more about us ?",
                 },
                 
             ],

@@ -142,6 +142,24 @@ export default {
         //alert(this.$route.params.slug)
         this.fetch(`/front/category/product/${this.$route.params.slug}`);
     },
+    metaInfo(){
+        return{
+            title:`BIKRI BAZZAR - ${this.category.name}`,
+            meta:[
+                { charset: 'utf-8' },
+                {
+                    name:"title",
+                    content: this.category.name,
+                    
+                },
+                {
+                    name:"og:title",
+                    content:this.category.name,
+                }
+
+            ]
+        }
+    },
 
 
     watch:{

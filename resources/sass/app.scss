@@ -576,7 +576,13 @@ a:hover {
     }
 }
 
-
+.center{
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    height:100px; 
+    background-color:#e0dddd
+}
 
 @media screen and (max-width:599px) {
     .menu-box-wrapper {

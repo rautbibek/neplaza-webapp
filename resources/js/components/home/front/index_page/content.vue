@@ -3,7 +3,7 @@
     <v-container >
       <p class="featured-title text-center">Recent Listing</p>
     </v-container>
-    <div>
+    <div class="pb-5">
       <v-container>
         <v-layout row wrap class="px-1">
           <v-overlay :value="overlay">

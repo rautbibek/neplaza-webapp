@@ -82,11 +82,12 @@
     >
     
     <div  class="mt-4 text-center">
-      <div class="top-right"><v-btn
-              icon
+      <div class="float-right mr-3"><v-btn
+              fab
               x-small
+              class="text-dark"
               @click="drawer = false"
-              color="blue"
+              
             >
               <v-icon>close</v-icon>
             </v-btn></div>
@@ -118,12 +119,7 @@
         </v-list-item-icon>
         <v-list-item-title style="font-size:12px"> Home</v-list-item-title>
       </v-list-item>
-      <v-list-item router :to="`/contact/us`">
-        <v-list-item-icon>
-          <v-icon small>mdi-phone</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title style="font-size:12px">Contact Us</v-list-item-title>
-      </v-list-item>
+      
       <v-subheader>Browse all categories</v-subheader>
       
       <v-list-group v-cloak
@@ -147,6 +143,51 @@
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
+      <v-divider></v-divider>
+      <v-subheader>Help & Support</v-subheader>
+
+
+      <v-list-item href="/support">
+        <v-list-item-icon>
+          <v-icon small>mdi-help</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title style="font-size:12px">Help & Support</v-list-item-title>
+      </v-list-item>
+      <v-list-item href="/contact">
+          <v-list-item-icon>
+            <v-icon small>mdi-phone</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title style="font-size:12px">Contact Us</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item href="/aboutUs">
+        <v-list-item-icon>
+          <v-icon small>call_to_action</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title style="font-size:12px">About Us</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item href="/faq">
+        <v-list-item-icon>
+          <v-icon small>help_outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title style="font-size:12px">FAQ</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item href="/trust&safety">
+        <v-list-item-icon>
+          <v-icon small>lightbulb</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title style="font-size:12px">Trust & Safety</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item href="/policy">
+        <v-list-item-icon>
+          <v-icon small>pan_tool</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title style="font-size:12px">Legal & Policy info</v-list-item-title>
+      </v-list-item>
+
     </v-list>
     </v-navigation-drawer>
   </div>
@@ -185,6 +226,7 @@ export default {
     });
   
   },
+ 
   computed: {
     category_url() {
       return `/menu/category`;

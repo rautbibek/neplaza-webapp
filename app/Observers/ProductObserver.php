@@ -19,6 +19,7 @@ class ProductObserver
         $config =['table' => 'products', 'field'=>'productid', 'length' => 10, 'prefix' =>'BKB-','reset_on_prefix_change'=>true];
         $product->slug = Str::slug($product->title);
         $product->productid = IdGenerator::generate($config);
+        
         $product->expiry_date = Carbon::now()->addYear();
         $product->save();
         $product->category->increment('product_count');

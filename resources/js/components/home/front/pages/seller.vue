@@ -155,6 +155,24 @@ export default {
   created(){
       this.seller();
       this.fetch(`/seller/${this.$route.params.id}/ad`);
-  }
+  },
+  metaInfo(){
+        return{
+            title:`BIKRI BAZZAR - ${this.scategory_name}`,
+            meta:[
+              { charset: 'utf-8' },
+                {
+                    name:"title",
+                    content: this.seller_detail.name,
+                    
+                },
+                {
+                  name:"og:title",
+                    content:this.seller_detail.name,
+                }
+
+            ]
+        }
+    },
 }
 </script>

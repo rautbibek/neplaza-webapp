@@ -115,6 +115,6 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        $user->notify(new SlackNotifiaction($user->name.' :Is logged in'));
+        //$user->notify(new SlackNotifiaction($user->name.' :Is logged in'));
     }
 }

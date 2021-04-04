@@ -1,4 +1,9 @@
 @extends('support.layout')
+@push('meta')
+<meta name="title" content="Trust & Safety">
+<meta name="description" content="Consider these to safeguard yourselves while using the services of this Platform">
+<meta property="og:title" content="Trust & Safety">
+@endpush
 @section('content')
 <nav aria-label="breadcrumb ">
     <ol class="breadcrumb ">

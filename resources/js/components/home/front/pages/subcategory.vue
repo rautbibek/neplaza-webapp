@@ -22,7 +22,7 @@
 
           <!-- sort by mobile view -->
           
-              <div class="text-center">
+              <div class="text-center pa-3">
                 <v-bottom-sheet v-model="sheet">
                   <v-list>
                       <v-col class="text-right pa-0 ma-0">
@@ -262,9 +262,9 @@
           <v-main>
             <v-row no-gutters style="margin:0px; padding:0px;">
               <!-- desktop view -->
-              <v-col cols="6" lg="3" sm="4" md="4" class="border-right d-none d-sm-flex " >
+              <v-col cols="6" lg="3" sm="4" md="4" class="border-right d-none d-sm-flex" >
                 <v-container class="mt-2">
-                  <v-card color="#00000000" flat v-for="(scat,index) in subcategory" :key="index">
+                  <v-card color="#00000000" flat v-for="(scat,index) in subcategory" :key="index" class="">
                     <!-- form start -->
                     <v-form ref="form">
                        <!-- location -->
@@ -744,6 +744,25 @@ export default {
         this.getScategory();
         this.getCity();
     },
+
+    metaInfo(){
+        return{
+            title:`BIKRI BAZZAR - ${this.scategory_name}`,
+            meta:[
+              { charset: 'utf-8' },
+                {
+                    name:"title",
+                    content: this.scategory_name,
+                    
+                },
+                {
+                  name:"og:title",
+                    content:this.scategory_name,
+                }
+
+            ]
+        }
+    },
     
 
     watch:{
@@ -756,7 +775,13 @@ export default {
 }  
 </script>
 <style scoped>
+.sidenav {
+  height: 100%;
+  overflow-x: scroll;
+  position: absolute;
 
+  
+}
   .checkbox {
     margin:0px;
     padding:0px;

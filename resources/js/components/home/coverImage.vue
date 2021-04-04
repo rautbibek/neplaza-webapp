@@ -4,7 +4,7 @@
       <v-img
         style="position: relative"
         class="white--text align-end"
-        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
+        
         aspect-ratio="1.4"
         max-height="190px"
         :src="ads.product_cover"

@@ -1,7 +1,7 @@
 <template>
-  <v-card>
+  <v-card flat >
     <div>
-      <div class="">
+      <div class="mb-2">
         <nav aria-label="breadcrumb " v-if="!overlay">
         <ol class="breadcrumb">
           <li class="breadcrumb-item pull-right">
@@ -85,10 +85,7 @@ export default {
     'ad-comment': adComment,
     
   },
-  metaInfo: {
-    title: 'Default App Title',
-    
-  },
+
   data() {
     return {
       overlay: false,
@@ -100,6 +97,9 @@ export default {
       scategory: {},
       productId: "",
       fav_count: null,
+      title:'',
+      description:'',
+      image:'',
     };
   },
   methods: {
@@ -109,12 +109,20 @@ export default {
         .then((response) => {
           this.detail = response.data;
           this.count = this.detail.length;
+          this.$metaInfo.description = this.detail[0].description;
           this.category = response.data[0].category;
           this.scategory = response.data[0].scategory;
           this.productId = response.data[0].productid;
-          this.$route.meta.title = this.detail[0].title
-          this.$route.meta.metaTags[0].content = this.detail[0].title
-          this.$route.meta.metaTags[1].content = this.detail[0].description
+
+          //meta
+          
+          if(this.detail[0].product_image.length>0){
+            this.image = this.detail[0].product_image[0].full_image;
+          }else{
+            this.image = '/image/no-image.webp';
+          }
+          this.title = this.detail[0].title;
+          this.description = this.detail[0].description;
           this.overlay = false;
         }).catch((error) => {
             window.location.href = '/pageNotFound';
@@ -122,11 +130,36 @@ export default {
     },
   },
   created() {
-    //console.log(window.location.pathname);
-    //localStorage.url = window.location.pathname;
     this.getAd();
-
   },
+    metaInfo(){
+        return{
+            title:'BIKRI BAZZAR',
+            meta:[
+              { charset: 'utf-8' },
+                {
+                    name:"title",
+                    content: this.title,
+                },
+                {
+                  name:'description',
+                  content:this.description
+                },
+                {
+                  name:'og:title',
+                  content:this.title,
+                },
+                {
+                  name:'og:description',
+                  content:this.description,
+                },
+                {
+                  name:'og:image',
+                  content:this.image,
+                },
+            ]
+        }
+    },
   watch: {
     $route(to, from) {
       return this.getAd();

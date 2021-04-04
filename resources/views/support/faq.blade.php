@@ -1,4 +1,9 @@
 @extends('support.layout')
+@push('meta')
+<meta name="title" content="FAQ">
+<meta name="description" content="Have a problem/question? Find your solution here or Contact Us.">
+<meta property="og:title" content="FAQ">
+@endpush
 @section('content')
 <nav aria-label="breadcrumb ">
         <ol class="breadcrumb ">

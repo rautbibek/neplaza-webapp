@@ -88,6 +88,9 @@ export default {
         EventBus.$emit("changeDialog", true);
         return;
       }
+      if(!this.comment){
+        return ;
+      }
       this.overlay = true;
       axios
         .post(`/reply/ad/comment`, {

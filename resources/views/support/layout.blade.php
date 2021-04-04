@@ -9,12 +9,7 @@
         <meta property="og:title" content="buy and sell anything online">
         <meta property="og:url" content="https://www.bikribazzar.com">
         <meta property="og:type" content="website">
-        <meta property="og:image" content="{{asset('image/cover.webp')}}">
-        <meta name="keywords" content="bikribazzar,Bikribazzar,bikri bazzar,house, land, 
-            classified website nepal,
-         bikes, cars, new bike, old bikes">
-         <meta name="description" content="
-         BIKRI BAZZAR is a classified website in Nepal where you can buy and sell locally. Find the latest classified ads for realestate, jobs, cars, bikes, furniture, fashion, mobiles and more for sale in Nepal. Find buyers and sellers that suit your need">
+         @stack('meta')
          <meta name=”robots” content="index, follow">
          <meta name="author" content="Bibek raut">
          <!-- <meta http-equiv="refresh" content="30"> -->

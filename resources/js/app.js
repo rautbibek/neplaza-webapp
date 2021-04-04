@@ -7,6 +7,12 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueMeta from 'vue-meta';
+Vue.use(VueMeta, {
+    // optional pluginOptions
+    refreshOnceOnNavigation: true
+  })
+
 
 //easy toast
 import VueIziToast from 'vue-izitoast';

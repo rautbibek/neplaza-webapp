@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="count > 0">
+  <div class="feature-container" v-if="count > 0">
     
     <div class="container">
       <v-container>
@@ -17,7 +17,6 @@
                       class="white--text align-end"
                       aspect-ratio="1.4"
                       max-height="190px"
-                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.3)"
                       :src="ads.product_cover"
                     >
                     </v-img>
@@ -93,6 +92,10 @@ export default {
 }
 .container {
   padding: 0px;
+}
+
+.feature-container{
+   background:#f0f2f5;
 }
 
 .card-date {

@@ -3,9 +3,11 @@
     <v-main>
       <topbar></topbar>
       <nav-bar ></nav-bar> 
-      <div style="min-height:550px">
+      <div style="min-height:550px" >
         <router-view></router-view>
+        
       </div>
+      <div class="space"></div>
       <login></login>
       <sign-up></sign-up>
       <scroll></scroll>
@@ -42,6 +44,9 @@ export default {
 </script>
 <style scoped>
   .theme--light.v-application{
-    background:#eee;
+    background:#f0f2f5;
   } 
+  .space{
+    height:20px;
+  }
 </style>

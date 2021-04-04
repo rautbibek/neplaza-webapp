@@ -9,7 +9,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    public function setUsernameAttribute($value)
+    {
+       $username = str_slug($value);
 
+       if(User::whereUsername($username)->exists())
+       {
+         $this->attributes['username'] = $username.'-'.uniqid();
+
+       }else{
+         $this->attributes['username'] = $username;
+       }
+       
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +30,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name','phone', 'email', 'password','role_id','username',
     ];
+
+    
 
     protected $guard = ['role_id'];
 

@@ -1,5 +1,6 @@
 <template>
-  <v-footer dark padless>
+<div style="margin-top:50px">
+  <v-footer dark padless dense>
     <v-card
       width="100%"
       flat
@@ -109,13 +110,13 @@
 
             <div class="col-12 col-md">
               <h5 class="text-muted">ABOUT US</h5>
-              <p style="text-align:justify">
-                <strong>BIKRI BAZZAR </strong>  is the best platform to reach the buyers and seller for goods 
-                and services of your need. In our website we provide online marketplace for 
-                products/services, of large number of sellers/vendors, which can be reached by a 
-                wider range of customers/potential buyers. To fulfil your need visit the page and 
+              <p style="text-align:center">
+                <strong>BIKRI BAZZAR </strong>  is the best platform to reach the buyers and seller for goods
+                and services of your need. In our website we provide online marketplace for
+                products/services, of large number of sellers/vendors, which can be reached by a
+                wider range of customers/potential buyers. To fulfil your need visit the page and
                 find what you are looking for. <strong>We aim to serve.</strong>
-                
+
               </p>
             </div>
           </div>
@@ -129,6 +130,7 @@
       </v-card-text>
     </v-card>
   </v-footer>
+  </div>
 </template>
 
 <script>

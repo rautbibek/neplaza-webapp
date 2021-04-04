@@ -5,7 +5,9 @@
     <link rel="icon" href="{{asset('image/favicon.ico')}}" type="image/ico">  
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
+    
+    
+    <title>{{ config('app.name', 'BIKRI BAZZAR') }}</title>
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}" class="rel">
     
