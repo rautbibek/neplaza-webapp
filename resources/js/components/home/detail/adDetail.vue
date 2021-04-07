@@ -37,7 +37,7 @@
                 md="5"
                 sm="12"
                 xs="12"
-                class="image-container"
+               
               >
                 <ad-image :images="ad.product_image"></ad-image>
               </v-col>

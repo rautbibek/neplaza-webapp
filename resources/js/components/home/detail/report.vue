@@ -158,7 +158,7 @@ export default {
   },
   created() {
     EventBus.$on("report", data => {
-      this.dialog = data;
+      this.report()
     });
   },
 };

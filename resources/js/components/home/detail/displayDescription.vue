@@ -179,17 +179,18 @@
     class="card-bg mt-5"
     v-if="ad.all_product_feature.length>0"
   >
-  <v-card-title class="py-0"><p><strong style="color:black">Features</strong></p></v-card-title>
+  <v-card-title class="py-0"><p><strong style="color:black">
+    <span v-if="ad.category.url == 'property'">Aminities</span>
+    <span v-else>Features</span>
+    </strong></p></v-card-title>
     <v-card-text class="product-description ">
       <v-row no-gutters>
-        
         <v-col cols="12" lg="3" md="3" sm="4" xs="6" v-for="feature in ad.all_product_feature" :key="feature.id">
-          
           <div class="d-flex ma-2">
-            <strong>
+            <b>
               <v-icon small left> mdi-check-circle-outline </v-icon>
                {{feature.features.name}}
-            </strong>
+            </b>
             
           </div>
         </v-col>
@@ -229,6 +230,11 @@ export default {
     width: 100%;
     padding-bottom: 10px;
     border-bottom: 1px solid #ababab;
+  }
+  .d-flex b {
+    width: 100%;
+    color: #2f3b59;
+
   }
   .d-flex span {
     padding-top: 10px;

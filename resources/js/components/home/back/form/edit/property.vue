@@ -191,7 +191,7 @@
       <v-divider v-if="scat.features.length>0"></v-divider>
       <div v-if="scat.features.length>0">
         <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
-          {{ "Features" }}
+          {{ "Amenities" }} 
         </v-card-title>
 
           <v-chip-group

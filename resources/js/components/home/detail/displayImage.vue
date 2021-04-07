@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="mb-2">
     <v-card color="#00000000" v-if="total_image > 0">
       <v-col>
         <vue-easy-lightbox
@@ -14,7 +14,7 @@
               :src="images[img_id].full_image"
               :lazy-src="images[img_id].full_image"
               aspect-ratio="1"
-              class="grey lighten-2 border"
+              class="grey lighten-3 border"
               contain
               max-width="100%"
               max-height="390"
@@ -45,14 +45,14 @@
             v-for="(image, index) in images"
             :key="index"
             class="d-flex child-flex px-1"
-            cols="2"
-            md="1"
+            cols="1"
+            md="2"
             sm="1"
             lg="1"
             xs="2"
           >
             <v-card
-              :style="index == img_id ? 'opacity:0.5' : ''"
+              :style="index == img_id ? 'opacity:0.7' : ''"
               class="d-flex"
               @click="selected_image(index)"
             >
@@ -60,8 +60,7 @@
                 :src="image.thumb_image"
                 :lazy-src="image.thumb_image"
                 aspect-ratio="1"
-                class="grey lighten-2"
-              >
+                class="grey lighten-2">
                 <template v-slot:placeholder>
                   <v-row
                     class="fill-height ma-0"
@@ -192,11 +191,12 @@ export default {
   position: absolute;
   top: 55%;
   width: auto;
-  padding: 10px;
-  margin-top: -50px;
-  color: rgb(53, 23, 23);
+  padding: 7px;
+  margin-top: -40px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 13px;
   border-radius: 0 3px 3px 0;
   user-select: none;
   -webkit-user-select: none;
@@ -214,4 +214,5 @@ export default {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
+
 </style>

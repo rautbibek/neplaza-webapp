@@ -100,8 +100,8 @@
             <v-chip v-for="feature in scat.features" :key="feature.id" class="ma-3 pa-2 text-white"
               filter
               label
-
-              color="#19916b"
+              outlined
+              color="indigo darken-3"
 
               :value="feature.id"
             >
