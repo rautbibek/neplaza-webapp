@@ -2,10 +2,11 @@ import { reduce } from "lodash"
 import colors from "vuetify/lib/util/colors"
 export default {
     props: ['scat'],
-    
+
     data() {
         return {
             //loading and display
+            product_features:[],
             loading: false,
             valid: false,
             overlay: false,
@@ -210,6 +211,7 @@ export default {
                 formData.append('filter_2_id', this.filter_2_id);
                 formData.append('filter_3_id', this.filter_3_id);
 
+
                 //common form data
                 formData.append('title', this.title);
                 formData.append('description', this.description);
@@ -222,7 +224,14 @@ export default {
                 this.files.forEach(file => {
                     formData.append('image[]', file, file.name);
                 });
-                axios.post(`/user/add/product`, formData, config)
+                this.product_features.forEach(feature => {
+                    formData.append('features[]', feature);
+                });
+                //formData.append('features[]', this.product_features);
+
+                axios.post(`/user/add/product`, formData, config,{
+                  'features': this.product_features,
+                })
                     .then(response => {
                         this.overlay = false;
                         this.$router.push('/user/myads');
@@ -233,7 +242,7 @@ export default {
 
                     })
                     .catch(error => {
-                        
+
                         if (error.response.status === 422) {
                             this.$toast.error(error.response.data.message, 'error', {
                                 timeout: 3000,
@@ -246,7 +255,7 @@ export default {
                                     position: 'topRight',
                                 });
                             }
-                            
+
                             this.overlay = false;
                         }
 

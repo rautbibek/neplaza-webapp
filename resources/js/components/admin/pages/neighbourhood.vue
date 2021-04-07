@@ -124,16 +124,18 @@
     </v-dialog>
     <!-- table componsent -->
     <v-col cols="4" >
-        <v-select @change="nhood"
+        <v-autocomplete @change="nhood"
         v-model="city_id" 
         :items='desserts'
         :item-text="'name'"
         :item-value="'id'"
         label="District"
         clearable
-        
+        outlined
+        small-chips
+        dense
         >
-        </v-select>
+        </v-autocomplete>
     </v-col>
     <v-simple-table class="p-5">
       <template v-slot:default>

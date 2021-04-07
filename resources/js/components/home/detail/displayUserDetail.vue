@@ -45,6 +45,7 @@
                   <v-list-item @click="soldOut(ad)">Mark as Sold Out</v-list-item>
                 </div>
               </div>
+              <v-list-item @click="report">Report</v-list-item>
               <v-list-item >{{ad.view_count}} Views</v-list-item>
             </v-list>
           </v-menu>
@@ -101,7 +102,7 @@
     </v-card>
         <v-footer padless elevation="10" height="50px" light fixed class="d-flex d-sm-none">
               <v-btn-toggle light style="width:100%;">
-              <v-btn outlined dark style="width:49%;" color="red">
+              <v-btn outlined  style="width:49%;" color="red">
                <report-ad :ads='ad'></report-ad>
               </v-btn>
               
@@ -176,6 +177,9 @@ export default {
         throw e;
       }
     },
+    report(){
+      EventBus.$emit("report", true);
+    }
   }
 };
 </script>

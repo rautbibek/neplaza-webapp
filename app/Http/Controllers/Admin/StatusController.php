@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Status;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,7 @@ class StatusController extends Controller
         $status->title = $request->name;
         $status->scategory_id = $request->scategory_id;
         $status->save();
+        Cache::flush();
         $message = "status succefully Saved";
         return response()->json($message,200);
     }
@@ -89,6 +91,7 @@ class StatusController extends Controller
         $status->title = $request->name;
         $status->scategory_id = $request->scategory_id;
         $status->save();
+        Cache::flush();
         $message = "status succefully Saved";
         return response()->json($message,200);
     }
@@ -103,6 +106,7 @@ class StatusController extends Controller
     {
         $status = Status::findOrFail($id);
         $status->delete();
-        return response()->json('Type deleted succefully !!',200);
+        Cache::flush();
+        return response()->json('Status deleted succefully !!',200);
     }
 }

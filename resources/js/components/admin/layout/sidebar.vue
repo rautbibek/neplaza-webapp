@@ -45,9 +45,32 @@
       <v-btn icon>
         <v-icon>mdi-apps</v-icon>
       </v-btn>
-      <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
+      <v-badge class="mx-3"
+          color="red"
+          :content="notification"
+          :value="notification"
+        >
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon
+          color="white"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          mdi-bell
+        </v-icon>
+      </template>
+      <v-list v-if="notification>0">
+        <v-list-item>
+          <v-list-item-title v-if="r_notif>0">Unread Reported Ads {{r_notif}}</v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title v-if="c_notif>0">Unread Contact Message {{c_notif}}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      </v-menu>
+       </v-badge>
       <v-btn icon @click="logout">
         <v-icon>logout</v-icon>
       </v-btn>
@@ -58,6 +81,9 @@
 export default {
   
      data: () => ({
+      r_notif :0,
+      c_notif:0,
+      show: false,
       
       drawer: false,
       items: [
@@ -71,6 +97,7 @@ export default {
         { icon: 'assignment', text: 'Status',url:'/admin/status' },
         { icon: 'mdi-account-circle', text: 'Users',url:'/admin/user' },
         { icon: 'shop', text: 'Product',url:'/admin/product' },
+        { icon: 'brush', text: 'Features',url:'/admin/feature' },
         { icon: 'report', text: 'Report',url:'/admin/report' },
         { icon: 'assignment_ind', text: 'Contact',url:'/admin/contact' },
       ],
@@ -83,6 +110,30 @@ export default {
                window.location.href = '/admin/login';
           });
       },
+      reportNotification(){
+        axios.get(`/admin/report/notification`).then(response=>{
+          this.r_notif = response.data;
+        }).catch();
+      },
+      contactNotification(){
+        axios.get(`/admin/contact/notification`).then(response=>{
+          this.c_notif = response.data;
+        }).catch();
+      }
     },
+    computed:{
+      notification(){
+        let n = this.r_notif + this.c_notif
+        if(n>0){
+          return n;
+        }else{
+          return null;
+        }
+      }
+    },
+    created(){
+      this.reportNotification();
+      this.contactNotification();
+    }
 }
 </script>

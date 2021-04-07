@@ -34,4 +34,9 @@ class ReportController extends Controller
 
     }
 
+    public function reportNotification(){
+        $report = Report::where('seen',false)->count();
+        return response()->json($report,200);
+    }
+
 }

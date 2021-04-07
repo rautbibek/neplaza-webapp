@@ -52,25 +52,16 @@
               v-for="(ads, index) in my_ads"
               :key="index"
             >
-              <v-lazy
-                v-model="isActive"
-                :options="{
-                  threshold: 0.5,
-                }"
-                min-height="200"
-                transition="fade-transition"
-              >
                 <v-card tile class="ma-2 product-card">
                   <!-- image part -->
                   <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                     <cover :ads="ads"></cover>
-
                     <!-- title and subtitle part -->
                     <card-title :ads="ads"></card-title>
                   </router-link>
                   <card-menu :ads="ads"></card-menu>
                 </v-card>
-              </v-lazy>
+              
             </v-flex>
             <div class="ma-5 mx-auto" v-if="nextUrl">
               <v-btn

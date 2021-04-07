@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\User;
@@ -14,6 +15,11 @@ class DashboardController extends Controller
     public function index(){ 
         $count = User::where('created_at','>=',Carbon::today()->subDays(7))->count();
         return view('admin.dashboard',compact('count'));
+    }
+
+    public function cache_clear(){ 
+        Cache::flush();
+        return response()->json('cache cleared succefully',200);
     }
     public function dayuser($day){
         $count = User::where('created_at','>=',Carbon::today()->subDays($day))->count();

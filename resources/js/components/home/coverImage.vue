@@ -1,14 +1,12 @@
 <template>
   <div>
     <v-responsive>
-      <v-img
-        style="position: relative"
-        class="white--text align-end"
-        
+      <v-img 
+        class="white--text align-end image"
         aspect-ratio="1.4"
         max-height="190px"
         :src="ads.product_cover"
-        :lazy-src="ads.product_cover"
+        lazy-src="/image/fabicon.ico"
       >
         <template v-slot:placeholder>
           <v-row class="fill-height ma-0" align="center" justify="center">
@@ -47,3 +45,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.image{
+  position: relative; 
+  background: rgb(190, 194, 191);
+}
+</style>

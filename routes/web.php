@@ -65,6 +65,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/category', 'CategoryController')->except('show','edit');
     Route::resource('/subcategory', 'SubcategoryController')->except('show','edit');
+    Route::resource('/feature', 'FeatureController')->except('edit');
     Route::resource('/city', 'CityController')->except('show','edit');
     Route::resource('/neighbourhood', 'NeighbourhoodController')->except('create','edit','show');
     Route::resource('/brand', 'BrandController')->except('create','edit');
@@ -73,12 +74,16 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::resource('/user', 'UserController')->except('edit');
     Route::resource('/product', 'ProductController')->except('edit');
     Route::get('/report', 'ReportController@index')->name('report');
+    Route::get('/report/notification', 'ReportController@reportNotification');
+    Route::get('/contact/notification', 'ContactController@ContactNotification');
     Route::delete('/report/delete/{id}', 'ReportController@delete')->name('report.delete');
     Route::get('/report/record', 'ReportController@reportApi')->name('report.api');
     Route::get('/dayuser/{day}', 'DashboardController@dayuser')->name('day.user');
     Route::get('productday/{day}', 'DashboardController@dayproduct')->name('day.product');
     //total user // seller // urgen ad // count
     Route::get('graph', 'DashboardController@userGraph')->name('user.graph');
+    
+    Route::post('/cache/clear', 'DashboardController@cache_clear');
     Route::get('count/all', 'DashboardController@countAll')->name('count.all');
     //contact us
     Route::get('/contact', 'ContactController@index')->name('admin.contact');

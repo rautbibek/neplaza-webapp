@@ -100,6 +100,7 @@ class ProductController extends Controller
                     'product_property',
                     'scategory',
                     'user',
+                    'all_product_feature.features',
                     'favorite_to_users'=>function($query){
                         $query->select('user_id')->where('user_id',Auth::id());
                     }])->get();

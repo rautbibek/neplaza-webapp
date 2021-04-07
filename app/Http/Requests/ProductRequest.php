@@ -75,13 +75,13 @@ class ProductRequest extends FormRequest
             $rule['filter_id'] = 'required';
         }
 
-        $rule['title'] = 'required| max:100 | min:10';
-        $rule['description'] = 'required | max:4000 | min:20';
+        $rule['title'] = 'required| max:180';
+        $rule['description'] = 'required | max:4000';
         $rule['price'] = 'required | numeric';
         $rule['nhood_id'] = 'required';
         $rule['city_id'] = 'required';
         $rule['address'] = 'required | max:100';
-        $rule['image.*'] = 'mimes:jpeg,png,jpg,gif,svg|max:20648';
+        $rule['image.*'] = 'mimes:jpeg,png,jpg,gif,svg,webp|max:20648';
 
         return $rule;
     }

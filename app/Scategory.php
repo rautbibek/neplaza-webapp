@@ -6,13 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scategory extends Model
 {
-    
+
     public function category(){
       return $this->belongsTo('App\Category');
     }
 
     public function brand(){
       return $this->hasMany('App\Brand')->orderBy('id','asc')->orderBy('name','asc');
+    }
+
+    public function features(){
+      return $this->hasMany('App\Feature')->orderBy('name','desc');
     }
 
     public function product(){

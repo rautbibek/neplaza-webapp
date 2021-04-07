@@ -31,16 +31,18 @@ class Product extends Model
       'property_3',
       'property_4',
       'join'
-      
+
     ];
 
     protected $hidden =[];
-    
+
     protected $appends=['created_date','product_price','product_max_price','is_favorite','product_cover'];
 
     public function product_image(){
       return $this->hasMany('App\Product_image')->select('id','image','product_id');
     }
+
+
 
     public function image(){
       return $this->hasOne('App\Product_image')->select('id','image','product_id');
@@ -56,6 +58,19 @@ class Product extends Model
 
     public function favorite_to_users(){
       return $this->belongsToMany('App\User','product_user')->withTimestamps();
+    }
+
+    public function f_all(){
+      return $this->belongsToMany('App\Feature','product_features')->withTimestamps();
+    }
+
+    public function product_features(){
+      return $this->belongsToMany('App\Feature','product_features')->withTimestamps();
+    }
+
+
+    public function all_product_feature(){
+      return $this->hasMany('App\Product_feature');
     }
 
     public function getIsFavoriteAttribute(){
@@ -149,7 +164,7 @@ class Product extends Model
 
 
     public function getProductCoverAttribute(){
-      
+
       if($this->image != null){
         return asset('storage/thumb/'.$this->image->image);
       }else{

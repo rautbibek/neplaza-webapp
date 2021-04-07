@@ -29,8 +29,9 @@ class HomeController extends Controller
     }
 
     public function subcategory($slug){
-        $subcategory = cache()->remember($slug,60*60*24,function() use ($slug){ 
-            return Scategory::where('slug',$slug)->with('category','brand','type','status','filter','filter_1','filter_2','filter_3')->firstOrFail();
+        $subcategory = cache()->remember($slug,60*60*24,function() use ($slug){
+            return Scategory::where('slug',$slug)
+            ->with(['category','brand','type','status','filter','filter_1','filter_2','filter_3','features'])->firstOrFail();
         });
        return response()->json($subcategory,200);
     }

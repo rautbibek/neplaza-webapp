@@ -1,14 +1,14 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="inspire" >
     <admin-sidebar></admin-sidebar>
-      <v-container>
+      <v-container class="my-5" style="min-height:600px;">
         <div class="mt-5"></div>
         <!-- first row -->
 
 
         <v-row>
-          <v-col class="sizing" cols="12" sm="12" md="4" lg="4">
-            <v-alert
+          <v-col class="sizing" cols="12" sm="12" md="4" lg="4" >
+            <v-alert 
               color="#2A3B4D"
               dark
               icon="mdi-account-circle"
@@ -179,6 +179,7 @@
             </v-alert>
             </v-col>
         </v-row>
+        <v-col class="text-center"> <v-btn color="error" @click="cache_clear">Cache Clear</v-btn></v-col>
       </v-container>
     <dialog-component></dialog-component>
   </v-app>
@@ -241,6 +242,16 @@ export default {
             this.report = response.data;
            })
            .catch();
+    },
+    cache_clear(){
+      this.overlay = true;
+      axios.post(`/admin/cache/clear`).then(response=>{
+        this.$toast.success(response.data, 'success', {
+              timeout: 3000,
+              position: 'topRight',
+        });
+        this.overlay = false;
+      }).catch()
     }
 
   },

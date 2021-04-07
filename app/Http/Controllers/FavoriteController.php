@@ -17,7 +17,6 @@ class FavoriteController extends Controller
     if($isfavorite == 0){
       $user->favourit_products()->attach($id);
     }else{
-
       $user->favourit_products()->detach($id);
     }
   }

@@ -108,9 +108,9 @@
         </v-col>
       </v-row>
       <v-col cols="12" class="p-0">
-      
+
       </v-col>
-      
+
     </div>
 
     <v-col cols="12" class="p-0 pr-3">
@@ -126,7 +126,29 @@
           clearable
         ></v-select>
       </v-col>
-        <v-divider></v-divider>
+      <v-divider v-if="scat.features.length>0"></v-divider>
+      <div v-if="scat.features.length>0">
+        <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
+          {{ "Features" }}
+        </v-card-title>
+
+          <v-chip-group
+            v-model="product_features"
+            column
+            multiple
+          >
+              <v-chip v-for="feature in scat.features" :key="feature.id" class="ma-3 pa-2"
+                filter
+                label
+                color="indigo darken-3"
+                outlined
+                :value="feature.id"
+              >
+                {{feature.name}}
+              </v-chip>
+          </v-chip-group>
+        </div>
+    <v-divider></v-divider>
     <div>
       <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
         {{ "Title & Description" }}
@@ -304,7 +326,7 @@
                 <v-card>
                   <img :src="image" style="object-fit: cover;" :alt="`Image Uplaoder ${index}`" />
                   <v-overlay v-if="index==0"
-            
+
                   absolute
                   color="#036358"
                 >
@@ -313,7 +335,7 @@
                 </v-card>
                 <a href="javascript:void(0)" @click="removeimage(index)" style="color: red"
                   >Remove</a>
-                 
+
 
                 <div class="details">
                   <span class="name" v-text="files[index].name"></span>
@@ -321,7 +343,7 @@
                     class="size"
                     v-text="getFileSize(files[index].size)"
                   ></span>
-                  
+
                 </div>
               </div>
             </div>

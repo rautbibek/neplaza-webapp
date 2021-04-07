@@ -40,7 +40,7 @@ class ImageController extends Controller
         $this->validate($request,[
         'product_id'    => 'required',
         'image'     => 'required',
-        'image.*'   =>'image|mimes:jpeg,png,jpg,gif,svg|max:20648',
+        'image.*'   =>'image|mimes:jpeg,png,jpg,gif,svg,webp|max:20648',
       ]);
         if($request->hasFile('image')){
             return $this->imageResizer->resizeImage($request->image,$request->product_id);

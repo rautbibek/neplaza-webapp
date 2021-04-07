@@ -149,16 +149,19 @@
     </v-dialog>
     <!-- table componsent -->
     <v-col cols="6" >
-        <v-select @change="getBrand"
+        <v-autocomplete @change="getBrand"
+        dense
+        outlined
+        small-chips
         v-model="scat_id" 
         :items='desserts'
         :item-text="'name'"
         :item-value="'id'"
-        label="District"
+        label="Subcategory"
         clearable
         
         >
-        </v-select>
+        </v-autocomplete>
     </v-col>
     <v-simple-table class="p-5">
       <template v-slot:default>

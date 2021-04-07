@@ -1,9 +1,10 @@
 export default {
-    
+
     props: ['scat'],
     data() {
         return {
             //loading and display
+            product_features:[],
             product: [],
             loading: false,
             valid: true,
@@ -129,6 +130,8 @@ export default {
                         'nhood_id': this.nhood,
                         'address': this.street,
                         'delivery': this.delivery,
+                        'features': this.product_features,
+
                     })
                     .then(response => {
                         this.overlay = false;
@@ -153,7 +156,7 @@ export default {
                                     position: 'topRight',
                                 });
                             }
-                            
+
                             this.overlay = false;
                         }
                         if(error.response.status === 403){
@@ -161,7 +164,7 @@ export default {
                               timeout: 3000,
                               position: 'topRight',
                           });
-                          
+
                           this.overlay = false;
                           this.$router.push({ name: 'myads' });
                         }
@@ -180,5 +183,6 @@ export default {
     created() {
         this.getCity();
     },
-    
+
+
 }

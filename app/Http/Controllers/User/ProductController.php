@@ -6,6 +6,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Events\ProductDeletedEvent;
 use App\product;
+use App\Feature;
 use Illuminate\Support\Facades\Cache;
 use App\Notifications\SlackNotifiaction;
 use App\Product_property;
@@ -48,8 +49,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        
         $product= $request->user()->product()->create($request->except('image'));
+
         if($product){
           $p_prop = new Product_property();
           $p_prop->product_id = $product->id;
@@ -81,12 +82,16 @@ class ProductController extends Controller
           if($product->filter_3_id){
             $p_prop->filter_3_name = $product->filter_3->name;
           }
-          
+
           $p_prop->user_name = Auth::user()->name;
           $p_prop->save();
           if($request->hasFile('image')){
               $this->imageResizer->resizeImage($request->image,$product->id);
           }
+
+
+            $product->product_features()->sync($request->features);
+
         }
         Auth::user()->notify(new SlackNotifiaction(Auth::user()->name.' :Added new product with title '.$request->title));
         $message="Ad posted succefully !!"  ;
@@ -116,7 +121,7 @@ class ProductController extends Controller
     public function edit($id)
     {
 
-        $product = Product::with('category','scategory')->findOrFail($id);
+        $product = Product::with('category','scategory','all_product_feature')->findOrFail($id);
         return response()->json($product,200);
     }
 
@@ -205,6 +210,7 @@ class ProductController extends Controller
         $product->price       = $request->price;
         //return $request->all();
         $product->update();
+        $product->product_features()->sync($request->features);
         $p_prop = Product_property::where('product_id',$product->id)->firstOrFail();
         $p_prop->city_name = $product->city->name;
         $p_prop->nhood_name = $product->nhood->name;
@@ -233,6 +239,7 @@ class ProductController extends Controller
         }
 
         $p_prop->update();
+        $product->product_features()->sync($request->features);
         $message = "ad detail updated succefully !!";
         return response()->json($message,200);
     }
@@ -298,7 +305,7 @@ class ProductController extends Controller
         foreach ($products->product_image as $product) {
             $product->delete();
         }
-        
+
         $products->delete();
         return response()->json('ad deleted succefully ',200);
     }

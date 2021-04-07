@@ -75,6 +75,29 @@
           clearable
         ></v-select>
       </v-col>
+      <v-divider v-if="scat.features.length>0"></v-divider>
+      <div v-if="scat.features.length>0">
+        <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
+          {{ "Features" }}
+        </v-card-title>
+
+          <v-chip-group
+            v-model="product_features"
+            column
+            multiple
+          >
+            <v-chip v-for="feature in scat.features" :key="feature.id" class="ma-3 pa-2"
+              filter
+              label
+              color="indigo darken-3"
+              outlined
+              :value="feature.id"
+            >
+              {{feature.name}}
+            </v-chip>
+
+          </v-chip-group>
+        </div>
       <v-divider></v-divider>
       <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
         {{ "Title & Description" }}
@@ -238,6 +261,9 @@ export default {
           this.filter_2_id = this.product.filter_2_id;
           this.status = this.product.status_id;
           this.delivery = this.product.delivery;
+          this.product.all_product_feature.forEach(feature=> {
+              this.product_features.push(feature.feature_id);
+          })
           this.getNhood();
         });
     },

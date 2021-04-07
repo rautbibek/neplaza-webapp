@@ -118,6 +118,7 @@ Vue.component('admin-report', require('./components/admin/pages/adReport.vue').d
 Vue.component('admin-ad-detail', require('./components/admin/detail/productDetail.vue').default);
 Vue.component('admin-user-detail', require('./components/admin/detail/userDetail.vue').default);
 Vue.component('admin-contact', require('./components/admin/pages/contact.vue').default);
+Vue.component('admin-feature', require('./components/admin/pages/feature.vue').default);
 
 //chat app
 Vue.component('chat-app', require('./components/chat/chatApp.vue').default);

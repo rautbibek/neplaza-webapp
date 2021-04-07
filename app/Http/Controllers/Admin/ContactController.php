@@ -33,4 +33,9 @@ class ContactController extends Controller
         return response()->json('Contact information marked as read');
     }
 
+    public function contactNotification(){
+        $contact = Contact::where('status',false)->count();
+        return response()->json($contact,200);
+    }
+
 }
