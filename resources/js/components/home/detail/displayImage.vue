@@ -10,7 +10,7 @@
         <v-row align="center" no-gutters justify="center" class="pa-1">
           <v-col elevation="10">
             <v-img
-              
+
               @click="() => showImg(img_id)"
               :src="images[img_id].full_image"
               :lazy-src="images[img_id].full_image"
@@ -112,7 +112,6 @@
 </template>
 <script>
 // use the component
-
 import Lightbox from "vue-easy-lightbox";
 export default {
   components: {
