@@ -113,9 +113,7 @@ export default {
           this.category = response.data[0].category;
           this.scategory = response.data[0].scategory;
           this.productId = response.data[0].productid;
-
           //meta
-          
           if(this.detail[0].product_image.length>0){
             this.image = this.detail[0].product_image[0].full_image;
           }else{
@@ -132,31 +130,16 @@ export default {
   created() {
     this.getAd();
   },
-    metaInfo(){
-        return{
-            title:'BIKRI BAZZAR',
-            meta:[
-              { charset: 'utf-8' },
-                {
-                    name:"title",
-                    content: this.title,
-                },
-                {
-                  name:'description',
-                  content:this.description
-                },
-                {
-                  name:'og:title',
-                  content:this.title,
-                },
-                {
-                  name:'og:description',
-                  content:this.description,
-                },
-                {
-                  name:'og:image',
-                  content:this.image,
-                },
+    metaInfo() {
+        return { 
+          title: this.title,
+            meta: [
+                {name: 'description', content:  this.description},
+                {property: 'og:title', content: this.title},
+                {property: 'og:site_name', content: 'Bikribazzar'},
+                {property: 'og:type', content: 'website'},   
+                {name: 'og:image', content: this.image} , 
+                {name: 'robots', content: 'index,follow'} 
             ]
         }
     },

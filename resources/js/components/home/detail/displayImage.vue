@@ -10,6 +10,7 @@
         <v-row align="center" no-gutters justify="center" class="pa-1">
           <v-col elevation="10">
             <v-img
+              
               @click="() => showImg(img_id)"
               :src="images[img_id].full_image"
               :lazy-src="images[img_id].full_image"
@@ -38,48 +39,49 @@
             <a class="prev" @click="prevSlides" v-if="first_slide">&#10094;</a>
           </v-col>
         </v-row>
-        
-          <div style=" overflow-x:auto">
-            <v-row no-gutters >
-            <v-col 
-            v-for="(image, index) in images"
-            :key="index"
-            class="d-flex child-flex px-1"
-            cols="1"
-            md="2"
-            sm="1"
-            lg="1"
-            xs="2"
-          >
-            <v-card
-              :style="index == img_id ? 'opacity:0.7' : ''"
-              class="d-flex"
-              @click="selected_image(index)"
+
+        <div style="overflow-x: auto">
+          <v-row no-gutters>
+            <v-col
+              v-for="(image, index) in images"
+              :key="index"
+              class="d-flex child-flex px-1"
+              cols="1"
+              md="2"
+              sm="1"
+              lg="1"
+              xs="2"
             >
-              <v-img
-                :src="image.thumb_image"
-                :lazy-src="image.thumb_image"
-                aspect-ratio="1"
-                class="grey lighten-2">
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img>
-            </v-card>
-          </v-col>
+              <v-card
+                :style="index == img_id ? 'opacity:0.7' : ''"
+                class="d-flex"
+                @click="selected_image(index)"
+              >
+                <v-img
+                  :src="image.thumb_image"
+                  :lazy-src="image.thumb_image"
+                  aspect-ratio="1"
+                  class="grey lighten-2"
+                >
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
+              </v-card>
+            </v-col>
           </v-row>
-          </div>
-        
+        </div>
       </v-col>
+      
     </v-card>
     <v-card tile v-else>
       <v-col>
@@ -110,11 +112,12 @@
 </template>
 <script>
 // use the component
-import Vue from "vue";
-import Lightbox from "vue-easy-lightbox";
 
-Vue.use(Lightbox);
+import Lightbox from "vue-easy-lightbox";
 export default {
+  components: {
+      'vue-easy-lightbox':Lightbox,
+    },
   props: ["images"],
   data() {
     return {
@@ -122,6 +125,11 @@ export default {
       imgs: [],
       index: 0, // default
       img_id: 0,
+      width: '100%',
+      height: 330,
+      items: [
+        
+      ],
     };
   },
   methods: {
@@ -154,11 +162,13 @@ export default {
     },
   },
   mounted() {
+    
     var i;
     for (i = 0; i < this.images.length; i++) {
       this.imgs.push(this.images[i].full_image);
     }
   },
+  
 };
 </script>
 <style scoped>
@@ -214,5 +224,4 @@ export default {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
-
 </style>

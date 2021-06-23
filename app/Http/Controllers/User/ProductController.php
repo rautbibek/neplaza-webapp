@@ -88,10 +88,7 @@ class ProductController extends Controller
           if($request->hasFile('image')){
               $this->imageResizer->resizeImage($request->image,$product->id);
           }
-
-
             $product->product_features()->sync($request->features);
-
         }
         Auth::user()->notify(new SlackNotifiaction(Auth::user()->name.' :Added new product with title '.$request->title));
         $message="Ad posted succefully !!"  ;

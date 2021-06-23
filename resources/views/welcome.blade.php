@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta property="og:title" content="buy and sell anything online">
+        <!-- <meta property="og:title" content="buy and sell anything online">
         <meta property="og:url" content="https://www.bikribazzar.com">
         <meta property="og:type" content="website">
         <meta property="og:image" content="{{asset('image/cover.webp')}}">
@@ -16,7 +16,7 @@
          <meta name="description" content="
          BIKRI BAZZAR is a classified website in Nepal where you can buy and sell locally. Find the latest classified ads for realestate, jobs, cars, bikes, furniture, fashion, mobiles and more for sale in Nepal. Find buyers and sellers that suit your need">
          <meta name=”robots” content="index, follow">
-         <meta name="author" content="Bibek raut">
+         <meta name="author" content="Bibek raut"> -->
          <!-- <meta http-equiv="refresh" content="30"> -->
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
          <script  src="{{mix('js/app.js')}}" defer></script>

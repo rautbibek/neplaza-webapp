@@ -142,26 +142,17 @@ export default {
         //alert(this.$route.params.slug)
         this.fetch(`/front/category/product/${this.$route.params.slug}`);
     },
-    metaInfo(){
-        return{
-            title:`BIKRI BAZZAR - ${this.category.name}`,
-            meta:[
-                { charset: 'utf-8' },
-                {
-                    name:"title",
-                    content: this.category.name,
-                    
-                },
-                {
-                    name:"og:title",
-                    content:this.category.name,
-                }
-
-            ]
-        }
-    },
-
-
+    metaInfo() {
+    return {
+      meta: [
+        { name: "title", content: this.category.name },
+        { property: "og:title", content: this.category.name },
+        { property: "og:site_name", content: "Bikribazzar" },
+        { property: "og:type", content: "website" },
+        { name: "robots", content: "index,follow" },
+      ],
+    };
+  },
     watch:{
       $route(to,from){
         return this.fetch(`/front/category/product/${this.$route.params.slug}`);

@@ -23,11 +23,10 @@
           <v-text-field
             v-model="name"
             placeholder="Enter your name"
-            counter="20"
+            counter="40"
             :rules="[
               required('name'),
-              minLength('name', 5),
-              maxLength('name', 20),
+              maxLength('name', 40),
             ]"
             outlined
             clearable

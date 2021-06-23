@@ -14,6 +14,7 @@ Vue.use(VueMeta, {
   })
 
 
+
 //easy toast
 import VueIziToast from 'vue-izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
