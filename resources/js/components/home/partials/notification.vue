@@ -86,7 +86,7 @@
   </div>
 </template>
 <script>
-let message_notification = new Audio(window.URL+'/audio/message.mp3');
+let message_notification = new Audio(process.env.MIX_APP_URL+'/audio/message.mp3');
 export default {
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
         .then((response) => {
           this.getNotification();
           //this.raadNotification();
-          
+
         })
         .catch();
     },
@@ -131,6 +131,7 @@ export default {
   },
   created() {
     this.getNotification();
+    
   },
 };
 </script>

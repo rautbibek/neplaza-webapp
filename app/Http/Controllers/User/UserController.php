@@ -24,11 +24,11 @@ class UserController extends Controller
     }
 
     public function contact_status(Request $request){
-        
+
         $contact = User::where('id',Auth::id())->firstOrFail();
         $contact->hide_contact = $request->status;
         $contact->update();
-        
+
         $message="status changed succefully";
         return response()->json($message,200);
     }
@@ -99,7 +99,8 @@ class UserController extends Controller
         'text'=>'Your mobile verification code for '.config('app.name').' is '.$otp,
       );
 
-      $url = "https://aakashsms.com/admin/public/sms/v1/send" ;
+
+      $url = config('app.sms_api_url') ;
       $ch = curl_init();
 
       curl_setopt_array($ch, array(
@@ -229,7 +230,7 @@ class UserController extends Controller
         ]);
         $user = User::where('id',Auth::id())->firstOrFail();
 
-        
+
         $activation_code = rand(10000,99999);
         Session::put('ACTIVE_CODE',$activation_code);
         Session::put('email',$request->email);

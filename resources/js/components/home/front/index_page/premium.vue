@@ -1,17 +1,17 @@
 <template>
   <div class="feature-container" v-if="count > 0">
-    
+
     <div class="container">
       <v-container>
         <p class="featured-title text-center">Featured Products</p>
         <div class="px-2">
-            
-            <carousel :autoplay="true" :autoplaySpeed="1000" :lazyLoad="true" :autoplayHoverPause="true" :nav="false" :responsive="{0:{items:2,nav:false},600:{items:2,nav:true},770:{items:3,nav:true},970:{items:4,nav:true}}">
-               
+
+            <carousel :autoplay="true" :lazyLoad="true" :autoplayHoverPause="true" :nav="false" :responsive="{0:{items:2,nav:false},600:{items:2,nav:true},770:{items:3,nav:true},970:{items:4,nav:true}}">
+
               <div v-for="(ads,index) in featured" :key="index" style="margin:5px; padding:0xp">
-               
+
                 <v-card class="card product-card" >
-                
+
                   <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`">
                     <v-img
                       class="white--text align-end"
@@ -42,10 +42,10 @@
                 </v-col>
             </div>
             </carousel>
-            
+
           </div>
       </v-container>
-      
+
     </div>
   </div>
 </template>
@@ -142,4 +142,3 @@ section >div {
 }
 
 </style>
-

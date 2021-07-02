@@ -56,11 +56,11 @@
       </div>
     </v-container>
 
-    
+
   </v-card>
-    
-    
-  
+
+
+
     <!-- <v-container class="container">
       <div class="row">
         <div class="top-container">
@@ -115,10 +115,11 @@ export default {
   components: { search },
   data() {
     return {
-      
+
       group: null,
     };
   },
+
   methods: {
     drawer(){
       EventBus.$emit("navigationDrawer", true);

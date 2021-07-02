@@ -16,6 +16,7 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     'sms_api' => env('SMS_GATEWAY_KEY', '111111111'),
+    'sms_api_url' => env('SMS_GATEWAY_URL', 'https://www.bikribazzar.com/'),
 
     /*
     |--------------------------------------------------------------------------

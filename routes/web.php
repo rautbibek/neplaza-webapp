@@ -40,7 +40,7 @@ Route::post('/post/ad/report','ReportController@report');
 
 Route::domain('{subdomain}.'.config('app.url'))->group(function () {
     Route::get('/', 'WelcomeController@sub')->name('sub');
-    
+
 });
 
 
@@ -50,7 +50,7 @@ Route::domain('{subdomain}.'.config('app.url'))->group(function () {
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@adminLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    
+
 });
 Route::post('admin/logout', 'Admin\UserController@logout')->name('admin.logout');
 Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'namespace'=>'Admin'],function(){
@@ -82,7 +82,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','middleware'=>['auth:admin'], 'na
     Route::get('productday/{day}', 'DashboardController@dayproduct')->name('day.product');
     //total user // seller // urgen ad // count
     Route::get('graph', 'DashboardController@userGraph')->name('user.graph');
-    
+
     Route::post('/cache/clear', 'DashboardController@cache_clear');
     Route::get('count/all', 'DashboardController@countAll')->name('count.all');
     //contact us

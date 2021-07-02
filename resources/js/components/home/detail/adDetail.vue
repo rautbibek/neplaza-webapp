@@ -37,7 +37,7 @@
                 md="5"
                 sm="12"
                 xs="12"
-               
+
               >
                 <ad-image :images="ad.product_image"></ad-image>
               </v-col>
@@ -64,9 +64,9 @@
               </v-col>
             </v-row>
           </v-container>
-            
+
         </div>
-        
+
       </div>
     </div>
   </v-card>
@@ -83,7 +83,7 @@ export default {
     'ad-user':adUser,
     'ad-description': adDescription,
     'ad-comment': adComment,
-    
+
   },
 
   data() {
@@ -131,15 +131,14 @@ export default {
     this.getAd();
   },
     metaInfo() {
-        return { 
-          title: this.title,
+        return {
             meta: [
                 {name: 'description', content:  this.description},
                 {property: 'og:title', content: this.title},
                 {property: 'og:site_name', content: 'Bikribazzar'},
-                {property: 'og:type', content: 'website'},   
-                {name: 'og:image', content: this.image} , 
-                {name: 'robots', content: 'index,follow'} 
+                {property: 'og:type', content: 'website'},
+                {name: 'og:image', content: this.image} ,
+                {name: 'robots', content: 'index,follow'}
             ]
         }
     },
