@@ -109,18 +109,9 @@ export default {
         .then((response) => {
           this.detail = response.data;
           this.count = this.detail.length;
-          this.$metaInfo.description = this.detail[0].description;
           this.category = response.data[0].category;
           this.scategory = response.data[0].scategory;
           this.productId = response.data[0].productid;
-          //meta
-          if(this.detail[0].product_image.length>0){
-            this.image = this.detail[0].product_image[0].full_image;
-          }else{
-            this.image = '/image/no-image.webp';
-          }
-          this.title = this.detail[0].title;
-          this.description = this.detail[0].description;
           this.overlay = false;
         }).catch((error) => {
             window.location.href = '/pageNotFound';
@@ -130,18 +121,7 @@ export default {
   created() {
     this.getAd();
   },
-    metaInfo() {
-        return {
-            meta: [
-                {name: 'description', content:  this.description},
-                {property: 'og:title', content: this.title},
-                {property: 'og:site_name', content: 'Bikribazzar'},
-                {property: 'og:type', content: 'website'},
-                {name: 'og:image', content: this.image} ,
-                {name: 'robots', content: 'index,follow'}
-            ]
-        }
-    },
+   
   watch: {
     $route(to, from) {
       return this.getAd();

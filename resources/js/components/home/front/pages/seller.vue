@@ -120,7 +120,7 @@ export default {
          all_ads:[],
          loading:false,
          count:1,
-        nextUrl : null,
+         nextUrl : null,
      }
  },
  methods:{
@@ -156,23 +156,6 @@ export default {
       this.seller();
       this.fetch(`/seller/${this.$route.params.id}/ad`);
   },
-  metaInfo(){
-        return{
-            title:`BIKRI BAZZAR - ${this.scategory_name}`,
-            meta:[
-              { charset: 'utf-8' },
-                {
-                    name:"title",
-                    content: this.seller_detail.name,
-
-                },
-                {
-                  name:"og:title",
-                    content:this.seller_detail.name,
-                }
-
-            ]
-        }
-    },
+  
 }
 </script>

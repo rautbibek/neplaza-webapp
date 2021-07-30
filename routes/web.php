@@ -105,6 +105,7 @@ Route::get('/front/featured/product', 'ProductController@premium');
 Route::get('/all/featured/product', 'ProductController@featured');
 Route::get('/front/urgent/product', 'ProductController@urgent');
 Route::get('/product/detail/{id}/{slug}', 'ProductController@productDetail');
+Route::get('/ad/detail/{id}/{slug}', 'ProductController@productDetailView');
 
 
 //login controller

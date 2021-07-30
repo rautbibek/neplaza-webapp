@@ -113,4 +113,10 @@ class ProductController extends Controller
             }
         return response()->json($product,200);
     }
+
+    public function productDetailView($id,$slug){
+        $product = Product:: where('id',$id)->where('slug',$slug)->with('product_image')->first();
+        return view('productDetail',compact('product'));
+        
+    }
 }
