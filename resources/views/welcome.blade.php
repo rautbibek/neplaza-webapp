@@ -17,7 +17,7 @@
          BIKRI BAZZAR is a classified website in Nepal where you can buy and sell locally. Find the latest classified ads for realestate, jobs, cars, bikes, furniture, fashion, mobiles and more for sale in Nepal. Find buyers and sellers that suit your need">
          <meta name=”robots” content="index, follow">
          <meta name="author" content="Bibek raut">
-        
+
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
          <script  src="{{mix('js/app.js')}}" defer></script>
          <link rel="stylesheet" href="{{mix('css/app.css')}}">
