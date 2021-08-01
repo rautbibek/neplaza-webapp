@@ -61,6 +61,20 @@
             clearable
           ></v-select>
         </v-col>
+        <v-col cols="12" v-if="scat.type.length>0" class="p-0">
+      <v-select
+          v-model="type"
+          :items="scat.type"
+          :item-text="'name'"
+          :item-value="'id'"
+          tabindex="4"
+          label="Storage Type *"
+          color="#19916B"
+          :rules="[select('Storage type')]"
+          outlined
+          clearable
+        ></v-select>
+    </v-col>
       </v-row>
       <v-col cols="12" class="p-0">
       <v-select
@@ -260,6 +274,7 @@ export default {
           this.filter_1_id = this.product.filter_1_id;
           this.filter_2_id = this.product.filter_2_id;
           this.status = this.product.status_id;
+          this.type = this.product.type_id;
           this.delivery = this.product.delivery;
           this.product.all_product_feature.forEach(feature=> {
               this.product_features.push(feature.feature_id);

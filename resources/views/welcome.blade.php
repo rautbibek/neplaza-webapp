@@ -27,11 +27,16 @@
 
     </head>
     <body onload="myFunction()" style="margin:0;">
-
+    <noscript>
+        
+            <p>Please enable javascript</p>
+       
+    </noscript>
 
         <div id="loader">
         </div>
         <div id="myDiv" style="min-height: 300px">
+            
             <div id="app">
                 <main-component></main-component>
             </div>

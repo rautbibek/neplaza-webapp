@@ -142,6 +142,17 @@
           >
           </v-autocomplete>
         </v-col>
+        <v-col cols="12">
+            <v-card-subtitle class="font-weight-bold pa-0 pt-5 pb-2 alignCenter">
+        About (Optional)
+            </v-card-subtitle>
+          <v-textarea
+            v-model="about"
+            placeholder="About...."
+            outlined
+          >
+          </v-textarea>
+        </v-col>
         <v-col class="text-center">
           <v-btn
             class="ml-auto mr-auto mt-8 update"
@@ -187,7 +198,7 @@
         </v-form>
         <v-spacer></v-spacer>
         <v-col cols="12" class="text-center">
-          <v-btn color="#19916B" class="upload" dark tile @click="save">
+          <v-btn color="#19916B" :loading="loading_upload" class="upload" dark tile @click="save">
             update
           </v-btn>
         </v-col>
@@ -200,6 +211,7 @@ export default {
   props: ["userData"],
   data() {
     return {
+      loading_upload:false,
       loading: false,
       valid: true,
       url: "",
@@ -253,6 +265,7 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         };
+        this.loading_upload = true;
         formData.append("_method", "put");
         formData.append("image", this.image);
         axios
@@ -265,6 +278,7 @@ export default {
               position: "topRight",
             });
             this.overlay = false;
+            this.loading_upload= false;
             this.dialog = false;
           })
           .catch((error) => {
@@ -283,6 +297,7 @@ export default {
               }
             }
             this.overlay = false;
+            this.loading_upload = false;
           });
       }
       this.overlay = false;
@@ -298,6 +313,7 @@ export default {
             name: this.name,
             nhood: this.nhood,
             district: this.district,
+            about: this.about,
           })
           .then((response) => {
             this.overlay = false;

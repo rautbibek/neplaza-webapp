@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        @php 
-         $desc = substr($product->description, 0, 160);
-         @endphp
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta property="og:title" content="{{$product->title}}">
-        <meta property="og:url" content="{{config('app.url').'add/detail/'.$product->id.'/'.$product->slug}}">
+        <meta property="og:title" content="{{$user->name}}">
+        <meta property="og:url" content="{{config('app.url').'seller/'.$user->id.'/'.$user->username}}">
         <meta property="og:type" content="website">
-        <meta property="og:image" content="{{$product->product_cover}}">
-        <meta property="og:description" content="{{$desc}}">
+        <meta property="og:image" content="{{$user->cover}}">
+        <meta property="og:description" content="{{$user->about}}">
         <meta name="keywords" content="bikribazzar,Bikribazzar,bikri bazzar,house, land,
             classified website nepal,
          bikes, cars, new bike, old bikes">
-         
-         <meta name="description" content="{{$desc}}">
+         <meta name="description" content="{{$user->about}}">
          <meta name=”robots” content="index, follow">
          <meta name="author" content="Bibek raut">
         
@@ -25,13 +21,18 @@
          <script  src="{{mix('js/app.js')}}" defer></script>
          <link rel="stylesheet" href="{{mix('css/app.css')}}">
          <link rel="stylesheet" href="{{asset('/custom-css/preloader.css')}}">
+
+
+
     </head>
     <body onload="myFunction()" style="margin:0;">
+
+
         <div id="loader">
         </div>
         <div id="myDiv" style="min-height: 300px">
-        
             <div id="app">
+                {{$user}}
                 <main-component></main-component>
             </div>
         </div>

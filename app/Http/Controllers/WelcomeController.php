@@ -47,4 +47,10 @@ class WelcomeController extends Controller
                            ->simplePaginate(15);
         return response()->json($product,200);
     }
+
+
+    public function sellerDetail($id,$slug){
+        $user = User::findOrFail($id);
+        return view('userDetail',compact('user'));
+    }
 }

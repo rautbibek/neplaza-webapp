@@ -31,6 +31,7 @@ Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::post('/send/contact/message', 'ContactController@save')->name('send.contact.message');
 Route::get('/seller/detail/{id}/{username}', 'WelcomeController@seller')->name('seller');
 Route::get('/seller/{id}/ad', 'WelcomeController@sellerAd')->name('seller.ad');
+Route::get('/seller/{id}/{slug}', 'WelcomeController@sellerDetail')->name('user.detail.ssr');
 Route::get('/urgent/ad', 'ProductController@urgentProduct')->name('urgent.ad');
 //search products
 Route::get('/ad/search', 'SearchController@search')->name('search');

@@ -73,6 +73,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->nhood_id = $request->nhood;
         $user->city_id = $request->district;
+        $user->about = $request->about;
         $user->update();
         $message="profile updated succefully";
         return response()->json($message,200);

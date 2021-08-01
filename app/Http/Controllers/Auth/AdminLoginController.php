@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
             'email' => 'required | email | exists:admins',
             'password' => 'required | min:6'
         ]);
-        
+
         //attemtp the logged the user in
         if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password],$request->remember)){
             //if succeful then redirect
@@ -33,5 +33,5 @@ class AdminLoginController extends Controller
 
     }
 
-    
+
 }

@@ -110,7 +110,7 @@
 
             <div class="col-12 col-md">
               <h5 class="text-muted">ABOUT US</h5>
-              <p style="text-align:center">
+              <p >
                 <strong>BIKRI BAZZAR </strong>  is the best platform to reach the buyers and seller for goods
                 and services of your need. In our website we provide online marketplace for
                 products/services, of large number of sellers/vendors, which can be reached by a

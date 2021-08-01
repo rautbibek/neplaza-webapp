@@ -15,9 +15,10 @@
             <li style="list-style:none; color: red ">** {{ $error }} **</li>
        @endforeach
       @endif
-      
+
     <label for="inputEmail" class="visually-hidden text-left">Email address</label>
-    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <input type="email" value="{{ old('email') }} " name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
     <label for="inputPassword" class="visually-hidden">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control text-left" placeholder="Password" required>
     <div class="checkbox mb-3">
@@ -26,7 +27,7 @@
       </label>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">LOGIN</button>
-    
+
   </form>
 </main>
 @endsection
