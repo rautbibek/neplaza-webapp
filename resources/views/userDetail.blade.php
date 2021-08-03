@@ -16,7 +16,7 @@
          <meta name="description" content="{{$user->about}}">
          <meta name=”robots” content="index, follow">
          <meta name="author" content="Bibek raut">
-        
+
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
          <script  src="{{mix('js/app.js')}}" defer></script>
          <link rel="stylesheet" href="{{mix('css/app.css')}}">
@@ -32,7 +32,6 @@
         </div>
         <div id="myDiv" style="min-height: 300px">
             <div id="app">
-                {{$user}}
                 <main-component></main-component>
             </div>
         </div>
