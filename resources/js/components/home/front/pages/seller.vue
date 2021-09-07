@@ -128,7 +128,7 @@ export default {
          this.overlay= true;
          axios.get(`/seller/detail/${this.$route.params.id}/${this.$route.params.username}`)
               .then(response =>{
-                
+
                   this.seller_detail = response.data;
                   this.overlay = false;
               })
@@ -156,6 +156,6 @@ export default {
       this.seller();
       this.fetch(`/seller/${this.$route.params.id}/ad`);
   },
-  
+
 }
 </script>

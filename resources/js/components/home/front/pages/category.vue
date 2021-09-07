@@ -23,10 +23,10 @@
                   >
                   <v-subheader>Choose your subcategory</v-subheader>
                     <v-list-item-group
-                    
+
                     active-class="deep-purple--text text--accent-4"
                     >
-                    <v-list-item 
+                    <v-list-item
                         v-for="(scat, i) in category.scategory"
                         :key="i"
                         router :to="`/category/${category.id}/${scat.slug}`"
@@ -52,16 +52,16 @@
                         left
                         fixed
                         dark
-                        color="#2f3b59" 
+                        color="#2f3b59"
                     >
                         <v-icon>mdi-reorder-horizontal</v-icon>
                     </v-btn>
                 <v-layout row wrap class="px-1">
-                
-                <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
+
+                <v-flex xs6 sm6 md4 lg2 xl2 v-for="(ads,index) in all_ads" :key="index" >
                     <card-lazy :ads="ads"></card-lazy>
                 </v-flex>
-                
+
                 </v-layout>
                 <div class="text-center mt-5" v-if="nextUrl">
 
@@ -73,7 +73,7 @@
                     <v-icon right>cached</v-icon>
                 </v-btn>
             </div>
-                
+
             </v-container>
         </div>
         <div v-else>
@@ -102,11 +102,11 @@ export default {
       }
     },
     methods:{
-      
+
       favorite(){
         if(this.$loggedIn){
             this.color= 'red';
-            
+
             this.background= 'white';
         }else{
             EventBus.$emit('changeDialog', true);

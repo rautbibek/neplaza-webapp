@@ -5,10 +5,10 @@
       :options="{
         threshold: 0.1,
       }"
-      
+
       transition="fade-transition"
     > -->
-      <v-card class="product-card" outlined style="margin:5px">
+      <v-card class="product-card" color="#fff" outlined style="margin:5px">
         <favorite class="mt-2"
           :is_favorite="ads.favorite_to_users.length ? true : false"
           :product_id="ads.id"
@@ -32,7 +32,7 @@ export default {
       isActive: false,
     };
   },
-  
-  
+
+
 };
 </script>

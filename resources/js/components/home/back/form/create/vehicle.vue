@@ -150,61 +150,195 @@
       ></v-textarea>
     </v-col>
     <v-divider></v-divider>
-    <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
-      {{ "Address" }}
-    </v-card-title>
-    <v-col cols="12" class="p-0">
-      <v-autocomplete
-        v-model="district"
-        :items="city"
-        tabindex="8"
-        :item-text="'name'"
-        color="#19916B"
-        :item-value="'id'"
-        label="District *"
-        :rules="[select('District')]"
-        outlined
-        clearable
-        @change="getNhood"
-      ></v-autocomplete>
-      <div
-        class="d-flex justify-content-center"
-        style="margin-bottom: 20px"
-        v-if="loading"
-      >
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-      <v-autocomplete
-        v-show="nhood_display && district"
-        v-model="nhood"
-        :items="localArea"
-        color="#19916B"
-        tabindex="9"
-        :item-text="'name'"
-        :item-value="'id'"
-        label="Metro/Municipility/VDC *"
-        :rules="[select('Metro/Municipility/VDC')]"
-        outlined
-        clearable
-        :loading="loading"
-      ></v-autocomplete>
+   <div>
+      <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">
+        {{ "Address" }}
+      </v-card-title>
 
-      <v-text-field
-        v-model="street"
-        label="Street Address *"
-        tabindex="10"
-        color="#19916B"
-        counter="100"
-        :rules="[
-          required('Location/Area'),
-          maxLength('Location/Area', 100),
-        ]"
-        outlined
-        clearable
-      ></v-text-field>
-    </v-col>
+    <v-tabs
+      v-model="tab"
+      color="primary"
+      right
+      style="font-size:15px"
+
+    >
+      <v-tabs-slider></v-tabs-slider>
+
+      <v-tab href="#manualaddress" small>
+        <v-icon>mdi-map-marker</v-icon>
+        Custom address
+      </v-tab>
+
+      <v-tab href="#myaddress" @click="newAddress">
+        <v-icon left>mdi-account-circle</v-icon>
+        my profile address
+
+      </v-tab>
+
+
+    </v-tabs >
+
+    <v-tabs-items v-model="tab">
+
+      <v-tab-item
+        value="manualaddress"
+        right
+      >
+        <v-col cols="12" class="p-0 mt-3">
+        <v-autocomplete
+          v-model="district"
+          :items="city"
+          :item-text="'name'"
+          tabindex="7"
+          :item-value="'id'"
+          label="District *"
+          color="#19916B"
+          :rules="[select('District')]"
+          outlined
+          clearable
+          @change="getNhood"
+        ></v-autocomplete>
+        <div
+          class="d-flex justify-content-center"
+          style="margin-bottom: 20px"
+          v-if="loading"
+        >
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <v-autocomplete
+          v-show="nhood_display && district"
+          v-model="nhood"
+          tabindex="8"
+          :items="localArea"
+          :item-text="'name'"
+          :item-value="'id'"
+          color="#19916B"
+          label="Metro/Municipility/VDC *"
+          :rules="[select('Metro/Municipility/VDC')]"
+          outlined
+          clearable
+          :loading="loading"
+        ></v-autocomplete>
+
+        <v-text-field
+          v-model="street"
+          tabindex="9"
+          label="Street Address *"
+          color="#19916B"
+          counter="100"
+          :rules="[
+            required('Location/Area'),
+            maxLength('Location/Area', 100),
+          ]"
+          outlined
+          clearable
+        ></v-text-field>
+      </v-col>
+      </v-tab-item>
+      <v-tab-item
+        value="myaddress"
+      >
+
+        <v-col cols="12" class="p-0 mt-5">
+            <v-row>
+                <v-col cols="12" md="2" lg="2" sm="12" xs="12" class="text-center" >
+
+                    <v-avatar
+                    size="150"
+                    >
+                     <img
+                        :src="loginUser.cover"
+                        alt="John"
+                    >
+                  </v-avatar>
+                </v-col>
+                <v-col cols="12" md="10" lg="10" sm="12" xs="12" >
+                <v-row>
+                    <v-col cols="12" md="6" lg="6" xl="6" sm="12" >
+                    <v-autocomplete
+                    ref="district"
+                    v-model="district"
+                    :items="city"
+                    :item-text="'name'"
+                    tabindex="7"
+                    :item-value="'id'"
+                    label="District *"
+                    color="#19916B"
+                    :rules="[select('District')]"
+                    outlined
+                    clearable
+                    @change="getNhood"
+                    >
+                </v-autocomplete>
+                    </v-col>
+                    <v-col cols="12" md="6" lg="6" xl="6" sm="12" >
+                        <div
+                    class="d-flex justify-content-center"
+                    style="margin-bottom: 20px"
+                    v-if="loading"
+                    >
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    </div>
+                    <v-autocomplete
+                    ref="nhood"
+                    v-model="nhood"
+                    tabindex="8"
+                    :items="localArea"
+                    :item-text="'name'"
+                    :item-value="'id'"
+                    color="#19916B"
+                    label="Metro/Municipility/VDC *"
+                    :rules="[select('Metro/Municipility/VDC')]"
+                    outlined
+                    clearable
+                    :loading="loading"
+                    ></v-autocomplete>
+                    </v-col>
+                </v-row>
+                <v-text-field
+                v-model="street"
+                tabindex="9"
+                label="Street *"
+                color="#19916B"
+                counter="100"
+                :rules="[
+                    required('Location/Area'),
+                    maxLength('Location/Area', 100),
+                ]"
+                outlined
+                clearable
+                ></v-text-field>
+                <div style="text-align:right" v-if="!addressUpdated">
+
+              <span style="margin-right:20px; color:red">Your profile address is not updated yet. do you want to update it? </span>
+              <v-btn
+                :loading="loading"
+                dark
+                color="#2F3B59"
+                @click.prevent="updateAddress"
+
+              >
+                update
+                <template v-slot:loader>
+                  <span>Loading...</span>
+                </template>
+
+              </v-btn>
+                </div>
+            </v-col>
+            </v-row>
+
+
+      </v-col>
+      </v-tab-item>
+    </v-tabs-items>
+
+
+    </div>
 
     <v-divider></v-divider>
     <v-card-title class="font-weight-bold pa-0 mb-10" style="color: #19916b">

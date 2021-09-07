@@ -5,30 +5,30 @@
                 <li class="breadcrumb-item pull-right"><router-link :to="`/`">Home</router-link></li>
                 <li class="breadcrumb-item active" aria-current="page">Search</li>
                 <li class="breadcrumb-item active" style="color:red" aria-current="page">Keyword - "{{this.$route.query.q}}"</li>
-                
+
             </ol>
         </nav>
         <div>
         <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
         </v-overlay>
-        
+
         <div class="py-5" v-if="count>0">
                 <h4 class="text-center">Search Results</h4>
                 <div class="text-center mb-5"><hr class="line"></div>
             <v-container>
-                
+
                 <v-layout row wrap class="px-1">
-                
+
                 <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
                     <card-lazy :ads="ads"></card-lazy>
                 </v-flex>
-                
+
                 </v-layout>
                 <div class="text-center mt-5" v-if="nextUrl">
 
                     <v-btn :loading="loading" outlined  color="#2F3B59" @click.prevent="more(nextUrl)">
-                        
+
                         Load More
                         <template v-slot:loader>
                             <span>Loading...</span>
@@ -36,7 +36,7 @@
                         <v-icon right>cached</v-icon>
                     </v-btn>
                 </div>
-                
+
             </v-container>
         </div>
         <div v-else>
@@ -79,8 +79,7 @@
     },
     watch:{
       $route(to,from){
-        //this.getSearch();
-        //console.log(this.cat_posts);
+
         this.fetch(`/searchResult/?q=${this.$route.query.q}`);
       }
     },

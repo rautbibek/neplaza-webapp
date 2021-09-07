@@ -107,7 +107,7 @@ export default {
         },
 
         submit() {
-            console.log(this.$route.params.id);
+
             this.overlay = true;
             if (this.$refs.form.validate()) {
                 axios.put(`/user/add/product/${this.$route.params.id}`, {

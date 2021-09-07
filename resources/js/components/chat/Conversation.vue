@@ -10,14 +10,14 @@
        <v-btn icon @click="show_dialog">
         <v-icon large>recent_actors</v-icon>
       </v-btn>
-       
+
      </v-list-item>
      <v-list-item v-else>
        <v-list-item-icon >
          <v-icon>message</v-icon>
        </v-list-item-icon>
        <v-list-item-content>
-         <v-list-item-title>Messanger</v-list-item-title>
+         <v-list-item-title>Messenger</v-list-item-title>
        </v-list-item-content>
        <v-list-item-icon @click="show_dialog" class="d-flex d-sm-none">
           <v-icon>recent_actors</v-icon>
@@ -73,12 +73,12 @@ export default {
         }
     },
     mounted(){
-        
+
     }
 }
 </script>
 <style scoped>
-    .message-feed{        
+    .message-feed{
         background-color:#b8babf36;
         }
 </style>

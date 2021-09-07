@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class WelcomeController extends Controller
 {
     public function index(){
+
         return view('welcome');
     }
 
@@ -18,12 +19,12 @@ class WelcomeController extends Controller
         $city = cache()->remember('city',60*60*24,function(){
            return City::select('id','name')->orderBy('name','ASC')->get();
         });
-        
+
         return response()->json($city,200);
     }
 
     public function nhood($id){
-        $nhood = cache()->remember('nhood-'.$id,60*60*24,function() use ($id){ 
+        $nhood = cache()->remember('nhood-'.$id,60*60*24,function() use ($id){
             return Nhood::select('id','name')->where('city_id',$id)->orderBy('name','ASC')->get();
         });
         return response()->json($nhood,200);
@@ -44,7 +45,7 @@ class WelcomeController extends Controller
                                 $query->select('user_id')->where('user_id',Auth::id());
                             }])
                            ->latest()
-                           ->simplePaginate(15);
+                           ->simplePaginate(16);
         return response()->json($product,200);
     }
 

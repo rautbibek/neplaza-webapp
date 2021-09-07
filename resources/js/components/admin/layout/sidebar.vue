@@ -79,12 +79,12 @@
 </template>
 <script>
 export default {
-  
+
      data: () => ({
       r_notif :0,
       c_notif:0,
       show: false,
-      
+
       drawer: false,
       items: [
         { icon: 'dashboard', text: 'Dashboard', url:'/admin/dashboard' },
@@ -106,7 +106,7 @@ export default {
       logout(){
         axios.post(`/admin/logout`)
              .then(response=>{
-               console.log(response.data);
+
                window.location.href = '/admin/login';
           });
       },

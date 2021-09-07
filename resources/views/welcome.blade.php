@@ -19,24 +19,33 @@
          <meta name="author" content="Bibek raut">
 
          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-         <script  src="{{mix('js/app.js')}}" defer></script>
+         <script  src="{{mix('js/app.js')}}" defer>
+        </script>
          <link rel="stylesheet" href="{{mix('css/app.css')}}">
          <link rel="stylesheet" href="{{asset('/custom-css/preloader.css')}}">
+         <!-- Global site tag (gtag.js) - Google Analytics -->
+         <script async src="https://www.googletagmanager.com/gtag/js?id=G-RMVHL5T2NZ"></script>
+         <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RMVHL5T2NZ');
+        </script>
 
 
 
     </head>
     <body onload="myFunction()" style="margin:0;">
     <noscript>
-        
+
             <p>Please enable javascript</p>
-       
+
     </noscript>
 
         <div id="loader">
         </div>
         <div id="myDiv" style="min-height: 300px">
-            
+
             <div id="app">
                 <main-component></main-component>
             </div>

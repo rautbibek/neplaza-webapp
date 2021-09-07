@@ -12,16 +12,16 @@
       <div class="">
         <v-container>
             <v-layout row wrap>
-            
+
                 <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
                     <card-lazy :ads="ads"></card-lazy>
                 </v-flex>
-            
+
             </v-layout>
             <div class="text-center mt-5" v-if="nextUrl">
 
             <v-btn :loading="loading" outlined color="#2F3B59" @click.prevent="more(nextUrl)">
-                
+
                 Load More
                 <template v-slot:loader>
                     <span>Loading...</span>
@@ -29,7 +29,7 @@
                 <v-icon right>cached</v-icon>
             </v-btn>
             </div>
-            
+
         </v-container>
       </div>
     </div>

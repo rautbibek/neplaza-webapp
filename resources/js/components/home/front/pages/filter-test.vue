@@ -242,7 +242,7 @@
                       <!-- mobile view end here -->
 
                       <!-- desktop view starts from here -->
-                        <v-col cols="8" lg="3" md="3" sm="6" xs="8">
+                        <v-col cols="8" lg="2" md="3" sm="6" xs="8">
 
                           <v-select class="mt-4"
                             @change="filter"
@@ -263,12 +263,12 @@
                   <v-col cols="12" md="3" lg="3" sm="4" xs="12" class="d-none d-sm-flex">
                     <div class="mt-3">
                       <v-card flat v-for="(scat,index) in subcategory" :key="index">
-                        
+
                         <!-- PART ONE -->
-                          
+
                             <v-card-text>
                               <h5 class="title mb-2">Location</h5>
-                              <v-autocomplete class="py-2" 
+                              <v-autocomplete class="py-2"
                                 v-model="city_id"
                                 :items='city'
                                 :item-text="'name'"
@@ -301,9 +301,9 @@
                             <!-- price part  -->
                             <v-card-text >
                               <h5 class="title mb-1">Price Range</h5>
-                              
 
-                                
+
+
                                 <div class="row" >
                                   <div class="col" @mouseout="changing" >
                                     <v-text-field
@@ -312,7 +312,7 @@
                                       type="number"
                                       v-model="min_p"
                                       label="Min Price"
-                                      
+
                                     ></v-text-field>
                                   </div>
 
@@ -323,11 +323,11 @@
                                       type="number"
                                       v-model="max_p"
                                       label="Max price"
-                                      
+
                                     ></v-text-field>
                                   </div>
                                 </div>
-                              
+
                             </v-card-text>
                             <v-divider></v-divider>
                             <!-- PART 2 -->
@@ -506,7 +506,7 @@ export default {
         surl:'',
         min_p:'',
         max_p:'',
-        
+
         category_name:'',
         category_slug:'',
         scategory_name:'',
@@ -533,7 +533,7 @@ export default {
       }
     },
     methods:{
-      
+
       changing(){
         //this.price.push(this.max_p,1)
         this.price[1] = this.max_p;
@@ -606,7 +606,7 @@ export default {
                this.surl = this.subcategory[0].url;
                this.overlay= false;
              });
-             
+
       },
       getCity() {
             axios.get(`/all/city`)

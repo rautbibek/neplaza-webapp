@@ -32,6 +32,7 @@ import AdDetail from './components/home/detail/adDetail.vue';
 // search
 import SearchData from './components/home/front/pages/searchData.vue';
 import SellerComponent from './components/home/front/pages/seller.vue';
+import SellerDesignComponent from './components/home/front/pages/sellerDesign.vue';
 
 //chat
 import ChatComponent from './components/chat/chatApp.vue';
@@ -178,9 +179,9 @@ export const routes = [{
               property: 'description',
               content: ''
             }
-          ] 
-        } 
-        
+          ]
+        }
+
     },
 
     //search
@@ -193,6 +194,10 @@ export const routes = [{
     {
         path: '/seller/:id/:username',
         component: SellerComponent,
+    },
+    {
+        path: '/sellerDesign/:id/:username',
+        component: SellerDesignComponent,
     },
 
     //chat

@@ -144,6 +144,24 @@
         </v-col>
         <v-col cols="12">
             <v-card-subtitle class="font-weight-bold pa-0 pt-5 pb-2 alignCenter">
+            Street *
+            </v-card-subtitle>
+         <v-text-field
+                v-model="street"
+                tabindex="9"
+                label="Street *"
+                color="#19916B"
+                counter="100"
+                :rules="[
+                    required('Location/Area'),
+                    maxLength('Location/Area', 100),
+                ]"
+                outlined
+                clearable
+                ></v-text-field>
+        </v-col>
+        <v-col cols="12">
+            <v-card-subtitle class="font-weight-bold pa-0 pt-5 pb-2 alignCenter">
         About (Optional)
             </v-card-subtitle>
           <v-textarea
@@ -233,6 +251,7 @@ export default {
       email: '',
       contact: '',
       about: '',
+      street:'',
       nhood: null,
       city: [],
       localArea: [],
@@ -313,6 +332,7 @@ export default {
             name: this.name,
             nhood: this.nhood,
             district: this.district,
+            street: this.street,
             about: this.about,
           })
           .then((response) => {
@@ -366,6 +386,7 @@ export default {
     if(this.loggedIn){
       this.name = this.loginUser.name;
       this.district=  this.loginUser.city_id;
+      this.street= this.loginUser.street;
       this.email= this.loginUser.valid_email;
       this.about= this.loginUser.about;
       this.nhood= this.loginUser.nhood_id;

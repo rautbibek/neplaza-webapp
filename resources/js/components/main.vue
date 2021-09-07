@@ -1,11 +1,11 @@
 <template>
-  <v-app style="margin:0px; padding:0px background:red">
+  <v-app style="margin:0px; padding:0px">
     <v-main>
       <topbar></topbar>
-      <nav-bar ></nav-bar> 
+      <nav-bar ></nav-bar>
       <div style="min-height:550px" >
         <router-view></router-view>
-        
+
       </div>
       <div class="space"></div>
       <login></login>
@@ -31,21 +31,21 @@ export default {
             'update-profile':profileForm,
             'sign-up':signUp,
             'nav-bar':Navbar,
-            
+
             'email-verify-notif':emailVerifyNotif,
          },
   data() {
 
     return {
-      
+
     };
   }
 };
 </script>
 <style scoped>
   .theme--light.v-application{
-    background:#f0f2f5;
-  } 
+    background:#f4f4f4;
+  }
   .space{
     height:20px;
   }

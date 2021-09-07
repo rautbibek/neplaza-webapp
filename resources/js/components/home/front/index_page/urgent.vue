@@ -1,15 +1,15 @@
 <template>
   <div v-if="count > 0" class="urgent-container">
-    <v-container class="pb-1" >
-        <p class="featured-title text-center">
+    <v-container  class="pb-1" >
+        <p class="featured-title ml-2">
           Urgent Products
         </p>
           <div class="px-2 mb-4">
             <vue-horizontal :button-between="false">
             <section v-for="(ads,index) in all_ads" :key="index" style="margin:5px; padding:0xp">
-             <v-card class="card product-card"  
+             <v-card class="card product-card" style="background:#ffffff"
              >
-             
+
               <router-link :to="`/ad/detail/${ads.id}/${ads.slug}`" >
                 <v-img
                   class="white--text align-end"
@@ -22,7 +22,7 @@
                 <card-title  :ads="ads"></card-title>
               </router-link>
             </v-card>
-              
+
             </section>
             <section v-if="count > 7">
                 <v-col  class="text-center " style=" margin-top:100px; margin-left:20px">
@@ -72,11 +72,11 @@ export default {
       });
     },
   },
- 
+
   created() {
     this.getAds();
   },
-  
+
 };
 </script>
 <style scoped>
@@ -90,7 +90,7 @@ export default {
   left: 16px;
 }
 .urgent-container {
-  background: #ffffffba;
+  /* background: #ffffffba; */
 }
 .container {
   padding: 0px;

@@ -19,6 +19,8 @@ export default {
             dragCount: 0,
             files: [],
             image: [],
+            tab: null,
+            tab_item:'manualaddress',
 
             //fetching city and loacal area
             city: [],
@@ -47,7 +49,7 @@ export default {
             district: '',
             street: '',
             nhood: '',
-
+            addressUpdated:false,
             //non filter static data
             property_1: '',
             property_2: '',
@@ -90,6 +92,50 @@ export default {
         }
     },
     methods: {
+        newAddress(){
+            this.district = this.my_data.city_id;
+            if(this.loginUser.city_id){
+               this.getNhood();
+            }
+
+            this.nhood = this.my_data.nhood_id;
+            this.street = this.my_data.street;
+        },
+
+        updateAddress(){
+
+            axios
+          .put(`/update/profile`, {
+            name: this.loginUser.name,
+            nhood: this.nhood,
+            district: this.district,
+            street : this.street,
+
+          })
+          .then((response) => {
+            this.overlay = false;
+            this.$toast.success(response.data, "success", {
+              timeout: 3000,
+              position: "topRight",
+            });
+            //EventBus.$emit("updateUser", true);
+            this.addressUpdated  = true;
+            this.userData();
+            //EventBus.$emit("loadUser");
+          })
+          .catch((error) => {
+            if (error.response.status == 422) {
+              this.overlay = false;
+              this.$toast.error(error.response.data.message, "error", {
+                timeout: 3000,
+                position: "topRight",
+              });
+            }
+
+          });
+
+
+        },
 
         getCity() {
             axios.get(`/all/city`)
@@ -165,6 +211,8 @@ export default {
                   .then(response =>{
                       this.my_data = response.data;
                       this.hasContact = this.my_data.phone_verified;
+
+
 
                   })
                   .catch();
@@ -275,9 +323,13 @@ export default {
             this.hasContact = true;
             this.submit();
         })
+
         this.getCity();
         this.userData();
         this.hasContact = this.my_data.phone_verified;
+        if(this.loginUser.street != null && this.loginUser.street != ''){
+            this.addressUpdated  = true;
+        }
     },
 
 }

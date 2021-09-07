@@ -24,9 +24,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  => 'required | max:40',
+            'name'  => 'required | max:80',
             'district' => 'required',
             'nhood' => 'required',
+            'street' =>'required | max:190',
         ];
     }
 }

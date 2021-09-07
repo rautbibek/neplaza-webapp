@@ -44,7 +44,7 @@
         <v-container>
             <v-layout row wrap class="px-1">
 
-                <v-flex xs6 sm6 md4 lg3 xl2 v-for="(ads,index) in all_ads" :key="index" >
+                <v-flex xs6 sm6 md4 lg2 xl2 v-for="(ads,index) in all_ads" :key="index" >
                     <card-lazy :ads="ads"></card-lazy>
                 </v-flex>
 
@@ -111,7 +111,7 @@ export default {
             })
       }
     },
-    
+
     created(){
         this.fetch(`front/all/product`);
         axios.get(this.subcategory_url).then(response => {
@@ -123,7 +123,7 @@ export default {
       return `/menu/subCategory`;
     }
   }
-    
+
 
 }
 </script>

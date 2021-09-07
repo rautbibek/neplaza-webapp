@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Events\ProductDeletedEvent;
 use App\product;
 use App\Feature;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use App\Notifications\SlackNotifiaction;
 use App\Product_property;
@@ -49,7 +51,11 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $product= $request->user()->product()->create($request->except('image'));
+
+        try{
+
+            DB::beginTransaction();
+            $product= $request->user()->product()->create($request->except('image'));
 
         if($product){
           $p_prop = new Product_property();
@@ -90,9 +96,26 @@ class ProductController extends Controller
           }
             $product->product_features()->sync($request->features);
         }
-        Auth::user()->notify(new SlackNotifiaction(Auth::user()->name.' :Added new product with title '.$request->title));
+
+        DB::commit();
+        //Auth::user()->notify(new SlackNotifiaction(Auth::user()->name.' :Added new product with title '.$request->title));
         $message="Ad posted succefully !!"  ;
+        Log::error('NEW PRODUCT ADDED', [
+            'Product title' => $request->title,
+            'Added by user' => Auth::user()->name,
+        ]);
+
         return response()->json($message,200);
+        }catch(\Exception $e){
+
+             DB::rollback();
+             Log::error($e);
+             return response()->json([
+                 'message'=>'something went wrong.'
+             ],500);
+
+
+        }
     }
 
     /**

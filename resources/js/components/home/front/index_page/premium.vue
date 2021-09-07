@@ -3,7 +3,7 @@
 
     <div class="container">
       <v-container>
-        <p class="featured-title text-center">Featured Products</p>
+        <p class="featured-title ml-2">Featured Products</p>
         <div class="px-2">
 
             <carousel :autoplay="true" :lazyLoad="true" :autoplayHoverPause="true" :nav="false" :responsive="{0:{items:2,nav:false},600:{items:2,nav:true},770:{items:3,nav:true},970:{items:4,nav:true}}">
@@ -94,9 +94,7 @@ export default {
   padding: 0px;
 }
 
-.feature-container{
-   background:#f0f2f5;
-}
+
 
 .card-date {
   height: 40px;

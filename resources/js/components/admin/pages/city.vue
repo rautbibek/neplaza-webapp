@@ -2,14 +2,14 @@
  <v-app >
   <admin-sidebar></admin-sidebar>
   <v-container class="mt-5">
-    
+
     <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
     <v-col class="text-right px-5">
       <v-btn @click="dialog = true" small color="primary">
         <v-icon small left>mdi-plus-circle</v-icon>
-        Add new 
+        Add new
         </v-btn>
     </v-col>
     <!-- dialog component -->
@@ -22,11 +22,11 @@
         </v-card-title>
 
         <v-divider></v-divider>
-        
+
             <v-form class="px-3" ref="form" v-model="valid" lazy-validation>
                   <v-col cols="12" >
-                    <v-text-field 
-                    v-model="name" 
+                    <v-text-field
+                    v-model="name"
                     label="District Name"
                     :rules="[required('District Name')]"
                     ></v-text-field>
@@ -50,7 +50,7 @@
           >
             Save District
           </v-btn>
-          
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -65,11 +65,11 @@
         </v-card-title>
 
         <v-divider></v-divider>
-        
+
             <v-form class="px-3" ref="form" v-model="valid" lazy-validation>
                   <v-col cols="12" >
-                    <v-text-field 
-                    v-model="name" 
+                    <v-text-field
+                    v-model="name"
                     label="District Name"
                     :rules="[required('District Name')]"
                     ></v-text-field>
@@ -81,7 +81,7 @@
                         :item-text="'name'"
                         :item-value="'id'"
                         label="visibility "
-                        
+
                     ></v-select>
                   </v-col>
               </v-form>
@@ -103,7 +103,7 @@
           >
             Update District
           </v-btn>
-          
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -141,7 +141,7 @@
                 text-color="white"
                 >
                 true
-               
+
             </v-chip>
             <v-chip v-else small
                 class="ma-2"
@@ -149,10 +149,10 @@
                 text-color="white"
                 >
                 false
-                
+
             </v-chip>
             </td>
-            
+
             <td>
               <v-btn x-small text @click="edit(item)">
                 <v-icon small>mdi-pencil</v-icon>
@@ -165,7 +165,7 @@
         </tbody>
       </template>
     </v-simple-table>
-    
+
   </v-container>
 
   </v-app>
@@ -173,7 +173,7 @@
 
 <script>
   export default {
-    
+
     data: () => ({
       overlay:false,
       name:'',
@@ -189,9 +189,9 @@
       required(propertyType) {
           return value => value && value.length > 0 || `you must input a ${propertyType}`
       },
-      desserts: [],      
+      desserts: [],
     }),
-    
+
 
     created () {
       this.initialize()
@@ -214,7 +214,7 @@
              });
       },
       del(id){
-        
+
         if(confirm('are you sure to want to delete this category item')){
           this.overlay = true;
           axios.delete(`/admin/city/`+id)
@@ -240,7 +240,7 @@
         this.name = item.name;
         this.city_id = item.id;
         this.show = item.show,
-        console.log(this.show);
+
         this.editDialog = true;
       },
       close(){
@@ -263,14 +263,14 @@
 
                     })
                     .catch(error => {
-                        
+
                         if (error.response.status === 422) {
                           if (error.response.data.errors.name.length>0) {
                                 this.$toast.error(error.response.data.errors.name[0],'error', {
                                     timeout: 3000,
                                     position: 'topRight',
                                 });
-                                
+
                             }
                         }
                     });
@@ -294,14 +294,14 @@
 
                     })
                     .catch(error => {
-                        
+
                         if (error.response.status === 422) {
                           if (error.response.data.errors.name.length>0) {
                                 this.$toast.error(error.response.data.errors.name[0],'error', {
                                     timeout: 3000,
                                     position: 'topRight',
                                 });
-                                
+
                             }
                         }
                     });

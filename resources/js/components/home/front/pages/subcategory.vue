@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb" style="background:white !important">
         <ol class="breadcrumb" style="padding-left: 5px">
           <li class="breadcrumb-item pull-right">
             <router-link :to="`/`">Home</router-link>

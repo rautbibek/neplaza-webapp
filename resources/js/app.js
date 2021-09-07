@@ -18,6 +18,7 @@ Vue.use(VueMeta, {
 //easy toast
 import VueIziToast from 'vue-izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+
 Vue.use(VueIziToast);
 
 //vuetify
@@ -27,7 +28,12 @@ import Vuetify from './plugins/vuetify';
 //vue router
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+ //google analytics
+import VueAnalytics from 'vue-analytics'
 
+Vue.use(VueAnalytics, {
+  id: 'UA-204713295-1'
+})
 
 
 //vue event bus

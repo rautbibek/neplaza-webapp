@@ -20,7 +20,7 @@ class User extends Authenticatable
        }else{
          $this->attributes['username'] = $username;
        }
-       
+
     }
     /**
      * The attributes that are mass assignable.
@@ -31,7 +31,7 @@ class User extends Authenticatable
         'name','phone', 'email', 'password','role_id','username',
     ];
 
-    
+
 
     protected $guard = ['role_id'];
 
@@ -148,6 +148,6 @@ class User extends Authenticatable
    // slack notification
    public function routeNotificationForSlack($notification)
     {
-        return 'https://hooks.slack.com/services/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';
+        return env('SLACK_WEB_HOOK');
     }
 }

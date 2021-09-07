@@ -1,18 +1,18 @@
 <template>
-  <v-card tile flat color="#00000000">
+  <div>
     <v-container >
-      <p class="featured-title text-center">Recent Listing</p>
+      <p class="featured-title">Recent Listing</p>
     </v-container>
     <div class="pb-5">
-      <v-container>
+      <div class="container">
         <v-layout row wrap class="px-1">
           <v-overlay :value="overlay">
             <v-progress-circular indeterminate size="64"></v-progress-circular>
           </v-overlay>
-          <v-flex 
+          <v-flex
             xs6
             sm6
-            md4
+            md3
             lg3
             xl2
             v-for="(ads, index) in all_ads"
@@ -32,9 +32,9 @@
                 <v-icon right>cached</v-icon>
             </v-btn>
             </div>
-      </v-container>
+      </div>
     </div>
-  </v-card>
+  </div>
 </template>
 <script>
 export default {
