@@ -7,6 +7,7 @@
         <title>{{ config('app.name', 'Bikri Bazzar') }}</title>
 {{--        @include('feed::links')--}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta property="fb:pages" content="106546471305792" />
         <meta property="og:title" content="buy and sell anything online">
         <meta property="og:url" content="https://www.bikribazzar.com">
         <meta property="og:type" content="website">
