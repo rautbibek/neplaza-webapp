@@ -8,7 +8,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.2.5 | ^8.0",
+        "bhaktaraz/php-rss-generator": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -17,15 +18,14 @@
         "laravel/framework": "^7.0",
         "laravel/helpers": "^1.2",
         "laravel/slack-notification-channel": "^2.3",
-        "laravel/socialite": "^4.4",
+        "laravel/socialite": "^5.2.5",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "predis/predis": "^1.1",
-        "pusher/pusher-php-server": "~3.0",
-        "renatomarinho/laravel-page-speed": "^1.9",
+        "pusher/pusher-php-server": "~7.0.1",
         "rollbar/rollbar-laravel": "^7.0",
         "s-ichikawa/laravel-sendgrid-driver": "^3.0",
-        "socialiteproviders/yahoo": "^3.0"
+        "socialiteproviders/yahoo": "^4.1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.4",

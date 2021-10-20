@@ -4,8 +4,10 @@ namespace App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Product extends Model
 {
+   
     protected $fillable = [
       'title',
       'description',

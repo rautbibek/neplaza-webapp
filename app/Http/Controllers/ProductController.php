@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function homeProduct(){
-        
+
         $product = Product::select('id','price','slug','maxprice','title','created_at')
                    ->with(['product_property','image','favorite_to_users'=>function($query){
                        $query->select('user_id')->where('user_id',Auth::id());
@@ -35,7 +35,7 @@ class ProductController extends Controller
                    ->take(8)
                    ->get();
         });
-        
+
         return response()->json($product,200);
     }
 
@@ -117,6 +117,7 @@ class ProductController extends Controller
     public function productDetailView($id,$slug){
         $product = Product:: where('id',$id)->where('slug',$slug)->with('product_image')->first();
         return view('productDetail',compact('product'));
-        
+
     }
+
 }

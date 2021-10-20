@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('email.ProductDeleted',compact('p','r'));
 // });
 
-
+//Route::feeds('product-feed');
+ROute::get('/product-feed','RssFeedController@rssFeed')->name('rss.feed');
 Route::get('/support', 'SupportController@index')->name('support');
 Route::get('/contact', 'SupportController@contact')->name('contact');
 Route::get('/faq', 'SupportController@faq')->name('faq');
@@ -105,7 +106,7 @@ Route::get('/front/scategory/filter/{slug}', 'SubcategoryController@subcategoryF
 Route::get('/front/featured/product', 'ProductController@premium');
 Route::get('/all/featured/product', 'ProductController@featured');
 Route::get('/front/urgent/product', 'ProductController@urgent');
-Route::get('/product/detail/{id}/{slug}', 'ProductController@productDetail');
+Route::get('/product/detail/{id}/{slug}', 'ProductController@productDetail')->name('product.detail');
 Route::get('/ad/detail/{id}/{slug}', 'ProductController@productDetailView');
 
 
