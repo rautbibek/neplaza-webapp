@@ -8,6 +8,7 @@ use Bhaktaraz\RSSGenerator\FacebookProductItem;
 use Bhaktaraz\RSSGenerator\Feed;
 use Bhaktaraz\RSSGenerator\Item;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RssFeedController extends Controller
 {
@@ -66,9 +67,8 @@ class RssFeedController extends Controller
             ->appendTo($channel);
         }
 
-        $header['Content-Type'] = 'xml';
-        return response($feed, 200, [
-            $header
-        ]);
+        $response = new Response($feed);
+        $response->headers->set('Content-Type', 'xml');
+        return $response;
     }
 }
